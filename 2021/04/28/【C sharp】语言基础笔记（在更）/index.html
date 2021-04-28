@@ -608,21 +608,26 @@
 </ul>
 </li>
 <li>差值表达式<ul>
-<li>$符号表明这是个差值字符串，{和}之间的任何表达式都需求值并置换，字符串差值比+操作符高效得多  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2></li>
+<li>$符号表明这是个差值字符串，{和}之间的任何表达式都需求值并置换，字符串差值比+操作符高效得多  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
 <li>只有<code>float</code>和<code>double</code>除以0得到<code>Infinity</code>（不会出错）</li>
 <li><code>int</code>的最大最小值<code>int.MaxValue</code>和<code>int.MinValue</code></li>
-<li>隐式类型变量<code>var</code>,作用类似于C++的<code>auto</code><h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2></li>
+<li>隐式类型变量<code>var</code>,作用类似于C++的<code>auto</code></li>
+</ul>
+<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><ul>
 <li>与C++不一致<br>  -<code>if</code>语句中表达式必须是布尔值, 如：<code>if (1)</code> // 错误</li>
 <li><code>switch</code>语句的控制表达式不能用<code>float</code>和<code>double</code>类型</li>
 <li><code>case</code>标签必须是常量表达式，且必须唯一</li>
 <li>C#语句的直通规则<ul>
 <li>直通，标签之间不能有额外语句（即不加<code>break</code>，不允许拥有语句）</li>
-<li>每个<code>case</code>都加上<code>break</code><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2></li>
+<li>每个<code>case</code>都加上<code>break</code></li>
 </ul>
 </li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
 <li>C#所有方法都必须在类的内部声明</li>
 <li>默认参数中如果参数匹配则不会出现歧义</li>
 <li>默认参数（可选参数）必须放在后面</li>
@@ -632,44 +637,35 @@
 </li>
 </ul>
 <h2 id="结构（结构体）"><a href="#结构（结构体）" class="headerlink" title="结构（结构体）"></a>结构（结构体）</h2><ul>
-<li><p>与C++不一致，结构主体后不加<code>;</code></p>
-</li>
-<li><p>值类型</p>
-<ul>
+<li>与C++不一致，结构主体后不加<code>;</code></li>
+<li>值类型<ul>
 <li>对于简单的、比较小的数据值，复制值的效率等同于或基本等同于复制地址的效率，但较复杂的数据就考虑使用类，这样就可选择只复制数据的地址，从而提高代码的执行效率</li>
 </ul>
 </li>
-<li><p>不能为结构声明默认构造器（无参构造器），否则无法编译，因为编译器始终会自动生成默认构造器（不同于类）</p>
-</li>
-<li><p>类的实例字段可在声明时初始化，但结构不允许</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Time</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">private</span> <span class="built_in">int</span> hours = <span class="number">0</span>;  <span class="comment">// 编译时错误</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>编译器不会自动初始化结构中的字段（与类不一致）</p>
-</li>
-<li><p>复制结构变量的前提时<code>=</code>操作符右侧的结构变量已完全初始化，否则编译错误</p>
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2></li>
-<li><p>与C++不一致，枚举主体后不加<code>;</code></p>
-</li>
-<li><p>值类型</p>
-</li>
-<li><p>声明枚举时字面值默认是int类型，可以选择枚举的基础类型</p>
-<ul>
+<li>不能为结构声明默认构造器（无参构造器），否则无法编译，因为编译器始终会自动生成默认构造器（不同于类）</li>
+<li>类的实例字段可在声明时初始化，但结构不允许  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Time</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">private</span> <span class="built_in">int</span> hours = <span class="number">0</span>;  <span class="comment">// 编译时错误</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>编译器不会自动初始化结构中的字段（与类不一致）</li>
+<li>复制结构变量的前提时<code>=</code>操作符右侧的结构变量已完全初始化，否则编译错误</li>
+</ul>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><ul>
+<li>与C++不一致，枚举主体后不加<code>;</code></li>
+<li>值类型</li>
+<li>声明枚举时字面值默认是int类型，可以选择枚举的基础类型<ul>
 <li><code>enum Season : short &#123; Spring, Summer &#125;</code></li>
 </ul>
 </li>
-<li><p>为枚举的字面值显式指定常量整数值</p>
-<ul>
+<li>为枚举的字面值显式指定常量整数值<ul>
 <li><code>enum Season &#123; Spring = 1, Summer &#125;</code></li>
 </ul>
 </li>
-<li><p>编译器自动为它指定比前一个枚举字面值大1的值</p>
-</li>
-<li><p>多个枚举字面值可以具有相同的基础值</p>
-<ul>
+<li>编译器自动为它指定比前一个枚举字面值大1的值</li>
+<li>多个枚举字面值可以具有相同的基础值<ul>
 <li><code>enum Season &#123; Spring, Summer, Fall, Autumn = Fall &#125;</code></li>
 </ul>
 </li>
-<li><p>每个枚举定义的字面值名称都只有这个枚举类型的作用域，因此要加枚举类型限定，否则编译错误，如：Season.Fall</p>
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2></li>
+<li>每个枚举定义的字面值名称都只有这个枚举类型的作用域，因此要加枚举类型限定，否则编译错误，如：Season.Fall</li>
+</ul>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><ul>
 <li><p>与c++不一致，类主体、结构主体后不加分号</p>
 </li>
 <li><p>每个字段和方法声明都要重复<code>public</code>或<code>private</code>关键字</p>
@@ -847,17 +843,17 @@
 <li><p>均采用驼峰命名法</p>
 </li>
 <li><p><code>TODO:</code>注释通常用于标注以后将进行加工的代码</p>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2></li>
-<li><p><code>checked</code>语句是<code>checked</code>关键字开头的代码块</p>
-<ul>
+</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li><code>checked</code>语句是<code>checked</code>关键字开头的代码块<ul>
 <li>只有直接在checked块中的整数运算才会检查</li>
 <li>溢出则抛出<code>OverflowException</code></li>
 <li><code>checked</code>和<code>unchecked</code>关键字只适合整型运算</li>
 <li>浮点运算永不抛出异常</li>
 </ul>
 </li>
-<li><p><code>catch</code>省略名称默认捕获<code>Exception</code></p>
-<ul>
+<li><code>catch</code>省略名称默认捕获<code>Exception</code><ul>
 <li>异常发生后将运行由”运行时“发现的第一个匹配的异常处理程序<code>catch</code>，其他处理程序会被忽略</li>
 </ul>
 </li>

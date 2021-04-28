@@ -629,7 +629,9 @@
 <li><code>show status</code>显示广泛的服务器状态信息</li>
 <li><code>show create databases/table</code>分别用来显示创建特定数据库或表的语句</li>
 <li><code>show grants</code>显示授予用户的安全权限</li>
-<li><code>show errors</code>和<code>show warnings</code>显示服务器错误或警告信息<h2 id="二、SELECT语句"><a href="#二、SELECT语句" class="headerlink" title="二、SELECT语句"></a>二、SELECT语句</h2></li>
+<li><code>show errors</code>和<code>show warnings</code>显示服务器错误或警告信息</li>
+</ul>
+<h2 id="二、SELECT语句"><a href="#二、SELECT语句" class="headerlink" title="二、SELECT语句"></a>二、SELECT语句</h2><ul>
 <li><code>SELECT &lt;列名&gt; FROM &lt;表名&gt;</code>在表中检索单个列<blockquote>
 <p>SELECT检索多个列，列名用逗号分隔<br>检索所有列，用<code>*</code>通配符</p>
 </blockquote>
@@ -675,7 +677,9 @@
 </tbody></table>
 <ul>
 <li>空值检查(<code>is NULL</code>子句)<code>where...is NULL;</code></li>
-<li><code>WHERE</code>子句给出了<code>AND, OR, IN, NOT</code>逻辑操作符来进行逻辑操作<h2 id="三、匹配"><a href="#三、匹配" class="headerlink" title="三、匹配"></a>三、匹配</h2></li>
+<li><code>WHERE</code>子句给出了<code>AND, OR, IN, NOT</code>逻辑操作符来进行逻辑操作</li>
+</ul>
+<h2 id="三、匹配"><a href="#三、匹配" class="headerlink" title="三、匹配"></a>三、匹配</h2><ul>
 <li>通配符本身实际是SQL的<code>WHERE</code>子句中有特殊含义的字符，在搜索子句中使用通配符，必须使用<code>LIKE</code>操作符，<code>LIKE</code>只是Mysql后跟的搜索模式利用通配符匹配而不是直接相等匹配进行比较</li>
 <li>百分号<code>%</code>通配符匹配任意个数的任意字符，下划线<code>_</code>通配符匹配任意单个字符</li>
 <li>使用通配符的技巧<ul>
@@ -801,8 +805,9 @@
 <li>正则表达式中<code>.</code>表示匹配任意一个字符</li>
 <li><code>LIKE</code>与<code>REGEXP</code>的区别，<code>LIKE</code>匹配整个串，<code>REGEXP</code>匹配子串</li>
 <li>简单的正则表达式测试，例：<code>SELECT &#39;hello&#39; REGEXP &#39;[0-9]&#39;;</code></li>
-<li><code>SELECT</code>语句中，<code>concat()</code>函数用来拼接字段（与列的意思相同），别名用<code>AS</code>关键字赋予，<code>RTrim()</code>函数去掉右边的所有空格<br>例：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT concat(Db, &#39;(&#39;, User, &#39;)&#39;) AS link</span><br><span class="line">FROM db;</span><br></pre></td></tr></table></figure>
-<h2 id="四、相关函数"><a href="#四、相关函数" class="headerlink" title="四、相关函数"></a>四、相关函数</h2></li>
+<li><code>SELECT</code>语句中，<code>concat()</code>函数用来拼接字段（与列的意思相同），别名用<code>AS</code>关键字赋予，<code>RTrim()</code>函数去掉右边的所有空格<br>例：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT concat(Db, &#39;(&#39;, User, &#39;)&#39;) AS link</span><br><span class="line">FROM db;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="四、相关函数"><a href="#四、相关函数" class="headerlink" title="四、相关函数"></a>四、相关函数</h2><ul>
 <li><code>Soundex()</code>函数匹配所有发音类似与Y.Lie的联系名<br>例：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_name, cust_contact</span><br><span class="line">FROM customers</span><br><span class="line">WHERE Soundex(cust_contact) &#x3D; Soundex(&#39;Y. Lie&#39;);</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p><strong>常用数值处理函数</strong></p>
@@ -924,8 +929,9 @@
 </tr>
 </tbody></table>
 <ul>
-<li>子查询，嵌套<code>SELECT</code>语句<br>例：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_id</span><br><span class="line">FROM orders</span><br><span class="line">WHERE order_num IN (SELECT order_num</span><br><span class="line">					FROM orderitems</span><br><span class="line">					WHERE prod_id &#x3D; &#39;TNT2&#39;);</span><br></pre></td></tr></table></figure>
-<h2 id="五、联结表"><a href="#五、联结表" class="headerlink" title="五、联结表"></a>五、联结表</h2></li>
+<li>子查询，嵌套<code>SELECT</code>语句<br>例：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_id</span><br><span class="line">FROM orders</span><br><span class="line">WHERE order_num IN (SELECT order_num</span><br><span class="line">					FROM orderitems</span><br><span class="line">					WHERE prod_id &#x3D; &#39;TNT2&#39;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="五、联结表"><a href="#五、联结表" class="headerlink" title="五、联结表"></a>五、联结表</h2><ul>
 <li><code>WHERE</code>子句在联结表中起配对的作用（用完全限定列名）</li>
 <li>没有联结条件的表关系返回的结果为笛卡尔积（检索出的行的数目将是第一个表中的行数乘以第二个表中的行数）</li>
 <li>应保证所有联结都有<code>WHERE</code>子句</li>
@@ -934,14 +940,20 @@
 <li>尽量使用自联结而不用子查询</li>
 <li><strong>联结的方式</strong><br><img "" class="lazyload placeholder" data-original="https://img-blog.csdnimg.cn/20210428125629111.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2ODAyNzEz,size_16,color_FFFFFF,t_70#pic_center" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="联结"></li>
 <li>外键：外键为某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系</li>
-<li>外键的意义：在于解耦合，定义外键的方法<code>FOREIGN KEY (主键）references &lt;表名&gt;(另一个表的主键）</code><h2 id="六、组合查询"><a href="#六、组合查询" class="headerlink" title="六、组合查询"></a>六、组合查询</h2></li>
+<li>外键的意义：在于解耦合，定义外键的方法<code>FOREIGN KEY (主键）references &lt;表名&gt;(另一个表的主键）</code></li>
+</ul>
+<h2 id="六、组合查询"><a href="#六、组合查询" class="headerlink" title="六、组合查询"></a>六、组合查询</h2><ul>
 <li>组合查询，必须由两条<code>SELECT</code>语句组成，语句之间用<code>UNION</code>关键字分隔</li>
 <li><code>UNION</code>的每个查询必须包含相同的列，表达式或聚集函数</li>
 <li>使用<code>UNION</code>时重复的行会被自动取消（默认行为），若想返回所有的匹配行可以用<code>UNION ALL</code></li>
-<li>在使用<code>UNION</code>组合查询时，只能使用一次<code>ORDER BY</code>子句，它必须出现在最后一条<code>SELECT</code>语句之后<h2 id="七、全文本搜索"><a href="#七、全文本搜索" class="headerlink" title="七、全文本搜索"></a>七、全文本搜索</h2></li>
+<li>在使用<code>UNION</code>组合查询时，只能使用一次<code>ORDER BY</code>子句，它必须出现在最后一条<code>SELECT</code>语句之后</li>
+</ul>
+<h2 id="七、全文本搜索"><a href="#七、全文本搜索" class="headerlink" title="七、全文本搜索"></a>七、全文本搜索</h2><ul>
 <li>全文本搜索会对结果排序，具有较高优先等级（文本中靠前的等级高）的行先返回，搜索默认不区分大小写</li>
 <li>在创建表时跟句子句<code>Fulltext(列名)</code>对它进行索引，函数<code>Match()</code>指定被搜索的列，函数<code>Against()</code>指定要使用的搜索表达式，搭配<code>WHERE</code>子句进行筛选</li>
-<li>使用查询扩展<code>Against(&#39;anvils&#39; WITH QUERY EXPANSION)</code>，找出和搜索相关的其他行<h2 id="八、操作数据"><a href="#八、操作数据" class="headerlink" title="八、操作数据"></a>八、操作数据</h2></li>
+<li>使用查询扩展<code>Against(&#39;anvils&#39; WITH QUERY EXPANSION)</code>，找出和搜索相关的其他行</li>
+</ul>
+<h2 id="八、操作数据"><a href="#八、操作数据" class="headerlink" title="八、操作数据"></a>八、操作数据</h2><ul>
 <li><h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><ul>
 <li><code>INSERT INTO &lt;表名&gt; (需要插入值的列名) values (给每个列提供一个值)</code></li>
 <li>没有列出的值默认为NULL</li>

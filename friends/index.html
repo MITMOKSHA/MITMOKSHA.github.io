@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>【C#】语言基础笔记（在更） | Moksha的个人博客</title>
+  <title>friends | Moksha的个人博客</title>
 
   
     
@@ -540,7 +540,7 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/13.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/11.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
@@ -551,7 +551,7 @@
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
           <script>
             var typed = new Typed("#post-detail-header-title", {
-              strings: ['【C#】语言基础笔记（在更）'],
+              strings: ['friends'],
               startDelay: 100,
               typeSpeed: 100,
               loop: false,
@@ -581,288 +581,10 @@
       
       <div class="post-tags-categories">
         
-        <div class="tags">
-          <i class="iconfont icontag"></i>
-          
-            <a href="/tags/C/" class="">
-              C#
-            </a>
-          
-        </div>
-        
-        
-        <div class="categories">
-          <i class="iconfont iconbookmark1"></i>
-          
-            <a href="/categories/C/" class="">
-              C#
-            </a>
-          
-        </div>
         
       </div>
       <div class="post-content">
-        <h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><ul>
-<li>表达式主体方法<ul>
-<li>=&gt;操作符引用构成方法主体的表达式，而且没有return语句。表达式的值自动作为返回值；如果表达式不返回值，则方法自动为void方法  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showResult</span>(<span class="params"><span class="built_in">int</span> answer</span>)</span> =&gt; Console.WriteLine(<span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>差值表达式<ul>
-<li>$符号表明这是个差值字符串，{和}之间的任何表达式都需求值并置换，字符串差值比+操作符高效得多  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2></li>
-</ul>
-</li>
-<li>只有<code>float</code>和<code>double</code>除以0得到<code>Infinity</code>（不会出错）</li>
-<li><code>int</code>的最大最小值<code>int.MaxValue</code>和<code>int.MinValue</code></li>
-<li>隐式类型变量<code>var</code>,作用类似于C++的<code>auto</code><h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2></li>
-<li>与C++不一致<br>  -<code>if</code>语句中表达式必须是布尔值, 如：<code>if (1)</code> // 错误</li>
-<li><code>switch</code>语句的控制表达式不能用<code>float</code>和<code>double</code>类型</li>
-<li><code>case</code>标签必须是常量表达式，且必须唯一</li>
-<li>C#语句的直通规则<ul>
-<li>直通，标签之间不能有额外语句（即不加<code>break</code>，不允许拥有语句）</li>
-<li>每个<code>case</code>都加上<code>break</code><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2></li>
-</ul>
-</li>
-<li>C#所有方法都必须在类的内部声明</li>
-<li>默认参数中如果参数匹配则不会出现歧义</li>
-<li>默认参数（可选参数）必须放在后面</li>
-<li>具名参数<ul>
-<li><code>optMethod(first: 99, third: &quot;Word&quot;);</code>  // 传递具名参数（参数名:传递的值），实参可以按任意顺序传递，second参数使用<code>默认值</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="结构（结构体）"><a href="#结构（结构体）" class="headerlink" title="结构（结构体）"></a>结构（结构体）</h2><ul>
-<li><p>与C++不一致，结构主体后不加<code>;</code></p>
-</li>
-<li><p>值类型</p>
-<ul>
-<li>对于简单的、比较小的数据值，复制值的效率等同于或基本等同于复制地址的效率，但较复杂的数据就考虑使用类，这样就可选择只复制数据的地址，从而提高代码的执行效率</li>
-</ul>
-</li>
-<li><p>不能为结构声明默认构造器（无参构造器），否则无法编译，因为编译器始终会自动生成默认构造器（不同于类）</p>
-</li>
-<li><p>类的实例字段可在声明时初始化，但结构不允许</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Time</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">private</span> <span class="built_in">int</span> hours = <span class="number">0</span>;  <span class="comment">// 编译时错误</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>编译器不会自动初始化结构中的字段（与类不一致）</p>
-</li>
-<li><p>复制结构变量的前提时<code>=</code>操作符右侧的结构变量已完全初始化，否则编译错误</p>
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2></li>
-<li><p>与C++不一致，枚举主体后不加<code>;</code></p>
-</li>
-<li><p>值类型</p>
-</li>
-<li><p>声明枚举时字面值默认是int类型，可以选择枚举的基础类型</p>
-<ul>
-<li><code>enum Season : short &#123; Spring, Summer &#125;</code></li>
-</ul>
-</li>
-<li><p>为枚举的字面值显式指定常量整数值</p>
-<ul>
-<li><code>enum Season &#123; Spring = 1, Summer &#125;</code></li>
-</ul>
-</li>
-<li><p>编译器自动为它指定比前一个枚举字面值大1的值</p>
-</li>
-<li><p>多个枚举字面值可以具有相同的基础值</p>
-<ul>
-<li><code>enum Season &#123; Spring, Summer, Fall, Autumn = Fall &#125;</code></li>
-</ul>
-</li>
-<li><p>每个枚举定义的字面值名称都只有这个枚举类型的作用域，因此要加枚举类型限定，否则编译错误，如：Season.Fall</p>
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2></li>
-<li><p>与c++不一致，类主体、结构主体后不加分号</p>
-</li>
-<li><p>每个字段和方法声明都要重复<code>public</code>或<code>private</code>关键字</p>
-</li>
-<li><p>省略控制可访问性，默认为<code>private</code></p>
-</li>
-<li><p>类被拆分到多个文件中之后，要在每个文件中使用<code>partial</code>（分部）关键字定义类的不同部分</p>
-</li>
-<li><p>如果把方法或字段声明为<code>static</code>，就可使用类名调用方法或访问字段，而不用先创建对象</p>
-</li>
-<li><p>静态方法只能访问标记为<code>static</code>的其他方法和字段</p>
-</li>
-<li><p>类外访问类中的<code>static</code>字段要以，类名作为前缀，<code>class.function</code></p>
-</li>
-<li><p>静态方法也称为类方法</p>
-</li>
-<li><p>静态字段称为静态字段或静态变量</p>
-</li>
-<li><p>只有数值类型、字符串类型和枚举类型的字段才能声明为const字段</p>
-</li>
-<li><p>静态类</p>
-<ul>
-<li>只能包含静态成员</li>
-<li><code>public static class Math</code></li>
-</ul>
-</li>
-<li><p>using语句允许将类引入作用域，以便在访问静态成员时省略类名</p>
-<ul>
-<li><code>using static System.Math;</code></li>
-</ul>
-</li>
-<li><p>匿名类</p>
-<ul>
-<li>匿名类就是没有名字的类</li>
-<li>不知道类的名称可以使用隐式类型变量来创建正确类型的对象  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myAnonymousObject = <span class="keyword">new</span> &#123; Name = <span class="string">&quot;John&quot;</span>, Age = <span class="number">47</span> &#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>值类型</p>
-<ul>
-<li>基元类型</li>
-</ul>
-</li>
-<li><p>引用类型</p>
-<ul>
-<li><code>string</code>在运行时动态分配内存</li>
-<li>声明类变量时，编译器分配一小块内存，其中刚好可以容纳一个地址。以后类实际占用内存块的地址会填充到这里。该地址成为对内存块的引用</li>
-<li>实际占用的内存<ul>
-<li>使用<code>new</code>关键字创建对象时分配的内存</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>引用类型的变量包含的是引用，引用本身存储在栈上，但该引用指向堆上的对象</p>
-</li>
-<li><p>类可以提供clone方法来返回自己的新实例，并填充相同数据</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Circle <span class="title">Clone</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">	    Circle clone = <span class="keyword">new</span> Circle();</span><br><span class="line">	    clone.radius = <span class="keyword">this</span>.radius;</span><br><span class="line">	    <span class="comment">// 返回包含克隆数据的新Circle对象</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>如果包含任何引用类型的字段，这种引用类型也需要提供Clone方法，否则只是“浅拷贝”，如果提供了Clone方法，能够复制引用的对象，就成为“深拷贝”</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Circle c = <span class="keyword">new</span> Circle(<span class="number">42</span>);</span><br><span class="line">Circle copy = <span class="keyword">new</span> Circle(<span class="number">99</span>);</span><br><span class="line">copy = c;</span><br></pre></td></tr></table></figure></li>
-<li><p>这时候copy原来的引用被回收了（垃圾回收机制）</p>
-</li>
-</ul>
-</li>
-<li><p>空条件操作符（问号加在变量名称之后）</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(c?.Area());</span><br></pre></td></tr></table></figure>
-<ul>
-<li>空条件操作符告诉”运行时“在操作符所应用的变量为null的前提下忽略当前语句</li>
-</ul>
-</li>
-<li><p>可空类型</p>
-<ul>
-<li><code>null</code>本身就是引用，不能把它赋值给值类型</li>
-<li>可将变量声明为可空值类型<ul>
-<li><code>int? i = null;</code></li>
-</ul>
-</li>
-<li>可将恰当值的表达式直接赋给可空变量<ul>
-<li><code>i = j;</code></li>
-</ul>
-</li>
-<li>不可将可空的值赋给普通的值类型变量<ul>
-<li><code>j = i;</code></li>
-</ul>
-</li>
-<li>可空类型的两个属性<ul>
-<li><code>HasValue</code><ul>
-<li>判断可空类型是包含一个值，还是包含null</li>
-</ul>
-</li>
-<li><code>Value</code><ul>
-<li>只读的属性</li>
-<li>读取变量的值，但不能修改</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>引用传参</p>
-<ul>
-<li><code>ref</code>参数<ul>
-<li>要求实参和形参前都加上<code>ref</code>关键字<ul>
-<li><code>DoWork(ref i)</code>;</li>
-</ul>
-</li>
-<li>要求在传参之前必须初始化</li>
-</ul>
-</li>
-<li><code>out</code>参数<ul>
-<li>要求实参和形参前都加上<code>out</code>关键字</li>
-<li>要求在方法中必须初始化，传参前不要求</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>object</code>类型</p>
-<ul>
-<li><code>object</code>类型的变量能引用任何引用类型的任何对象</li>
-</ul>
-</li>
-<li><p><code>装箱</code></p>
-<ul>
-<li>将值类型赋给<code>object</code>类型的变量<ul>
-<li><code>object o = 42;</code></li>
-</ul>
-</li>
-<li>数据项从栈自动复制到堆的行为</li>
-<li>与泛型异曲同工</li>
-</ul>
-</li>
-<li><p><code>拆箱</code></p>
-<ul>
-<li>将引用了已装箱的值的object引用强制转换成值类型<ul>
-<li><code>int a = (int)o;</code></li>
-</ul>
-</li>
-<li>必须强制转换</li>
-</ul>
-</li>
-<li><p>装箱和拆箱会产生较大的开销</p>
-<ul>
-<li>它们设计不少检查工作，且需要分配额外的堆内存</li>
-</ul>
-</li>
-<li><p>数据的安全转型</p>
-<ul>
-<li>左操作数为对象，右操作数为类型<ul>
-<li>is操作符<ul>
-<li>if (o is WrappedInt)</li>
-<li>如果is表达式正确，结果为true，反之为false</li>
-</ul>
-</li>
-<li>as操作符<ul>
-<li>WrappedInt temp = o as WrappedInt;</li>
-<li>若转换成功，就返回转换成功的结果，失败则为null</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>在c#中使用c指针必须将代码标记为<code>unsafe</code></p>
-<ul>
-<li><code>unsafe</code>关键字可标记代码块或整个方法  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsafe</span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">unsafe</span> <span class="keyword">void</span> <span class="title">swap</span>(<span class="params"></span>)</span> &#123;&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>命名规范</p>
-</li>
-<li><p>公共标识符以大写字母开头</p>
-</li>
-<li><p>非公共标识符（包括局部变量）以小写字母开头</p>
-</li>
-<li><p>类名以大写字母开头</p>
-</li>
-<li><p>均采用驼峰命名法</p>
-</li>
-<li><p><code>TODO:</code>注释通常用于标注以后将进行加工的代码</p>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2></li>
-<li><p><code>checked</code>语句是<code>checked</code>关键字开头的代码块</p>
-<ul>
-<li>只有直接在checked块中的整数运算才会检查</li>
-<li>溢出则抛出<code>OverflowException</code></li>
-<li><code>checked</code>和<code>unchecked</code>关键字只适合整型运算</li>
-<li>浮点运算永不抛出异常</li>
-</ul>
-</li>
-<li><p><code>catch</code>省略名称默认捕获<code>Exception</code></p>
-<ul>
-<li>异常发生后将运行由”运行时“发现的第一个匹配的异常处理程序<code>catch</code>，其他处理程序会被忽略</li>
-</ul>
-</li>
-</ul>
-
+        
       </div>
       
         <div class="copyright">
@@ -872,7 +594,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2021/04/28/【C#】语言基础笔记（在更）/" target="_blank" title="【C#】语言基础笔记（在更）">http://example.com/2021/04/28/【C#】语言基础笔记（在更）/</a>
+    <a href="/friends/index.html" target="_blank" title="friends">http://example.com/friends/index.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -889,25 +611,6 @@
 <div class="post-nav">
 
 
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/7.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/04/28/%E3%80%90Lua%E3%80%91%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9C%A8%E6%9B%B4%EF%BC%89/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> Prev:
-        <div>【Lua】语言基础笔记（在更）</div>
-      </div>
-      
-      <!-- <div class="content">
-        交互模式
-lua -i，-i参数用于在运行完其他命令行参数后进入交互模式
-不在交互模式下必须把表达式包在函数print的
-      </div> -->
-    </a>
-  </div>
 
 
 

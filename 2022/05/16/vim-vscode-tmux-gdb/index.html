@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>archives: 2022 | Moksha&#39;s Blog</title>
+  <title>vim+vscode+tmux+gdb | Moksha&#39;s Blog</title>
 
   
     
@@ -338,40 +338,475 @@
   
 </header>
     <main class="main" style="margin-top: 60px;">
-      <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="lazyload archive-header" data-original="/medias/archive.jpg" style="width: 100%;height: 50vh;overflow: hidden;background-size: cover; 
-background-position: center center;">
-<!-- <span class="title">archives</span> -->
+      
+ <!-- prismjs 代码高亮 -->
+ 
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
 </div>
-<div class="archive-main">
-  <section class="archive">
-    <div class="archive-content">
-      <ul class="post-archive">
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/10.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
+  
+    <div class="title-box">
+      
+          <span class="title">
+            vim+vscode+tmux+gdb
+          </span>
         
-        
-          
-            
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2022">2022</a>
-            </div>
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">05-16</span>
-            <a class="post-title" href="/2022/05/16/vim-vscode-tmux-gdb/">vim+vscode+tmux+gdb</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">05-16</span>
-            <a class="post-title" href="/2022/05/16/cppNote/">Advanced Cpp Note</a>
-          </li>
-        
-      </ul>
     </div>
-  </section>
+  
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
   
 </div>
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      
+      <div class="post-meta">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <span class="post-time">2022-05-16</span>
+      </div>
+      
+      <div class="post-tags-categories">
+        
+        
+      </div>
+      <div class="post-content">
+        <h1 id="vim-vscode-tmux-gdb-git"><a href="#vim-vscode-tmux-gdb-git" class="headerlink" title="vim+vscode+tmux+gdb+git"></a>vim+vscode+tmux+gdb+git</h1><p>个人的一些认为比较常用以及不经常用到的的快捷操作</p>
+<h2 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a><strong>vscode</strong></h2><ol>
+<li>查找文件ctrl+p， esc退出</li>
+<li>分割屏幕ctrl+\，通过ctrl+1/2/3来切换分割屏幕的焦点</li>
+<li>ctrl+` 打开/关闭终端</li>
+<li>ctrl+tab, 在tab之间切换</li>
+<li>模糊查找当前工作目录下的所有文件ctrl+p, #</li>
+<li>Ctrl + Shift + Tab 导航tab</li>
+<li>alt + &lt;-/-&gt;切换tab</li>
+</ol>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a><strong>vim</strong></h2><ol>
+<li>跳转到指定行号n, ngg</li>
+<li>复制整行 yy, 复制包括当前行接下来n行， nyy</li>
+<li>复制指定行v模式下指定复制内容，然后y键复制。</li>
+<li>粘贴<br>如复制内容不是一整行：p粘贴到当前光标处，P粘贴到当前行首。<br>如复制内容是一整行：p粘贴到当前行的下一行，P粘贴到当前行的上一行</li>
+<li>剪切dd</li>
+<li>在当前文件查找指定内容，/+内容</li>
+<li>ctrl+] 跳转到函数的定义处，ctrl+t返回上一次光标处</li>
+<li>u撤销，ctrl+r恢复</li>
+<li><code>^y</code>向上移动一行, <code>^e</code>向下移动一行</li>
+<li><code>^b</code>向上移动一页，<code>^f</code>向下移动一页</li>
+<li>number + shift + G, 跳到第number行 </li>
+<li>在<code>tab</code>之间切换, <code>Alt</code>+<code>number</code>.</li>
+<li>可视条件下选中后<code>&lt;</code>或<code>&gt;</code>完成缩进。</li>
+<li>要想跳转到函数定义处，需要在项目目录中输入<code>ctags -R</code>命令。<code>ctrl+]</code>跳转, <code>ctrl+o</code>返回。</li>
+<li>可视模式下注释+<code>d</code>。</li>
+<li>替换变量名<code>:%s/foo/bar/g</code>将整个文件中的<code>foo</code>替换为<code>bar</code></li>
+<li>在vim文件内使用shell命令<code>:! command</code></li>
+<li>在当前文件中打开另一个文件<code>:e file</code></li>
+<li>在Vim中编译代码<code>:!gcc %</code>, 编译并运行代码<code>:!gcc % || ./a.out</code></li>
+</ol>
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a><strong>tmux</strong></h2><ol>
+<li>任何命令都需要加ctrl+b前缀</li>
+<li>c创建窗口；n, p切换窗口</li>
+<li>%垂直分屏, “水平分屏</li>
+<li>x关闭窗口</li>
+<li>o在窗口之间切换</li>
+<li>PgUp开启tmux终端界面的翻页，q退出。</li>
+</ol>
+<h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a><strong>gdb</strong></h2><ol>
+<li>delete 删除所有断点</li>
+<li>layout src/reg/asm 显示c源代码、寄存器和汇编，但未分屏；focus src/reg/asm在src、reg和asm的tui中来回切换</li>
+<li>layout split获得c和asm的分屏。</li>
+<li>info/i frame 查看栈帧, info/i args查看传递给main的参数, i locals显示当前的本地变量。</li>
+<li>通过backtrace查看栈帧，frame n(n为bt结果的栈帧号)，然后i frame查看当前栈帧号的详细内容</li>
+<li>print/p查看argv数据;print/p *argv(默认打印一个参数);可以通过print/p *argv@n 来选择argv数组中的n个元素即参数; p *argv@argc打印所有参数</li>
+<li><code>print</code>是打印值，<code>x</code>是访问主存。</li>
+<li><code>Ctrl + x</code>，再按1：单窗口模式，显示一个窗口</li>
+<li><code>Ctrl + x</code>，再按2：双窗口模式，显示两个窗口</li>
+<li><code>Ctrl + x</code>，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口。</li>
+<li><code>^x+a</code>关闭可视化</li>
+<li><code>wa</code>跟踪某个变量(watch point)</li>
+</ol>
+<h2 id="lt-gt-gdb续"><a href="#lt-gt-gdb续" class="headerlink" title="&lt;&gt;(gdb续)"></a><strong>&lt;<Debug Hacks>&gt;(gdb续)</strong></h2><ol>
+<li><code>break/b</code><ul>
+<li><code>break 函数名</code></li>
+<li><code>break 行号</code></li>
+<li><code>break 文件名:行号</code></li>
+<li><code>break 文件名:函数名</code></li>
+<li><code>break +偏移量</code></li>
+<li><code>break -偏移量</code></li>
+<li><code>break *地址</code></li>
+<li><code>break 断点 if 条件</code></li>
+<li>若不指定位置就默认在下一行代码上设置断点</li>
+<li><code>info break</code>显示断点信息</li>
+</ul>
+</li>
+<li><code>run/r</code>, 如果不加参数，执行到断点位置后暂停运行(和start命令一样的效果)</li>
+<li><code>print/p</code><ul>
+<li><code>p $eax</code>，显示寄存器(寄存器名前加$)</li>
+</ul>
+</li>
+<li><code>p/格式 变量</code>, 显示寄存器可用的格式:<ul>
+<li>x, 显示为十六进制数</li>
+<li>d, 显示为十进制数</li>
+<li>u, 显示无符号十进制数</li>
+<li>o, 显示八进制数</li>
+<li>t, 显示二进制数(two)</li>
+<li>a, 显示地址</li>
+<li>c, 显示为字符</li>
+<li>f, 浮点小数</li>
+<li>s, 显示为字符串</li>
+<li>i, 显示为机器语言</li>
+</ul>
+</li>
+<li><code>x/NFU ADDR</code>, 显示内存的内容(eXamining):<ul>
+<li><code>N</code>为重复次数</li>
+<li><code>F</code>为上述的P格式</li>
+<li><code>U</code>代表的单位：<ul>
+<li>b, 字节</li>
+<li>h, 半字</li>
+<li>w, 字(4字节默认)</li>
+<li>g, 双字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="cgdb"><a href="#cgdb" class="headerlink" title="cgdb"></a><strong>cgdb</strong></h2><ol>
+<li>使用<code>i</code>切换到<code>GDB command</code>，<code>esc</code>切换到<code>source window</code>。</li>
+<li>在<code>source window</code>下，可以像<code>vim</code>一样用<code>\</code>匹配内容， 且移动到指定行按下<code>space</code>可以可视化打断点。</li>
+<li><code>q</code>或者<code>^c+d</code>退出<code>gdb</code></li>
+<li>调整<code>source window</code>的大小, <code>-</code>缩小一行，<code>=</code>增加一行。</li>
+<li>在<code>source window</code>下<code>^w</code>窗口水平竖直分割切换。</li>
+<li><code>F5</code> = <code>run</code>, <code>F6</code> = <code>continue</code>, <code>F7</code> = <code>finish</code>, <code>F8</code> = <code>next</code>, <code>F10</code> = <code>step</code>。</li>
+<li><code>CGDB</code>的配置, 在<code>~/.cgdb/</code>目录下创建<code>cgdbrc</code>文件并编辑。如果<code>cgdbrc</code>文件存在，<code>CGDB</code>就会执行该文件中的每一行。<ul>
+<li><code>:set disasm</code>，以汇编语言的形式显示。</li>
+<li><code>:set hls</code>，高亮显示匹配到的字符串</li>
+<li><code>:set syn=style</code>设置当前文件对应语法风格的高亮。</li>
+</ul>
+</li>
+</ol>
+<h2 id="git"><a href="#git" class="headerlink" title="git"></a><strong>git</strong></h2><ul>
+<li><code>git clone -b branch XXX</code>克隆指定分支的代码</li>
+<li><code>git reset --hard 1a703e</code>回滚到某个历史commit</li>
+<li><code>git branch -m &lt;branchName&gt;</code>将当前分支名更改为branchName</li>
+<li><code>git checkout -b &lt;newbranch&gt;</code>创建新分支并切换到新分支</li>
+<li><code>git diff</code>查看修改的差异</li>
+</ul>
+
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Pishun Huang</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2022/05/16/vim-vscode-tmux-gdb/" target="_blank" title="vim+vscode+tmux+gdb">http://example.com/2022/05/16/vim-vscode-tmux-gdb/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint polocy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/39.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2022/05/16/cppNote/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fa fa-angle-right"></i>
+        <div>Advanced Cpp Note</div>
+      </div>
+      <!-- <div class="content">
+        一、std::function和bind绑定器可调用对象
+是一个函数指针
+是一个具有operator()成员函数的类对象
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+      
+        <div id="myComment">
+          
+        </div>
+      
+  </div>
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
+          <div class="toc-open-close">catalog</div>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+.toc-main ul {
+  counter-reset: show-list;
+}
+.toc-main ul li::before {
+  content: counter(item)".";
+  display: block;
+  position: absolute;
+  left: 12px;
+  top:0;
+}
+.toc > .toc-list {
+  padding-left: 35px;
+}
+.toc>.toc-list li {
+  list-style: decimal;
+}
+.toc-list {
+  padding-left: 25px;
+}
+</style>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script>
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    </script>
+  
+</div>
+
+
     </main>
     <div class="footer bg-color">
   <div class="footer-main">

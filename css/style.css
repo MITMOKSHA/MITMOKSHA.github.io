@@ -532,7 +532,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   color: #fff;
   width: 100%;
   text-align: center;
-  font-weight: bold;
+  font-weight: bolder;
 }
 .post-detail-header .typed-cursor {
   font-size: 2rem;

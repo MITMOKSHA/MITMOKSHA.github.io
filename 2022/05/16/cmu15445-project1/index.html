@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>CMU 15-445 Project1: BUFFER POOL MANAGER | Moksha&#39;s Blog</title>
+
+  
+    
+<link rel="stylesheet" href="/js/aos/aos.css">
+
+  
+
+  <link rel="icon" type="image/png" href="/puzzle_favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+</head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <link href="/js/danmu/barrager.css" rel="stylesheet">
+<script src="/js/danmu/jquery.barrager.js"></script>
+  <body>
+    <!-- 判断是否为黑夜模式 -->
+    <script>
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+      if (isDark) {
+        $(document.body).addClass('darkModel');
+      }
+    </script>
+
+    <header class="header bg-color" 
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo" src="/medias/logo.jpg" alt="logo">
+      <h3 class="drawer-box-head_title">Moksha&#39;s Blog</h3>
+      <h5 class="drawer-box-head_desc">Opportunities are ready for it, the more to beat action.</h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>Home</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>Archives</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>Categories</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/friends" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>link</span>
+            </a>
+          </li>
+        
+        <li class="drawer-box-content_item">
+          <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA">
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <span>Github</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <div class="avatar">
+        <img src="/medias/logo.jpg" alt="logo">
+      </div>
+      <a href="/" class="logo">Moksha&#39;s Blog</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>Home</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>Archives</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>Categories</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/friends" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>link</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div class="dark">
+  <div class="dark-content">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-moon-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+        
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <!-- <div class="close" style="overflow: hidden;">
+          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
+        </div> -->
+        <h2>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <span class="title">Search</span>
+          <i class="fa fa-close close" style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+  <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+</header>
+    <main class="main" style="margin-top: 60px;">
+      
+ <!-- prismjs 代码高亮 -->
+ 
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/13.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
+  
+    <div class="title-box">
+      
+          <span class="title">
+            CMU 15-445 Project1: BUFFER POOL MANAGER
+          </span>
+        
+    </div>
+  
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      
+      <div class="post-meta">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <span class="post-time">2022-05-16</span>
+      </div>
+      
+      <div class="post-tags-categories">
+        
+        
+        <div class="categories">
+          <i class="iconfont iconbookmark1"></i>
+          
+            <a href="/categories/CMU15-445/" class="">
+              CMU15-445
+            </a>
+          
+        </div>
+        
+      </div>
+      <div class="post-content">
+        <h1 id="CMU-15-445-Project1-BUFFER-POOL-MANAGER"><a href="#CMU-15-445-Project1-BUFFER-POOL-MANAGER" class="headerlink" title="CMU 15-445 Project1: BUFFER POOL MANAGER"></a>CMU 15-445 Project1: BUFFER POOL MANAGER</h1><h2 id="TASK-1-LRU-REPLACEMENT-POLICY"><a href="#TASK-1-LRU-REPLACEMENT-POLICY" class="headerlink" title="TASK #1 - LRU REPLACEMENT POLICY"></a><strong>TASK #1 - LRU REPLACEMENT POLICY</strong></h2><h3 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a><strong>1.1 问题描述</strong></h3><p>需要完成的函数</p>
+<ul>
+<li>Victim(frame_id_t*) : Remove the object that was accessed least recently compared to all the other elements being tracked by the Replacer, store its contents in the output parameter and return True. If the Replacer is empty return False.</li>
+<li>Pin(frame_id_t) : This method should be called after a page is pinned to a frame in the BufferPoolManager. It should remove the frame containing the pinned page from the LRUReplacer.</li>
+<li>Unpin(frame_id_t) : This method should be called when the pin_count of a page becomes 0. This method should add the frame containing the unpinned page to the LRUReplacer.</li>
+<li>Size() : This method returns the number of frames that are currently in the LRUReplacer</li>
+</ul>
+<p>想到lc上有类似的实现可以参考一下，双链表+哈希表实现<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU</a>，大致思路和本题是一样的。pin时表示该页正在被使用，因此需要将该页从lru_replacer中移除，unpin反之。需要注意的是，不能多次unpin，这点与lc上有差别。</p>
+<h3 id="1-2-部分实现"><a href="#1-2-部分实现" class="headerlink" title="1.2 部分实现"></a><strong>1.2 部分实现</strong></h3><p><strong>lru_replacer.h</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line"> <span class="comment">// TODO(student): implement me!</span></span><br><span class="line"> std::unordered_map&lt;<span class="type">frame_id_t</span>, ListNode*&gt; cache_;</span><br><span class="line"> std::mutex lru_latch_;</span><br><span class="line"> ListNode* head_;  <span class="comment">// dummy.</span></span><br><span class="line"> ListNode* tail_;</span><br><span class="line"> <span class="type">size_t</span> curr_size_;</span><br><span class="line"> <span class="type">size_t</span> capacity_;</span><br></pre></td></tr></table></figure>
+<p><strong>lru_replacer.cpp</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">LRUReplacer::Victim</span><span class="params">(<span class="type">frame_id_t</span> *frame_id)</span> </span>&#123;  <span class="comment">// evict the old frame.</span></span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guard</span><span class="params">(lru_latch_)</span></span>;  <span class="comment">// lock</span></span><br><span class="line">  <span class="keyword">if</span> (curr_size_ == <span class="number">0</span>) &#123;  <span class="comment">// lruReplacer empty.</span></span><br><span class="line">    frame_id = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ListNode* delframe = tail_-&gt;prev;</span><br><span class="line">  <span class="type">frame_id_t</span> delframe_id= delframe-&gt;frame_id;</span><br><span class="line">  *frame_id = delframe_id;</span><br><span class="line">  cache_.<span class="built_in">erase</span>(delframe_id);  <span class="comment">// remove from frame.</span></span><br><span class="line">  curr_size_--;</span><br><span class="line">  <span class="comment">// Evict frame.</span></span><br><span class="line">  <span class="built_in">RemoveFrame</span>(delframe);</span><br><span class="line">  <span class="keyword">delete</span> delframe;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRUReplacer::Pin</span><span class="params">(<span class="type">frame_id_t</span> frame_id)</span> </span>&#123;</span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guard</span><span class="params">(lru_latch_)</span></span>;  <span class="comment">// lock</span></span><br><span class="line">  <span class="keyword">if</span> (cache_.<span class="built_in">find</span>(frame_id) != cache_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    <span class="comment">// decrease the attribute size.</span></span><br><span class="line">    curr_size_--;</span><br><span class="line">    ListNode* delframe = cache_[frame_id];</span><br><span class="line">    cache_.<span class="built_in">erase</span>(frame_id);</span><br><span class="line">    <span class="built_in">RemoveFrame</span>(delframe);</span><br><span class="line">    <span class="comment">// release the source.</span></span><br><span class="line">    <span class="keyword">delete</span> delframe;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRUReplacer::Unpin</span><span class="params">(<span class="type">frame_id_t</span> frame_id)</span> </span>&#123;</span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guard</span><span class="params">(lru_latch_)</span></span>;  <span class="comment">// lock</span></span><br><span class="line">  <span class="keyword">if</span> (cache_.<span class="built_in">find</span>(frame_id) == cache_.<span class="built_in">end</span>()) &#123;  <span class="comment">// didn&#x27;t find Unpin frame.</span></span><br><span class="line">    ListNode* frame = <span class="keyword">new</span> <span class="built_in">ListNode</span>(frame_id);</span><br><span class="line">    ++curr_size_;</span><br><span class="line">    <span class="keyword">if</span> (curr_size_ &gt; capacity_) &#123;</span><br><span class="line">      <span class="type">frame_id_t</span> fid;</span><br><span class="line">      <span class="built_in">Victim</span>(&amp;fid);</span><br><span class="line">      cache_[frame_id] = frame;</span><br><span class="line">      curr_size_--;</span><br><span class="line">      <span class="built_in">AddToHead</span>(frame);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      cache_[frame_id] = frame;</span><br><span class="line">      <span class="built_in">AddToHead</span>(frame);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// couldn&#x27;t Unpin many times but once.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">LRUReplacer::Size</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> curr_size_; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRUReplacer::AddToHead</span><span class="params">(ListNode* frame)</span> </span>&#123;</span><br><span class="line">  frame-&gt;next = head_-&gt;next;</span><br><span class="line">  head_-&gt;next-&gt;prev = frame;</span><br><span class="line">  head_-&gt;next = frame;</span><br><span class="line">  frame-&gt;prev = head_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRUReplacer::RemoveFrame</span><span class="params">(ListNode* frame)</span> </span>&#123;</span><br><span class="line">  frame-&gt;prev-&gt;next = frame-&gt;next;</span><br><span class="line">  frame-&gt;next-&gt;prev = frame-&gt;prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="TASK-2-BUFFER-POOL-MANAGER-INSTANCE"><a href="#TASK-2-BUFFER-POOL-MANAGER-INSTANCE" class="headerlink" title="TASK #2 - BUFFER POOL MANAGER INSTANCE"></a><strong>TASK #2 - BUFFER POOL MANAGER INSTANCE</strong></h2><h3 id="2-1-问题描述"><a href="#2-1-问题描述" class="headerlink" title="2.1 问题描述"></a><strong>2.1 问题描述</strong></h3><p>可以联系课程给的slide了解对应的关系，需要理解的概念以及注意的点：</p>
+<ol>
+<li>free_list、lru_replacer、buffer_pool是独立存在的。</li>
+<li>free_list中存放的是未被使用的frame，页表中不存在其frame的映射，即page_id为INVALID_PAGE_ID。</li>
+<li>unpin_page，存放在lru_replacer中，页表中存在其frame的映射，但其在buffer pool中未被使用。</li>
+<li>pin_page，存在于buffer pool中且正在被使用。</li>
+<li>刷盘的时机，只需要在victim、deletePage时刷盘即可，不需要在每次unpinpage时刷盘，在unpinpage时保存其传入的dirty状就行。因此每次fetch或者new一个页，从free_list中返回的页都不是脏页，同时victim时刷盘也保证获取的页不是脏页。</li>
+<li>从fetch、new获取lru_replace中的页时，需要在页表中删除原page与frame的映射。</li>
+<li>避免加锁函数的嵌套，可能会出现死锁的情况。</li>
+</ol>
+<h3 id="2-2-代码实现"><a href="#2-2-代码实现" class="headerlink" title="2.2 代码实现"></a><strong>2.2 代码实现</strong></h3><p>可以进一步细化锁粒度，这里只给了未优化的实现。</p>
+<p><strong>NewPgImp</strong></p>
+<p>fetchpage和newpgImp都需要增加pin_count值，实现是差不多的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Page *<span class="title">BufferPoolManagerInstance::NewPgImp</span><span class="params">(<span class="type">page_id_t</span> *page_id)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 0.   Make sure you call AllocatePage!</span></span><br><span class="line">  <span class="comment">// 1.   If all the pages in the buffer pool are pinned, return nullptr.</span></span><br><span class="line">  <span class="comment">// 2.   Pick a victim page P from either the free list or the replacer. Always pick from the free list first.</span></span><br><span class="line">  <span class="comment">// 3.   Update P&#x27;s metadata, zero out memory and add P to the page table.</span></span><br><span class="line">  <span class="comment">// 4.   Set the page ID output parameter. Return a pointer to P.</span></span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(latch_)</span></span>;</span><br><span class="line">  <span class="comment">// step 1</span></span><br><span class="line">  <span class="type">bool</span> all_pinned = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; pool_size_; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pages_[i].pin_count_ &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      all_pinned = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (all_pinned)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="comment">// allocate a page on disk.</span></span><br><span class="line">  *page_id = <span class="built_in">AllocatePage</span>();</span><br><span class="line">  </span><br><span class="line">  Page* p = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="comment">// pick a victim page P.</span></span><br><span class="line">  <span class="type">frame_id_t</span> fid;</span><br><span class="line">  <span class="keyword">if</span> (free_list_.<span class="built_in">empty</span>()) &#123;  <span class="comment">// pick from free list first.</span></span><br><span class="line">    <span class="keyword">if</span> (!replacer_-&gt;<span class="built_in">Victim</span>(&amp;fid)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      p = &amp;pages_[fid];</span><br><span class="line">      <span class="keyword">if</span> (p-&gt;is_dirty_) &#123;</span><br><span class="line">        disk_manager_-&gt;<span class="built_in">WritePage</span>(p-&gt;page_id_, p-&gt;data_);</span><br><span class="line">        p-&gt;is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      page_table_.<span class="built_in">erase</span>(p-&gt;page_id_);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fid = free_list_.<span class="built_in">front</span>();</span><br><span class="line">    free_list_.<span class="built_in">pop_front</span>();</span><br><span class="line">    p = &amp;pages_[fid];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// add P to the page table.</span></span><br><span class="line">  page_table_[*page_id] = fid;</span><br><span class="line">  <span class="comment">// updata P&#x27;s metadata.</span></span><br><span class="line">  p-&gt;page_id_ = *page_id;</span><br><span class="line">  p-&gt;pin_count_ = <span class="number">1</span>;</span><br><span class="line">  replacer_-&gt;<span class="built_in">Pin</span>(fid);</span><br><span class="line">  <span class="comment">// zeroes out the data that is held within the page</span></span><br><span class="line">  p-&gt;<span class="built_in">ResetMemory</span>();</span><br><span class="line">  <span class="comment">// step 4</span></span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>FetchPgImp</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Page *<span class="title">BufferPoolManagerInstance::FetchPgImp</span><span class="params">(<span class="type">page_id_t</span> page_id)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 1.     Search the page table for the requested page (P).</span></span><br><span class="line">  <span class="comment">// 1.1    If P exists, pin it and return it immediately.</span></span><br><span class="line">  <span class="comment">// 1.2    If P does not exist, find a replacement page (R) from either the free list or the replacer.</span></span><br><span class="line">  <span class="comment">//        Note that pages are always found from the free list first.</span></span><br><span class="line">  <span class="comment">// 2.     If R is dirty, write it back to the disk.</span></span><br><span class="line">  <span class="comment">// 3.     Delete R from the page table and insert P.</span></span><br><span class="line">  <span class="comment">// 4.     Update P&#x27;s metadata, read in the page content from disk, and then return a pointer to P.</span></span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(latch_)</span></span>;</span><br><span class="line">  <span class="comment">// step 1</span></span><br><span class="line">  <span class="type">frame_id_t</span> fid;</span><br><span class="line">  Page* p = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">if</span> (page_table_.<span class="built_in">find</span>(page_id) != page_table_.<span class="built_in">end</span>()) &#123;  <span class="comment">// find.</span></span><br><span class="line">    fid = page_table_[page_id];</span><br><span class="line">    pages_[fid].pin_count_++;</span><br><span class="line">    <span class="comment">// pin it.</span></span><br><span class="line">    replacer_-&gt;<span class="built_in">Pin</span>(fid);</span><br><span class="line">    <span class="keyword">return</span> &amp;pages_[fid];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (free_list_.<span class="built_in">empty</span>()) &#123;  <span class="comment">// pick from free list first.</span></span><br><span class="line">    <span class="keyword">if</span> (!replacer_-&gt;<span class="built_in">Victim</span>(&amp;fid)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// the page placed in the lrureplacer need to be flushed.</span></span><br><span class="line">      p = &amp;pages_[fid];</span><br><span class="line">      <span class="keyword">if</span> (p-&gt;is_dirty_) &#123;</span><br><span class="line">        disk_manager_-&gt;<span class="built_in">WritePage</span>(p-&gt;page_id_, p-&gt;data_);</span><br><span class="line">        p-&gt;is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      page_table_.<span class="built_in">erase</span>(p-&gt;page_id_);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fid = free_list_.<span class="built_in">front</span>();</span><br><span class="line">    free_list_.<span class="built_in">pop_front</span>();</span><br><span class="line">    p = &amp;pages_[fid];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// step 3</span></span><br><span class="line">  <span class="comment">// insert p.</span></span><br><span class="line">  page_table_[page_id] = fid;</span><br><span class="line">  replacer_-&gt;<span class="built_in">Pin</span>(fid);</span><br><span class="line">  <span class="comment">// update P&#x27;s metadata.</span></span><br><span class="line">  p-&gt;page_id_ = page_id;</span><br><span class="line">  p-&gt;pin_count_ = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">// read in the page content from disk.</span></span><br><span class="line">  disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, p-&gt;data_);</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>DeletePgImp</strong></p>
+<p>删除buffer pool中的页后需要将page的元数据还原到初始值，再放入free_list中。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">BufferPoolManagerInstance::DeletePgImp</span><span class="params">(<span class="type">page_id_t</span> page_id)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 0.   Make sure you call DeallocatePage!</span></span><br><span class="line">  <span class="comment">// 1.   Search the page table for the requested page (P).</span></span><br><span class="line">  <span class="comment">// 1.   If P does not exist, return true.</span></span><br><span class="line">  <span class="comment">// 2.   If P exists, but has a non-zero pin-count, return false. Someone is using the page.</span></span><br><span class="line">  <span class="comment">// 3.   Otherwise, P can be deleted. Remove P from the page table, reset its metadata and return it to the free list.</span></span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(latch_)</span></span>;</span><br><span class="line">  <span class="comment">// P does not exist.</span></span><br><span class="line">  <span class="keyword">if</span> (page_table_.<span class="built_in">find</span>(page_id) == page_table_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// P does exist.</span></span><br><span class="line">  <span class="type">frame_id_t</span> fid = page_table_[page_id];</span><br><span class="line">  Page* deletepage = &amp;pages_[fid];</span><br><span class="line">  <span class="keyword">if</span> (deletepage-&gt;pin_count_ != <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// flush the page before deallocate it.</span></span><br><span class="line">  <span class="keyword">if</span> (deletepage-&gt;is_dirty_) &#123;</span><br><span class="line">    disk_manager_-&gt;<span class="built_in">WritePage</span>(page_id, deletepage-&gt;data_);</span><br><span class="line">    deletepage-&gt;is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">DeallocatePage</span>(page_id);</span><br><span class="line">  <span class="comment">// remove P from the page table.</span></span><br><span class="line">  page_table_.<span class="built_in">erase</span>(page_id);</span><br><span class="line">  <span class="comment">// reset its metadata.</span></span><br><span class="line">  <span class="comment">// the page returned to freelist does not stores any page.</span></span><br><span class="line">  deletepage-&gt;page_id_ = INVALID_PAGE_ID;</span><br><span class="line">  deletepage-&gt;is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">  deletepage-&gt;pin_count_ = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// return it to free_list_.</span></span><br><span class="line">  free_list_.<span class="built_in">push_back</span>(fid);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>UnpinPgImp</strong></p>
+<p>保留传入的dirty状态，在Victim时刷盘。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">BufferPoolManagerInstance::UnpinPgImp</span><span class="params">(<span class="type">page_id_t</span> page_id, <span class="type">bool</span> is_dirty)</span> </span>&#123;</span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(latch_)</span></span>;</span><br><span class="line">  <span class="type">frame_id_t</span> fid = page_table_[page_id];</span><br><span class="line">  Page* p = &amp;pages_[fid];</span><br><span class="line">  p-&gt;is_dirty_ = is_dirty;  <span class="comment">// hold the state until victim.</span></span><br><span class="line">  <span class="keyword">if</span> (p-&gt;pin_count_ &lt;= <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  --p-&gt;pin_count_;</span><br><span class="line">  <span class="keyword">if</span> (p-&gt;pin_count_ == <span class="number">0</span>) &#123;</span><br><span class="line">    replacer_-&gt;<span class="built_in">Unpin</span>(fid);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>FlushPgImp</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">BufferPoolManagerInstance::FlushPgImp</span><span class="params">(<span class="type">page_id_t</span> page_id)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Make sure you call DiskManager::WritePage!</span></span><br><span class="line">  <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(latch_)</span></span>;</span><br><span class="line">  <span class="keyword">if</span> (page_table_.<span class="built_in">find</span>(page_id) == page_table_.<span class="built_in">end</span>() || page_id == INVALID_PAGE_ID)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  disk_manager_-&gt;<span class="built_in">WritePage</span>(page_id, pages_[page_table_[page_id]].data_);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TASK-3-PARALLEL-BUFFER-POOL-MANAGER"><a href="#TASK-3-PARALLEL-BUFFER-POOL-MANAGER" class="headerlink" title="TASK #3 - PARALLEL BUFFER POOL MANAGER"></a><strong>TASK #3 - PARALLEL BUFFER POOL MANAGER</strong></h2><h3 id="3-1-问题描述"><a href="#3-1-问题描述" class="headerlink" title="3.1 问题描述"></a><strong>3.1 问题描述</strong></h3><p>问题是从task2进一步延出来的，单个缓冲池管理器可能会照成大量的锁争用，因为在这种情况下每个线程和缓冲池交互都争着用单个锁存器，因此需要实现一个并行管理器来管理多个缓冲池管理器，进而实现每个缓冲池都有自己的latch。在这里只需要复用上一个task所实现的缓冲器实例即可，再实现一些基本的逻辑即可通过。</p>
+<h3 id="3-2-代码实现"><a href="#3-2-代码实现" class="headerlink" title="3.2 代码实现"></a><strong>3.2 代码实现</strong></h3><p><strong>parallel_buffer_pool_manager.cpp</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ParallelBufferPoolManager::<span class="built_in">ParallelBufferPoolManager</span>(<span class="type">size_t</span> num_instances, <span class="type">size_t</span> pool_size, DiskManager *disk_manager,</span><br><span class="line">                                                     LogManager *log_manager) &#123;</span><br><span class="line">  <span class="comment">// Allocate and create individual BufferPoolManagerInstances</span></span><br><span class="line">  num_instances_ = num_instances;</span><br><span class="line">  pool_size_ = pool_size;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; num_instances; ++i) &#123;</span><br><span class="line">    parallel_.<span class="built_in">emplace_back</span>(<span class="keyword">new</span> <span class="built_in">BufferPoolManagerInstance</span>(pool_size, num_instances, i, disk_manager, log_manager));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update constructor to destruct all BufferPoolManagerInstances and deallocate any associated memory</span></span><br><span class="line">ParallelBufferPoolManager::~<span class="built_in">ParallelBufferPoolManager</span>() &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> bpm : parallel_) &#123;</span><br><span class="line">    <span class="keyword">delete</span> bpm;</span><br><span class="line">  &#125;</span><br><span class="line">  parallel_.<span class="built_in">clear</span>();</span><br><span class="line">  std::<span class="built_in">vector</span>&lt;BufferPoolManager*&gt;().<span class="built_in">swap</span>(parallel_);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>parallel_buffer_pool_manager.h</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::vector&lt;BufferPoolManager*&gt; parallel_;</span><br><span class="line">  <span class="type">uint32_t</span> num_instances_;</span><br><span class="line">  <span class="type">size_t</span> pool_size_;</span><br><span class="line">  <span class="type">int</span> start_ = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>通过完成lab1，让我站在DBMS的角度去理解了操作系统的工作原理，以及对页表，缓存，刷盘时机，页面调度算法LRU有了更深刻的理解。</p>
+
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Pishun Huang</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2022/05/16/cmu15445-project1/" target="_blank" title="CMU 15-445 Project1: BUFFER POOL MANAGER">https://mitmoksha.github.io/2022/05/16/cmu15445-project1/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint polocy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/30.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2022/05/16/CS186-Note/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> Prev:
+        <div>CS186 Note</div>
+      </div>
+      
+      <!-- <div class="content">
+        CS186 NoteSQL
+SELECT后加DISTINCT可以将重复的tuple去掉。  12SELECT DISTI
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/30.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2022/05/16/cs61c-lab2/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fa fa-angle-right"></i>
+        <div>CS61C Lab2</div>
+      </div>
+      <!-- <div class="content">
+        CS61C Lab2Exercise 0: Makefiles
+Which target is part of a ru
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+      
+        <div id="myComment">
+          
+        </div>
+      
+  </div>
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
+          <div class="toc-open-close">catalog</div>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+.toc-main ul {
+  counter-reset: show-list;
+}
+.toc-main ul li::before {
+  content: counter(item)".";
+  display: block;
+  position: absolute;
+  left: 12px;
+  top:0;
+}
+.toc > .toc-list {
+  padding-left: 35px;
+}
+.toc>.toc-list li {
+  list-style: decimal;
+}
+.toc-list {
+  padding-left: 25px;
+}
+</style>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script>
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    </script>
+  
+</div>
+
+
+    </main>
+    <div class="footer bg-color">
+  <div class="footer-main">
+    <div class="link">
+      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:1730241541@qq.com">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
+    </div>
+    
+      
+  <!-- 不蒜子统计 -->
+  <span id="busuanzi_container_site_pv">
+        <i class="fa fa-book" aria-hidden="true"></i>Total reading：<span id="busuanzi_value_page_pv"></span> times
+  </span>
+  <span id="busuanzi_container_site_pv">
+        <i class="fa fa-eye" aria-hidden="true"></i>Total visits：<span id="busuanzi_value_site_pv"></span> times
+  </span>
+  <span class="post-meta-divider">|</span>
+  <span id="busuanzi_container_site_uv" style='display:none'>
+        <i class="fa fa-users" aria-hidden="true"></i>Number of visitors：<span id="busuanzi_value_site_uv"></span> people
+  </span>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop top-btn-color border-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+    
+
+    <script src="/js/wrapImage.js"></script>
+    
+    <!-- 爱心点击 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+      <script src="/js/aos/aos.js"></script>
+      <script>
+        // https://github.com/michalsnik/aos
+        const themeOffset = parseInt('120') || 120;
+        const themeDelay = parseInt('0')|| 0;
+        const themeDuration = parseInt('400') || 400;
+        const themeEasing = 'ease' || 'ease';
+        const themeOnce = eval('true') || false;
+        const themeMirror = eval('false') || false;
+        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
+        AOS.init({
+          // Global settings:
+          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+          initClassName: 'aos-init', // class applied after initialization
+          animatedClassName: 'aos-animate', // class applied on animation
+          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+          offset: themeOffset, // offset (in px) from the original trigger point
+          delay: themeDelay, // values from 0 to 3000, with step 50ms
+          duration: themeDuration, // values from 0 to 3000, with step 50ms
+          easing: themeEasing, // default easing for AOS animations
+          once: themeOnce, // whether animation should happen only once - while scrolling down
+          mirror: themeMirror, // whether elements should animate out while scrolling past them
+          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
+
+        });
+      </script>
+    
+
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
+<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+<div id="appCopy">
+</div>
+<script>
+  var vm = new Vue({
+    el: '#appCopy',
+    data: {
+    },
+    computed: {
+    },
+    mounted() {
+      const that = this;
+      //  监听 ctrl + c事件  
+      $(document).unbind('keypress').bind('keypress', function (e) {
+        if (e.ctrlKey && e.keyCode == 67) {
+          doSomething();
+          // 返回false, 防止重复触发copy事件  
+          return false;
+        }
+      })
+
+      // 鼠标右键的复制事件  
+      $(document).unbind('copy').bind('copy', function (e) {
+        doSomething();
+        // console.log('右键复制 监听成功');
+      });
+
+      function doSomething() {
+        that.$notify({
+          title: "成功",
+          content: "代码已复制，请遵守相关授权协议。",
+          type: 'success'
+        })
+        // console.log('ctrl + c 监听成功');  
+      }
+    },
+    methods: {
+    },
+    created() { }
+  })
+</script>
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能 -->
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+
+    <script src="/js/lazyload/lazyload@1.9.1.js"></script>
+    <script>
+      $(function() {
+        $("div.lazyload, img.lazyload, a.lazyload").lazyload(
+            {
+                effect: "fadeIn",
+                placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
+            }
+        );
+    });
+    </script>
+    
+    <script src="/js/app.js"></script>
+  </body>
+</html>

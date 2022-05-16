@@ -3,11 +3,11 @@
   <title>Moksha&#39;s Blog</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2022-05-16T09:40:17.904Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://mitmoksha.github.io/"/>
+  <updated>2022-05-16T10:14:58.495Z</updated>
+  <id>https://mitmoksha.github.io/</id>
   
   <author>
     <name>Pishun Huang</name>
@@ -17,9 +17,263 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>NJU OS Note</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/NJU-OS-Note/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/NJU-OS-Note/</id>
+    <published>2022-05-16T10:14:19.000Z</published>
+    <updated>2022-05-16T10:14:58.495Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;NJU-OS-Note&quot;&gt;&lt;a href=&quot;#NJU-OS-Note&quot; class=&quot;headerlink&quot; title=&quot;NJU OS Note&quot;&gt;&lt;/a&gt;NJU OS Note&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ld&lt;/code&gt;, GNU</summary>
+        
+      
+    
+    
+    
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ICS Lab Note</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/</id>
+    <published>2022-05-16T10:08:10.000Z</published>
+    <updated>2022-05-16T10:12:33.373Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ICS-Lab-Note&quot;&gt;&lt;a href=&quot;#ICS-Lab-Note&quot; class=&quot;headerlink&quot; title=&quot;ICS Lab Note&quot;&gt;&lt;/a&gt;ICS Lab Note&lt;/h1&gt;&lt;h2 id=&quot;lab1&quot;&gt;&lt;a href=&quot;#lab1&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CS186 Note</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/CS186-Note/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/CS186-Note/</id>
+    <published>2022-05-16T10:07:44.000Z</published>
+    <updated>2022-05-16T10:12:44.740Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CS186-Note&quot;&gt;&lt;a href=&quot;#CS186-Note&quot; class=&quot;headerlink&quot; title=&quot;CS186 Note&quot;&gt;&lt;/a&gt;&lt;strong&gt;CS186 Note&lt;/strong&gt;&lt;/h1&gt;&lt;h2 id=&quot;SQL&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CMU 15-445 Project1: BUFFER POOL MANAGER</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/cmu15445-project1/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/cmu15445-project1/</id>
+    <published>2022-05-16T10:02:21.000Z</published>
+    <updated>2022-05-16T10:06:09.912Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CMU-15-445-Project1-BUFFER-POOL-MANAGER&quot;&gt;&lt;a href=&quot;#CMU-15-445-Project1-BUFFER-POOL-MANAGER&quot; class=&quot;headerlink&quot; title=&quot;CMU 15-445</summary>
+        
+      
+    
+    
+    
+    <category term="CMU15-445" scheme="https://mitmoksha.github.io/categories/CMU15-445/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CS61C Lab2</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/cs61c-lab2/</id>
+    <published>2022-05-16T09:59:00.000Z</published>
+    <updated>2022-05-16T10:00:29.556Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CS61C-Lab2&quot;&gt;&lt;a href=&quot;#CS61C-Lab2&quot; class=&quot;headerlink&quot; title=&quot;CS61C Lab2&quot;&gt;&lt;/a&gt;CS61C Lab2&lt;/h1&gt;&lt;h2 id=&quot;Exercise-0-Makefiles&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="CS61C" scheme="https://mitmoksha.github.io/categories/CS61C/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Stanford CS144 Lab0: Networking Warmup</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/cs144-lab0/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/cs144-lab0/</id>
+    <published>2022-05-16T09:58:51.000Z</published>
+    <updated>2022-05-16T10:06:07.874Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Stanford-CS144-Lab0-Networking-Warmup&quot;&gt;&lt;a href=&quot;#Stanford-CS144-Lab0-Networking-Warmup&quot; class=&quot;headerlink&quot; title=&quot;Stanford CS144</summary>
+        
+      
+    
+    
+    
+    <category term="CS144" scheme="https://mitmoksha.github.io/categories/CS144/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6.S081 Lab5: xv6 lazy page allocation</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab5/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/s081-lab5/</id>
+    <published>2022-05-16T09:55:02.000Z</published>
+    <updated>2022-05-16T10:05:51.223Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MIT-6-S081-Lab5-xv6-lazy-page-allocation&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab5-xv6-lazy-page-allocation&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081</summary>
+        
+      
+    
+    
+    
+    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6.S081 Lab4: Traps</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab4/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/s081-lab4/</id>
+    <published>2022-05-16T09:54:57.000Z</published>
+    <updated>2022-05-16T10:05:43.818Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MIT-6-S081-Lab4-Traps&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab4-Traps&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081 Lab4: Traps&quot;&gt;&lt;/a&gt;MIT 6.S081 Lab4:</summary>
+        
+      
+    
+    
+    
+    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6.S081 Lab3: Page tables</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab3/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/s081-lab3/</id>
+    <published>2022-05-16T09:54:53.000Z</published>
+    <updated>2022-05-16T10:05:35.837Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MIT-6-S081-Lab3-Page-tables&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab3-Page-tables&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081 Lab3: Page tables&quot;&gt;&lt;/a&gt;MIT</summary>
+        
+      
+    
+    
+    
+    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6.S081 Lab2: System Calls</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab2/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/s081-lab2/</id>
+    <published>2022-05-16T09:54:49.000Z</published>
+    <updated>2022-05-16T10:05:15.308Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MIT-6-S081-Lab2-System-Calls&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab2-System-Calls&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081 Lab2: System</summary>
+        
+      
+    
+    
+    
+    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6.S081 Lab1: Xv6 and Unix utilities</title>
+    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab1/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/s081-lab1/</id>
+    <published>2022-05-16T09:53:02.000Z</published>
+    <updated>2022-05-16T10:05:20.147Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MIT-6-S081-Lab1-Xv6-and-Unix-utilities&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab1-Xv6-and-Unix-utilities&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081</summary>
+        
+      
+    
+    
+    
+    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>CS61B GITLET PROJECT</title>
-    <link href="http://example.com/2022/05/16/CS61B-GITLET-PROJECT/"/>
-    <id>http://example.com/2022/05/16/CS61B-GITLET-PROJECT/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/</id>
     <published>2022-05-16T09:39:52.000Z</published>
     <updated>2022-05-16T09:40:17.904Z</updated>
     
@@ -34,15 +288,15 @@
     
     
     
-    <category term="CS61B" scheme="http://example.com/categories/CS61B/"/>
+    <category term="CS61B" scheme="https://mitmoksha.github.io/categories/CS61B/"/>
     
     
   </entry>
   
   <entry>
     <title>CS61C CPU PROJECT</title>
-    <link href="http://example.com/2022/05/16/CS61C-CPU-PROJECT/"/>
-    <id>http://example.com/2022/05/16/CS61C-CPU-PROJECT/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/</id>
     <published>2022-05-16T09:37:37.000Z</published>
     <updated>2022-05-16T09:38:29.757Z</updated>
     
@@ -57,15 +311,15 @@
     
     
     
-    <category term="CS61C" scheme="http://example.com/categories/CS61C/"/>
+    <category term="CS61C" scheme="https://mitmoksha.github.io/categories/CS61C/"/>
     
     
   </entry>
   
   <entry>
     <title>CSAPP Lab2: Bomb Lab</title>
-    <link href="http://example.com/2022/05/16/CSAPP-Lab2-Bomb-Lab/"/>
-    <id>http://example.com/2022/05/16/CSAPP-Lab2-Bomb-Lab/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/</id>
     <published>2022-05-16T09:36:28.000Z</published>
     <updated>2022-05-16T09:38:42.677Z</updated>
     
@@ -80,15 +334,15 @@
     
     
     
-    <category term="CMU15-213" scheme="http://example.com/categories/CMU15-213/"/>
+    <category term="CMU15-213" scheme="https://mitmoksha.github.io/categories/CMU15-213/"/>
     
     
   </entry>
   
   <entry>
     <title>CSAPP Lab1: Data Lab</title>
-    <link href="http://example.com/2022/05/16/CSAPP-Lab1-Data-Lab/"/>
-    <id>http://example.com/2022/05/16/CSAPP-Lab1-Data-Lab/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/</id>
     <published>2022-05-16T09:32:17.000Z</published>
     <updated>2022-05-16T09:38:56.401Z</updated>
     
@@ -103,15 +357,15 @@
     
     
     
-    <category term="CMU15-213" scheme="http://example.com/categories/CMU15-213/"/>
+    <category term="CMU15-213" scheme="https://mitmoksha.github.io/categories/CMU15-213/"/>
     
     
   </entry>
   
   <entry>
     <title>6.NULL Video Note</title>
-    <link href="http://example.com/2022/05/16/6-NULL-Video-Note/"/>
-    <id>http://example.com/2022/05/16/6-NULL-Video-Note/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/</id>
     <published>2022-05-16T09:26:09.000Z</published>
     <updated>2022-05-16T09:26:59.284Z</updated>
     
@@ -126,17 +380,17 @@
     
     
     
-    <category term="6.NULL" scheme="http://example.com/categories/6-NULL/"/>
+    <category term="6.NULL" scheme="https://mitmoksha.github.io/categories/6-NULL/"/>
     
     
   </entry>
   
   <entry>
     <title>Makefile Note</title>
-    <link href="http://example.com/2022/05/16/Makefile-Note/"/>
-    <id>http://example.com/2022/05/16/Makefile-Note/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/Makefile-Note/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/Makefile-Note/</id>
     <published>2022-05-16T09:24:07.000Z</published>
-    <updated>2022-05-16T09:25:22.662Z</updated>
+    <updated>2022-05-16T10:11:39.117Z</updated>
     
     
       
@@ -149,17 +403,17 @@
     
     
     
-    <category term="Computer Science" scheme="http://example.com/categories/Computer-Science/"/>
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
     
     
   </entry>
   
   <entry>
     <title>vim+vscode+tmux+gdb</title>
-    <link href="http://example.com/2022/05/16/vim-vscode-tmux-gdb/"/>
-    <id>http://example.com/2022/05/16/vim-vscode-tmux-gdb/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/vim-vscode-tmux-gdb/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/vim-vscode-tmux-gdb/</id>
     <published>2022-05-16T09:09:48.000Z</published>
-    <updated>2022-05-16T09:13:37.377Z</updated>
+    <updated>2022-05-16T10:11:28.059Z</updated>
     
     
       
@@ -172,15 +426,15 @@
     
     
     
-    <category term="Computer Science" scheme="http://example.com/categories/Computer-Science/"/>
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
     
     
   </entry>
   
   <entry>
     <title>Advanced Cpp Note</title>
-    <link href="http://example.com/2022/05/16/cpp%20Note/"/>
-    <id>http://example.com/2022/05/16/cpp%20Note/</id>
+    <link href="https://mitmoksha.github.io/2022/05/16/cpp%20Note/"/>
+    <id>https://mitmoksha.github.io/2022/05/16/cpp%20Note/</id>
     <published>2022-05-16T07:39:40.000Z</published>
     <updated>2022-05-16T09:13:05.542Z</updated>
     
@@ -195,15 +449,15 @@
     
     
     
-    <category term="PL" scheme="http://example.com/categories/PL/"/>
+    <category term="PL" scheme="https://mitmoksha.github.io/categories/PL/"/>
     
     
   </entry>
   
   <entry>
     <title>leetcode 403. 青蛙过河</title>
-    <link href="http://example.com/2021/04/29/%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/"/>
-    <id>http://example.com/2021/04/29/%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/</id>
+    <link href="https://mitmoksha.github.io/2021/04/29/%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/"/>
+    <id>https://mitmoksha.github.io/2021/04/29/%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/</id>
     <published>2021-04-29T05:16:26.000Z</published>
     <updated>2022-05-16T09:02:41.690Z</updated>
     
@@ -218,150 +472,7 @@
     
     
     
-    <category term="Leetcode" scheme="http://example.com/categories/Leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>TCP/IP Note</title>
-    <link href="http://example.com/2021/04/28/tcp%20note/"/>
-    <id>http://example.com/2021/04/28/tcp%20note/</id>
-    <published>2021-04-28T15:00:13.000Z</published>
-    <updated>2022-05-16T09:01:33.480Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;TCP-IP详解&quot;&gt;&lt;a href=&quot;#TCP-IP详解&quot; class=&quot;headerlink&quot; title=&quot;TCP/IP详解&quot;&gt;&lt;/a&gt;TCP/IP详解&lt;/h1&gt;&lt;h2 id=&quot;一、TCP超时与重传&quot;&gt;&lt;a href=&quot;#一、TCP超时与重传&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Computer Science" scheme="http://example.com/categories/Computer-Science/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>C# Note</title>
-    <link href="http://example.com/2021/04/28/c#%20Note/"/>
-    <id>http://example.com/2021/04/28/c#%20Note/</id>
-    <published>2021-04-28T13:20:57.000Z</published>
-    <updated>2022-05-16T08:58:14.625Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;新特性&quot;&gt;&lt;a href=&quot;#新特性&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="PL" scheme="http://example.com/categories/PL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer 34. 二叉树中和为某一值的路径</title>
-    <link href="http://example.com/2021/04/28/%E5%89%91%E6%8C%87%20Offer%2034.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/"/>
-    <id>http://example.com/2021/04/28/%E5%89%91%E6%8C%87%20Offer%2034.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/</id>
-    <published>2021-04-28T09:59:13.000Z</published>
-    <updated>2022-05-16T09:02:59.037Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;一、题目&quot;&gt;&lt;a href=&quot;#一、题目&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="http://example.com/categories/Leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 684. 冗余连接</title>
-    <link href="http://example.com/2021/04/28/leetcode%20684.%20%E5%86%97%E4%BD%99%E8%BF%9E%E6%8E%A5/"/>
-    <id>http://example.com/2021/04/28/leetcode%20684.%20%E5%86%97%E4%BD%99%E8%BF%9E%E6%8E%A5/</id>
-    <published>2021-04-28T09:57:58.000Z</published>
-    <updated>2022-05-16T09:00:41.919Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;一、题目&quot;&gt;&lt;a href=&quot;#一、题目&quot; class=&quot;headerlink&quot; title=&quot;一、题目&quot;&gt;&lt;/a&gt;一、题目&lt;/h1&gt;&lt;p&gt;找出无向图中的冗余连接，即将无向图还原成二叉树&lt;/p&gt;
-&lt;figure class=&quot;highlight</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="http://example.com/categories/Leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql Note</title>
-    <link href="http://example.com/2021/04/28/mysql%20note/"/>
-    <id>http://example.com/2021/04/28/mysql%20note/</id>
-    <published>2021-04-28T09:57:17.000Z</published>
-    <updated>2022-05-16T08:59:22.809Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一、基本概念&quot;&gt;&lt;a href=&quot;#一、基本概念&quot; class=&quot;headerlink&quot; title=&quot;一、基本概念&quot;&gt;&lt;/a&gt;一、基本概念&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;表名是唯一的&lt;/li&gt;
-&lt;li&gt;表中的数据是按行存储的&lt;/li&gt;
-&lt;li&gt;行（别名</summary>
-        
-      
-    
-    
-    
-    <category term="PL" scheme="http://example.com/categories/PL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Lua Note</title>
-    <link href="http://example.com/2021/04/28/Lua%20Note/"/>
-    <id>http://example.com/2021/04/28/Lua%20Note/</id>
-    <published>2021-04-28T09:56:31.000Z</published>
-    <updated>2022-05-16T08:58:54.818Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;交互模式&quot;&gt;&lt;a href=&quot;#交互模式&quot; class=&quot;headerlink&quot; title=&quot;交互模式&quot;&gt;&lt;/a&gt;交互模式&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;lua</summary>
-        
-      
-    
-    
-    
-    <category term="PL" scheme="http://example.com/categories/PL/"/>
+    <category term="Leetcode" scheme="https://mitmoksha.github.io/categories/Leetcode/"/>
     
     
   </entry>

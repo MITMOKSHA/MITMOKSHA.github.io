@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-05-16T09:26:59.284Z</updated>
+  <updated>2022-05-16T09:33:28.118Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSAPP Lab1: Data Lab</title>
+    <link href="http://example.com/2022/05/16/CSAPP-Lab1-Data-Lab/"/>
+    <id>http://example.com/2022/05/16/CSAPP-Lab1-Data-Lab/</id>
+    <published>2022-05-16T09:32:17.000Z</published>
+    <updated>2022-05-16T09:33:28.118Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CSAPP-Lab1-Data-Lab&quot;&gt;&lt;a href=&quot;#CSAPP-Lab1-Data-Lab&quot; class=&quot;headerlink&quot; title=&quot;CSAPP Lab1: Data Lab&quot;&gt;&lt;/a&gt;CSAPP Lab1: Data</summary>
+        
+      
+    
+    
+    
+    <category term="CMU 15-213 CSAPP Lab" scheme="http://example.com/categories/CMU-15-213-CSAPP-Lab/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>6.NULL Video Note</title>

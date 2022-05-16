@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-05-16T09:10:15.364Z</updated>
+  <updated>2022-05-16T09:13:37.377Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2022/05/16/vim-vscode-tmux-gdb/"/>
     <id>http://example.com/2022/05/16/vim-vscode-tmux-gdb/</id>
     <published>2022-05-16T09:09:48.000Z</published>
-    <updated>2022-05-16T09:10:15.364Z</updated>
+    <updated>2022-05-16T09:13:37.377Z</updated>
     
     
       
@@ -34,15 +34,17 @@
     
     
     
+    <category term="Computer Science" scheme="http://example.com/categories/Computer-Science/"/>
+    
     
   </entry>
   
   <entry>
     <title>Advanced Cpp Note</title>
-    <link href="http://example.com/2022/05/16/cppNote/"/>
-    <id>http://example.com/2022/05/16/cppNote/</id>
+    <link href="http://example.com/2022/05/16/cpp%20Note/"/>
+    <id>http://example.com/2022/05/16/cpp%20Note/</id>
     <published>2022-05-16T07:39:40.000Z</published>
-    <updated>2022-05-16T07:41:35.332Z</updated>
+    <updated>2022-05-16T09:13:05.542Z</updated>
     
     
       
@@ -55,10 +57,8 @@
     
     
     
-    <category term="C++" scheme="http://example.com/categories/C/"/>
+    <category term="PL" scheme="http://example.com/categories/PL/"/>
     
-    
-    <category term="C++" scheme="http://example.com/tags/C/"/>
     
   </entry>
   

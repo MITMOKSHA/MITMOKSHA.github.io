@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Advanced Cpp Note | Moksha&#39;s Blog</title>
+
+  
+    
+<link rel="stylesheet" href="/js/aos/aos.css">
+
+  
+
+  <link rel="icon" type="image/png" href="/puzzle_favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+</head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <link href="/js/danmu/barrager.css" rel="stylesheet">
+<script src="/js/danmu/jquery.barrager.js"></script>
+  <body>
+    <!-- 判断是否为黑夜模式 -->
+    <script>
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+      if (isDark) {
+        $(document.body).addClass('darkModel');
+      }
+    </script>
+
+    <header class="header bg-color" 
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo" src="/medias/logo.jpg" alt="logo">
+      <h3 class="drawer-box-head_title">Moksha&#39;s Blog</h3>
+      <h5 class="drawer-box-head_desc">Opportunities are ready for it, the more to beat action.</h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>Home</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>Archives</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>Categories</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/friends" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>link</span>
+            </a>
+          </li>
+        
+        <li class="drawer-box-content_item">
+          <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA">
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <span>Github</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <div class="avatar">
+        <img src="/medias/logo.jpg" alt="logo">
+      </div>
+      <a href="/" class="logo">Moksha&#39;s Blog</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>Home</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>Archives</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>Categories</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/friends" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>link</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div class="dark">
+  <div class="dark-content">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-moon-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+        
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <!-- <div class="close" style="overflow: hidden;">
+          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
+        </div> -->
+        <h2>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <span class="title">Search</span>
+          <i class="fa fa-close close" style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+  <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+</header>
+    <main class="main" style="margin-top: 60px;">
+      
+ <!-- prismjs 代码高亮 -->
+ 
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/6.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
+  
+    <div class="title-box">
+      
+        <span class="title" id="post-detail-header-title"></span>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+          <script>
+            var typed = new Typed("#post-detail-header-title", {
+              strings: ['Advanced Cpp Note'],
+              startDelay: 100,
+              typeSpeed: 100,
+              loop: false,
+              backSpeed: 50,
+              showCursor: false
+            });
+          </script>
+        
+    </div>
+  
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      
+      <div class="post-meta">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <span class="post-time">2022-05-16</span>
+      </div>
+      
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          <i class="iconfont icontag"></i>
+          
+            <a href="/tags/C/" class="">
+              C++
+            </a>
+          
+        </div>
+        
+        
+        <div class="categories">
+          <i class="iconfont iconbookmark1"></i>
+          
+            <a href="/categories/C/" class="">
+              C++
+            </a>
+          
+        </div>
+        
+      </div>
+      <div class="post-content">
+        <h2 id="一、std-function和bind绑定器"><a href="#一、std-function和bind绑定器" class="headerlink" title="一、std::function和bind绑定器"></a>一、std::function和bind绑定器</h2><h3 id="可调用对象"><a href="#可调用对象" class="headerlink" title="可调用对象"></a>可调用对象</h3><ul>
+<li>是一个函数指针</li>
+<li>是一个具有<code>operator()</code>成员函数的类对象（仿函数）</li>
+<li>是一个可被转换为函数指针的类对象</li>
+<li>是一个类成员（函数）指针</li>
+</ul>
+<h3 id="可调用对象包装器std-funtion"><a href="#可调用对象包装器std-funtion" class="headerlink" title="可调用对象包装器std::funtion"></a>可调用对象包装器std::funtion</h3><ul>
+<li>头文件<code>&lt;functional&gt;</code></li>
+<li>可以容纳除了类成员（函数）指针之外的所有可调用对象</li>
+<li>可以用统一的方式处理函数、函数对象、函数指针，并允许保存和延迟执行它们</li>
+<li><code>function</code>比普通函数指针更灵活和便利</li>
+</ul>
+<h3 id="std-bind绑定器"><a href="#std-bind绑定器" class="headerlink" title="std::bind绑定器"></a>std::bind绑定器</h3><ul>
+<li>头文件<code>&lt;functional&gt;</code></li>
+<li>接受一个可调用对象，生成一个新的可调用对象</li>
+<li><code>std::bind</code>用来将可调用对象与其参数一起进行绑定，绑定后的结果可以使用<code>std::function</code>进行保存，并延迟调用到任何我们需要的时候</li>
+<li>作用<ul>
+<li>将可调用对象与其参数一起绑定成一个仿函数(functor)</li>
+<li>将多元（参数个数为n）可调用对象转成一元或者（n-1）元可调用对象，却只绑定部分参数  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">1</span>, <span class="number">2</span>)();  <span class="comment">// 输出：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, std::placeholders::_1, <span class="number">2</span>)(<span class="number">1</span>);  <span class="comment">// 输出 ：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">2</span>, std::placeholders::_1)(<span class="number">1</span>);  <span class="comment">// 输出 ：2 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><code>std::bind</code>的返回类型是一个stl内部定义的仿函数类型</li>
+<li><code>std::placeholders::_1</code>是一个占位符，代表这个位置将在函数调用时被传入的第一个参数所替代</li>
+<li>组合bind函数<ul>
+<li><code>std::bind(std::greater&lt;int&gt;(), std::placeholders::_1, 5);</code><ul>
+<li>判断是否大于5的功能闭包</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="C-11通过提供std-function和std-bind统一了可调用对象的各种操作"><a href="#C-11通过提供std-function和std-bind统一了可调用对象的各种操作" class="headerlink" title="C++11通过提供std::function和std::bind统一了可调用对象的各种操作"></a>C++11通过提供std::function和std::bind统一了可调用对象的各种操作</h3><h2 id="二、lambda表达式"><a href="#二、lambda表达式" class="headerlink" title="二、lambda表达式"></a>二、lambda表达式</h2><h3 id="语法形式"><a href="#语法形式" class="headerlink" title="语法形式"></a>语法形式</h3><ul>
+<li><code>[ capture ] ( params ) opt -&gt; ret &#123; body; &#125;;</code></li>
+<li>C++11允许省略lambda表达式返回值定义，这样编译器就会根据<code>return</code>语句自动推导出返回类型<ul>
+<li>初始化列表不能用于返回值的自动推导 </li>
+</ul>
+</li>
+<li>lambda表达式在没有参数列表时，参数列表是可以省略的</li>
+</ul>
+<h3 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h3><ul>
+<li><code>[]</code>不捕获任何变量</li>
+<li><code>[&amp;]</code>捕获外部作用域中所有变量，并作为引用在函数体中使用（引用捕获）</li>
+<li><code>[=]</code>捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）</li>
+<li><code>[=, &amp;foo]</code>按值捕获外部作用域中所有变量，并按引用捕获foo变量</li>
+<li><code>[bar]</code>按值捕获bar变量，同时不捕获其他变量</li>
+<li><code>[this]</code>捕获当前类中的指针，让lambda表达式拥有和当前类成员函数同样的访问权限。如果已经使用了<code>&amp;</code>或者<code>=</code>，就默认添加此选项</li>
+<li>如果希望去修改按值捕获的外部变量，需要显示指明lambda表达式为<code>mutable</code>，如：<code>auto f2 = [=]() mutable &#123;return a++; &#125;</code></li>
+</ul>
+<h3 id="可以认为它是个带有operator-的类，即仿函数"><a href="#可以认为它是个带有operator-的类，即仿函数" class="headerlink" title="可以认为它是个带有operator()的类，即仿函数"></a>可以认为它是个带有operator()的类，即仿函数</h3><ul>
+<li>可以使用<code>std::function</code>和<code>std::bind</code>来存储和操作lambda表达式  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">int</span>)&gt; f1 = [](<span class="type">int</span> a)&#123; <span class="keyword">return</span> a; &#125;;</span><br><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">void</span>)&gt; f2 = std::<span class="built_in">bind</span>([](<span class="type">int</span> a)&#123; <span class="keyword">return</span> a; &#125;, <span class="number">123</span>);</span><br></pre></td></tr></table></figure></li>
+<li>对于没有捕获任何变量的lambda表达式，还可以被转换成一个普通的函数指针  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="type">func_t</span> = <span class="built_in">int</span> (*)(<span class="type">int</span>);</span><br><span class="line"><span class="type">func_t</span> f = [](<span class="type">int</span>  a)&#123; <span class="keyword">return</span> a; &#125;;</span><br><span class="line"><span class="built_in">f</span>(<span class="number">123</span>);</span><br></pre></td></tr></table></figure></li>
+<li>捕获变量的lambda表达式则不能转化为普通指针，若转换，lambda表达式本身的this指针就丢失掉了</li>
+<li>lambda和<code>std::function</code>的效果是一样的，一般情况下可直接用lambda来代替<code>function</code></li>
+</ul>
+<h2 id="三、tuple元组"><a href="#三、tuple元组" class="headerlink" title="三、tuple元组"></a>三、tuple元组</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>可以把它当作一个通用的结构体来用，不需要创建结构体又获取结构体的特征</li>
+<li>在某些情况下可以取代结构体，使程序更简洁、直观</li>
+<li>如果用tuple来替代3个以上字段的结构体时就不太合适了，不直观，易读性降低（建议）</li>
+</ul>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li>创建元组<ul>
+<li><code>tuple&lt;const char*, int&gt; tp = make_tuple(sendPack, nSendSize);</code></li>
+<li><code>auto tp = return std::tie(1, &quot;aa&quot;, 2);</code>  // tp的实际类型是：std::tuple&lt;int&amp;, string&amp;, int&amp;&gt;</li>
+</ul>
+</li>
+<li>获取元组的值  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* data = tp.<span class="built_in">get</span>&lt;<span class="number">0</span>&gt; ();  <span class="comment">// 获取第一个值</span></span><br><span class="line"><span class="type">int</span> len = tp.<span class="built_in">get</span>&lt;<span class="number">1</span>&gt; ();  <span class="comment">// 获取第二个值</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过<code>std::tie</code>解包tuple  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x, y;</span><br><span class="line">string a;</span><br><span class="line">std::<span class="built_in">tie</span>(x, a, y) = tp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果只想了解某个位置的值时，可以用<code>std::ignore</code>占位符来表示不解某个位置的值<br><code>std::tie(std::ignore, std::ignore, y) = tp;</code>  // 只解第3个值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建右值引用元组<ul>
+<li><code>forward_as_tuple</code>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::map&lt;<span class="type">int</span>, std::string&gt; m;</span><br><span class="line">m.<span class="built_in">emplace</span>(std::forward_as_tuple(<span class="number">10</span>, std::<span class="built_in">string</span>(<span class="number">20</span>, <span class="string">&#x27;a&#x27;</span>)));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建了类似于<code>std::tuple&lt;int&amp;&amp;, std::string&amp;&amp;&gt;</code>类型的tuple</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接多个tuple<ul>
+<li><code>tuple_cat</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="四、shared-ptr共享的智能指针"><a href="#四、shared-ptr共享的智能指针" class="headerlink" title="四、shared_ptr共享的智能指针"></a>四、shared_ptr共享的智能指针</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>希望多个智能指针管理同一个资源就用shared_ptr</li>
+<li><code>std::shared_ptr</code>使用引用计数，每一个shared_ptr的拷贝都指向相同的内存</li>
+<li>在最后一个shared_ptr析构的时候，内存才会被释放</li>
+</ul>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><ul>
+<li>初始化<ul>
+<li>可以通过使用构造函数、<code>std::make_shared&lt;int&gt;</code>辅助函数和<code>reset</code>方法来初始化shared_ptr  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;  <span class="comment">// 使用动态初始化，后加一个括号为值初始化</span></span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; p2 = p;</span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; ptr;</span><br><span class="line">ptr.<span class="built_in">reset</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">1</span>));</span><br></pre></td></tr></table></figure></li>
+<li>不能将一个原始指针直接赋值给智能指针</li>
+<li>当智能指针中有值的时候，调用reset会使引用计数减1</li>
+</ul>
+</li>
+<li>获取原始指针<ul>
+<li>可以通过<code>get</code>方法来返回原始指针<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line"><span class="type">int</span>* p = ptr.<span class="built_in">get</span>();</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>指定删除器<ul>
+<li>智能指针初始化可以指定删除器</li>
+<li>当p的<code>引用计数</code>为0时，自动调用删除器DeleteIntPtr来释放对象的内存<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DeleteIntPtr</span><span class="params">(<span class="type">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>, DeleteIntPtr)</span></span>;</span><br></pre></td></tr></table></figure></li>
+<li>也可以用lambda表达式指定删除器<ul>
+<li><code>std::shared_ptr&lt;int&gt; p(new int, [](int* p) &#123; delete p; &#125;);</code></li>
+</ul>
+</li>
+<li>当我们用<code>shared_ptr</code>管理动态数组时，需要指定删除器，因为<code>std::shared_ptr</code>的默认删除器不支持数组对象</li>
+<li>也可以将<code>std::default_delete</code>作为删除器</li>
+</ul>
+</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>1）不要用一个原始指针初始化多个shared_ptr</li>
+<li>2）不要在函数实参中创建shared_ptr<ul>
+<li>可能会因为发生异常而泄露内存</li>
+</ul>
+</li>
+<li>3）通过<code>shared_from_this()</code>返回this指针<ul>
+<li>因为this指针本质上是一个<code>裸指针</code>，因此这样可能会导致重复析构</li>
+<li>解决方法<ul>
+<li>让目标类通过派生<code>std::enable_shared_from_this&lt;T&gt;</code>类，然后使用基类的成员函数<code>shared_from_this</code>来返回this的shared_ptr</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>4）要避免循环引用<ul>
+<li>智能指针最大的一个陷阱就是循环引用，循环引用会导致内存泄露</li>
+<li>导致意外延长对象的生命期</li>
+<li>解决方法<ul>
+<li>使用weak_ptr</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、unique-ptr独占的智能指针"><a href="#五、unique-ptr独占的智能指针" class="headerlink" title="五、unique_ptr独占的智能指针"></a>五、unique_ptr独占的智能指针</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>希望只有一个智能指针管理资源或者管理数组就用unique_ptr</li>
+<li>unique_ptr是一个独占型的智能指针</li>
+<li>它不允许其他的智能指针共享其内部的指针</li>
+<li>不允许通过赋值将一个unique_ptr赋值给另外一个unique_ptr</li>
+<li>可以通过<code>std::move</code>来转移到其他的unique_ptr  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;T&gt; <span class="title">myPtr</span><span class="params">(<span class="keyword">new</span> T)</span></span>;</span><br><span class="line">unique_ptr&lt;T&gt; myOtherPtr = std:: <span class="built_in">move</span>(myptr);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>如果是数组，则判断是否是定长数组<ul>
+<li>若为定长数组则编译不通过（不能这样调用<code>make_unique&lt;T[10]&gt;(10) </code>)</li>
+<li>若为非定长数组，则获取数组中的元素类型，再根据参数size创建动态数组的unique_ptr<ul>
+<li><code>unique_ptr&lt;int[]&gt; ptr5 = make_unique&lt;int[]&gt;(10);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>unique_ptr可以指向数组（而shared_ptr这么做不合法）  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_ptr&lt;<span class="type">int</span> []&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>])</span></span></span><br><span class="line"><span class="function">ptr[9] </span>= <span class="number">9</span>;         <span class="comment">// 设置最后一个元素值为9</span></span><br></pre></td></tr></table></figure></li>
+<li>unique_ptr指定删除器的时候需要确定删除器的类型<ul>
+<li><code>std::unique_ptr&lt;int, void(*)(int*)&gt; ptr(new int (1), [](int* p) &#123; delete p; &#125;);</code></li>
+<li>lambda表达式在没有捕获变量的情况下是可以直接转换为函数指针的，一旦捕获了就无法转换了<ul>
+<li><code>std::unique_ptr&lt;int, void(*)(int*)&gt; ptr(new int (1), [&amp;](int* p) &#123; delete p; &#125;);</code>  // 错误，捕获了变量</li>
+</ul>
+</li>
+<li>如果希望unique_ptr删除器支持lambda可以这么写<ul>
+<li><code>std::unique_ptr&lt;int, std::function&lt;void(int*)&gt;&gt; ptr(new int(1), [&amp;](int* p) &#123; delete p; &#125;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、weak-ptr弱引用的智能指针"><a href="#六、weak-ptr弱引用的智能指针" class="headerlink" title="六、weak_ptr弱引用的智能指针"></a>六、weak_ptr弱引用的智能指针</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>weak_ptr是用来监视shared_ptr的，不会使引用计数加1</li>
+<li>它不管理shared_ptr内部的指针，主要是为了监视shared_ptr的生命周期</li>
+<li>它的构造不会增加引用计数，它的析构也不会减少引用计数</li>
+</ul>
+<h3 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h3><ul>
+<li>1）通过<code>use_count()</code>方法来获得当前观测资源的引用计数  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">sp</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line"><span class="function">weak_ptr&lt;<span class="type">int</span>&gt; <span class="title">wp</span><span class="params">(sp)</span></span>;</span><br><span class="line">cout &lt;&lt; wp.<span class="built_in">use_count</span>() &lt;&lt; endl;  <span class="comment">// 结果将输出1</span></span><br></pre></td></tr></table></figure></li>
+<li>2）通过<code>expired()</code>方法来判断所观测的资源是否已经释放（true为无效）  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (wp.<span class="built_in">expired</span>())</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;weak_ptr无效，所监视的智能指针已经被释放&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;weak_ptr有效&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>3）通过<code>lock()</code>方法来获取所监视的shared_ptr  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> sp = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt; (<span class="number">42</span>);</span><br><span class="line">std::weak_ptr&lt;<span class="type">int</span>&gt; gw = sp;</span><br><span class="line"><span class="keyword">auto</span> spt = gw.<span class="built_in">lock</span>();  <span class="comment">// 获取所监视的shared_ptr</span></span><br><span class="line">cout &lt;&lt; *spt &lt;&lt; endl;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="weak-ptr返回this指针"><a href="#weak-ptr返回this指针" class="headerlink" title="weak_ptr返回this指针"></a>weak_ptr返回this指针</h3><ul>
+<li><code>std::enable_shared_from_this</code>类中有一个weak_ptr，这个weak_ptr用来观测this智能指针</li>
+<li>调用<code>shared_from_this()</code>方法时，会调用内部这个weak_ptr的<code>lock()</code>方法，将所观测的shared_ptr返回</li>
+<li>获取自身智能指针的函数仅在<code>shared_ptr&lt;T&gt;</code>的构造函数被调用之后才能使用，因为<code>enable_shared_from_this</code>内部的weak_ptr只有通过shared_ptr才能构造</li>
+</ul>
+<h3 id="可以通过weak-ptr解决循环引用问题"><a href="#可以通过weak-ptr解决循环引用问题" class="headerlink" title="可以通过weak_ptr解决循环引用问题"></a>可以通过weak_ptr解决循环引用问题</h3>
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Pishun Huang</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2022/05/16/cppNote/" target="_blank" title="Advanced Cpp Note">http://example.com/2022/05/16/cppNote/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint polocy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/12.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2021/04/29/%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fa fa-angle-right"></i>
+        <div>leetcode 403. 青蛙过河</div>
+      </div>
+      <!-- <div class="content">
+        一、题目给定石子位置的列表stones（升序），青蛙可以跳上石子，但不能跳入水中。如果青蛙一步跳跃了k个单位，那么它接下
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+      
+        <div id="myComment">
+          
+        </div>
+      
+  </div>
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
+          <div class="toc-open-close">catalog</div>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+.toc-main ul {
+  counter-reset: show-list;
+}
+.toc-main ul li::before {
+  content: counter(item)".";
+  display: block;
+  position: absolute;
+  left: 12px;
+  top:0;
+}
+.toc > .toc-list {
+  padding-left: 35px;
+}
+.toc>.toc-list li {
+  list-style: decimal;
+}
+.toc-list {
+  padding-left: 25px;
+}
+</style>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script>
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    </script>
+  
+</div>
+
+
+    </main>
+    <div class="footer bg-color">
+  <div class="footer-main">
+    <div class="link">
+      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:1730241541@qq.com">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
+    </div>
+    
+      
+  <!-- 不蒜子统计 -->
+  <span id="busuanzi_container_site_pv">
+        <i class="fa fa-book" aria-hidden="true"></i>Total reading：<span id="busuanzi_value_page_pv"></span> times
+  </span>
+  <span id="busuanzi_container_site_pv">
+        <i class="fa fa-eye" aria-hidden="true"></i>Total visits：<span id="busuanzi_value_site_pv"></span> times
+  </span>
+  <span class="post-meta-divider">|</span>
+  <span id="busuanzi_container_site_uv" style='display:none'>
+        <i class="fa fa-users" aria-hidden="true"></i>Number of visitors：<span id="busuanzi_value_site_uv"></span> people
+  </span>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop top-btn-color border-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+    
+
+    <script src="/js/wrapImage.js"></script>
+    
+    <!-- 爱心点击 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+      <script src="/js/aos/aos.js"></script>
+      <script>
+        // https://github.com/michalsnik/aos
+        const themeOffset = parseInt('120') || 120;
+        const themeDelay = parseInt('0')|| 0;
+        const themeDuration = parseInt('400') || 400;
+        const themeEasing = 'ease' || 'ease';
+        const themeOnce = eval('true') || false;
+        const themeMirror = eval('false') || false;
+        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
+        AOS.init({
+          // Global settings:
+          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+          initClassName: 'aos-init', // class applied after initialization
+          animatedClassName: 'aos-animate', // class applied on animation
+          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+          offset: themeOffset, // offset (in px) from the original trigger point
+          delay: themeDelay, // values from 0 to 3000, with step 50ms
+          duration: themeDuration, // values from 0 to 3000, with step 50ms
+          easing: themeEasing, // default easing for AOS animations
+          once: themeOnce, // whether animation should happen only once - while scrolling down
+          mirror: themeMirror, // whether elements should animate out while scrolling past them
+          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
+
+        });
+      </script>
+    
+
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
+<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+<div id="appCopy">
+</div>
+<script>
+  var vm = new Vue({
+    el: '#appCopy',
+    data: {
+    },
+    computed: {
+    },
+    mounted() {
+      const that = this;
+      //  监听 ctrl + c事件  
+      $(document).unbind('keypress').bind('keypress', function (e) {
+        if (e.ctrlKey && e.keyCode == 67) {
+          doSomething();
+          // 返回false, 防止重复触发copy事件  
+          return false;
+        }
+      })
+
+      // 鼠标右键的复制事件  
+      $(document).unbind('copy').bind('copy', function (e) {
+        doSomething();
+        // console.log('右键复制 监听成功');
+      });
+
+      function doSomething() {
+        that.$notify({
+          title: "成功",
+          content: "代码已复制，请遵守相关授权协议。",
+          type: 'success'
+        })
+        // console.log('ctrl + c 监听成功');  
+      }
+    },
+    methods: {
+    },
+    created() { }
+  })
+</script>
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能 -->
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+
+    <script src="/js/lazyload/lazyload@1.9.1.js"></script>
+    <script>
+      $(function() {
+        $("div.lazyload, img.lazyload, a.lazyload").lazyload(
+            {
+                effect: "fadeIn",
+                placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
+            }
+        );
+    });
+    </script>
+    
+    <script src="/js/app.js"></script>
+  </body>
+</html>

@@ -1,513 +1,265 @@
 <!DOCTYPE html>
-<html>
-  
-
-
-
+<html lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
 
 
-  <title>CS61C Lab2 | Moksha&#39;s Blog</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-    
-<link rel="stylesheet" href="/js/aos/aos.css">
+<link rel="stylesheet" href="/css/main.css">
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CS61C Lab2 Exercise 0: Makefiles  Which target is part of a rule that deletes all the compiled programs? Which target is part of a rule that makes all the compiled programs? Which compiler is cur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61C Lab2">
+<meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/index.html">
+<meta property="og:site_name" content="Moksha&#39;s Blog">
+<meta property="og:description" content="CS61C Lab2 Exercise 0: Makefiles  Which target is part of a rule that deletes all the compiled programs? Which target is part of a rule that makes all the compiled programs? Which compiler is cur">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-704f48aad6446d5640cac655e77e7a19.gif">
+<meta property="article:published_time" content="2022-05-16T09:59:00.000Z">
+<meta property="article:modified_time" content="2022-05-16T10:00:29.556Z">
+<meta property="article:author" content="Pishun Huang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-704f48aad6446d5640cac655e77e7a19.gif">
+
+
+<link rel="canonical" href="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2022/05/16/cs61c-lab2/","path":"2022/05/16/cs61c-lab2/","title":"CS61C Lab2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61C Lab2 | Moksha's Blog</title>
   
 
-  <link rel="icon" type="image/png" href="/puzzle_favicon.png">
-  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
-  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  
-  
-<link rel="stylesheet" href="/css/animate.min.css">
 
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-  
-    
-<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
 
-  
-  
-    
-<link rel="stylesheet" href="/js/shareJs/share.min.css">
-
-  
-  <style>
-        @media (max-width: 992px) {
-            #waifu {
-                display: none;
-            }
-        }
-    </style>
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
 </head>
 
-  <script src="/js/jquery3.5.1.js"></script>
-  <script src="/js/vue2.6.11.js"></script>
-  <link href="/js/danmu/barrager.css" rel="stylesheet">
-<script src="/js/danmu/jquery.barrager.js"></script>
-  <body>
-    <!-- 判断是否为黑夜模式 -->
-    <script>
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-      if (isDark) {
-        $(document.body).addClass('darkModel');
-      }
-    </script>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
 
-    <header class="header bg-color" 
-  style="position: fixed; 
-  left: 0; top: 0; z-index: 10;width: 100%;"
->
-  <div class="header-content">
-    <div class="bars">
-      <div id="appDrawer" class="sidebar-image">
-  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
-  <transition name="fade">
-    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moksha's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
-  </transition>
-  <div class="drawer-box" :class="{'active': visible}">
-    <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo" src="/medias/logo.jpg" alt="logo">
-      <h3 class="drawer-box-head_title">Moksha&#39;s Blog</h3>
-      <h5 class="drawer-box-head_desc">Opportunities are ready for it, the more to beat action.</h5>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
     </div>
-    <div class="drawer-box-content">
-      <ul class="drawer-box-content_menu">
+  </div>
+
+</div>
         
-          <li class="drawer-box-content_item">
-            <a href="/" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Home</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/archives" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Archives</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/categories" class="menu-item-link">
-              
-                <i class="fa fa-bookmark" aria-hidden="true"></i>
-              
-              <span>Categories</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/friends" class="menu-item-link">
-              
-                <i class="fa fa-link" aria-hidden="true"></i>
-              
-              <span>link</span>
-            </a>
-          </li>
-        
-        <li class="drawer-box-content_item">
-          <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA">
-            <i class="fa fa-github" aria-hidden="true"></i>
-            <span>Github</span>
-          </a>
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
         </li>
       </ul>
-    </div>
-  </div>
-</div>
 
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDrawer',
-    data: {
-      visible: false,
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      }
-    },
-    created() {}
-  })
-</script>
-    </div>
-    <div class="blog-title" id="author-avatar">
-      <div class="avatar">
-        <img src="/medias/logo.jpg" alt="logo">
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cs61c-lab2"><span class="nav-number">1.</span> <span class="nav-text">CS61C Lab2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#exercise-0-makefiles"><span class="nav-number">1.1.</span> <span class="nav-text">Exercise 0: Makefiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exercise-3-linked-lists"><span class="nav-number">1.2.</span> <span class="nav-text">Exercise 3: Linked Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exercise-4-memory-management"><span class="nav-number">1.3.</span> <span class="nav-text">Exercise 4: Memory Management</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Pishun Huang</p>
+  <div class="site-description" itemprop="description">Opportunities are ready for it, the more to beat action.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
       </div>
-      <a href="/" class="logo">Moksha&#39;s Blog</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
-        
-          <li class="menu-item">
-            <a href="/" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Home</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/archives" class="menu-item-link">
-              
-                <i class="fa fa-archive" aria-hidden="true"></i>
-              
-              <span>Archives</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/categories" class="menu-item-link">
-              
-                <i class="fa fa-bookmark" aria-hidden="true"></i>
-              
-              <span>Categories</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/friends" class="menu-item-link">
-              
-                <i class="fa fa-link" aria-hidden="true"></i>
-              
-              <span>link</span>
-            </a>
-          </li>
-        
-      </ul>
-      
-        <div class="dark">
-  <div class="dark-content">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-    <!-- <span>关灯</span> -->
-  </div>
-  
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
 </div>
 
-<script>
-  $(function() {
-    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
-    if (isDark) {
-      $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-    }
-    $('.dark').click(function() {
-      if ($(document.body).is('.darkModel')) {
-        $(document.body).removeClass('darkModel');
-        localStorage.setItem('dark', false);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-moon-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      } else {
-        $(document.body).addClass('darkModel');
-        localStorage.setItem('dark', true);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      }
-    })
-  })
-</script>
-        
-      
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <!-- <div class="close" style="overflow: hidden;">
-          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
-        </div> -->
-        <h2>
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <span class="title">Search</span>
-          <i class="fa fa-close close" style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="Please enter keywords"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
+
+
         </div>
       </div>
     </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-      
 
-    </nav>
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
   
-  <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+<div class="post-block">
   
-</header>
-    <main class="main" style="margin-top: 60px;">
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61C Lab2 | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61C Lab2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
- <!-- prismjs 代码高亮 -->
- 
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
-    <transition-group tag="ul" :name="names">
-        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-            <img :src="image" class="bg-swiper-img">
-        </li>
-    </transition-group>
-</div>
-<script>
-    var vm = new Vue({
-        el: '#appBgSwiper',
-        data: {
-            names: '' || 'fade' || 'fade', // translate-fade fade
-            mark: 0,
-            img: [],
-            bgColor: '',
-            time: null
-        },
-        methods: {   //添加方法
-            change(i, m) {
-                if (i > m) {
-                    // this.names = 'fade';
-                } else if (i < m) {
-                    // this.names = 'fade';
-                } else {
-                    return;
-                }
-                this.mark = i;
-            },
-            prev() {
-                // this.names = 'fade';
-                this.mark--;
-                if (this.mark === -1) {
-                    this.mark = 3;
-                    return
-                }
-            },
-            next() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            autoPlay() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            play() {
-                let bgImgDelay = '' || '180000'
-                let delay = parseInt(bgImgDelay) || 180000;
-                this.time = setInterval(this.autoPlay, delay);
-            },
-            enter() {
-                clearInterval(this.time);
-            },
-            leave() {
-                this.play();
-            }
-        },
-        created() {
-            this.play()
-        },
-        beforeDestroy() {
-            clearInterval(this.time);
-        },
-        mounted() {
-            let prop = ''|| '';
-            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
-            if (isImg) {
-                let img = prop.split(',');
-                let configRoot = '/'
-                let arrImg = [];
-                img.forEach(el => {
-                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-			        var objExp = new RegExp(Expression);
+      <time title="Created: 2022-05-16 17:59:00 / Modified: 18:00:29" itemprop="dateCreated datePublished" datetime="2022-05-16T17:59:00+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61C/" itemprop="url" rel="index"><span itemprop="name">CS61C</span></a>
+        </span>
+    </span>
 
-                    if(objExp.test(el)) {
-                        // http or https
-                        arrImg.push(el);
-                    } else {
-                        // 非http or https开头
-                        // 本地文件
-                        let firstStr = el.charAt(0);
-                        if (firstStr == '/') {
-                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-                        }
-                        el = configRoot + el;
-                        arrImg.push(el);
-                    }
-                })
-                this.img = arrImg;
-            } else {
-                this.bgColor = prop;
-            }
-        }
-    })
-</script>
-
-<style>
-    .bg-swiper-box {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-    .bg-swiper-img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-</style>
-
-
-
-
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/30.jpg" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
-  
-    <div class="title-box">
-      
-          <span class="title">
-            CS61C Lab2
-          </span>
-        
-    </div>
-  
-  
-  
-    <script src="/js/bubble/bubble.js"></script>
   
 </div>
 
-
-<div class="row justify-position">
-  <div class="main-content">
-    <article class="post post-detail">
-      
-      
-      <div class="post-meta">
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2022-05-16</span>
-      </div>
-      
-      <div class="post-tags-categories">
-        
-        
-        <div class="categories">
-          <i class="iconfont iconbookmark1"></i>
-          
-            <a href="/categories/CS61C/" class="">
-              CS61C
-            </a>
-          
         </div>
-        
-      </div>
-      <div class="post-content">
-        <h1 id="CS61C-Lab2"><a href="#CS61C-Lab2" class="headerlink" title="CS61C Lab2"></a>CS61C Lab2</h1><h2 id="Exercise-0-Makefiles"><a href="#Exercise-0-Makefiles" class="headerlink" title="Exercise 0: Makefiles"></a><strong>Exercise 0: Makefiles</strong></h2><ol>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="cs61c-lab2">CS61C Lab2</h1>
+<h2 id="exercise-0-makefiles"><strong>Exercise 0: Makefiles</strong></h2>
+<ol type="1">
 <li>Which target is part of a rule that deletes all the compiled programs?</li>
 <li>Which target is part of a rule that makes all the compiled programs?</li>
 <li>Which compiler is currently being used?</li>
@@ -516,440 +268,93 @@
 <li>What operating system does the term “Darwin” represent?</li>
 <li>What line creates the lfsr program from its object files? (Give its line number.)</li>
 </ol>
-<p>我的答案:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.clean</span><br><span class="line">2.all</span><br><span class="line">3.gcc</span><br><span class="line">4.c99</span><br><span class="line">5.$(Foo)</span><br><span class="line">6.macos</span><br><span class="line">7.31</span><br></pre></td></tr></table></figure>
-<h2 id="Exercise-1-Bit-Operations"><a href="#Exercise-1-Bit-Operations" class="headerlink" title="Exercise 1: Bit Operations"></a><strong>Exercise 1: Bit Operations</strong></h2><p><code>get_bit</code>很简单，<code>set_bit</code>中需要将<code>v</code>的<code>0</code>和<code>1</code>减去1构造一下变成全0和全1来判断条件, 做过csapp的datalab之后一下就有思路了。若<code>v</code>为<code>1</code>则只需要移动<code>n</code>个bit到对应的bit或一下就行了，置为0则需要考虑一下除了移动到的bit之外的bit都置为1，可以在移位前做加上一个<code>1</code>的处理，随后移动到相应位置之后再取反，与一下即可。<code>flip_bit</code>只需要稍加处理在应用<code>set_bit</code>的模式即可，先取到即将要翻转的bit，随后与<code>1</code>做异或运算，使得0变为1，1变为0。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bit_ops.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Return the nth bit of x.</span></span><br><span class="line"><span class="comment">// Assume 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">get_bit</span><span class="params">(<span class="type">unsigned</span> x,</span></span><br><span class="line"><span class="params">                 <span class="type">unsigned</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// YOUR CODE HERE</span></span><br><span class="line">    <span class="comment">// Returning -1 is a placeholder (it makes</span></span><br><span class="line">    <span class="comment">// no sense, because get_bit only returns</span></span><br><span class="line">    <span class="comment">// 0 or 1)</span></span><br><span class="line">    <span class="keyword">return</span> (x &gt;&gt; n) &amp; <span class="number">0x1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Set the nth bit of the value of x to v.</span></span><br><span class="line"><span class="comment">// Assume 0 &lt;= n &lt;= 31, and v is 0 or 1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">set_bit</span><span class="params">(<span class="type">unsigned</span> * x,</span></span><br><span class="line"><span class="params">             <span class="type">unsigned</span> n,</span></span><br><span class="line"><span class="params">             <span class="type">unsigned</span> v)</span> &#123;</span><br><span class="line">    <span class="comment">// YOUR CODE HERE</span></span><br><span class="line">	<span class="type">int</span> flag = v<span class="number">-1</span>;</span><br><span class="line">	(*x) = (((*x) | (v &lt;&lt; n)) &amp; (~flag)) | ((*x) &amp; (~((v+<span class="number">1</span>) &lt;&lt; n)) &amp; flag);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Flip the nth bit of the value of x.</span></span><br><span class="line"><span class="comment">// Assume 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">flip_bit</span><span class="params">(<span class="type">unsigned</span> * x,</span></span><br><span class="line"><span class="params">              <span class="type">unsigned</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// YOUR CODE HERE</span></span><br><span class="line">	<span class="type">int</span> v = ((*x) &gt;&gt; n) &amp; <span class="number">0x1</span>;</span><br><span class="line">	v ^= <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> flag = v<span class="number">-1</span>;</span><br><span class="line">	(*x) = (((*x) | (v &lt;&lt; n)) &amp; (~flag)) | ((*x) &amp; (~((v+<span class="number">1</span>) &lt;&lt; n)) &amp; flag);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Exercise-2-Linear-Feedback-Shift-Register"><a href="#Exercise-2-Linear-Feedback-Shift-Register" class="headerlink" title="Exercise 2: Linear Feedback Shift Register"></a><strong>Exercise 2: Linear Feedback Shift Register</strong></h2><p><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-704f48aad6446d5640cac655e77e7a19.gif" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Linear Feedback Shift Register"></p>
-<p>根据图中信息构造门级电路即可，<code>test</code>中循环已经写好不需要再构建循环。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;lfsr.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">lfsr_calculate</span><span class="params">(<span class="type">uint16_t</span> *reg)</span> &#123;</span><br><span class="line">    <span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">	<span class="type">uint16_t</span> regs =	*reg; </span><br><span class="line">	<span class="type">uint16_t</span> msb = ((regs&amp;<span class="number">0x1</span>)^((regs&gt;&gt;<span class="number">2</span>)&amp;<span class="number">0x1</span>)^((regs&gt;&gt;<span class="number">3</span>)&amp;<span class="number">0x1</span>)^((regs&gt;&gt;<span class="number">5</span>)&amp;<span class="number">0x1</span>))&lt;&lt;<span class="number">15</span>;</span><br><span class="line">	(*reg) &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	(*reg) |= msb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Exercise-3-Linked-Lists"><a href="#Exercise-3-Linked-Lists" class="headerlink" title="Exercise 3: Linked Lists"></a><strong>Exercise 3: Linked Lists</strong></h2><p>面试常考的翻转链表</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;list.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Add a node to the end of the linked list. Assume head_ptr is non-null. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">append_node</span> <span class="params">(node** head_ptr, <span class="type">int</span> new_data)</span> &#123;</span><br><span class="line">	<span class="comment">/* First lets allocate memory for the new node and initialize its attributes */</span></span><br><span class="line">	<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">	node* new_node = (node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">	new_node-&gt;val = new_data;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* If the list is empty, set the new node to be the head and return */</span></span><br><span class="line">	<span class="keyword">if</span> (*head_ptr == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">		*head_ptr = new_node;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	node* curr = *head_ptr;</span><br><span class="line">	<span class="keyword">while</span> (curr-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		curr = curr-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/* Insert node at the end of the list */</span></span><br><span class="line">	<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">	curr-&gt;next = new_node;</span><br><span class="line">	new_node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Reverse a linked list in place (in other words, without creating a new list).</span></span><br><span class="line"><span class="comment">   Assume that head_ptr is non-null. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reverse_list</span> <span class="params">(node** head_ptr)</span> &#123;</span><br><span class="line">	node* prev = <span class="literal">NULL</span>;</span><br><span class="line">	node* curr = *head_ptr;</span><br><span class="line">	node* next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="comment">/* INSERT CODE HERE */</span></span><br><span class="line">		next = curr-&gt;next;</span><br><span class="line">		curr-&gt;next = prev;</span><br><span class="line">		prev = curr;</span><br><span class="line">		curr = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/* Set the new head to be what originally was the last node in the list */</span></span><br><span class="line">	*head_ptr = prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Exercise-4-Memory-Management"><a href="#Exercise-4-Memory-Management" class="headerlink" title="Exercise 4: Memory Management"></a><strong>Exercise 4: Memory Management</strong></h2><p>为<code>vector</code>在<code>Makefile</code>中指定目标, 将下列语句添加到<code>Makefile</code>中。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(VECTOR_PROG)</span>: <span class="variable">$(VECTOR_OBJS)</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -g -o <span class="variable">$(VECTOR_PROG)</span> <span class="variable">$(VECTOR_OBJS)</span> <span class="variable">$(LDFLAGS)</span></span><br></pre></td></tr></table></figure>
-
+<p>我的答案: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.clean</span><br><span class="line">2.all</span><br><span class="line">3.gcc</span><br><span class="line">4.c99</span><br><span class="line">5.$(Foo)</span><br><span class="line">6.macos</span><br><span class="line">7.31</span><br></pre></td></tr></table></figure> ## <strong>Exercise 1: Bit Operations</strong> <code>get_bit</code>很简单，<code>set_bit</code>中需要将<code>v</code>的<code>0</code>和<code>1</code>减去1构造一下变成全0和全1来判断条件, 做过csapp的datalab之后一下就有思路了。若<code>v</code>为<code>1</code>则只需要移动<code>n</code>个bit到对应的bit或一下就行了，置为0则需要考虑一下除了移动到的bit之外的bit都置为1，可以在移位前做加上一个<code>1</code>的处理，随后移动到相应位置之后再取反，与一下即可。<code>flip_bit</code>只需要稍加处理在应用<code>set_bit</code>的模式即可，先取到即将要翻转的bit，随后与<code>1</code>做异或运算，使得0变为1，1变为0。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bit_ops.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Return the nth bit of x.</span></span><br><span class="line"><span class="comment">// Assume 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">get_bit</span><span class="params">(<span class="type">unsigned</span> x,</span></span><br><span class="line"><span class="params">                 <span class="type">unsigned</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// YOUR CODE HERE</span></span><br><span class="line">    <span class="comment">// Returning -1 is a placeholder (it makes</span></span><br><span class="line">    <span class="comment">// no sense, because get_bit only returns</span></span><br><span class="line">    <span class="comment">// 0 or 1)</span></span><br><span class="line">    <span class="keyword">return</span> (x &gt;&gt; n) &amp; <span class="number">0x1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Set the nth bit of the value of x to v.</span></span><br><span class="line"><span class="comment">// Assume 0 &lt;= n &lt;= 31, and v is 0 or 1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">set_bit</span><span class="params">(<span class="type">unsigned</span> * x,</span></span><br><span class="line"><span class="params">             <span class="type">unsigned</span> n,</span></span><br><span class="line"><span class="params">             <span class="type">unsigned</span> v)</span> &#123;</span><br><span class="line">    <span class="comment">// YOUR CODE HERE</span></span><br><span class="line">	<span class="type">int</span> flag = v<span class="number">-1</span>;</span><br><span class="line">	(*x) = (((*x) | (v &lt;&lt; n)) &amp; (~flag)) | ((*x) &amp; (~((v+<span class="number">1</span>) &lt;&lt; n)) &amp; flag);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Flip the nth bit of the value of x.</span></span><br><span class="line"><span class="comment">// Assume 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">flip_bit</span><span class="params">(<span class="type">unsigned</span> * x,</span></span><br><span class="line"><span class="params">              <span class="type">unsigned</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// YOUR CODE HERE</span></span><br><span class="line">	<span class="type">int</span> v = ((*x) &gt;&gt; n) &amp; <span class="number">0x1</span>;</span><br><span class="line">	v ^= <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> flag = v<span class="number">-1</span>;</span><br><span class="line">	(*x) = (((*x) | (v &lt;&lt; n)) &amp; (~flag)) | ((*x) &amp; (~((v+<span class="number">1</span>) &lt;&lt; n)) &amp; flag);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## <strong>Exercise 2: Linear Feedback Shift Register</strong> <img src="https://pic4.zhimg.com/80/v2-704f48aad6446d5640cac655e77e7a19.gif" alt="Linear Feedback Shift Register" /></p>
+<p>根据图中信息构造门级电路即可，<code>test</code>中循环已经写好不需要再构建循环。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;lfsr.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">lfsr_calculate</span><span class="params">(<span class="type">uint16_t</span> *reg)</span> &#123;</span><br><span class="line">    <span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">	<span class="type">uint16_t</span> regs =	*reg; </span><br><span class="line">	<span class="type">uint16_t</span> msb = ((regs&amp;<span class="number">0x1</span>)^((regs&gt;&gt;<span class="number">2</span>)&amp;<span class="number">0x1</span>)^((regs&gt;&gt;<span class="number">3</span>)&amp;<span class="number">0x1</span>)^((regs&gt;&gt;<span class="number">5</span>)&amp;<span class="number">0x1</span>))&lt;&lt;<span class="number">15</span>;</span><br><span class="line">	(*reg) &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	(*reg) |= msb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="exercise-3-linked-lists"><strong>Exercise 3: Linked Lists</strong></h2>
+<p>面试常考的翻转链表 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;list.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Add a node to the end of the linked list. Assume head_ptr is non-null. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">append_node</span> <span class="params">(node** head_ptr, <span class="type">int</span> new_data)</span> &#123;</span><br><span class="line">	<span class="comment">/* First lets allocate memory for the new node and initialize its attributes */</span></span><br><span class="line">	<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">	node* new_node = (node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">	new_node-&gt;val = new_data;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* If the list is empty, set the new node to be the head and return */</span></span><br><span class="line">	<span class="keyword">if</span> (*head_ptr == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">		*head_ptr = new_node;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	node* curr = *head_ptr;</span><br><span class="line">	<span class="keyword">while</span> (curr-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		curr = curr-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/* Insert node at the end of the list */</span></span><br><span class="line">	<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">	curr-&gt;next = new_node;</span><br><span class="line">	new_node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Reverse a linked list in place (in other words, without creating a new list).</span></span><br><span class="line"><span class="comment">   Assume that head_ptr is non-null. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reverse_list</span> <span class="params">(node** head_ptr)</span> &#123;</span><br><span class="line">	node* prev = <span class="literal">NULL</span>;</span><br><span class="line">	node* curr = *head_ptr;</span><br><span class="line">	node* next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="comment">/* INSERT CODE HERE */</span></span><br><span class="line">		next = curr-&gt;next;</span><br><span class="line">		curr-&gt;next = prev;</span><br><span class="line">		prev = curr;</span><br><span class="line">		curr = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/* Set the new head to be what originally was the last node in the list */</span></span><br><span class="line">	*head_ptr = prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="exercise-4-memory-management"><strong>Exercise 4: Memory Management</strong></h2>
+<p>为<code>vector</code>在<code>Makefile</code>中指定目标, 将下列语句添加到<code>Makefile</code>中。 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(VECTOR_PROG)</span>: <span class="variable">$(VECTOR_OBJS)</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -g -o <span class="variable">$(VECTOR_PROG)</span> <span class="variable">$(VECTOR_OBJS)</span> <span class="variable">$(LDFLAGS)</span></span><br></pre></td></tr></table></figure></p>
 <p>分析一下: <code>bad_vector_new</code>。声明的指针变量v未被使用，且没有为结构体<code>vector_t</code>动态开辟堆空间，而是使用野指针，这样很危险; <code>also_bad_vector_new</code>。声明栈上的结构体数据，最后返回之后拷贝的开销非常大，因此也不够合理, 且如果未及时对返回值进行保存，栈帧会有被覆盖的可能，会丢失返回的数据。</p>
 <blockquote>
-<p>$ valgrind –tool=memcheck –leak-check=full –track-origins=yes [OS SPECIFIC ARGS] <code>./&lt;executable&gt;</code></p>
+<p>$ valgrind --tool=memcheck --leak-check=full --track-origins=yes [OS SPECIFIC ARGS] <code>./&lt;executable&gt;</code> - <code>Valgrind</code>默认使用<code>memcheck</code>工具。还有其它工具包括: <code>Callgrind</code>, <code>Cachegrind</code>, <code>Helgrind</code>, <code>Massif</code>。 - <code>--leak-check=full</code>: 详细地显示每个单独的内存泄露。 - <code>--track-origins=yes</code>: 这会跟踪初始化值的来源。着重于有用的输出而不是速度。</p>
 </blockquote>
-<ul>
-<li><code>Valgrind</code>默认使用<code>memcheck</code>工具。还有其它工具包括: <code>Callgrind</code>, <code>Cachegrind</code>, <code>Helgrind</code>, <code>Massif</code>。</li>
-<li><code>--leak-check=full</code>: 详细地显示每个单独的内存泄露。</li>
-<li><code>--track-origins=yes</code>: 这会跟踪初始化值的来源。着重于有用的输出而不是速度。</li>
-</ul>
-<p>注意在函数<code>vector_set</code>的题意，超出访问的loc超出堆内存的范围需要重新再申请空间<code>realloc</code>，而不是简单地提示错误信息，若重新申请为空则提示错误信息<code>allocation_failed</code>。用<code>cgdb</code>慢慢调就行了。在<code>make vector_test</code>通过后，使用工具<code>Valgrind</code>检测到内存泄露，查看了一下<code>vector_test</code>函数，发现存在使用未初始化元素的行为，随后便可以将问题可以定位到<code>vector_set</code>函数中，在其中加入for循环初始化即可。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Create a new vector with a size (length) of 1</span></span><br><span class="line"><span class="comment">   and set its single component to zero... the</span></span><br><span class="line"><span class="comment">   RIGHT WAY */</span></span><br><span class="line"><span class="type">vector_t</span> *<span class="title function_">vector_new</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">/* Declare what this function will return */</span></span><br><span class="line">    <span class="type">vector_t</span> *retval;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* First, we need to allocate memory on the heap for the struct */</span></span><br><span class="line">    retval = (<span class="type">vector_t</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">vector_t</span>));<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check our return value to make sure we got memory */</span></span><br><span class="line">    <span class="keyword">if</span> (retval == <span class="literal">NULL</span><span class="comment">/* YOUR CODE HERE */</span>) &#123;</span><br><span class="line">        allocation_failed();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Now we need to initialize our data.</span></span><br><span class="line"><span class="comment">       Since retval-&gt;data should be able to dynamically grow,</span></span><br><span class="line"><span class="comment">       what do you need to do? */</span></span><br><span class="line">    retval-&gt;size = <span class="number">1</span>;<span class="comment">/* YOUR CODE HERE */</span>;</span><br><span class="line">    retval-&gt;data = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*retval-&gt;size);<span class="comment">/* YOUR CODE HERE */</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check the data attribute of our vector to make sure we got memory */</span></span><br><span class="line">    <span class="keyword">if</span> (retval-&gt;data == <span class="literal">NULL</span><span class="comment">/* YOUR CODE HERE */</span>) &#123;</span><br><span class="line">        <span class="built_in">free</span>(retval);				<span class="comment">//Why is this line necessary? Because it allocate the memory of vector but not allocate the data that will cause memory leak.</span></span><br><span class="line">        allocation_failed();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Complete the initialization by setting the single component to zero */</span></span><br><span class="line">    <span class="comment">/* YOUR CODE HERE */</span> </span><br><span class="line">	*(retval-&gt;data) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* and return... */</span></span><br><span class="line">    <span class="keyword">return</span> retval;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return the value at the specified location/component &quot;loc&quot; of the vector */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">vector_get</span><span class="params">(<span class="type">vector_t</span> *v, <span class="type">size_t</span> loc)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we are passed a NULL pointer for our vector, complain about it and exit. */</span></span><br><span class="line">    <span class="keyword">if</span>(v == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;vector_get: passed a NULL vector.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If the requested location is higher than we have allocated, return 0.</span></span><br><span class="line"><span class="comment">     * Otherwise, return what is in the passed location.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">if</span> (loc &lt; v-&gt;size<span class="comment">/* YOUR CODE HERE */</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> v-&gt;data[loc];<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Free up the memory allocated for the passed vector.</span></span><br><span class="line"><span class="comment">   Remember, you need to free up ALL the memory that was allocated. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">vector_delete</span><span class="params">(<span class="type">vector_t</span> *v)</span> &#123;</span><br><span class="line">    <span class="comment">/* YOUR SOLUTION HERE */</span></span><br><span class="line">	<span class="built_in">free</span>(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Set a value in the vector. If the extra memory allocation fails, call</span></span><br><span class="line"><span class="comment">   allocation_failed(). */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">vector_set</span><span class="params">(<span class="type">vector_t</span> *v, <span class="type">size_t</span> loc, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">    <span class="comment">/* What do you need to do if the location is greater than the size we have</span></span><br><span class="line"><span class="comment">     * allocated?  Remember that unset locations should contain a value of 0.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* YOUR SOLUTION HERE */</span></span><br><span class="line">	<span class="keyword">if</span> (loc &gt;= v-&gt;size) &#123;</span><br><span class="line">		v-&gt;data = (<span class="type">int</span>*)<span class="built_in">realloc</span>(v-&gt;data, <span class="keyword">sizeof</span>(<span class="type">int</span>)*(loc+<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span> (v-&gt;data == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            allocation_failed();</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">size_t</span> i = v-&gt;size; i &lt; loc+<span class="number">1</span>; ++i)</span><br><span class="line">			v-&gt;data[i] = <span class="number">0</span>;</span><br><span class="line">		v-&gt;size = loc+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	v-&gt;data[loc] = value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意在函数<code>vector_set</code>的题意，超出访问的loc超出堆内存的范围需要重新再申请空间<code>realloc</code>，而不是简单地提示错误信息，若重新申请为空则提示错误信息<code>allocation_failed</code>。用<code>cgdb</code>慢慢调就行了。在<code>make vector_test</code>通过后，使用工具<code>Valgrind</code>检测到内存泄露，查看了一下<code>vector_test</code>函数，发现存在使用未初始化元素的行为，随后便可以将问题可以定位到<code>vector_set</code>函数中，在其中加入for循环初始化即可。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Create a new vector with a size (length) of 1</span></span><br><span class="line"><span class="comment">   and set its single component to zero... the</span></span><br><span class="line"><span class="comment">   RIGHT WAY */</span></span><br><span class="line"><span class="type">vector_t</span> *<span class="title function_">vector_new</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">/* Declare what this function will return */</span></span><br><span class="line">    <span class="type">vector_t</span> *retval;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* First, we need to allocate memory on the heap for the struct */</span></span><br><span class="line">    retval = (<span class="type">vector_t</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">vector_t</span>));<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check our return value to make sure we got memory */</span></span><br><span class="line">    <span class="keyword">if</span> (retval == <span class="literal">NULL</span><span class="comment">/* YOUR CODE HERE */</span>) &#123;</span><br><span class="line">        allocation_failed();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Now we need to initialize our data.</span></span><br><span class="line"><span class="comment">       Since retval-&gt;data should be able to dynamically grow,</span></span><br><span class="line"><span class="comment">       what do you need to do? */</span></span><br><span class="line">    retval-&gt;size = <span class="number">1</span>;<span class="comment">/* YOUR CODE HERE */</span>;</span><br><span class="line">    retval-&gt;data = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*retval-&gt;size);<span class="comment">/* YOUR CODE HERE */</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check the data attribute of our vector to make sure we got memory */</span></span><br><span class="line">    <span class="keyword">if</span> (retval-&gt;data == <span class="literal">NULL</span><span class="comment">/* YOUR CODE HERE */</span>) &#123;</span><br><span class="line">        <span class="built_in">free</span>(retval);				<span class="comment">//Why is this line necessary? Because it allocate the memory of vector but not allocate the data that will cause memory leak.</span></span><br><span class="line">        allocation_failed();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Complete the initialization by setting the single component to zero */</span></span><br><span class="line">    <span class="comment">/* YOUR CODE HERE */</span> </span><br><span class="line">	*(retval-&gt;data) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* and return... */</span></span><br><span class="line">    <span class="keyword">return</span> retval;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return the value at the specified location/component &quot;loc&quot; of the vector */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">vector_get</span><span class="params">(<span class="type">vector_t</span> *v, <span class="type">size_t</span> loc)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we are passed a NULL pointer for our vector, complain about it and exit. */</span></span><br><span class="line">    <span class="keyword">if</span>(v == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;vector_get: passed a NULL vector.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If the requested location is higher than we have allocated, return 0.</span></span><br><span class="line"><span class="comment">     * Otherwise, return what is in the passed location.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">if</span> (loc &lt; v-&gt;size<span class="comment">/* YOUR CODE HERE */</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> v-&gt;data[loc];<span class="comment">/* YOUR CODE HERE */</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Free up the memory allocated for the passed vector.</span></span><br><span class="line"><span class="comment">   Remember, you need to free up ALL the memory that was allocated. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">vector_delete</span><span class="params">(<span class="type">vector_t</span> *v)</span> &#123;</span><br><span class="line">    <span class="comment">/* YOUR SOLUTION HERE */</span></span><br><span class="line">	<span class="built_in">free</span>(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Set a value in the vector. If the extra memory allocation fails, call</span></span><br><span class="line"><span class="comment">   allocation_failed(). */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">vector_set</span><span class="params">(<span class="type">vector_t</span> *v, <span class="type">size_t</span> loc, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">    <span class="comment">/* What do you need to do if the location is greater than the size we have</span></span><br><span class="line"><span class="comment">     * allocated?  Remember that unset locations should contain a value of 0.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* YOUR SOLUTION HERE */</span></span><br><span class="line">	<span class="keyword">if</span> (loc &gt;= v-&gt;size) &#123;</span><br><span class="line">		v-&gt;data = (<span class="type">int</span>*)<span class="built_in">realloc</span>(v-&gt;data, <span class="keyword">sizeof</span>(<span class="type">int</span>)*(loc+<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span> (v-&gt;data == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            allocation_failed();</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">size_t</span> i = v-&gt;size; i &lt; loc+<span class="number">1</span>; ++i)</span><br><span class="line">			v-&gt;data[i] = <span class="number">0</span>;</span><br><span class="line">		v-&gt;size = loc+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	v-&gt;data[loc] = value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>Pishun Huang</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/2022/05/16/cs61c-lab2/" target="_blank" title="CS61C Lab2">https://mitmoksha.github.io/2022/05/16/cs61c-lab2/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint polocy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/13.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2022/05/16/cmu15445-project1/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> Prev:
-        <div>CMU 15-445 Project1: BUFFER POOL MANAGER</div>
-      </div>
-      
-      <!-- <div class="content">
-        CMU 15-445 Project1: BUFFER POOL MANAGERTASK #1 - LRU REPLAC
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/36.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2022/05/16/cs144-lab0/" class="post-nav-link">
-      <div class="title">
-        Next: <i class="fa fa-angle-right"></i>
-        <div>Stanford CS144 Lab0: Networking Warmup</div>
-      </div>
-      <!-- <div class="content">
-        Stanford CS144 Lab0: Networking Warmup1. Fetch a Web page使用t
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
-  }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-      
-        <div id="myComment">
-          
-        </div>
-      
-  </div>
-
-  
-    <div class="toc-aside">
-      <div class="toc-main">
-        <div class="toc-aside-title">
-          <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
-          <div class="toc-open-close">catalog</div>
-        </div>
-        <div class="toc-content">
-          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
-<script src="/js/tocbot/tocbot.min.js"></script>
-<div class="toc"></div>
-
-<script>
-  if ($('.toc').length > 0) {
-    var headerEl = 'h2, h3, h4',  //headers 
-      content = '.post-detail',//文章容器
-      idArr = {};  //标题数组以确定是否增加索引id
-      //add #id
-
-    $(content).children(headerEl).each(function () {
-      //去除空格以及多余标点
-      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-
-      headerId = headerId.toLowerCase();
-      if (idArr[headerId]) {
-        //id已经存在
-        $(this).attr('id', headerId + '-' + idArr[headerId]);
-        idArr[headerId]++;
-      }
-      else {
-        //id未存在
-        idArr[headerId] = 1;
-        $(this).attr('id', headerId);
-      }
-    });
-
-    tocbot.init({
-      // Where to render the table of contents.
-      tocSelector: '.toc',
-      // Where to grab the headings to build the table of contents.
-      contentSelector: content,
-      // Which headings to grab inside of the contentSelector element.
-      headingSelector: headerEl,
-      scrollSmooth: true,
-      scrollSmoothOffset: -80,
-      headingsOffset: 130,
-      positionFixedSelector: '.toc-main',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  }
-
-</script>
-
-<style>
-.is-position-fixed {
-  position:fixed !important;
-  top: 64px;
-}
-.toc-main ul {
-  counter-reset: show-list;
-}
-.toc-main ul li::before {
-  content: counter(item)".";
-  display: block;
-  position: absolute;
-  left: 12px;
-  top:0;
-}
-.toc > .toc-list {
-  padding-left: 35px;
-}
-.toc>.toc-list li {
-  list-style: decimal;
-}
-.toc-list {
-  padding-left: 25px;
-}
-</style>
-        </div>
-      </div>
     </div>
 
     
+    
+    
 
-    <script>
-      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
-      let open = eval('' || 'true');
-      openOrCloseBtn.click(function() {
-        if (open === true) {
-          $(".toc-aside").css({'width': 0, 'padding': 0});
-          $(".toc-content").css({'width': 0});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
-          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
-          open = false;
-        } else {
-          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
-          $(".toc-content").css({'width': '300px'});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
-          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
-          open = true;
-        }
-      });
-    </script>
-  
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/16/cs144-lab0/" rel="prev" title="Stanford CS144 Lab0: Networking Warmup">
+                  <i class="fa fa-chevron-left"></i> Stanford CS144 Lab0: Networking Warmup
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/16/cmu15445-project1/" rel="next" title="CMU 15-445 Project1: BUFFER POOL MANAGER">
+                  CMU 15-445 Project1: BUFFER POOL MANAGER <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-    </main>
-    <div class="footer bg-color">
-  <div class="footer-main">
-    <div class="link">
-      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
-      <a href="mailto:1730241541@qq.com">
-        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
-        <i class="fa fa-qq" aria-hidden="true"></i>
-      </a>
-      <a href="/atom.xml" target="_blank">
-        <i class="fa fa-rss" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="footer-copyright">
-      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
-    </div>
-    
-      
-  <!-- 不蒜子统计 -->
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-book" aria-hidden="true"></i>Total reading：<span id="busuanzi_value_page_pv"></span> times
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
   </span>
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-eye" aria-hidden="true"></i>Total visits：<span id="busuanzi_value_site_pv"></span> times
-  </span>
-  <span class="post-meta-divider">|</span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-        <i class="fa fa-users" aria-hidden="true"></i>Number of visitors：<span id="busuanzi_value_site_uv"></span> people
-  </span>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-    
+  <span class="author" itemprop="copyrightHolder">Pishun Huang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
-</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
-    
-      <div class="goTop top-btn-color border-color">
-  <i class="fa fa-arrow-up" aria-hidden="true"></i>
-</div>
-<script src="/js/goTop.js"></script>
-    
 
-    
 
-    <!-- 图片放大 -->
-    
-      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
-    
 
-    <script src="/js/wrapImage.js"></script>
-    
-    <!-- 爱心点击 -->
-    
+  
 
-    <!-- Baidu Analytics -->
 
-    <!-- Baidu Push -->
 
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
-    
-    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
-    
-      <script src="/js/aos/aos.js"></script>
-      <script>
-        // https://github.com/michalsnik/aos
-        const themeOffset = parseInt('120') || 120;
-        const themeDelay = parseInt('0')|| 0;
-        const themeDuration = parseInt('400') || 400;
-        const themeEasing = 'ease' || 'ease';
-        const themeOnce = eval('true') || false;
-        const themeMirror = eval('false') || false;
-        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
-        AOS.init({
-          // Global settings:
-          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
-          initClassName: 'aos-init', // class applied after initialization
-          animatedClassName: 'aos-animate', // class applied on animation
-          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
-          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
-          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+  
 
-          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-          offset: themeOffset, // offset (in px) from the original trigger point
-          delay: themeDelay, // values from 0 to 3000, with step 50ms
-          duration: themeDuration, // values from 0 to 3000, with step 50ms
-          easing: themeEasing, // default easing for AOS animations
-          once: themeOnce, // whether animation should happen only once - while scrolling down
-          mirror: themeMirror, // whether elements should animate out while scrolling past them
-          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","//mhchem.github.io/MathJax-mhchem/ mhchem":false,"js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
-        });
-      </script>
-    
 
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
-<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-<div id="appCopy">
-</div>
-<script>
-  var vm = new Vue({
-    el: '#appCopy',
-    data: {
-    },
-    computed: {
-    },
-    mounted() {
-      const that = this;
-      //  监听 ctrl + c事件  
-      $(document).unbind('keypress').bind('keypress', function (e) {
-        if (e.ctrlKey && e.keyCode == 67) {
-          doSomething();
-          // 返回false, 防止重复触发copy事件  
-          return false;
-        }
-      })
 
-      // 鼠标右键的复制事件  
-      $(document).unbind('copy').bind('copy', function (e) {
-        doSomething();
-        // console.log('右键复制 监听成功');
-      });
-
-      function doSomething() {
-        that.$notify({
-          title: "成功",
-          content: "代码已复制，请遵守相关授权协议。",
-          type: 'success'
-        })
-        // console.log('ctrl + c 监听成功');  
-      }
-    },
-    methods: {
-    },
-    created() { }
-  })
-</script>
-    
-
-    <!-- 输入框打字特效 -->
-    
-      <script src="/js/activate-power-mode.js"></script>
-      <script>
-          POWERMODE.colorful = true;  // 打开随机颜色特效
-          POWERMODE.shake = false;    // 关闭输入框抖动
-          document.body.addEventListener('input', POWERMODE);//监听打字事件
-      </script>
-    
-
-    <!-- markdown代码一键复制功能 -->
-    <script src="/js/clipboard/clipboard.min.js"></script>
-    <script>
-      !function (e, t, a) {
-        var copy = 'copy';
-        /* code */
-        var initCopyCode = function(){
-          var copyHtml = '';
-          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
-          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
-          copyHtml += '</button>';
-          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
-          $(".post-detail pre").not('.gutter pre').before(copyHtml);
-          new ClipboardJS('.btn-copy', {
-              target: function(trigger) {
-                  return trigger.nextElementSibling;
-              }
-          });
-        }
-        initCopyCode();
-      }(window, document);
-    </script>
-
-    <script src="/js/lazyload/lazyload@1.9.1.js"></script>
-    <script>
-      $(function() {
-        $("div.lazyload, img.lazyload, a.lazyload").lazyload(
-            {
-                effect: "fadeIn",
-                placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
-            }
-        );
-    });
-    </script>
-    
-    <script src="/js/app.js"></script>
-  </body>
+</body>
 </html>

@@ -1,945 +1,379 @@
 <!DOCTYPE html>
-<html>
-  
-
-
-
+<html lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
 
 
-  <title>CS61C CPU PROJECT | Moksha&#39;s Blog</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-    
-<link rel="stylesheet" href="/js/aos/aos.css">
+<link rel="stylesheet" href="/css/main.css">
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CS61C CPU PROJECT 关于如何Debug 相信前面的lab5和lab6已经奠定好了使用logisim的基础，前面相关内容同样奠定好了RISC-V ISA的知识基础。接下来Project中的一系列的task可以通过参考: - 61C Reference card - ROM表 - 对应测试文件中的汇编代码和测试电路 - 通过change value来对电路中的bit位进行赋值，查看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61C CPU PROJECT">
+<meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/index.html">
+<meta property="og:site_name" content="Moksha&#39;s Blog">
+<meta property="og:description" content="CS61C CPU PROJECT 关于如何Debug 相信前面的lab5和lab6已经奠定好了使用logisim的基础，前面相关内容同样奠定好了RISC-V ISA的知识基础。接下来Project中的一系列的task可以通过参考: - 61C Reference card - ROM表 - 对应测试文件中的汇编代码和测试电路 - 通过change value来对电路中的bit位进行赋值，查看">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-014bf51c0d29af49c1b904c3cb4a28e2.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-2bc53f743fb481fc3a22f8c141f95071.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-f46d246882abfdf6f28e13266e41c363.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-3ffb5bc0653de42a33fba13bf38a868d.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-00828871fd39660bf6ddaf8a32ab38fa.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-ee25b2c060400847e6cf55d220704422.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-4c10eb6557e75cdd3866bd188e5868ff.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-b4917e6611d7a6b8aa66d86f9d1362b5.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-941f7fe17956fab75c7e74b1afa5fb17.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-723ccb2b6671606fe4a6ac5b0cbf58c9.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-1b3b6bfa9c35647d8b7df3225a1e2a6f.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-55adeda8be6c453ab203579651619b65.png">
+<meta property="article:published_time" content="2022-05-16T09:37:37.000Z">
+<meta property="article:modified_time" content="2022-05-16T09:38:29.757Z">
+<meta property="article:author" content="Pishun Huang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-014bf51c0d29af49c1b904c3cb4a28e2.png">
+
+
+<link rel="canonical" href="https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/","path":"2022/05/16/CS61C-CPU-PROJECT/","title":"CS61C CPU PROJECT"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61C CPU PROJECT | Moksha's Blog</title>
   
 
-  <link rel="icon" type="image/png" href="/puzzle_favicon.png">
-  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
-  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  
-  
-<link rel="stylesheet" href="/css/animate.min.css">
 
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-  
-    
-<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
 
-  
-  
-    
-<link rel="stylesheet" href="/js/shareJs/share.min.css">
-
-  
-  <style>
-        @media (max-width: 992px) {
-            #waifu {
-                display: none;
-            }
-        }
-    </style>
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
 </head>
 
-  <script src="/js/jquery3.5.1.js"></script>
-  <script src="/js/vue2.6.11.js"></script>
-  <link href="/js/danmu/barrager.css" rel="stylesheet">
-<script src="/js/danmu/jquery.barrager.js"></script>
-  <body>
-    <!-- 判断是否为黑夜模式 -->
-    <script>
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-      if (isDark) {
-        $(document.body).addClass('darkModel');
-      }
-    </script>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
 
-    <header class="header bg-color" 
-  style="position: fixed; 
-  left: 0; top: 0; z-index: 10;width: 100%;"
->
-  <div class="header-content">
-    <div class="bars">
-      <div id="appDrawer" class="sidebar-image">
-  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
-  <transition name="fade">
-    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moksha's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
-  </transition>
-  <div class="drawer-box" :class="{'active': visible}">
-    <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo" src="/medias/logo.jpg" alt="logo">
-      <h3 class="drawer-box-head_title">Moksha&#39;s Blog</h3>
-      <h5 class="drawer-box-head_desc">Opportunities are ready for it, the more to beat action.</h5>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
     </div>
-    <div class="drawer-box-content">
-      <ul class="drawer-box-content_menu">
+  </div>
+
+</div>
         
-          <li class="drawer-box-content_item">
-            <a href="/" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Home</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/archives" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Archives</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/categories" class="menu-item-link">
-              
-                <i class="fa fa-bookmark" aria-hidden="true"></i>
-              
-              <span>Categories</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/friends" class="menu-item-link">
-              
-                <i class="fa fa-link" aria-hidden="true"></i>
-              
-              <span>link</span>
-            </a>
-          </li>
-        
-        <li class="drawer-box-content_item">
-          <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA">
-            <i class="fa fa-github" aria-hidden="true"></i>
-            <span>Github</span>
-          </a>
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
         </li>
       </ul>
-    </div>
-  </div>
-</div>
 
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDrawer',
-    data: {
-      visible: false,
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      }
-    },
-    created() {}
-  })
-</script>
-    </div>
-    <div class="blog-title" id="author-avatar">
-      <div class="avatar">
-        <img src="/medias/logo.jpg" alt="logo">
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cs61c-cpu-project"><span class="nav-number">1.</span> <span class="nav-text">CS61C CPU PROJECT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95debug"><span class="nav-number">1.1.</span> <span class="nav-text">关于如何Debug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alu"><span class="nav-number">1.2.</span> <span class="nav-text">ALU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regfile"><span class="nav-number">1.3.</span> <span class="nav-text">RegFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#immediate-generator"><span class="nav-number">1.4.</span> <span class="nav-text">Immediate Generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#control-storeimplemented-by-rom"><span class="nav-number">1.5.</span> <span class="nav-text">Control Store(Implemented by ROM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#branch-and-jump-instruction"><span class="nav-number">1.6.</span> <span class="nav-text">Branch and Jump Instruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loading-and-storing"><span class="nav-number">1.7.</span> <span class="nav-text">Loading and Storing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#partial-load"><span class="nav-number">1.7.1.</span> <span class="nav-text">Partial Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#partial-store"><span class="nav-number">1.7.2.</span> <span class="nav-text">Partial Store</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#datapath"><span class="nav-number">1.8.</span> <span class="nav-text">Datapath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E4%B9%A6%E7%9B%AE"><span class="nav-number">1.9.</span> <span class="nav-text">参考书目</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Pishun Huang</p>
+  <div class="site-description" itemprop="description">Opportunities are ready for it, the more to beat action.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
       </div>
-      <a href="/" class="logo">Moksha&#39;s Blog</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
-        
-          <li class="menu-item">
-            <a href="/" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Home</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/archives" class="menu-item-link">
-              
-                <i class="fa fa-archive" aria-hidden="true"></i>
-              
-              <span>Archives</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/categories" class="menu-item-link">
-              
-                <i class="fa fa-bookmark" aria-hidden="true"></i>
-              
-              <span>Categories</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/friends" class="menu-item-link">
-              
-                <i class="fa fa-link" aria-hidden="true"></i>
-              
-              <span>link</span>
-            </a>
-          </li>
-        
-      </ul>
-      
-        <div class="dark">
-  <div class="dark-content">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-    <!-- <span>关灯</span> -->
-  </div>
-  
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
 </div>
 
-<script>
-  $(function() {
-    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
-    if (isDark) {
-      $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-    }
-    $('.dark').click(function() {
-      if ($(document.body).is('.darkModel')) {
-        $(document.body).removeClass('darkModel');
-        localStorage.setItem('dark', false);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-moon-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      } else {
-        $(document.body).addClass('darkModel');
-        localStorage.setItem('dark', true);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      }
-    })
-  })
-</script>
-        
-      
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <!-- <div class="close" style="overflow: hidden;">
-          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
-        </div> -->
-        <h2>
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <span class="title">Search</span>
-          <i class="fa fa-close close" style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="Please enter keywords"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
+
+
         </div>
       </div>
     </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-      
 
-    </nav>
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
   
-  <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+<div class="post-block">
   
-</header>
-    <main class="main" style="margin-top: 60px;">
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61C CPU PROJECT | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61C CPU PROJECT
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
- <!-- prismjs 代码高亮 -->
- 
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
-    <transition-group tag="ul" :name="names">
-        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-            <img :src="image" class="bg-swiper-img">
-        </li>
-    </transition-group>
-</div>
-<script>
-    var vm = new Vue({
-        el: '#appBgSwiper',
-        data: {
-            names: '' || 'fade' || 'fade', // translate-fade fade
-            mark: 0,
-            img: [],
-            bgColor: '',
-            time: null
-        },
-        methods: {   //添加方法
-            change(i, m) {
-                if (i > m) {
-                    // this.names = 'fade';
-                } else if (i < m) {
-                    // this.names = 'fade';
-                } else {
-                    return;
-                }
-                this.mark = i;
-            },
-            prev() {
-                // this.names = 'fade';
-                this.mark--;
-                if (this.mark === -1) {
-                    this.mark = 3;
-                    return
-                }
-            },
-            next() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            autoPlay() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            play() {
-                let bgImgDelay = '' || '180000'
-                let delay = parseInt(bgImgDelay) || 180000;
-                this.time = setInterval(this.autoPlay, delay);
-            },
-            enter() {
-                clearInterval(this.time);
-            },
-            leave() {
-                this.play();
-            }
-        },
-        created() {
-            this.play()
-        },
-        beforeDestroy() {
-            clearInterval(this.time);
-        },
-        mounted() {
-            let prop = ''|| '';
-            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
-            if (isImg) {
-                let img = prop.split(',');
-                let configRoot = '/'
-                let arrImg = [];
-                img.forEach(el => {
-                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-			        var objExp = new RegExp(Expression);
+      <time title="Created: 2022-05-16 17:37:37 / Modified: 17:38:29" itemprop="dateCreated datePublished" datetime="2022-05-16T17:37:37+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61C/" itemprop="url" rel="index"><span itemprop="name">CS61C</span></a>
+        </span>
+    </span>
 
-                    if(objExp.test(el)) {
-                        // http or https
-                        arrImg.push(el);
-                    } else {
-                        // 非http or https开头
-                        // 本地文件
-                        let firstStr = el.charAt(0);
-                        if (firstStr == '/') {
-                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-                        }
-                        el = configRoot + el;
-                        arrImg.push(el);
-                    }
-                })
-                this.img = arrImg;
-            } else {
-                this.bgColor = prop;
-            }
-        }
-    })
-</script>
-
-<style>
-    .bg-swiper-box {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-    .bg-swiper-img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-</style>
-
-
-
-
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/26.jpg" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
-  
-    <div class="title-box">
-      
-          <span class="title">
-            CS61C CPU PROJECT
-          </span>
-        
-    </div>
-  
-  
-  
-    <script src="/js/bubble/bubble.js"></script>
   
 </div>
 
-
-<div class="row justify-position">
-  <div class="main-content">
-    <article class="post post-detail">
-      
-      
-      <div class="post-meta">
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2022-05-16</span>
-      </div>
-      
-      <div class="post-tags-categories">
-        
-        
-        <div class="categories">
-          <i class="iconfont iconbookmark1"></i>
-          
-            <a href="/categories/CS61C/" class="">
-              CS61C
-            </a>
-          
         </div>
-        
-      </div>
-      <div class="post-content">
-        <h1 id="CS61C-CPU-PROJECT"><a href="#CS61C-CPU-PROJECT" class="headerlink" title="CS61C CPU PROJECT"></a><strong>CS61C CPU PROJECT</strong></h1><h2 id="关于如何Debug"><a href="#关于如何Debug" class="headerlink" title="关于如何Debug"></a><strong>关于如何Debug</strong></h2><p>相信前面的<code>lab5</code>和<code>lab6</code>已经奠定好了使用<code>logisim</code>的基础，前面相关内容同样奠定好了RISC-V ISA的知识基础。接下来Project中的一系列的task可以通过参考:</p>
-<ul>
-<li><code>61C Reference card</code></li>
-<li><code>ROM</code>表</li>
-<li>对应测试文件中的汇编代码和测试电路</li>
-<li>通过<code>change value</code>来对电路中的bit位进行赋值，查看输入输出的值</li>
-</ul>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="cs61c-cpu-project"><strong>CS61C CPU PROJECT</strong></h1>
+<h2 id="关于如何debug"><strong>关于如何Debug</strong></h2>
+<p>相信前面的<code>lab5</code>和<code>lab6</code>已经奠定好了使用<code>logisim</code>的基础，前面相关内容同样奠定好了RISC-V ISA的知识基础。接下来Project中的一系列的task可以通过参考: - <code>61C Reference card</code> - <code>ROM</code>表 - 对应测试文件中的汇编代码和测试电路 - 通过<code>change value</code>来对电路中的bit位进行赋值，查看输入输出的值</p>
 <p>需要将所有这些结合起来构建完整的<code>big picture</code>。</p>
-<h2 id="ALU"><a href="#ALU" class="headerlink" title="ALU"></a><strong>ALU</strong></h2><p>根据文档中给的功能类别通过门级电路来构造基本的ALU原件，个别功能的实现所用到的元器件还需要查看手册。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-014bf51c0d29af49c1b904c3cb4a28e2.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="ALU"></p>
-<h2 id="RegFile"><a href="#RegFile" class="headerlink" title="RegFile"></a><strong>RegFile</strong></h2><p>需要用到<code>Multiplexer</code>和<code>Demultiplexer</code>，以及一些基本的逻辑，比较废鼠标…<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-2bc53f743fb481fc3a22f8c141f95071.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Regfile"></p>
-<h2 id="Immediate-Generator"><a href="#Immediate-Generator" class="headerlink" title="Immediate Generator"></a><strong>Immediate Generator</strong></h2><p>这一部分跟着61C绿卡里的指令编码表。以下显示的是所有含有imm部分的指令的实现。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-f46d246882abfdf6f28e13266e41c363.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Imm-gen"></p>
-<h2 id="Control-Store-Implemented-by-ROM"><a href="#Control-Store-Implemented-by-ROM" class="headerlink" title="Control Store(Implemented by ROM)"></a><strong>Control Store(Implemented by ROM)</strong></h2><p>通过分析绿卡上或者是文档里给的指令的功能，来初始化每条指令对应的微指令，需要结合数据通路中每个部分的实现以及PartA中我们已经构建好的ALU。Immsel以及个别控制信号可以自行设计(后面会有介绍修改<code>.csv</code>文件即可, 我这边是修改过后的)，建议PartB部分一开始就完善ROM表。<br>下面给出我的数据:<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-3ffb5bc0653de42a33fba13bf38a868d.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="ROM"></p>
-<p>完善ROM表后，将<code>ROM Output</code>复制到控制逻辑的ROM中。需要在控制逻辑电路中根据指令编码中的<code>opcode</code>, <code>fun3</code>, <code>fun7</code>字段来区分每个类型，甚至每条指令，再通过优先级别编码器来索引控存中的微指令, 产生对应的控制信号。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-00828871fd39660bf6ddaf8a32ab38fa.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Control"><br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-ee25b2c060400847e6cf55d220704422.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Control"><br>因为优先级别编码器最多只能支持32bit, 但我们的指令有36条, 需拆拆分成两部分输入。剩下四条指令可以通过指令编码格式来各自区分，然后再找到指令编码格式中与前32条指令相异的bit作为控制信号来控制二选一MUX。<img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-4c10eb6557e75cdd3866bd188e5868ff.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Control"></p>
-<h2 id="Branch-and-Jump-Instruction"><a href="#Branch-and-Jump-Instruction" class="headerlink" title="Branch and Jump Instruction"></a><strong>Branch and Jump Instruction</strong></h2><p>通过<code>BrUn</code>信号来实现分支比较器产生对应<code>BrEq</code>和<code>BrLt</code>的控制信号决定分支是否发生跳转。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-b4917e6611d7a6b8aa66d86f9d1362b5.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Branch Comp"></p>
-<p>B类指令和J类指令产生<code>PCsel</code>控制信号来决定是否修改<code>PC</code>, 同样也通过指令编码格式中的bit来区分jump发生还是branch发生<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-941f7fe17956fab75c7e74b1afa5fb17.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Control"></p>
-<h2 id="Loading-and-Storing"><a href="#Loading-and-Storing" class="headerlink" title="Loading and Storing"></a><strong>Loading and Storing</strong></h2><p>这部分需要细心一些，部分load和部分store无论是字节还是半字都要<strong>符号位拓展</strong>成字的大小。部分load相对部分store来说比较简单，因为部分load只需要考虑从存储器中读出来的数据位置不同即可，而部分store不仅需要将从寄存器中读来的数据分割，还需要将分割的数据存到对应存储器中字的偏移位置(这部分是由Mask来确定写入的位置的)。需要通过低两位来判断具体load的是当前字的哪一个部分。</p>
-<h3 id="Partial-Load"><a href="#Partial-Load" class="headerlink" title="Partial Load"></a><strong>Partial Load</strong></h3><p>如果不是取一个字的数据，则要根据当前指令lw来访问存储器的地址字段的低两位来产生控制信号，决定取当前数据字的哪一个部分的数据到寄存器中(通过splitter来划分)。由指令编码中的bit来作为控制信号区分，选择具体是<code>lw</code>还是<code>lh</code>, <code>lb</code>。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-723ccb2b6671606fe4a6ac5b0cbf58c9.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif"></p>
-<h3 id="Partial-Store"><a href="#Partial-Store" class="headerlink" title="Partial Store"></a><strong>Partial Store</strong></h3><p>同样有指令编码格式来区分三种类型的store指令决定store到存储器中的数据。MemWriteMask有四个二进制bit组成，分别表示store到存储器中数据的位置, 实验中并未提到mask实现的细节。但是需要完成有指令编码和访问存储器的地址来生成mask。生成的mask需要通过指令编码格式中的bit和地址字段的低两位来区分, 额外在利用上优先级别编码器来索引。 生成的mask有<code>lb</code>的0001, 0010, 0100, 1000, 和<code>lh</code>的0011, 1100以及<code>lw</code>的1111, 七种组合。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-1b3b6bfa9c35647d8b7df3225a1e2a6f.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif"></p>
-<h2 id="Datapath"><a href="#Datapath" class="headerlink" title="Datapath"></a><strong>Datapath</strong></h2><p>下面是流水过后的数据通路, 两级流水线挺好实现的，看了一下不需要考虑<code>Structure Hazards</code>以及<code>Data Hazards</code>，省去了很多数据通路上的麻烦。需要考虑的只有<code>Control Hazards</code>。当Branch或者Jump发生时，紧随其后进入流水线的只有一条指令，实验文档里解决的方案是插入一条NOP指令来防止冲突。什么时候插入NOP指令根据<code>PCsel</code>控制信号来决定即可。同时注意两个不同stage之间的差异(导致后面利用到PC的指令执行结果不正确)，需要通过在两个stage之间加流水线寄存器来存储一个时钟周期之内的信息(包括指令和PC值)。<br><img "" class="lazyload placeholder" data-original="https://pic4.zhimg.com/80/v2-55adeda8be6c453ab203579651619b65.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="Datapath"></p>
-<h2 id="参考书目"><a href="#参考书目" class="headerlink" title="参考书目"></a><strong>参考书目</strong></h2><ul>
+<h2 id="alu"><strong>ALU</strong></h2>
+<p>根据文档中给的功能类别通过门级电路来构造基本的ALU原件，个别功能的实现所用到的元器件还需要查看手册。 <img src="https://pic4.zhimg.com/80/v2-014bf51c0d29af49c1b904c3cb4a28e2.png" alt="ALU" /></p>
+<h2 id="regfile"><strong>RegFile</strong></h2>
+<p>需要用到<code>Multiplexer</code>和<code>Demultiplexer</code>，以及一些基本的逻辑，比较废鼠标... <img src="https://pic4.zhimg.com/80/v2-2bc53f743fb481fc3a22f8c141f95071.png" alt="Regfile" /></p>
+<h2 id="immediate-generator"><strong>Immediate Generator</strong></h2>
+<p>这一部分跟着61C绿卡里的指令编码表。以下显示的是所有含有imm部分的指令的实现。 <img src="https://pic4.zhimg.com/80/v2-f46d246882abfdf6f28e13266e41c363.png" alt="Imm-gen" /></p>
+<h2 id="control-storeimplemented-by-rom"><strong>Control Store(Implemented by ROM)</strong></h2>
+<p>通过分析绿卡上或者是文档里给的指令的功能，来初始化每条指令对应的微指令，需要结合数据通路中每个部分的实现以及PartA中我们已经构建好的ALU。Immsel以及个别控制信号可以自行设计(后面会有介绍修改<code>.csv</code>文件即可, 我这边是修改过后的)，建议PartB部分一开始就完善ROM表。 下面给出我的数据: <img src="https://pic4.zhimg.com/80/v2-3ffb5bc0653de42a33fba13bf38a868d.png" alt="ROM" /></p>
+<p>完善ROM表后，将<code>ROM Output</code>复制到控制逻辑的ROM中。需要在控制逻辑电路中根据指令编码中的<code>opcode</code>, <code>fun3</code>, <code>fun7</code>字段来区分每个类型，甚至每条指令，再通过优先级别编码器来索引控存中的微指令, 产生对应的控制信号。 <img src="https://pic4.zhimg.com/80/v2-00828871fd39660bf6ddaf8a32ab38fa.png" alt="Control" /> <img src="https://pic4.zhimg.com/80/v2-ee25b2c060400847e6cf55d220704422.png" alt="Control" /> 因为优先级别编码器最多只能支持32bit, 但我们的指令有36条, 需拆拆分成两部分输入。剩下四条指令可以通过指令编码格式来各自区分，然后再找到指令编码格式中与前32条指令相异的bit作为控制信号来控制二选一MUX。<img src="https://pic4.zhimg.com/80/v2-4c10eb6557e75cdd3866bd188e5868ff.png" alt="Control" /></p>
+<h2 id="branch-and-jump-instruction"><strong>Branch and Jump Instruction</strong></h2>
+<p>通过<code>BrUn</code>信号来实现分支比较器产生对应<code>BrEq</code>和<code>BrLt</code>的控制信号决定分支是否发生跳转。 <img src="https://pic4.zhimg.com/80/v2-b4917e6611d7a6b8aa66d86f9d1362b5.png" alt="Branch Comp" /></p>
+<p>B类指令和J类指令产生<code>PCsel</code>控制信号来决定是否修改<code>PC</code>, 同样也通过指令编码格式中的bit来区分jump发生还是branch发生 <img src="https://pic4.zhimg.com/80/v2-941f7fe17956fab75c7e74b1afa5fb17.png" alt="Control" /></p>
+<h2 id="loading-and-storing"><strong>Loading and Storing</strong></h2>
+<p>这部分需要细心一些，部分load和部分store无论是字节还是半字都要<strong>符号位拓展</strong>成字的大小。部分load相对部分store来说比较简单，因为部分load只需要考虑从存储器中读出来的数据位置不同即可，而部分store不仅需要将从寄存器中读来的数据分割，还需要将分割的数据存到对应存储器中字的偏移位置(这部分是由Mask来确定写入的位置的)。需要通过低两位来判断具体load的是当前字的哪一个部分。</p>
+<h3 id="partial-load"><strong>Partial Load</strong></h3>
+<p>如果不是取一个字的数据，则要根据当前指令lw来访问存储器的地址字段的低两位来产生控制信号，决定取当前数据字的哪一个部分的数据到寄存器中(通过splitter来划分)。由指令编码中的bit来作为控制信号区分，选择具体是<code>lw</code>还是<code>lh</code>, <code>lb</code>。 <img src="https://pic4.zhimg.com/80/v2-723ccb2b6671606fe4a6ac5b0cbf58c9.png" /></p>
+<h3 id="partial-store"><strong>Partial Store</strong></h3>
+<p>同样有指令编码格式来区分三种类型的store指令决定store到存储器中的数据。MemWriteMask有四个二进制bit组成，分别表示store到存储器中数据的位置, 实验中并未提到mask实现的细节。但是需要完成有指令编码和访问存储器的地址来生成mask。生成的mask需要通过指令编码格式中的bit和地址字段的低两位来区分, 额外在利用上优先级别编码器来索引。 生成的mask有<code>lb</code>的0001, 0010, 0100, 1000, 和<code>lh</code>的0011, 1100以及<code>lw</code>的1111, 七种组合。 <img src="https://pic4.zhimg.com/80/v2-1b3b6bfa9c35647d8b7df3225a1e2a6f.png" /></p>
+<h2 id="datapath"><strong>Datapath</strong></h2>
+<p>下面是流水过后的数据通路, 两级流水线挺好实现的，看了一下不需要考虑<code>Structure Hazards</code>以及<code>Data Hazards</code>，省去了很多数据通路上的麻烦。需要考虑的只有<code>Control Hazards</code>。当Branch或者Jump发生时，紧随其后进入流水线的只有一条指令，实验文档里解决的方案是插入一条NOP指令来防止冲突。什么时候插入NOP指令根据<code>PCsel</code>控制信号来决定即可。同时注意两个不同stage之间的差异(导致后面利用到PC的指令执行结果不正确)，需要通过在两个stage之间加流水线寄存器来存储一个时钟周期之内的信息(包括指令和PC值)。 <img src="https://pic4.zhimg.com/80/v2-55adeda8be6c453ab203579651619b65.png" alt="Datapath" /></p>
+<h2 id="参考书目"><strong>参考书目</strong></h2>
+<ul>
 <li>Introduction to Computing Systems: From Bits &amp; Gates to C &amp; Beyond [3ed.]</li>
 <li>P&amp;H [RISC-V 2ed.]</li>
 <li>CAAQA [6ed.]</li>
 </ul>
 
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>Pishun Huang</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/2022/05/16/CS61C-CPU-PROJECT/" target="_blank" title="CS61C CPU PROJECT">https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint polocy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/22.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2022/05/16/CS61B-GITLET-PROJECT/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> Prev:
-        <div>CS61B GITLET PROJECT</div>
-      </div>
-      
-      <!-- <div class="content">
-        CS61B GitletProject 2 Getting Started(Lab6)Preperation首先使用gi
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/40.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2022/05/16/CSAPP-Lab2-Bomb-Lab/" class="post-nav-link">
-      <div class="title">
-        Next: <i class="fa fa-angle-right"></i>
-        <div>CSAPP Lab2: Bomb Lab</div>
-      </div>
-      <!-- <div class="content">
-        CSAPP Lab2: Bomb LabPreparation建议在实验大致看一下lab相关的pdf。使用man手册来查
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
-  }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-      
-        <div id="myComment">
-          
-        </div>
-      
-  </div>
-
-  
-    <div class="toc-aside">
-      <div class="toc-main">
-        <div class="toc-aside-title">
-          <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
-          <div class="toc-open-close">catalog</div>
-        </div>
-        <div class="toc-content">
-          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
-<script src="/js/tocbot/tocbot.min.js"></script>
-<div class="toc"></div>
-
-<script>
-  if ($('.toc').length > 0) {
-    var headerEl = 'h2, h3, h4',  //headers 
-      content = '.post-detail',//文章容器
-      idArr = {};  //标题数组以确定是否增加索引id
-      //add #id
-
-    $(content).children(headerEl).each(function () {
-      //去除空格以及多余标点
-      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-
-      headerId = headerId.toLowerCase();
-      if (idArr[headerId]) {
-        //id已经存在
-        $(this).attr('id', headerId + '-' + idArr[headerId]);
-        idArr[headerId]++;
-      }
-      else {
-        //id未存在
-        idArr[headerId] = 1;
-        $(this).attr('id', headerId);
-      }
-    });
-
-    tocbot.init({
-      // Where to render the table of contents.
-      tocSelector: '.toc',
-      // Where to grab the headings to build the table of contents.
-      contentSelector: content,
-      // Which headings to grab inside of the contentSelector element.
-      headingSelector: headerEl,
-      scrollSmooth: true,
-      scrollSmoothOffset: -80,
-      headingsOffset: 130,
-      positionFixedSelector: '.toc-main',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  }
-
-</script>
-
-<style>
-.is-position-fixed {
-  position:fixed !important;
-  top: 64px;
-}
-.toc-main ul {
-  counter-reset: show-list;
-}
-.toc-main ul li::before {
-  content: counter(item)".";
-  display: block;
-  position: absolute;
-  left: 12px;
-  top:0;
-}
-.toc > .toc-list {
-  padding-left: 35px;
-}
-.toc>.toc-list li {
-  list-style: decimal;
-}
-.toc-list {
-  padding-left: 25px;
-}
-</style>
-        </div>
-      </div>
     </div>
 
     
+    
+    
 
-    <script>
-      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
-      let open = eval('' || 'true');
-      openOrCloseBtn.click(function() {
-        if (open === true) {
-          $(".toc-aside").css({'width': 0, 'padding': 0});
-          $(".toc-content").css({'width': 0});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
-          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
-          open = false;
-        } else {
-          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
-          $(".toc-content").css({'width': '300px'});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
-          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
-          open = true;
-        }
-      });
-    </script>
-  
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/16/CSAPP-Lab2-Bomb-Lab/" rel="prev" title="CSAPP Lab2: Bomb Lab">
+                  <i class="fa fa-chevron-left"></i> CSAPP Lab2: Bomb Lab
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/16/CS61B-GITLET-PROJECT/" rel="next" title="CS61B GITLET PROJECT">
+                  CS61B GITLET PROJECT <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-    </main>
-    <div class="footer bg-color">
-  <div class="footer-main">
-    <div class="link">
-      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
-      <a href="mailto:1730241541@qq.com">
-        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
-        <i class="fa fa-qq" aria-hidden="true"></i>
-      </a>
-      <a href="/atom.xml" target="_blank">
-        <i class="fa fa-rss" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="footer-copyright">
-      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
-    </div>
-    
-      
-  <!-- 不蒜子统计 -->
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-book" aria-hidden="true"></i>Total reading：<span id="busuanzi_value_page_pv"></span> times
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
   </span>
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-eye" aria-hidden="true"></i>Total visits：<span id="busuanzi_value_site_pv"></span> times
-  </span>
-  <span class="post-meta-divider">|</span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-        <i class="fa fa-users" aria-hidden="true"></i>Number of visitors：<span id="busuanzi_value_site_uv"></span> people
-  </span>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-    
+  <span class="author" itemprop="copyrightHolder">Pishun Huang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
-</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
-    
-      <div class="goTop top-btn-color border-color">
-  <i class="fa fa-arrow-up" aria-hidden="true"></i>
-</div>
-<script src="/js/goTop.js"></script>
-    
 
-    
 
-    <!-- 图片放大 -->
-    
-      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
-    
 
-    <script src="/js/wrapImage.js"></script>
-    
-    <!-- 爱心点击 -->
-    
+  
 
-    <!-- Baidu Analytics -->
 
-    <!-- Baidu Push -->
 
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
-    
-    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
-    
-      <script src="/js/aos/aos.js"></script>
-      <script>
-        // https://github.com/michalsnik/aos
-        const themeOffset = parseInt('120') || 120;
-        const themeDelay = parseInt('0')|| 0;
-        const themeDuration = parseInt('400') || 400;
-        const themeEasing = 'ease' || 'ease';
-        const themeOnce = eval('true') || false;
-        const themeMirror = eval('false') || false;
-        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
-        AOS.init({
-          // Global settings:
-          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
-          initClassName: 'aos-init', // class applied after initialization
-          animatedClassName: 'aos-animate', // class applied on animation
-          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
-          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
-          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+  
 
-          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-          offset: themeOffset, // offset (in px) from the original trigger point
-          delay: themeDelay, // values from 0 to 3000, with step 50ms
-          duration: themeDuration, // values from 0 to 3000, with step 50ms
-          easing: themeEasing, // default easing for AOS animations
-          once: themeOnce, // whether animation should happen only once - while scrolling down
-          mirror: themeMirror, // whether elements should animate out while scrolling past them
-          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","//mhchem.github.io/MathJax-mhchem/ mhchem":false,"js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
-        });
-      </script>
-    
 
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
-<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-<div id="appCopy">
-</div>
-<script>
-  var vm = new Vue({
-    el: '#appCopy',
-    data: {
-    },
-    computed: {
-    },
-    mounted() {
-      const that = this;
-      //  监听 ctrl + c事件  
-      $(document).unbind('keypress').bind('keypress', function (e) {
-        if (e.ctrlKey && e.keyCode == 67) {
-          doSomething();
-          // 返回false, 防止重复触发copy事件  
-          return false;
-        }
-      })
 
-      // 鼠标右键的复制事件  
-      $(document).unbind('copy').bind('copy', function (e) {
-        doSomething();
-        // console.log('右键复制 监听成功');
-      });
-
-      function doSomething() {
-        that.$notify({
-          title: "成功",
-          content: "代码已复制，请遵守相关授权协议。",
-          type: 'success'
-        })
-        // console.log('ctrl + c 监听成功');  
-      }
-    },
-    methods: {
-    },
-    created() { }
-  })
-</script>
-    
-
-    <!-- 输入框打字特效 -->
-    
-      <script src="/js/activate-power-mode.js"></script>
-      <script>
-          POWERMODE.colorful = true;  // 打开随机颜色特效
-          POWERMODE.shake = false;    // 关闭输入框抖动
-          document.body.addEventListener('input', POWERMODE);//监听打字事件
-      </script>
-    
-
-    <!-- markdown代码一键复制功能 -->
-    <script src="/js/clipboard/clipboard.min.js"></script>
-    <script>
-      !function (e, t, a) {
-        var copy = 'copy';
-        /* code */
-        var initCopyCode = function(){
-          var copyHtml = '';
-          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
-          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
-          copyHtml += '</button>';
-          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
-          $(".post-detail pre").not('.gutter pre').before(copyHtml);
-          new ClipboardJS('.btn-copy', {
-              target: function(trigger) {
-                  return trigger.nextElementSibling;
-              }
-          });
-        }
-        initCopyCode();
-      }(window, document);
-    </script>
-
-    <script src="/js/lazyload/lazyload@1.9.1.js"></script>
-    <script>
-      $(function() {
-        $("div.lazyload, img.lazyload, a.lazyload").lazyload(
-            {
-                effect: "fadeIn",
-                placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
-            }
-        );
-    });
-    </script>
-    
-    <script src="/js/app.js"></script>
-  </body>
+</body>
 </html>

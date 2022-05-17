@@ -1,1179 +1,570 @@
 <!DOCTYPE html>
-<html>
-  
-
-
-
+<html lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
 
 
-  <title>C# Note | Moksha&#39;s Blog</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-    
-<link rel="stylesheet" href="/js/aos/aos.css">
+<link rel="stylesheet" href="/css/main.css">
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="新特性  表达式主体方法  &#x3D;&gt;操作符引用构成方法主体的表达式，而且没有return语句。表达式的值自动作为返回值；如果表达式不返回值，则方法自动为void方法 1private void showResult(int answer) &#x3D;&gt; Console.WriteLine($&quot;The answer is &amp;#123;answer&amp;#125;&quot;);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# Note">
+<meta property="og:url" content="https://mitmoksha.github.io/2021/04/28/c#%20Note/index.html">
+<meta property="og:site_name" content="Moksha&#39;s Blog">
+<meta property="og:description" content="新特性  表达式主体方法  &#x3D;&gt;操作符引用构成方法主体的表达式，而且没有return语句。表达式的值自动作为返回值；如果表达式不返回值，则方法自动为void方法 1private void showResult(int answer) &#x3D;&gt; Console.WriteLine($&quot;The answer is &amp;#123;answer&amp;#125;&quot;);">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-28T13:20:57.000Z">
+<meta property="article:modified_time" content="2022-05-16T08:58:14.625Z">
+<meta property="article:author" content="Pishun Huang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mitmoksha.github.io/2021/04/28/c#%20Note/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2021/04/28/c#%20Note/","path":"2021/04/28/c# Note/","title":"C# Note"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C# Note | Moksha's Blog</title>
   
 
-  <link rel="icon" type="image/png" href="/puzzle_favicon.png">
-  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
-  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  
-  
-<link rel="stylesheet" href="/css/animate.min.css">
 
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-  
-    
-<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
 
-  
-  
-    
-<link rel="stylesheet" href="/js/shareJs/share.min.css">
-
-  
-  <style>
-        @media (max-width: 992px) {
-            #waifu {
-                display: none;
-            }
-        }
-    </style>
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
 </head>
 
-  <script src="/js/jquery3.5.1.js"></script>
-  <script src="/js/vue2.6.11.js"></script>
-  <link href="/js/danmu/barrager.css" rel="stylesheet">
-<script src="/js/danmu/jquery.barrager.js"></script>
-  <body>
-    <!-- 判断是否为黑夜模式 -->
-    <script>
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-      if (isDark) {
-        $(document.body).addClass('darkModel');
-      }
-    </script>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
 
-    <header class="header bg-color" 
-  style="position: fixed; 
-  left: 0; top: 0; z-index: 10;width: 100%;"
->
-  <div class="header-content">
-    <div class="bars">
-      <div id="appDrawer" class="sidebar-image">
-  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
-  <transition name="fade">
-    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moksha's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
-  </transition>
-  <div class="drawer-box" :class="{'active': visible}">
-    <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo" src="/medias/logo.jpg" alt="logo">
-      <h3 class="drawer-box-head_title">Moksha&#39;s Blog</h3>
-      <h5 class="drawer-box-head_desc">Opportunities are ready for it, the more to beat action.</h5>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
     </div>
-    <div class="drawer-box-content">
-      <ul class="drawer-box-content_menu">
+  </div>
+
+</div>
         
-          <li class="drawer-box-content_item">
-            <a href="/" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Home</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/archives" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Archives</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/categories" class="menu-item-link">
-              
-                <i class="fa fa-bookmark" aria-hidden="true"></i>
-              
-              <span>Categories</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/friends" class="menu-item-link">
-              
-                <i class="fa fa-link" aria-hidden="true"></i>
-              
-              <span>link</span>
-            </a>
-          </li>
-        
-        <li class="drawer-box-content_item">
-          <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA">
-            <i class="fa fa-github" aria-hidden="true"></i>
-            <span>Github</span>
-          </a>
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
         </li>
       </ul>
-    </div>
-  </div>
-</div>
 
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDrawer',
-    data: {
-      visible: false,
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      }
-    },
-    created() {}
-  })
-</script>
-    </div>
-    <div class="blog-title" id="author-avatar">
-      <div class="avatar">
-        <img src="/medias/logo.jpg" alt="logo">
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">5.</span> <span class="nav-text">结构（结构体）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE"><span class="nav-number">6.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">7.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">8.</span> <span class="nav-text">异常</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Pishun Huang</p>
+  <div class="site-description" itemprop="description">Opportunities are ready for it, the more to beat action.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
       </div>
-      <a href="/" class="logo">Moksha&#39;s Blog</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
-        
-          <li class="menu-item">
-            <a href="/" class="menu-item-link">
-              
-                <i class="fa fa-home" aria-hidden="true"></i>
-              
-              <span>Home</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/archives" class="menu-item-link">
-              
-                <i class="fa fa-archive" aria-hidden="true"></i>
-              
-              <span>Archives</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/categories" class="menu-item-link">
-              
-                <i class="fa fa-bookmark" aria-hidden="true"></i>
-              
-              <span>Categories</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/friends" class="menu-item-link">
-              
-                <i class="fa fa-link" aria-hidden="true"></i>
-              
-              <span>link</span>
-            </a>
-          </li>
-        
-      </ul>
-      
-        <div class="dark">
-  <div class="dark-content">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-    <!-- <span>关灯</span> -->
-  </div>
-  
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
 </div>
 
-<script>
-  $(function() {
-    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
-    if (isDark) {
-      $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-    }
-    $('.dark').click(function() {
-      if ($(document.body).is('.darkModel')) {
-        $(document.body).removeClass('darkModel');
-        localStorage.setItem('dark', false);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-moon-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      } else {
-        $(document.body).addClass('darkModel');
-        localStorage.setItem('dark', true);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      }
-    })
-  })
-</script>
-        
-      
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <!-- <div class="close" style="overflow: hidden;">
-          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
-        </div> -->
-        <h2>
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <span class="title">Search</span>
-          <i class="fa fa-close close" style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="Please enter keywords"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
+
+
         </div>
       </div>
     </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-      
 
-    </nav>
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
   
-  <a target="_blank" rel="noopener" href="https://github.com/MITMOKSHA" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-  
-</header>
-    <main class="main" style="margin-top: 60px;">
-      
- <!-- prismjs 代码高亮 -->
- 
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
-    <transition-group tag="ul" :name="names">
-        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-            <img :src="image" class="bg-swiper-img">
-        </li>
-    </transition-group>
-</div>
-<script>
-    var vm = new Vue({
-        el: '#appBgSwiper',
-        data: {
-            names: '' || 'fade' || 'fade', // translate-fade fade
-            mark: 0,
-            img: [],
-            bgColor: '',
-            time: null
-        },
-        methods: {   //添加方法
-            change(i, m) {
-                if (i > m) {
-                    // this.names = 'fade';
-                } else if (i < m) {
-                    // this.names = 'fade';
-                } else {
-                    return;
-                }
-                this.mark = i;
-            },
-            prev() {
-                // this.names = 'fade';
-                this.mark--;
-                if (this.mark === -1) {
-                    this.mark = 3;
-                    return
-                }
-            },
-            next() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            autoPlay() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            play() {
-                let bgImgDelay = '' || '180000'
-                let delay = parseInt(bgImgDelay) || 180000;
-                this.time = setInterval(this.autoPlay, delay);
-            },
-            enter() {
-                clearInterval(this.time);
-            },
-            leave() {
-                this.play();
-            }
-        },
-        created() {
-            this.play()
-        },
-        beforeDestroy() {
-            clearInterval(this.time);
-        },
-        mounted() {
-            let prop = ''|| '';
-            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
-            if (isImg) {
-                let img = prop.split(',');
-                let configRoot = '/'
-                let arrImg = [];
-                img.forEach(el => {
-                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-			        var objExp = new RegExp(Expression);
-
-                    if(objExp.test(el)) {
-                        // http or https
-                        arrImg.push(el);
-                    } else {
-                        // 非http or https开头
-                        // 本地文件
-                        let firstStr = el.charAt(0);
-                        if (firstStr == '/') {
-                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-                        }
-                        el = configRoot + el;
-                        arrImg.push(el);
-                    }
-                })
-                this.img = arrImg;
-            } else {
-                this.bgColor = prop;
-            }
-        }
-    })
-</script>
-
-<style>
-    .bg-swiper-box {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-    .bg-swiper-img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-</style>
 
 
-
-
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/35.jpg" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
-  
-    <div class="title-box">
-      
-          <span class="title">
-            C# Note
-          </span>
-        
-    </div>
+<div class="post-block">
   
   
-  
-    <script src="/js/bubble/bubble.js"></script>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2021/04/28/c#%20Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C# Note | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C# Note
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-28 21:20:57" itemprop="dateCreated datePublished" datetime="2021-04-28T21:20:57+08:00">2021-04-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-16 16:58:14" itemprop="dateModified" datetime="2022-05-16T16:58:14+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PL/" itemprop="url" rel="index"><span itemprop="name">PL</span></a>
+        </span>
+    </span>
+
   
 </div>
 
-
-<div class="row justify-position">
-  <div class="main-content">
-    <article class="post post-detail">
-      
-      
-      <div class="post-meta">
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-04-28</span>
-      </div>
-      
-      <div class="post-tags-categories">
-        
-        
-        <div class="categories">
-          <i class="iconfont iconbookmark1"></i>
-          
-            <a href="/categories/PL/" class="">
-              PL
-            </a>
-          
         </div>
-        
-      </div>
-      <div class="post-content">
-        <h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><ul>
-<li>表达式主体方法<ul>
-<li>=&gt;操作符引用构成方法主体的表达式，而且没有return语句。表达式的值自动作为返回值；如果表达式不返回值，则方法自动为void方法  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showResult</span>(<span class="params"><span class="built_in">int</span> answer</span>)</span> =&gt; Console.WriteLine(<span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="新特性">新特性</h2>
+<ul>
+<li>表达式主体方法
+<ul>
+<li>=&gt;操作符引用构成方法主体的表达式，而且没有return语句。表达式的值自动作为返回值；如果表达式不返回值，则方法自动为void方法 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showResult</span>(<span class="params"><span class="built_in">int</span> answer</span>)</span> =&gt; Console.WriteLine(<span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>差值表达式
+<ul>
+<li>$符号表明这是个差值字符串，{和}之间的任何表达式都需求值并置换，字符串差值比+操作符高效得多 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
-</li>
-<li>差值表达式<ul>
-<li>$符号表明这是个差值字符串，{和}之间的任何表达式都需求值并置换，字符串差值比+操作符高效得多  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<h2 id="变量">变量</h2>
+<ul>
 <li>只有<code>float</code>和<code>double</code>除以0得到<code>Infinity</code>（不会出错）</li>
 <li><code>int</code>的最大最小值<code>int.MaxValue</code>和<code>int.MinValue</code></li>
 <li>隐式类型变量<code>var</code>,作用类似于C++的<code>auto</code></li>
 </ul>
-<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><ul>
-<li>与C++不一致<br>  -<code>if</code>语句中表达式必须是布尔值, 如：<code>if (1)</code> // 错误</li>
+<h2 id="逻辑">逻辑</h2>
+<ul>
+<li>与C++不一致 -<code>if</code>语句中表达式必须是布尔值, 如：<code>if (1)</code> // 错误</li>
 <li><code>switch</code>语句的控制表达式不能用<code>float</code>和<code>double</code>类型</li>
 <li><code>case</code>标签必须是常量表达式，且必须唯一</li>
-<li>C#语句的直通规则<ul>
+<li>C#语句的直通规则
+<ul>
 <li>直通，标签之间不能有额外语句（即不加<code>break</code>，不允许拥有语句）</li>
 <li>每个<code>case</code>都加上<code>break</code></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<h2 id="方法">方法</h2>
+<ul>
 <li>C#所有方法都必须在类的内部声明</li>
 <li>默认参数中如果参数匹配则不会出现歧义</li>
 <li>默认参数（可选参数）必须放在后面</li>
-<li>具名参数<ul>
-<li><code>optMethod(first: 99, third: &quot;Word&quot;);</code>  // 传递具名参数（参数名:传递的值），实参可以按任意顺序传递，second参数使用<code>默认值</code></li>
+<li>具名参数
+<ul>
+<li><code>optMethod(first: 99, third: "Word");</code> // 传递具名参数（参数名:传递的值），实参可以按任意顺序传递，second参数使用<code>默认值</code></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="结构（结构体）"><a href="#结构（结构体）" class="headerlink" title="结构（结构体）"></a>结构（结构体）</h2><ul>
+<h2 id="结构结构体">结构（结构体）</h2>
+<ul>
 <li>与C++不一致，结构主体后不加<code>;</code></li>
-<li>值类型<ul>
+<li>值类型
+<ul>
 <li>对于简单的、比较小的数据值，复制值的效率等同于或基本等同于复制地址的效率，但较复杂的数据就考虑使用类，这样就可选择只复制数据的地址，从而提高代码的执行效率</li>
-</ul>
-</li>
+</ul></li>
 <li>不能为结构声明默认构造器（无参构造器），否则无法编译，因为编译器始终会自动生成默认构造器（不同于类）</li>
-<li>类的实例字段可在声明时初始化，但结构不允许  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Time</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">private</span> <span class="built_in">int</span> hours = <span class="number">0</span>;  <span class="comment">// 编译时错误</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>类的实例字段可在声明时初始化，但结构不允许 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Time</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">private</span> <span class="built_in">int</span> hours = <span class="number">0</span>;  <span class="comment">// 编译时错误</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
 <li>编译器不会自动初始化结构中的字段（与类不一致）</li>
 <li>复制结构变量的前提时<code>=</code>操作符右侧的结构变量已完全初始化，否则编译错误</li>
 </ul>
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><ul>
+<h2 id="枚举">枚举</h2>
+<ul>
 <li>与C++不一致，枚举主体后不加<code>;</code></li>
 <li>值类型</li>
-<li>声明枚举时字面值默认是int类型，可以选择枚举的基础类型<ul>
+<li>声明枚举时字面值默认是int类型，可以选择枚举的基础类型
+<ul>
 <li><code>enum Season : short &#123; Spring, Summer &#125;</code></li>
-</ul>
-</li>
-<li>为枚举的字面值显式指定常量整数值<ul>
+</ul></li>
+<li>为枚举的字面值显式指定常量整数值
+<ul>
 <li><code>enum Season &#123; Spring = 1, Summer &#125;</code></li>
-</ul>
-</li>
+</ul></li>
 <li>编译器自动为它指定比前一个枚举字面值大1的值</li>
-<li>多个枚举字面值可以具有相同的基础值<ul>
+<li>多个枚举字面值可以具有相同的基础值
+<ul>
 <li><code>enum Season &#123; Spring, Summer, Fall, Autumn = Fall &#125;</code></li>
-</ul>
-</li>
+</ul></li>
 <li>每个枚举定义的字面值名称都只有这个枚举类型的作用域，因此要加枚举类型限定，否则编译错误，如：Season.Fall</li>
 </ul>
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><ul>
-<li><p>与c++不一致，类主体、结构主体后不加分号</p>
-</li>
-<li><p>每个字段和方法声明都要重复<code>public</code>或<code>private</code>关键字</p>
-</li>
-<li><p>省略控制可访问性，默认为<code>private</code></p>
-</li>
-<li><p>类被拆分到多个文件中之后，要在每个文件中使用<code>partial</code>（分部）关键字定义类的不同部分</p>
-</li>
-<li><p>如果把方法或字段声明为<code>static</code>，就可使用类名调用方法或访问字段，而不用先创建对象</p>
-</li>
-<li><p>静态方法只能访问标记为<code>static</code>的其他方法和字段</p>
-</li>
-<li><p>类外访问类中的<code>static</code>字段要以，类名作为前缀，<code>class.function</code></p>
-</li>
-<li><p>静态方法也称为类方法</p>
-</li>
-<li><p>静态字段称为静态字段或静态变量</p>
-</li>
-<li><p>只有数值类型、字符串类型和枚举类型的字段才能声明为const字段</p>
-</li>
+<h2 id="类">类</h2>
+<ul>
+<li><p>与c++不一致，类主体、结构主体后不加分号</p></li>
+<li><p>每个字段和方法声明都要重复<code>public</code>或<code>private</code>关键字</p></li>
+<li><p>省略控制可访问性，默认为<code>private</code></p></li>
+<li><p>类被拆分到多个文件中之后，要在每个文件中使用<code>partial</code>（分部）关键字定义类的不同部分</p></li>
+<li><p>如果把方法或字段声明为<code>static</code>，就可使用类名调用方法或访问字段，而不用先创建对象</p></li>
+<li><p>静态方法只能访问标记为<code>static</code>的其他方法和字段</p></li>
+<li><p>类外访问类中的<code>static</code>字段要以，类名作为前缀，<code>class.function</code></p></li>
+<li><p>静态方法也称为类方法</p></li>
+<li><p>静态字段称为静态字段或静态变量</p></li>
+<li><p>只有数值类型、字符串类型和枚举类型的字段才能声明为const字段</p></li>
 <li><p>静态类</p>
 <ul>
 <li>只能包含静态成员</li>
 <li><code>public static class Math</code></li>
-</ul>
-</li>
+</ul></li>
 <li><p>using语句允许将类引入作用域，以便在访问静态成员时省略类名</p>
 <ul>
 <li><code>using static System.Math;</code></li>
-</ul>
-</li>
+</ul></li>
 <li><p>匿名类</p>
 <ul>
 <li>匿名类就是没有名字的类</li>
-<li>不知道类的名称可以使用隐式类型变量来创建正确类型的对象  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myAnonymousObject = <span class="keyword">new</span> &#123; Name = <span class="string">&quot;John&quot;</span>, Age = <span class="number">47</span> &#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
+<li>不知道类的名称可以使用隐式类型变量来创建正确类型的对象 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myAnonymousObject = <span class="keyword">new</span> &#123; Name = <span class="string">&quot;John&quot;</span>, Age = <span class="number">47</span> &#125;;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 <li><p>值类型</p>
 <ul>
 <li>基元类型</li>
-</ul>
-</li>
+</ul></li>
 <li><p>引用类型</p>
 <ul>
 <li><code>string</code>在运行时动态分配内存</li>
 <li>声明类变量时，编译器分配一小块内存，其中刚好可以容纳一个地址。以后类实际占用内存块的地址会填充到这里。该地址成为对内存块的引用</li>
-<li>实际占用的内存<ul>
-<li>使用<code>new</code>关键字创建对象时分配的内存</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>引用类型的变量包含的是引用，引用本身存储在栈上，但该引用指向堆上的对象</p>
-</li>
-<li><p>类可以提供clone方法来返回自己的新实例，并填充相同数据</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Circle <span class="title">Clone</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">	    Circle clone = <span class="keyword">new</span> Circle();</span><br><span class="line">	    clone.radius = <span class="keyword">this</span>.radius;</span><br><span class="line">	    <span class="comment">// 返回包含克隆数据的新Circle对象</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<li>实际占用的内存
 <ul>
-<li><p>如果包含任何引用类型的字段，这种引用类型也需要提供Clone方法，否则只是“浅拷贝”，如果提供了Clone方法，能够复制引用的对象，就成为“深拷贝”</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Circle c = <span class="keyword">new</span> Circle(<span class="number">42</span>);</span><br><span class="line">Circle copy = <span class="keyword">new</span> Circle(<span class="number">99</span>);</span><br><span class="line">copy = c;</span><br></pre></td></tr></table></figure></li>
-<li><p>这时候copy原来的引用被回收了（垃圾回收机制）</p>
-</li>
-</ul>
-</li>
-<li><p>空条件操作符（问号加在变量名称之后）</p>
-  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(c?.Area());</span><br></pre></td></tr></table></figure>
+<li>使用<code>new</code>关键字创建对象时分配的内存</li>
+</ul></li>
+</ul></li>
+<li><p>引用类型的变量包含的是引用，引用本身存储在栈上，但该引用指向堆上的对象</p></li>
+<li><p>类可以提供clone方法来返回自己的新实例，并填充相同数据 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Circle <span class="title">Clone</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">	    Circle clone = <span class="keyword">new</span> Circle();</span><br><span class="line">	    clone.radius = <span class="keyword">this</span>.radius;</span><br><span class="line">	    <span class="comment">// 返回包含克隆数据的新Circle对象</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>如果包含任何引用类型的字段，这种引用类型也需要提供Clone方法，否则只是“浅拷贝”，如果提供了Clone方法，能够复制引用的对象，就成为“深拷贝” <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Circle c = <span class="keyword">new</span> Circle(<span class="number">42</span>);</span><br><span class="line">Circle copy = <span class="keyword">new</span> Circle(<span class="number">99</span>);</span><br><span class="line">copy = c;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>这时候copy原来的引用被回收了（垃圾回收机制）</p></li>
+</ul></li>
+<li><p>空条件操作符（问号加在变量名称之后） <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(c?.Area());</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>空条件操作符告诉”运行时“在操作符所应用的变量为null的前提下忽略当前语句</li>
-</ul>
-</li>
+</ul></li>
 <li><p>可空类型</p>
 <ul>
 <li><code>null</code>本身就是引用，不能把它赋值给值类型</li>
-<li>可将变量声明为可空值类型<ul>
+<li>可将变量声明为可空值类型
+<ul>
 <li><code>int? i = null;</code></li>
-</ul>
-</li>
-<li>可将恰当值的表达式直接赋给可空变量<ul>
+</ul></li>
+<li>可将恰当值的表达式直接赋给可空变量
+<ul>
 <li><code>i = j;</code></li>
-</ul>
-</li>
-<li>不可将可空的值赋给普通的值类型变量<ul>
+</ul></li>
+<li>不可将可空的值赋给普通的值类型变量
+<ul>
 <li><code>j = i;</code></li>
-</ul>
-</li>
-<li>可空类型的两个属性<ul>
-<li><code>HasValue</code><ul>
+</ul></li>
+<li>可空类型的两个属性
+<ul>
+<li><code>HasValue</code>
+<ul>
 <li>判断可空类型是包含一个值，还是包含null</li>
-</ul>
-</li>
-<li><code>Value</code><ul>
+</ul></li>
+<li><code>Value</code>
+<ul>
 <li>只读的属性</li>
 <li>读取变量的值，但不能修改</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
+</ul></li>
 <li><p>引用传参</p>
 <ul>
-<li><code>ref</code>参数<ul>
-<li>要求实参和形参前都加上<code>ref</code>关键字<ul>
+<li><code>ref</code>参数
+<ul>
+<li>要求实参和形参前都加上<code>ref</code>关键字
+<ul>
 <li><code>DoWork(ref i)</code>;</li>
-</ul>
-</li>
+</ul></li>
 <li>要求在传参之前必须初始化</li>
-</ul>
-</li>
-<li><code>out</code>参数<ul>
+</ul></li>
+<li><code>out</code>参数
+<ul>
 <li>要求实参和形参前都加上<code>out</code>关键字</li>
 <li>要求在方法中必须初始化，传参前不要求</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li><p><code>object</code>类型</p>
 <ul>
 <li><code>object</code>类型的变量能引用任何引用类型的任何对象</li>
-</ul>
-</li>
+</ul></li>
 <li><p><code>装箱</code></p>
 <ul>
-<li>将值类型赋给<code>object</code>类型的变量<ul>
+<li>将值类型赋给<code>object</code>类型的变量
+<ul>
 <li><code>object o = 42;</code></li>
-</ul>
-</li>
+</ul></li>
 <li>数据项从栈自动复制到堆的行为</li>
 <li>与泛型异曲同工</li>
-</ul>
-</li>
+</ul></li>
 <li><p><code>拆箱</code></p>
 <ul>
-<li>将引用了已装箱的值的object引用强制转换成值类型<ul>
+<li>将引用了已装箱的值的object引用强制转换成值类型
+<ul>
 <li><code>int a = (int)o;</code></li>
-</ul>
-</li>
+</ul></li>
 <li>必须强制转换</li>
-</ul>
-</li>
+</ul></li>
 <li><p>装箱和拆箱会产生较大的开销</p>
 <ul>
 <li>它们设计不少检查工作，且需要分配额外的堆内存</li>
-</ul>
-</li>
+</ul></li>
 <li><p>数据的安全转型</p>
 <ul>
-<li>左操作数为对象，右操作数为类型<ul>
-<li>is操作符<ul>
+<li>左操作数为对象，右操作数为类型
+<ul>
+<li>is操作符
+<ul>
 <li>if (o is WrappedInt)</li>
 <li>如果is表达式正确，结果为true，反之为false</li>
-</ul>
-</li>
-<li>as操作符<ul>
+</ul></li>
+<li>as操作符
+<ul>
 <li>WrappedInt temp = o as WrappedInt;</li>
 <li>若转换成功，就返回转换成功的结果，失败则为null</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
+</ul></li>
 <li><p>在c#中使用c指针必须将代码标记为<code>unsafe</code></p>
 <ul>
-<li><code>unsafe</code>关键字可标记代码块或整个方法  <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsafe</span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">unsafe</span> <span class="keyword">void</span> <span class="title">swap</span>()</span> &#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>unsafe</code>关键字可标记代码块或整个方法 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsafe</span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">unsafe</span> <span class="keyword">void</span> <span class="title">swap</span>()</span> &#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>命名规范</p></li>
+<li><p>公共标识符以大写字母开头</p></li>
+<li><p>非公共标识符（包括局部变量）以小写字母开头</p></li>
+<li><p>类名以大写字母开头</p></li>
+<li><p>均采用驼峰命名法</p></li>
+<li><p><code>TODO:</code>注释通常用于标注以后将进行加工的代码</p></li>
 </ul>
-</li>
-<li><p>命名规范</p>
-</li>
-<li><p>公共标识符以大写字母开头</p>
-</li>
-<li><p>非公共标识符（包括局部变量）以小写字母开头</p>
-</li>
-<li><p>类名以大写字母开头</p>
-</li>
-<li><p>均采用驼峰命名法</p>
-</li>
-<li><p><code>TODO:</code>注释通常用于标注以后将进行加工的代码</p>
-</li>
-</ul>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
-<li><code>checked</code>语句是<code>checked</code>关键字开头的代码块<ul>
+<h2 id="异常">异常</h2>
+<ul>
+<li><code>checked</code>语句是<code>checked</code>关键字开头的代码块
+<ul>
 <li>只有直接在checked块中的整数运算才会检查</li>
 <li>溢出则抛出<code>OverflowException</code></li>
 <li><code>checked</code>和<code>unchecked</code>关键字只适合整型运算</li>
 <li>浮点运算永不抛出异常</li>
-</ul>
-</li>
-<li><code>catch</code>省略名称默认捕获<code>Exception</code><ul>
+</ul></li>
+<li><code>catch</code>省略名称默认捕获<code>Exception</code>
+<ul>
 <li>异常发生后将运行由”运行时“发现的第一个匹配的异常处理程序<code>catch</code>，其他处理程序会被忽略</li>
+</ul></li>
 </ul>
-</li>
-</ul>
 
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>Pishun Huang</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/2021/04/28/c# Note/" target="_blank" title="C# Note">https://mitmoksha.github.io/2021/04/28/c# Note/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint polocy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/36.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/04/28/tcp%20note/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> Prev:
-        <div>TCP/IP Note</div>
-      </div>
-      
-      <!-- <div class="content">
-        TCP/IP详解一、TCP超时与重传引言
-计时器超时称为重传超时（RTO）
-若TCP累计确认无法返回新的ACK，或者当A
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/38.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/04/28/%E5%89%91%E6%8C%87%20Offer%2034.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/" class="post-nav-link">
-      <div class="title">
-        Next: <i class="fa fa-angle-right"></i>
-        <div>剑指 Offer 34. 二叉树中和为某一值的路径</div>
-      </div>
-      <!-- <div class="content">
-        一、题目打印出二叉树中节点值的和为输入整数的所有路径（从根节点一直到叶子节点的路径）输入：给定如下二叉树，以及目标和 t
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
-  }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-      
-        <div id="myComment">
-          
-        </div>
-      
-  </div>
-
-  
-    <div class="toc-aside">
-      <div class="toc-main">
-        <div class="toc-aside-title">
-          <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
-          <div class="toc-open-close">catalog</div>
-        </div>
-        <div class="toc-content">
-          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
-<script src="/js/tocbot/tocbot.min.js"></script>
-<div class="toc"></div>
-
-<script>
-  if ($('.toc').length > 0) {
-    var headerEl = 'h2, h3, h4',  //headers 
-      content = '.post-detail',//文章容器
-      idArr = {};  //标题数组以确定是否增加索引id
-      //add #id
-
-    $(content).children(headerEl).each(function () {
-      //去除空格以及多余标点
-      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-
-      headerId = headerId.toLowerCase();
-      if (idArr[headerId]) {
-        //id已经存在
-        $(this).attr('id', headerId + '-' + idArr[headerId]);
-        idArr[headerId]++;
-      }
-      else {
-        //id未存在
-        idArr[headerId] = 1;
-        $(this).attr('id', headerId);
-      }
-    });
-
-    tocbot.init({
-      // Where to render the table of contents.
-      tocSelector: '.toc',
-      // Where to grab the headings to build the table of contents.
-      contentSelector: content,
-      // Which headings to grab inside of the contentSelector element.
-      headingSelector: headerEl,
-      scrollSmooth: true,
-      scrollSmoothOffset: -80,
-      headingsOffset: 130,
-      positionFixedSelector: '.toc-main',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  }
-
-</script>
-
-<style>
-.is-position-fixed {
-  position:fixed !important;
-  top: 64px;
-}
-.toc-main ul {
-  counter-reset: show-list;
-}
-.toc-main ul li::before {
-  content: counter(item)".";
-  display: block;
-  position: absolute;
-  left: 12px;
-  top:0;
-}
-.toc > .toc-list {
-  padding-left: 35px;
-}
-.toc>.toc-list li {
-  list-style: decimal;
-}
-.toc-list {
-  padding-left: 25px;
-}
-</style>
-        </div>
-      </div>
     </div>
 
     
+    
+    
 
-    <script>
-      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
-      let open = eval('' || 'true');
-      openOrCloseBtn.click(function() {
-        if (open === true) {
-          $(".toc-aside").css({'width': 0, 'padding': 0});
-          $(".toc-content").css({'width': 0});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
-          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
-          open = false;
-        } else {
-          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
-          $(".toc-content").css({'width': '300px'});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
-          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
-          open = true;
-        }
-      });
-    </script>
-  
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/28/%E5%89%91%E6%8C%87%20Offer%2034.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/" rel="prev" title="剑指 Offer 34. 二叉树中和为某一值的路径">
+                  <i class="fa fa-chevron-left"></i> 剑指 Offer 34. 二叉树中和为某一值的路径
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/28/tcp%20note/" rel="next" title="TCP/IP Note">
+                  TCP/IP Note <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-    </main>
-    <div class="footer bg-color">
-  <div class="footer-main">
-    <div class="link">
-      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
-      <a href="mailto:1730241541@qq.com">
-        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
-        <i class="fa fa-qq" aria-hidden="true"></i>
-      </a>
-      <a href="/atom.xml" target="_blank">
-        <i class="fa fa-rss" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="footer-copyright">
-      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
-    </div>
-    
-      
-  <!-- 不蒜子统计 -->
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-book" aria-hidden="true"></i>Total reading：<span id="busuanzi_value_page_pv"></span> times
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
   </span>
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-eye" aria-hidden="true"></i>Total visits：<span id="busuanzi_value_site_pv"></span> times
-  </span>
-  <span class="post-meta-divider">|</span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-        <i class="fa fa-users" aria-hidden="true"></i>Number of visitors：<span id="busuanzi_value_site_uv"></span> people
-  </span>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-    
+  <span class="author" itemprop="copyrightHolder">Pishun Huang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
-</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
-    
-      <div class="goTop top-btn-color border-color">
-  <i class="fa fa-arrow-up" aria-hidden="true"></i>
-</div>
-<script src="/js/goTop.js"></script>
-    
 
-    
 
-    <!-- 图片放大 -->
-    
-      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
-    
 
-    <script src="/js/wrapImage.js"></script>
-    
-    <!-- 爱心点击 -->
-    
+  
 
-    <!-- Baidu Analytics -->
 
-    <!-- Baidu Push -->
 
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
-    
-    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
-    
-      <script src="/js/aos/aos.js"></script>
-      <script>
-        // https://github.com/michalsnik/aos
-        const themeOffset = parseInt('120') || 120;
-        const themeDelay = parseInt('0')|| 0;
-        const themeDuration = parseInt('400') || 400;
-        const themeEasing = 'ease' || 'ease';
-        const themeOnce = eval('true') || false;
-        const themeMirror = eval('false') || false;
-        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
-        AOS.init({
-          // Global settings:
-          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
-          initClassName: 'aos-init', // class applied after initialization
-          animatedClassName: 'aos-animate', // class applied on animation
-          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
-          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
-          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+  
 
-          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-          offset: themeOffset, // offset (in px) from the original trigger point
-          delay: themeDelay, // values from 0 to 3000, with step 50ms
-          duration: themeDuration, // values from 0 to 3000, with step 50ms
-          easing: themeEasing, // default easing for AOS animations
-          once: themeOnce, // whether animation should happen only once - while scrolling down
-          mirror: themeMirror, // whether elements should animate out while scrolling past them
-          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","//mhchem.github.io/MathJax-mhchem/ mhchem":false,"js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
-        });
-      </script>
-    
 
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
-<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-<div id="appCopy">
-</div>
-<script>
-  var vm = new Vue({
-    el: '#appCopy',
-    data: {
-    },
-    computed: {
-    },
-    mounted() {
-      const that = this;
-      //  监听 ctrl + c事件  
-      $(document).unbind('keypress').bind('keypress', function (e) {
-        if (e.ctrlKey && e.keyCode == 67) {
-          doSomething();
-          // 返回false, 防止重复触发copy事件  
-          return false;
-        }
-      })
 
-      // 鼠标右键的复制事件  
-      $(document).unbind('copy').bind('copy', function (e) {
-        doSomething();
-        // console.log('右键复制 监听成功');
-      });
-
-      function doSomething() {
-        that.$notify({
-          title: "成功",
-          content: "代码已复制，请遵守相关授权协议。",
-          type: 'success'
-        })
-        // console.log('ctrl + c 监听成功');  
-      }
-    },
-    methods: {
-    },
-    created() { }
-  })
-</script>
-    
-
-    <!-- 输入框打字特效 -->
-    
-      <script src="/js/activate-power-mode.js"></script>
-      <script>
-          POWERMODE.colorful = true;  // 打开随机颜色特效
-          POWERMODE.shake = false;    // 关闭输入框抖动
-          document.body.addEventListener('input', POWERMODE);//监听打字事件
-      </script>
-    
-
-    <!-- markdown代码一键复制功能 -->
-    <script src="/js/clipboard/clipboard.min.js"></script>
-    <script>
-      !function (e, t, a) {
-        var copy = 'copy';
-        /* code */
-        var initCopyCode = function(){
-          var copyHtml = '';
-          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
-          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
-          copyHtml += '</button>';
-          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
-          $(".post-detail pre").not('.gutter pre').before(copyHtml);
-          new ClipboardJS('.btn-copy', {
-              target: function(trigger) {
-                  return trigger.nextElementSibling;
-              }
-          });
-        }
-        initCopyCode();
-      }(window, document);
-    </script>
-
-    <script src="/js/lazyload/lazyload@1.9.1.js"></script>
-    <script>
-      $(function() {
-        $("div.lazyload, img.lazyload, a.lazyload").lazyload(
-            {
-                effect: "fadeIn",
-                placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
-            }
-        );
-    });
-    </script>
-    
-    <script src="/js/app.js"></script>
-  </body>
+</body>
 </html>

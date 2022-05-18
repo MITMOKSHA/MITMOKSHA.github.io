@@ -63,8 +63,7 @@
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;以下记录一些本人常用的公式, 因为deploy之后对部分公式支持较差，因此有部分删减&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
+&lt;p&gt;以下记录一些本人常用的公式, 因为deploy之后对部分公式支持较差，因此有部分删减&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -390,7 +389,8 @@
     <updated>2022-05-18T09:57:47.177Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;Some-Restriction&quot;&gt;&lt;a href=&quot;#Some-Restriction&quot; class=&quot;headerlink&quot; title=&quot;Some Restriction&quot;&gt;&lt;/a&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;&lt;!-- # CSAPP Lab1: Data Lab --&gt;
+    <summary type="html">&lt;h2 id=&quot;some-restriction&quot;&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;
+&lt;!-- # CSAPP Lab1: Data Lab --&gt;
 &lt;blockquote&gt;
 &lt;p&gt;又复习了一次位级表示&lt;/p&gt;
 &lt;/blockquote&gt;</summary>

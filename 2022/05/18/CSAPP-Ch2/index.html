@@ -257,10 +257,9 @@
 <p>第二章后面部分Yale patt讲的比较清楚，因此在读第二遍的时候就没有继续总结了</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="信息的表示和处理"><strong>信息的表示和处理</strong></h1>
-<ul>
+<h1 id="信息的表示和处理"><a href="#信息的表示和处理" class="headerlink" title="信息的表示和处理"></a><strong>信息的表示和处理</strong></h1><ul>
 <li>编译器维护着数据类型的信息，机器级程序不包含所谓的数据类型信息。</li>
-<li>可以将2的幂次十进制数通过<span class="math inline">\(n=i+4*j\)</span>这个公式来直接转换成十六进制数。其中<span class="math inline">\(0\leq i\leq3\)</span>， 1(i=0), 2(i=1), 4(i=2), 8(i=3)，可以把十六进制数写成高位是<code>i</code>对应的值，后面跟<code>j</code>个0。如：<span class="math inline">\(2^{11}\)</span>转换成十六进制数，<span class="math inline">\(n=11=3+4\times2\)</span>，<code>i</code>对应的值是8，后面跟2个0，得到的结果是<code>0x800</code></li>
+<li>可以将2的幂次十进制数通过$n&#x3D;i+4*j$这个公式来直接转换成十六进制数。其中$0\leq i\leq3$， 1(i&#x3D;0), 2(i&#x3D;1), 4(i&#x3D;2), 8(i&#x3D;3)，可以把十六进制数写成高位是<code>i</code>对应的值，后面跟<code>j</code>个0。如：$2^{11}$转换成十六进制数，$n&#x3D;11&#x3D;3+4\times2$，<code>i</code>对应的值是8，后面跟2个0，得到的结果是<code>0x800</code></li>
 <li><code>大端字节序/网络字节序</code>: 最高有效字节在最前面; <code>小端字节序/主机字节序</code>: 最低有效字节在最前面</li>
 <li><code>ISA</code>可以同时拥有两种以上顺序模式，如：ARM。而具体决定使用什么字节顺序由操作系统来决定。</li>
 <li>书中提到了<code>指针和数组</code>，想起来<code>P&amp;H</code>中提到过C语言中两者的性能差距。通过观察汇编代码可以发现，数组Loop判断越界下标需要在循环体内计算边界条件的地址，相比较于指针loop完成额外的乘法运算(花更多的指令)</li>
@@ -347,7 +346,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"b50d8233c67fd83be916","client_secret":"d0f8f3e472aee03a3d5c8cf15370408b0c76e55f","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c1436fb623546c6d5a8c0fc9c09c1262"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c1436fb623546c6d5a8c0fc9c09c1262"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

@@ -351,7 +351,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab5: xv6 lazy page allocation -->
-<p>很多情况都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files</p>
+<p>很多情况都用到了Lazy allocation, 比如:</p>
+<ul>
+<li>paging from disk</li>
+<li>COW fork</li>
+<li>automatically extending stack</li>
+<li>memory-mapped files</li></ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab5/#more" rel="contents">
@@ -444,6 +449,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab4: Traps -->
+
 <ul>
 <li>跟着视频走一遍系统调用<code>gdb</code>的流程。<code>tmux</code>分割两个窗口，一个窗口作为服务器<code>make CPUS=1 qemu-gdb</code>，另一个窗口作为<code>gdb</code>调试窗口<code>gdb-multiarch</code>。将断点打在<code>ecall指令处</code>, <code>continue</code>执行，随后再将第二个断点打到<code>print/x $stvec</code>处也就是，<code>TRAPFRAME</code>的起始地址。<code>ecall</code>指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。</li></ul>
           <!--noindex-->
@@ -538,7 +544,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab3: Page tables -->
-<h2 id="print-a-page-table"><strong>1. Print a page table</strong></h2>
+<h2 id="1-Print-a-page-table"><a href="#1-Print-a-page-table" class="headerlink" title="1. Print a page table"></a><strong>1. Print a page table</strong></h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab3/#more" rel="contents">
@@ -631,7 +637,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab2: System Calls -->
-<h2 id="system-call-tracing"><strong>1. System call tracing</strong></h2>
+<h2 id="1-System-call-tracing"><a href="#1-System-call-tracing" class="headerlink" title="1. System call tracing"></a><strong>1. System call tracing</strong></h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab2/#more" rel="contents">
@@ -724,7 +730,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab1: Xv6 and Unix utilities -->
-<h2 id="sleep"><strong>1. sleep</strong></h2>
+<h2 id="1-sleep"><a href="#1-sleep" class="headerlink" title="1. sleep"></a><strong>1. sleep</strong></h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab1/#more" rel="contents">
@@ -1101,8 +1107,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="some-restriction"><strong>Some Restriction</strong></h2>
-<!-- # CSAPP Lab1: Data Lab -->
+          <h2 id="Some-Restriction"><a href="#Some-Restriction" class="headerlink" title="Some Restriction"></a><strong>Some Restriction</strong></h2><!-- # CSAPP Lab1: Data Lab -->
 <blockquote>
 <p>又复习了一次位级表示</p>
 </blockquote>
@@ -1183,7 +1188,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"b50d8233c67fd83be916","client_secret":"d0f8f3e472aee03a3d5c8cf15370408b0c76e55f","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c853ec00cc9d13bc22336b7d45d1416e"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c853ec00cc9d13bc22336b7d45d1416e"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

@@ -273,7 +273,7 @@ dd {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 1.1em;
+  font-size: 1em;
   margin: 0 0 20px;
   width: 100%;
 }
@@ -306,7 +306,7 @@ td {
   border-radius: 0;
   color: var(--btn-default-color);
   display: inline-block;
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 2;
   padding: 0 20px;
   transition: background-color 0.2s ease-in-out;
@@ -393,7 +393,7 @@ pre figcaption {
   background: var(--highlight-gutter-background);
   color: var(--highlight-foreground);
   display: flow-root;
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1.2;
   padding: 0.5em;
 }
@@ -414,7 +414,7 @@ code {
 }
 code {
   border-radius: 3px;
-  font-size: 1.1em;
+  font-size: 1em;
   padding: 2px 4px;
   overflow-wrap: break-word;
 }
@@ -1298,7 +1298,7 @@ header.header {
   font-size: 0.9em;
 }
 .links-of-blogroll-title {
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 600;
   margin-top: 0;
 }
@@ -1343,7 +1343,7 @@ header.header {
   color: #666;
   cursor: pointer;
   display: inline-block;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 .sidebar-nav li.sidebar-nav-overview {
   margin-left: 10px;
@@ -1430,7 +1430,7 @@ header.header {
   transform: rotate(-45deg);
 }
 .post-toc {
-  font-size: 1.1em;
+  font-size: 1em;
 }
 .post-toc ol {
   list-style: none;
@@ -1492,11 +1492,11 @@ header.header {
 }
 .site-state-item-name {
   color: inherit;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 .footer {
   color: #999;
-  font-size: 1.1em;
+  font-size: 1em;
   padding: 20px 0;
 }
 .footer.footer-fixed {
@@ -1785,7 +1785,7 @@ header.header {
   color: var(--link-color);
 }
 .posts-collapse .post-content .post-title .fa-external-link-alt {
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 5px;
 }
 .posts-collapse .post-content::before {
@@ -1831,7 +1831,7 @@ header.header {
   border-bottom-style: none;
   color: inherit;
   float: right;
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 10px;
   opacity: 0;
 }
@@ -1880,14 +1880,14 @@ header.header {
   opacity: 1;
 }
 .post-body .exturl .fa {
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 4px;
 }
 .post-body .image-caption,
 .post-body img + figcaption,
 .post-body .fancybox + figcaption {
   color: #999;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold;
   line-height: 1;
   margin: -15px auto 15px;
@@ -1975,7 +1975,7 @@ header.header {
   transform: scaleX(1);
 }
 .posts-expand .post-title-link .fa-external-link-alt {
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 5px;
 }
 .post-sticky-flag {
@@ -1990,7 +1990,7 @@ header.header {
   margin-top: 3px;
 }
 .posts-expand .post-meta-container .post-description {
-  font-size: 1.1em;
+  font-size: 1em;
   margin-top: 2px;
 }
 .posts-expand .post-meta-container time {
@@ -2031,7 +2031,7 @@ header.header {
 .post-nav-item a {
   border-bottom: 0;
   display: block;
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1.6;
 }
 .post-nav-item a:active {
@@ -2088,7 +2088,7 @@ header.header {
 }
 .social-like {
   display: flex;
-  font-size: 1.1em;
+  font-size: 1em;
   justify-content: center;
   text-align: center;
 }
@@ -2763,7 +2763,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #f18721;
+  background: #ff39a2;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);

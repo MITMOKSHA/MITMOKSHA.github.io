@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-18T09:29:54.861Z</updated>
+  <updated>2022-05-18T09:55:41.839Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -21,11 +21,12 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CSAPP-Ch1/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CSAPP-Ch1/</id>
     <published>2022-05-18T03:14:00.000Z</published>
-    <updated>2022-05-18T09:29:54.861Z</updated>
+    <updated>2022-05-18T09:55:41.839Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;计算机系统总是如此的吸引人&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;计算机系统总是如此的吸引人&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -39,10 +40,12 @@
     <link href="https://mitmoksha.github.io/2022/05/18/Letex-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/18/Letex-Note/</id>
     <published>2022-05-18T02:53:09.000Z</published>
-    <updated>2022-05-18T09:50:05.208Z</updated>
+    <updated>2022-05-18T09:58:00.812Z</updated>
     
     
-    <summary type="html">&lt;p&gt;以下记录一些本人常用的公式, 因为deploy之后对部分公式支持较差，因此有部分删减&lt;/p&gt;</summary>
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;以下记录一些本人常用的公式, 因为deploy之后对部分公式支持较差，因此有部分删减&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -56,11 +59,12 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CS61B-Lec-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CS61B-Lec-Note/</id>
     <published>2022-05-18T02:52:23.000Z</published>
-    <updated>2022-05-18T09:46:16.621Z</updated>
+    <updated>2022-05-18T09:57:19.750Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;数据结构和Java基础&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;Data Structure in Java&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -74,12 +78,13 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/</id>
     <published>2022-05-18T02:08:33.000Z</published>
-    <updated>2022-05-18T09:46:28.820Z</updated>
+    <updated>2022-05-18T09:57:24.205Z</updated>
     
     
     <summary type="html">&lt;!-- # CS61C C Part Notes. --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;揭示C语言的本质&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;揭示C语言的本质&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -93,11 +98,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/NJU-OS-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/NJU-OS-Note/</id>
     <published>2022-05-16T10:14:19.000Z</published>
-    <updated>2022-05-18T09:40:33.425Z</updated>
+    <updated>2022-05-18T09:58:21.744Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;一直以来被忽略的本科教学&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;一直以来被忽略的本科教学&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -111,12 +117,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/</id>
     <published>2022-05-16T10:08:09.000Z</published>
-    <updated>2022-05-18T09:49:53.310Z</updated>
+    <updated>2022-05-18T09:57:52.517Z</updated>
     
     
     <summary type="html">&lt;!-- # ICS Lab Note --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本校的Lab体验总结&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;本校的Lab体验总结&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -130,12 +137,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CS186-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CS186-Note/</id>
     <published>2022-05-16T10:07:44.000Z</published>
-    <updated>2022-05-18T09:48:34.564Z</updated>
+    <updated>2022-05-18T09:57:42.510Z</updated>
     
     
     <summary type="html">&lt;!-- # **CS186 Note** --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;SQL真的这么难吗?&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;SQL真的这么难吗?&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -149,12 +157,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/cmu15445-project1/"/>
     <id>https://mitmoksha.github.io/2022/05/16/cmu15445-project1/</id>
     <published>2022-05-16T10:02:20.000Z</published>
-    <updated>2022-05-18T09:44:19.486Z</updated>
+    <updated>2022-05-18T09:56:29.589Z</updated>
     
     
     <summary type="html">&lt;!-- # CMU 15-445 Project1: BUFFER POOL MANAGER --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;OS vs. DB&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;OS vs. DB&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -168,12 +177,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/"/>
     <id>https://mitmoksha.github.io/2022/05/16/cs61c-lab2/</id>
     <published>2022-05-16T09:59:00.000Z</published>
-    <updated>2022-05-18T09:47:51.426Z</updated>
+    <updated>2022-05-18T09:57:31.792Z</updated>
     
     
     <summary type="html">&lt;!-- # CS61C Lab2 --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;覆盖广的一个lab&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;覆盖广的一个lab&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -187,12 +197,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/cs144-lab0/"/>
     <id>https://mitmoksha.github.io/2022/05/16/cs144-lab0/</id>
     <published>2022-05-16T09:58:51.000Z</published>
-    <updated>2022-05-18T09:48:20.539Z</updated>
+    <updated>2022-05-18T09:57:39.734Z</updated>
     
     
     <summary type="html">&lt;!-- # Stanford CS144 Lab0: Networking Warmup --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;应用层Overview&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;应用层Overview&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -279,7 +290,7 @@
     <link href="https://mitmoksha.github.io/2022/05/16/s081-lab1/"/>
     <id>https://mitmoksha.github.io/2022/05/16/s081-lab1/</id>
     <published>2022-05-16T09:53:02.000Z</published>
-    <updated>2022-05-18T09:40:43.072Z</updated>
+    <updated>2022-05-18T09:58:54.332Z</updated>
     
     
     <summary type="html">&lt;!-- # MIT 6.S081 Lab1: Xv6 and Unix utilities --&gt;
@@ -297,12 +308,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/</id>
     <published>2022-05-16T09:39:52.000Z</published>
-    <updated>2022-05-18T09:45:19.042Z</updated>
+    <updated>2022-05-18T09:56:49.018Z</updated>
     
     
     <summary type="html">&lt;!-- # CS61B Gitlet --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;简化版Git，深入探索Git的底层结构&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;简化版Git，深入探索Git的底层结构&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -316,12 +328,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/</id>
     <published>2022-05-16T09:37:37.000Z</published>
-    <updated>2022-05-18T09:47:17.201Z</updated>
+    <updated>2022-05-18T09:57:27.796Z</updated>
     
     
     <summary type="html">&lt;!-- # **CS61C CPU PROJECT** --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;用时4天，体验CPU设计&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;用时4天，体验CPU设计&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -335,12 +348,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/</id>
     <published>2022-05-16T09:36:28.000Z</published>
-    <updated>2022-05-18T09:49:27.135Z</updated>
+    <updated>2022-05-18T09:57:49.696Z</updated>
     
     
     <summary type="html">&lt;!-- # CSAPP Lab2: Bomb Lab --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;熟悉GDB&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;熟悉GDB&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -354,13 +368,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/</id>
     <published>2022-05-16T09:32:17.000Z</published>
-    <updated>2022-05-18T09:48:59.833Z</updated>
+    <updated>2022-05-18T09:57:47.177Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;some-restriction&quot;&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;
-&lt;!-- # CSAPP Lab1: Data Lab --&gt;
+    <summary type="html">&lt;h2 id=&quot;Some-Restriction&quot;&gt;&lt;a href=&quot;#Some-Restriction&quot; class=&quot;headerlink&quot; title=&quot;Some Restriction&quot;&gt;&lt;/a&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;&lt;!-- # CSAPP Lab1: Data Lab --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;又复习了一次位级表示&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;又复习了一次位级表示&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -374,12 +388,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/</id>
     <published>2022-05-16T09:26:09.000Z</published>
-    <updated>2022-05-18T09:43:30.813Z</updated>
+    <updated>2022-05-18T09:56:12.463Z</updated>
     
     
     <summary type="html">&lt;!-- # 6.NULL Video Note --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;好的工具总是能带来高的效率&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;好的工具总是能带来高的效率&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     

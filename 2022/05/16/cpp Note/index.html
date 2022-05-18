@@ -27,7 +27,7 @@
 <meta property="og:description" content="工业级的Cpp语法">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-16T07:39:40.000Z">
-<meta property="article:modified_time" content="2022-05-18T09:44:36.988Z">
+<meta property="article:modified_time" content="2022-05-18T09:56:36.933Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">可调用对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8stdfuntion"><span class="nav-number">2.</span> <span class="nav-text">可调用对象包装器std::funtion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdbind%E7%BB%91%E5%AE%9A%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">std::bind绑定器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c11%E9%80%9A%E8%BF%87%E6%8F%90%E4%BE%9Bstdfunction%E5%92%8Cstdbind%E7%BB%9F%E4%B8%80%E4%BA%86%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">C++11通过提供std::function和std::bind统一了可调用对象的各种操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Clambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number"></span> <span class="nav-text">二、lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">语法形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">捕获列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E8%AE%A4%E4%B8%BA%E5%AE%83%E6%98%AF%E4%B8%AA%E5%B8%A6%E6%9C%89operator%E7%9A%84%E7%B1%BB%E5%8D%B3%E4%BB%BF%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">可以认为它是个带有operator()的类，即仿函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89tuple%E5%85%83%E7%BB%84"><span class="nav-number"></span> <span class="nav-text">三、tuple元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9Bshared_ptr%E5%85%B1%E4%BA%AB%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number"></span> <span class="nav-text">四、shared_ptr共享的智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94unique_ptr%E7%8B%AC%E5%8D%A0%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number"></span> <span class="nav-text">五、unique_ptr独占的智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="nav-number">2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%ADweak_ptr%E5%BC%B1%E5%BC%95%E7%94%A8%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number"></span> <span class="nav-text">六、weak_ptr弱引用的智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-1"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#weak_ptr%E8%BF%94%E5%9B%9Ethis%E6%8C%87%E9%92%88"><span class="nav-number">3.</span> <span class="nav-text">weak_ptr返回this指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87weak_ptr%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">可以通过weak_ptr解决循环引用问题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81std-function%E5%92%8Cbind%E7%BB%91%E5%AE%9A%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">一、std::function和bind绑定器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">可调用对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8std-funtion"><span class="nav-number">1.2.</span> <span class="nav-text">可调用对象包装器std::funtion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-bind%E7%BB%91%E5%AE%9A%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">std::bind绑定器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-11%E9%80%9A%E8%BF%87%E6%8F%90%E4%BE%9Bstd-function%E5%92%8Cstd-bind%E7%BB%9F%E4%B8%80%E4%BA%86%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">C++11通过提供std::function和std::bind统一了可调用对象的各种操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">二、lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">语法形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">捕获列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E8%AE%A4%E4%B8%BA%E5%AE%83%E6%98%AF%E4%B8%AA%E5%B8%A6%E6%9C%89operator-%E7%9A%84%E7%B1%BB%EF%BC%8C%E5%8D%B3%E4%BB%BF%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">可以认为它是个带有operator()的类，即仿函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81tuple%E5%85%83%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">三、tuple元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">3.2.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81shared-ptr%E5%85%B1%E4%BA%AB%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">4.</span> <span class="nav-text">四、shared_ptr共享的智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81unique-ptr%E7%8B%AC%E5%8D%A0%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">5.</span> <span class="nav-text">五、unique_ptr独占的智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="nav-number">5.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="nav-number">5.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81weak-ptr%E5%BC%B1%E5%BC%95%E7%94%A8%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">6.</span> <span class="nav-text">六、weak_ptr弱引用的智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="nav-number">6.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-1"><span class="nav-number">6.2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#weak-ptr%E8%BF%94%E5%9B%9Ethis%E6%8C%87%E9%92%88"><span class="nav-number">6.3.</span> <span class="nav-text">weak_ptr返回this指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87weak-ptr%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98"><span class="nav-number">6.4.</span> <span class="nav-text">可以通过weak_ptr解决循环引用问题</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 17:44:36" itemprop="dateModified" datetime="2022-05-18T17:44:36+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:56:36" itemprop="dateModified" datetime="2022-05-18T17:56:36+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,55 +260,49 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>工业级的Cpp语法 <span id="more"></span> ## 一、std::function和bind绑定器</p>
+<p>工业级的Cpp语法</p>
 </blockquote>
-<h3 id="可调用对象">可调用对象</h3>
-<ul>
+<span id="more"></span>
+<h2 id="一、std-function和bind绑定器"><a href="#一、std-function和bind绑定器" class="headerlink" title="一、std::function和bind绑定器"></a>一、std::function和bind绑定器</h2><h3 id="可调用对象"><a href="#可调用对象" class="headerlink" title="可调用对象"></a>可调用对象</h3><ul>
 <li>是一个函数指针</li>
 <li>是一个具有<code>operator()</code>成员函数的类对象（仿函数）</li>
 <li>是一个可被转换为函数指针的类对象</li>
 <li>是一个类成员（函数）指针</li>
 </ul>
-<h3 id="可调用对象包装器stdfuntion">可调用对象包装器std::funtion</h3>
-<ul>
+<h3 id="可调用对象包装器std-funtion"><a href="#可调用对象包装器std-funtion" class="headerlink" title="可调用对象包装器std::funtion"></a>可调用对象包装器std::funtion</h3><ul>
 <li>头文件<code>&lt;functional&gt;</code></li>
 <li>可以容纳除了类成员（函数）指针之外的所有可调用对象</li>
 <li>可以用统一的方式处理函数、函数对象、函数指针，并允许保存和延迟执行它们</li>
 <li><code>function</code>比普通函数指针更灵活和便利</li>
 </ul>
-<h3 id="stdbind绑定器">std::bind绑定器</h3>
-<ul>
+<h3 id="std-bind绑定器"><a href="#std-bind绑定器" class="headerlink" title="std::bind绑定器"></a>std::bind绑定器</h3><ul>
 <li>头文件<code>&lt;functional&gt;</code></li>
 <li>接受一个可调用对象，生成一个新的可调用对象</li>
 <li><code>std::bind</code>用来将可调用对象与其参数一起进行绑定，绑定后的结果可以使用<code>std::function</code>进行保存，并延迟调用到任何我们需要的时候</li>
-<li>作用
-<ul>
+<li>作用<ul>
 <li>将可调用对象与其参数一起绑定成一个仿函数(functor)</li>
-<li>将多元（参数个数为n）可调用对象转成一元或者（n-1）元可调用对象，却只绑定部分参数 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">1</span>, <span class="number">2</span>)();  <span class="comment">// 输出：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, std::placeholders::_1, <span class="number">2</span>)(<span class="number">1</span>);  <span class="comment">// 输出 ：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">2</span>, std::placeholders::_1)(<span class="number">1</span>);  <span class="comment">// 输出 ：2 1</span></span><br></pre></td></tr></table></figure></li>
-</ul></li>
+<li>将多元（参数个数为n）可调用对象转成一元或者（n-1）元可调用对象，却只绑定部分参数  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">1</span>, <span class="number">2</span>)();  <span class="comment">// 输出：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, std::placeholders::_1, <span class="number">2</span>)(<span class="number">1</span>);  <span class="comment">// 输出 ：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">2</span>, std::placeholders::_1)(<span class="number">1</span>);  <span class="comment">// 输出 ：2 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 <li><code>std::bind</code>的返回类型是一个stl内部定义的仿函数类型</li>
 <li><code>std::placeholders::_1</code>是一个占位符，代表这个位置将在函数调用时被传入的第一个参数所替代</li>
-<li>组合bind函数
-<ul>
-<li><code>std::bind(std::greater&lt;int&gt;(), std::placeholders::_1, 5);</code>
-<ul>
+<li>组合bind函数<ul>
+<li><code>std::bind(std::greater&lt;int&gt;(), std::placeholders::_1, 5);</code><ul>
 <li>判断是否大于5的功能闭包</li>
-</ul></li>
-</ul></li>
 </ul>
-<h3 id="c11通过提供stdfunction和stdbind统一了可调用对象的各种操作">C++11通过提供std::function和std::bind统一了可调用对象的各种操作</h3>
-<h2 id="二lambda表达式">二、lambda表达式</h2>
-<h3 id="语法形式">语法形式</h3>
-<ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="C-11通过提供std-function和std-bind统一了可调用对象的各种操作"><a href="#C-11通过提供std-function和std-bind统一了可调用对象的各种操作" class="headerlink" title="C++11通过提供std::function和std::bind统一了可调用对象的各种操作"></a>C++11通过提供std::function和std::bind统一了可调用对象的各种操作</h3><h2 id="二、lambda表达式"><a href="#二、lambda表达式" class="headerlink" title="二、lambda表达式"></a>二、lambda表达式</h2><h3 id="语法形式"><a href="#语法形式" class="headerlink" title="语法形式"></a>语法形式</h3><ul>
 <li><code>[ capture ] ( params ) opt -&gt; ret &#123; body; &#125;;</code></li>
-<li>C++11允许省略lambda表达式返回值定义，这样编译器就会根据<code>return</code>语句自动推导出返回类型
-<ul>
+<li>C++11允许省略lambda表达式返回值定义，这样编译器就会根据<code>return</code>语句自动推导出返回类型<ul>
 <li>初始化列表不能用于返回值的自动推导</li>
-</ul></li>
+</ul>
+</li>
 <li>lambda表达式在没有参数列表时，参数列表是可以省略的</li>
 </ul>
-<h3 id="捕获列表">捕获列表</h3>
-<ul>
+<h3 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h3><ul>
 <li><code>[]</code>不捕获任何变量</li>
 <li><code>[&amp;]</code>捕获外部作用域中所有变量，并作为引用在函数体中使用（引用捕获）</li>
 <li><code>[=]</code>捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）</li>
@@ -317,156 +311,143 @@
 <li><code>[this]</code>捕获当前类中的指针，让lambda表达式拥有和当前类成员函数同样的访问权限。如果已经使用了<code>&amp;</code>或者<code>=</code>，就默认添加此选项</li>
 <li>如果希望去修改按值捕获的外部变量，需要显示指明lambda表达式为<code>mutable</code>，如：<code>auto f2 = [=]() mutable &#123;return a++; &#125;</code></li>
 </ul>
-<h3 id="可以认为它是个带有operator的类即仿函数">可以认为它是个带有operator()的类，即仿函数</h3>
-<ul>
-<li>可以使用<code>std::function</code>和<code>std::bind</code>来存储和操作lambda表达式 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">int</span>)&gt; f1 = [](<span class="type">int</span> a)&#123; <span class="keyword">return</span> a; &#125;;</span><br><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">void</span>)&gt; f2 = std::<span class="built_in">bind</span>([](<span class="type">int</span> a)&#123; <span class="keyword">return</span> a; &#125;, <span class="number">123</span>);</span><br></pre></td></tr></table></figure></li>
-<li>对于没有捕获任何变量的lambda表达式，还可以被转换成一个普通的函数指针 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="type">func_t</span> = <span class="built_in">int</span> (*)(<span class="type">int</span>);</span><br><span class="line"><span class="type">func_t</span> f = [](<span class="type">int</span>  a)&#123; <span class="keyword">return</span> a; &#125;;</span><br><span class="line"><span class="built_in">f</span>(<span class="number">123</span>);</span><br></pre></td></tr></table></figure></li>
+<h3 id="可以认为它是个带有operator-的类，即仿函数"><a href="#可以认为它是个带有operator-的类，即仿函数" class="headerlink" title="可以认为它是个带有operator()的类，即仿函数"></a>可以认为它是个带有operator()的类，即仿函数</h3><ul>
+<li>可以使用<code>std::function</code>和<code>std::bind</code>来存储和操作lambda表达式  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">int</span>)&gt; f1 = [](<span class="type">int</span> a)&#123; <span class="keyword">return</span> a; &#125;;</span><br><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">void</span>)&gt; f2 = std::<span class="built_in">bind</span>([](<span class="type">int</span> a)&#123; <span class="keyword">return</span> a; &#125;, <span class="number">123</span>);</span><br></pre></td></tr></table></figure></li>
+<li>对于没有捕获任何变量的lambda表达式，还可以被转换成一个普通的函数指针  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="type">func_t</span> = <span class="built_in">int</span> (*)(<span class="type">int</span>);</span><br><span class="line"><span class="type">func_t</span> f = [](<span class="type">int</span>  a)&#123; <span class="keyword">return</span> a; &#125;;</span><br><span class="line"><span class="built_in">f</span>(<span class="number">123</span>);</span><br></pre></td></tr></table></figure></li>
 <li>捕获变量的lambda表达式则不能转化为普通指针，若转换，lambda表达式本身的this指针就丢失掉了</li>
 <li>lambda和<code>std::function</code>的效果是一样的，一般情况下可直接用lambda来代替<code>function</code></li>
 </ul>
-<h2 id="三tuple元组">三、tuple元组</h2>
-<h3 id="定义">定义</h3>
-<ul>
+<h2 id="三、tuple元组"><a href="#三、tuple元组" class="headerlink" title="三、tuple元组"></a>三、tuple元组</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
 <li>可以把它当作一个通用的结构体来用，不需要创建结构体又获取结构体的特征</li>
 <li>在某些情况下可以取代结构体，使程序更简洁、直观</li>
 <li>如果用tuple来替代3个以上字段的结构体时就不太合适了，不直观，易读性降低（建议）</li>
 </ul>
-<h3 id="功能">功能</h3>
-<ul>
-<li>创建元组
-<ul>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li>创建元组<ul>
 <li><code>tuple&lt;const char*, int&gt; tp = make_tuple(sendPack, nSendSize);</code></li>
-<li><code>auto tp = return std::tie(1, "aa", 2);</code> // tp的实际类型是：std::tuple&lt;int&amp;, string&amp;, int&amp;&gt;</li>
-</ul></li>
-<li>获取元组的值 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* data = tp.<span class="built_in">get</span>&lt;<span class="number">0</span>&gt; ();  <span class="comment">// 获取第一个值</span></span><br><span class="line"><span class="type">int</span> len = tp.<span class="built_in">get</span>&lt;<span class="number">1</span>&gt; ();  <span class="comment">// 获取第二个值</span></span><br></pre></td></tr></table></figure>
+<li><code>auto tp = return std::tie(1, &quot;aa&quot;, 2);</code>  &#x2F;&#x2F; tp的实际类型是：std::tuple&lt;int&amp;, string&amp;, int&amp;&gt;</li>
+</ul>
+</li>
+<li>获取元组的值  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* data = tp.<span class="built_in">get</span>&lt;<span class="number">0</span>&gt; ();  <span class="comment">// 获取第一个值</span></span><br><span class="line"><span class="type">int</span> len = tp.<span class="built_in">get</span>&lt;<span class="number">1</span>&gt; ();  <span class="comment">// 获取第二个值</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>通过<code>std::tie</code>解包tuple <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x, y;</span><br><span class="line">string a;</span><br><span class="line">std::<span class="built_in">tie</span>(x, a, y) = tp;</span><br></pre></td></tr></table></figure>
+<li>通过<code>std::tie</code>解包tuple  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x, y;</span><br><span class="line">string a;</span><br><span class="line">std::<span class="built_in">tie</span>(x, a, y) = tp;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>如果只想了解某个位置的值时，可以用<code>std::ignore</code>占位符来表示不解某个位置的值 <code>std::tie(std::ignore, std::ignore, y) = tp;</code> // 只解第3个值</li>
-</ul></li>
-</ul></li>
-<li>创建右值引用元组
-<ul>
-<li><code>forward_as_tuple</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::map&lt;<span class="type">int</span>, std::string&gt; m;</span><br><span class="line">m.<span class="built_in">emplace</span>(std::forward_as_tuple(<span class="number">10</span>, std::<span class="built_in">string</span>(<span class="number">20</span>, <span class="string">&#x27;a&#x27;</span>)));</span><br></pre></td></tr></table></figure>
+<li>如果只想了解某个位置的值时，可以用<code>std::ignore</code>占位符来表示不解某个位置的值<br>  <code>std::tie(std::ignore, std::ignore, y) = tp;</code>  &#x2F;&#x2F; 只解第3个值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建右值引用元组<ul>
+<li><code>forward_as_tuple</code>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::map&lt;<span class="type">int</span>, std::string&gt; m;</span><br><span class="line">m.<span class="built_in">emplace</span>(std::forward_as_tuple(<span class="number">10</span>, std::<span class="built_in">string</span>(<span class="number">20</span>, <span class="string">&#x27;a&#x27;</span>)));</span><br></pre></td></tr></table></figure>
 <ul>
 <li>创建了类似于<code>std::tuple&lt;int&amp;&amp;, std::string&amp;&amp;&gt;</code>类型的tuple</li>
-</ul></li>
-</ul></li>
-<li>连接多个tuple
-<ul>
-<li><code>tuple_cat</code></li>
-</ul></li>
 </ul>
-<h2 id="四shared_ptr共享的智能指针">四、shared_ptr共享的智能指针</h2>
-<h3 id="概念">概念</h3>
-<ul>
+</li>
+</ul>
+</li>
+<li>连接多个tuple<ul>
+<li><code>tuple_cat</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="四、shared-ptr共享的智能指针"><a href="#四、shared-ptr共享的智能指针" class="headerlink" title="四、shared_ptr共享的智能指针"></a>四、shared_ptr共享的智能指针</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
 <li>希望多个智能指针管理同一个资源就用shared_ptr</li>
 <li><code>std::shared_ptr</code>使用引用计数，每一个shared_ptr的拷贝都指向相同的内存</li>
 <li>在最后一个shared_ptr析构的时候，内存才会被释放</li>
 </ul>
-<h3 id="基本用法">基本用法</h3>
-<ul>
-<li>初始化
-<ul>
-<li>可以通过使用构造函数、<code>std::make_shared&lt;int&gt;</code>辅助函数和<code>reset</code>方法来初始化shared_ptr <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;  <span class="comment">// 使用动态初始化，后加一个括号为值初始化</span></span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; p2 = p;</span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; ptr;</span><br><span class="line">ptr.<span class="built_in">reset</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">1</span>));</span><br></pre></td></tr></table></figure></li>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><ul>
+<li>初始化<ul>
+<li>可以通过使用构造函数、<code>std::make_shared&lt;int&gt;</code>辅助函数和<code>reset</code>方法来初始化shared_ptr  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;  <span class="comment">// 使用动态初始化，后加一个括号为值初始化</span></span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; p2 = p;</span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; ptr;</span><br><span class="line">ptr.<span class="built_in">reset</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">1</span>));</span><br></pre></td></tr></table></figure></li>
 <li>不能将一个原始指针直接赋值给智能指针</li>
 <li>当智能指针中有值的时候，调用reset会使引用计数减1</li>
-</ul></li>
-<li>获取原始指针
-<ul>
-<li>可以通过<code>get</code>方法来返回原始指针 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line"><span class="type">int</span>* p = ptr.<span class="built_in">get</span>();</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li>指定删除器
-<ul>
+</ul>
+</li>
+<li>获取原始指针<ul>
+<li>可以通过<code>get</code>方法来返回原始指针  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line"><span class="type">int</span>* p = ptr.<span class="built_in">get</span>();</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>指定删除器<ul>
 <li>智能指针初始化可以指定删除器</li>
-<li>当p的<code>引用计数</code>为0时，自动调用删除器DeleteIntPtr来释放对象的内存 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DeleteIntPtr</span><span class="params">(<span class="type">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>, DeleteIntPtr)</span></span>;</span><br></pre></td></tr></table></figure></li>
-<li>也可以用lambda表达式指定删除器
-<ul>
+<li>当p的<code>引用计数</code>为0时，自动调用删除器DeleteIntPtr来释放对象的内存  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DeleteIntPtr</span><span class="params">(<span class="type">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>, DeleteIntPtr)</span></span>;</span><br></pre></td></tr></table></figure></li>
+<li>也可以用lambda表达式指定删除器<ul>
 <li><code>std::shared_ptr&lt;int&gt; p(new int, [](int* p) &#123; delete p; &#125;);</code></li>
-</ul></li>
+</ul>
+</li>
 <li>当我们用<code>shared_ptr</code>管理动态数组时，需要指定删除器，因为<code>std::shared_ptr</code>的默认删除器不支持数组对象</li>
 <li>也可以将<code>std::default_delete</code>作为删除器</li>
-</ul></li>
 </ul>
-<h3 id="注意事项">注意事项</h3>
-<ul>
+</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
 <li>1）不要用一个原始指针初始化多个shared_ptr</li>
-<li>2）不要在函数实参中创建shared_ptr
-<ul>
+<li>2）不要在函数实参中创建shared_ptr<ul>
 <li>可能会因为发生异常而泄露内存</li>
-</ul></li>
-<li>3）通过<code>shared_from_this()</code>返回this指针
-<ul>
+</ul>
+</li>
+<li>3）通过<code>shared_from_this()</code>返回this指针<ul>
 <li>因为this指针本质上是一个<code>裸指针</code>，因此这样可能会导致重复析构</li>
-<li>解决方法
-<ul>
+<li>解决方法<ul>
 <li>让目标类通过派生<code>std::enable_shared_from_this&lt;T&gt;</code>类，然后使用基类的成员函数<code>shared_from_this</code>来返回this的shared_ptr</li>
-</ul></li>
-</ul></li>
-<li>4）要避免循环引用
-<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>4）要避免循环引用<ul>
 <li>智能指针最大的一个陷阱就是循环引用，循环引用会导致内存泄露</li>
 <li>导致意外延长对象的生命期</li>
-<li>解决方法
-<ul>
+<li>解决方法<ul>
 <li>使用weak_ptr</li>
-</ul></li>
-</ul></li>
 </ul>
-<h2 id="五unique_ptr独占的智能指针">五、unique_ptr独占的智能指针</h2>
-<h3 id="概念-1">概念</h3>
-<ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、unique-ptr独占的智能指针"><a href="#五、unique-ptr独占的智能指针" class="headerlink" title="五、unique_ptr独占的智能指针"></a>五、unique_ptr独占的智能指针</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><ul>
 <li>希望只有一个智能指针管理资源或者管理数组就用unique_ptr</li>
 <li>unique_ptr是一个独占型的智能指针</li>
 <li>它不允许其他的智能指针共享其内部的指针</li>
 <li>不允许通过赋值将一个unique_ptr赋值给另外一个unique_ptr</li>
-<li>可以通过<code>std::move</code>来转移到其他的unique_ptr <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;T&gt; <span class="title">myPtr</span><span class="params">(<span class="keyword">new</span> T)</span></span>;</span><br><span class="line">unique_ptr&lt;T&gt; myOtherPtr = std:: <span class="built_in">move</span>(myptr);</span><br></pre></td></tr></table></figure></li>
+<li>可以通过<code>std::move</code>来转移到其他的unique_ptr  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;T&gt; <span class="title">myPtr</span><span class="params">(<span class="keyword">new</span> T)</span></span>;</span><br><span class="line">unique_ptr&lt;T&gt; myOtherPtr = std:: <span class="built_in">move</span>(myptr);</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="注意事项-1">注意事项</h3>
-<ul>
-<li>如果是数组，则判断是否是定长数组
-<ul>
-<li>若为定长数组则编译不通过（不能这样调用<code>make_unique&lt;T[10]&gt;(10)</code>)</li>
-<li>若为非定长数组，则获取数组中的元素类型，再根据参数size创建动态数组的unique_ptr
-<ul>
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>如果是数组，则判断是否是定长数组<ul>
+<li>若为定长数组则编译不通过（不能这样调用<code>make_unique&lt;T[10]&gt;(10) </code>)</li>
+<li>若为非定长数组，则获取数组中的元素类型，再根据参数size创建动态数组的unique_ptr<ul>
 <li><code>unique_ptr&lt;int[]&gt; ptr5 = make_unique&lt;int[]&gt;(10);</code></li>
-</ul></li>
-</ul></li>
-<li>unique_ptr可以指向数组（而shared_ptr这么做不合法） <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_ptr&lt;<span class="type">int</span> []&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>])</span></span></span><br><span class="line"><span class="function">ptr[9] </span>= <span class="number">9</span>;         <span class="comment">// 设置最后一个元素值为9</span></span><br></pre></td></tr></table></figure></li>
-<li>unique_ptr指定删除器的时候需要确定删除器的类型
-<ul>
-<li><code>std::unique_ptr&lt;int, void(*)(int*)&gt; ptr(new int (1), [](int* p) &#123; delete p; &#125;);</code></li>
-<li>lambda表达式在没有捕获变量的情况下是可以直接转换为函数指针的，一旦捕获了就无法转换了
-<ul>
-<li><code>std::unique_ptr&lt;int, void(*)(int*)&gt; ptr(new int (1), [&amp;](int* p) &#123; delete p; &#125;);</code> // 错误，捕获了变量</li>
-</ul></li>
-<li>如果希望unique_ptr删除器支持lambda可以这么写
-<ul>
-<li><code>std::unique_ptr&lt;int, std::function&lt;void(int*)&gt;&gt; ptr(new int(1), [&amp;](int* p) &#123; delete p; &#125;</code></li>
-</ul></li>
-</ul></li>
 </ul>
-<h2 id="六weak_ptr弱引用的智能指针">六、weak_ptr弱引用的智能指针</h2>
-<h3 id="概念-2">概念</h3>
-<ul>
+</li>
+</ul>
+</li>
+<li>unique_ptr可以指向数组（而shared_ptr这么做不合法）  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_ptr&lt;<span class="type">int</span> []&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>])</span></span></span><br><span class="line"><span class="function">ptr[9] </span>= <span class="number">9</span>;         <span class="comment">// 设置最后一个元素值为9</span></span><br></pre></td></tr></table></figure></li>
+<li>unique_ptr指定删除器的时候需要确定删除器的类型<ul>
+<li><code>std::unique_ptr&lt;int, void(*)(int*)&gt; ptr(new int (1), [](int* p) &#123; delete p; &#125;);</code></li>
+<li>lambda表达式在没有捕获变量的情况下是可以直接转换为函数指针的，一旦捕获了就无法转换了<ul>
+<li><code>std::unique_ptr&lt;int, void(*)(int*)&gt; ptr(new int (1), [&amp;](int* p) &#123; delete p; &#125;);</code>  &#x2F;&#x2F; 错误，捕获了变量</li>
+</ul>
+</li>
+<li>如果希望unique_ptr删除器支持lambda可以这么写<ul>
+<li><code>std::unique_ptr&lt;int, std::function&lt;void(int*)&gt;&gt; ptr(new int(1), [&amp;](int* p) &#123; delete p; &#125;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、weak-ptr弱引用的智能指针"><a href="#六、weak-ptr弱引用的智能指针" class="headerlink" title="六、weak_ptr弱引用的智能指针"></a>六、weak_ptr弱引用的智能指针</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><ul>
 <li>weak_ptr是用来监视shared_ptr的，不会使引用计数加1</li>
 <li>它不管理shared_ptr内部的指针，主要是为了监视shared_ptr的生命周期</li>
 <li>它的构造不会增加引用计数，它的析构也不会减少引用计数</li>
 </ul>
-<h3 id="基本用法-1">基本用法</h3>
-<ul>
-<li>1）通过<code>use_count()</code>方法来获得当前观测资源的引用计数 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">sp</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line"><span class="function">weak_ptr&lt;<span class="type">int</span>&gt; <span class="title">wp</span><span class="params">(sp)</span></span>;</span><br><span class="line">cout &lt;&lt; wp.<span class="built_in">use_count</span>() &lt;&lt; endl;  <span class="comment">// 结果将输出1</span></span><br></pre></td></tr></table></figure></li>
-<li>2）通过<code>expired()</code>方法来判断所观测的资源是否已经释放（true为无效） <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (wp.<span class="built_in">expired</span>())</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;weak_ptr无效，所监视的智能指针已经被释放&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;weak_ptr有效&quot;</span>;</span><br></pre></td></tr></table></figure></li>
-<li>3）通过<code>lock()</code>方法来获取所监视的shared_ptr <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> sp = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt; (<span class="number">42</span>);</span><br><span class="line">std::weak_ptr&lt;<span class="type">int</span>&gt; gw = sp;</span><br><span class="line"><span class="keyword">auto</span> spt = gw.<span class="built_in">lock</span>();  <span class="comment">// 获取所监视的shared_ptr</span></span><br><span class="line">cout &lt;&lt; *spt &lt;&lt; endl;</span><br></pre></td></tr></table></figure></li>
+<h3 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h3><ul>
+<li>1）通过<code>use_count()</code>方法来获得当前观测资源的引用计数  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">sp</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line"><span class="function">weak_ptr&lt;<span class="type">int</span>&gt; <span class="title">wp</span><span class="params">(sp)</span></span>;</span><br><span class="line">cout &lt;&lt; wp.<span class="built_in">use_count</span>() &lt;&lt; endl;  <span class="comment">// 结果将输出1</span></span><br></pre></td></tr></table></figure></li>
+<li>2）通过<code>expired()</code>方法来判断所观测的资源是否已经释放（true为无效）  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (wp.<span class="built_in">expired</span>())</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;weak_ptr无效，所监视的智能指针已经被释放&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;weak_ptr有效&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>3）通过<code>lock()</code>方法来获取所监视的shared_ptr  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> sp = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt; (<span class="number">42</span>);</span><br><span class="line">std::weak_ptr&lt;<span class="type">int</span>&gt; gw = sp;</span><br><span class="line"><span class="keyword">auto</span> spt = gw.<span class="built_in">lock</span>();  <span class="comment">// 获取所监视的shared_ptr</span></span><br><span class="line">cout &lt;&lt; *spt &lt;&lt; endl;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="weak_ptr返回this指针">weak_ptr返回this指针</h3>
-<ul>
+<h3 id="weak-ptr返回this指针"><a href="#weak-ptr返回this指针" class="headerlink" title="weak_ptr返回this指针"></a>weak_ptr返回this指针</h3><ul>
 <li><code>std::enable_shared_from_this</code>类中有一个weak_ptr，这个weak_ptr用来观测this智能指针</li>
 <li>调用<code>shared_from_this()</code>方法时，会调用内部这个weak_ptr的<code>lock()</code>方法，将所观测的shared_ptr返回</li>
 <li>获取自身智能指针的函数仅在<code>shared_ptr&lt;T&gt;</code>的构造函数被调用之后才能使用，因为<code>enable_shared_from_this</code>内部的weak_ptr只有通过shared_ptr才能构造</li>
 </ul>
-<h3 id="可以通过weak_ptr解决循环引用问题">可以通过weak_ptr解决循环引用问题</h3>
-
+<h3 id="可以通过weak-ptr解决循环引用问题"><a href="#可以通过weak-ptr解决循环引用问题" class="headerlink" title="可以通过weak_ptr解决循环引用问题"></a>可以通过weak_ptr解决循环引用问题</h3>
     </div>
 
     

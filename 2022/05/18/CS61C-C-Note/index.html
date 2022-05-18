@@ -27,7 +27,7 @@
 <meta property="og:description" content="揭示C语言的本质">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-18T02:08:33.000Z">
-<meta property="article:modified_time" content="2022-05-18T09:46:28.820Z">
+<meta property="article:modified_time" content="2022-05-18T09:57:24.205Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -230,7 +230,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-05-18 10:08:33 / Modified: 17:46:28" itemprop="dateCreated datePublished" datetime="2022-05-18T10:08:33+08:00">2022-05-18</time>
+      <time title="Created: 2022-05-18 10:08:33 / Modified: 17:57:24" itemprop="dateCreated datePublished" datetime="2022-05-18T10:08:33+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -254,18 +254,20 @@
     <div class="post-body" itemprop="articleBody">
         <!-- # CS61C C Part Notes. -->
 <blockquote>
-<p>揭示C语言的本质 <span id="more"></span></p>
+<p>揭示C语言的本质</p>
 </blockquote>
-<ol type="1">
+<span id="more"></span>
+
+<ol>
 <li>Array在传递给函数时记得必须要一并传递Array的大小，因为在函数内使用<code>sizeof</code>会得到不正确的结果。</li>
-<li>Array in C don't know their size.</li>
+<li>Array in C don’t know their size.</li>
 <li>数组名不是一个变量。</li>
 <li>Struct Alignment.</li>
-<li>A String in C is just an array of characters.</li>
-<li>String end. Last character is followed by a 0 byte('\0')(a.k.a <code>null terminator</code>).</li>
+<li>A String in C is just an array of characters. </li>
+<li>String end. Last character is followed by a 0 byte(‘\0’)(a.k.a <code>null terminator</code>).</li>
 <li><code>strlen()</code> return the length of string(not including null term).</li>
-<li>Pointer Arithmetic, Pointer+1实际上是加指针指向的类型的大小<code>sizeof(*p)</code>. Pointer arithmetic moves the pointer by the size of the thing it’s pointing to.</li>
-<li>注意<code>postfixal</code>++的优先级要大于dereference(<em>), 注意这两种区别<code>*p++</code>，先将p和后置++捆绑，但是在解引用之后生效，即增以p=p+1。<code>(*p)++</code>表示，先将p和<code>*</code>捆绑，再将解引用后的值++, 即(</em>p) = (*p) + 1.</li>
+<li>Pointer Arithmetic, Pointer+1实际上是加指针指向的类型的大小<code>sizeof(*p)</code>. Pointer arithmetic moves the pointer by the<br>size of the thing it’s pointing to.</li>
+<li>注意<code>postfixal</code>++的优先级要大于dereference(*), 注意这两种区别<code>*p++</code>，先将p和后置++捆绑，但是在解引用之后生效，即增以p&#x3D;p+1。<code>(*p)++</code>表示，先将p和<code>*</code>捆绑，再将解引用后的值++, 即(*p) &#x3D; (*p) + 1.</li>
 <li>声明一个指针如果未初始化，则随机指向任何一个地址<code>garbage</code>，这在<code>dereference</code>时会发生ACV(如果地址为系统地址)。</li>
 <li>dot notation &amp; arrow notationss</li>
 <li>pointers to pointers, 还有一点需要注意。如果传的参数不是当前类型本身的地址，则在函数中改变的值不会对全局造成影响，比如：类型本身是指针就需要传递指针的指针才能改变本身的值。</li>
@@ -273,7 +275,7 @@
 <li>Stack pointer 为最低的(current)Stack frame.</li>
 <li>注意从局部变量返回地址，这个地址在接下来主函数中解引用会出现错误的值，因为栈帧(stack frame)很可能会被覆盖(over write)。印象中Effective cpp书中只是提到这种情况是危险的但并未说清楚其中的原理。So never return pointers to local variable from function.</li>
 <li>Static Data: place for variables that persist. 静态数据会在程序执行的整个过程中持续存在。</li>
-<li><code>String literal</code>字符串字面量同样也是静态数据，比如: <code>char* str = "hi"</code>, 为一个字符指针指向用引号括起来的字符串。切记不要误用为<code>char str[] = "hi"</code>，它会将数据保存到栈(stack)中而不是<code>Static Data</code>区域。</li>
+<li><code>String literal</code>字符串字面量同样也是静态数据，比如: <code>char* str = &quot;hi&quot;</code>, 为一个字符指针指向用引号括起来的字符串。切记不要误用为<code>char str[] = &quot;hi&quot;</code>，它会将数据保存到栈(stack)中而不是<code>Static Data</code>区域。</li>
 <li><code>String literal</code>是不能被更改的左值。</li>
 <li><code>Static Data</code>由两种类型组成，一种是<code>Read-only</code>, 比如说<code>String literal</code>; 一种是<code>Read-Write</code>, 比如说<code>Global variable</code>.</li>
 <li><code>Code</code>为<code>Read-only</code> Data，存放machine code.</li>

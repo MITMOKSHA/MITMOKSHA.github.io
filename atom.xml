@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-18T14:32:50.167Z</updated>
+  <updated>2022-05-18T15:52:03.824Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>书籍推荐</title>
+    <link href="https://mitmoksha.github.io/2022/05/18/%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90/"/>
+    <id>https://mitmoksha.github.io/2022/05/18/%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90/</id>
+    <published>2022-05-18T15:37:49.000Z</published>
+    <updated>2022-05-18T15:52:03.824Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;一些好书推荐(强烈建议阅读)，列入我后期的阅读清单&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="读书笔记" scheme="https://mitmoksha.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>CSAPP Ch2</title>
@@ -372,27 +390,6 @@
     <summary type="html">&lt;!-- # CSAPP Lab2: Bomb Lab --&gt;
 &lt;blockquote&gt;
 &lt;p&gt;熟悉GDB&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="CMU15-213" scheme="https://mitmoksha.github.io/categories/CMU15-213/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CSAPP Lab1: Data Lab</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/</id>
-    <published>2022-05-16T09:32:17.000Z</published>
-    <updated>2022-05-18T09:57:47.177Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;some-restriction&quot;&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;
-&lt;!-- # CSAPP Lab1: Data Lab --&gt;
-&lt;blockquote&gt;
-&lt;p&gt;又复习了一次位级表示&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     

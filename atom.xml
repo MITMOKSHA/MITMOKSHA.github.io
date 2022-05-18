@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-18T03:28:18.666Z</updated>
+  <updated>2022-05-18T09:29:54.861Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -21,16 +21,11 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CSAPP-Ch1/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CSAPP-Ch1/</id>
     <published>2022-05-18T03:14:00.000Z</published>
-    <updated>2022-05-18T03:28:18.666Z</updated>
+    <updated>2022-05-18T09:29:54.861Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1</summary>
-        
-      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;计算机系统总是如此的吸引人&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -44,18 +39,10 @@
     <link href="https://mitmoksha.github.io/2022/05/18/Letex-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/18/Letex-Note/</id>
     <published>2022-05-18T02:53:09.000Z</published>
-    <updated>2022-05-18T03:08:44.886Z</updated>
+    <updated>2022-05-18T09:50:05.208Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;use-latex-in-markdown&quot;&gt;&lt;strong&gt;Use Latex In MarkDown&lt;/strong&gt;&lt;/h1&gt;
-&lt;p&gt;以下记录一些本人常用的公式, 因为deploy之后对部分公式支持较差，因此有部分删减&lt;/p&gt;
-&lt;h4</summary>
-        
-      
+    <summary type="html">&lt;p&gt;以下记录一些本人常用的公式, 因为deploy之后对部分公式支持较差，因此有部分删减&lt;/p&gt;</summary>
     
     
     
@@ -69,17 +56,11 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CS61B-Lec-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CS61B-Lec-Note/</id>
     <published>2022-05-18T02:52:23.000Z</published>
-    <updated>2022-05-18T03:10:29.496Z</updated>
+    <updated>2022-05-18T09:46:16.621Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cs61b-data-structure-notes&quot;&gt;CS61B Data Structure Notes&lt;/h1&gt;
-&lt;h1 id=&quot;java-syntax&quot;&gt;&lt;strong&gt;Java</summary>
-        
-      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;数据结构和Java基础&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -93,17 +74,12 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/</id>
     <published>2022-05-18T02:08:33.000Z</published>
-    <updated>2022-05-18T03:17:53.839Z</updated>
+    <updated>2022-05-18T09:46:28.820Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cs61c-c-part-notes.&quot;&gt;CS61C C Part Notes.&lt;/h1&gt;
-&lt;ol</summary>
-        
-      
+    <summary type="html">&lt;!-- # CS61C C Part Notes. --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;揭示C语言的本质&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -117,18 +93,11 @@
     <link href="https://mitmoksha.github.io/2022/05/16/NJU-OS-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/NJU-OS-Note/</id>
     <published>2022-05-16T10:14:19.000Z</published>
-    <updated>2022-05-18T01:48:22.303Z</updated>
+    <updated>2022-05-18T09:40:33.425Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;nju-os-note&quot;&gt;NJU OS Note&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ld&lt;/code&gt;, GNU</summary>
-        
-      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;一直以来被忽略的本科教学&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -142,18 +111,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/</id>
     <published>2022-05-16T10:08:09.000Z</published>
-    <updated>2022-05-18T01:48:07.935Z</updated>
+    <updated>2022-05-18T09:49:53.310Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;ics-lab-note&quot;&gt;ICS Lab Note&lt;/h1&gt;
-&lt;h2 id=&quot;lab1&quot;&gt;&lt;strong&gt;lab1&lt;/strong&gt;&lt;/h2&gt;
-&lt;ol</summary>
-        
-      
+    <summary type="html">&lt;!-- # ICS Lab Note --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本校的Lab体验总结&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -167,17 +130,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CS186-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CS186-Note/</id>
     <published>2022-05-16T10:07:44.000Z</published>
-    <updated>2022-05-18T01:47:43.442Z</updated>
+    <updated>2022-05-18T09:48:34.564Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cs186-note&quot;&gt;&lt;strong&gt;CS186 Note&lt;/strong&gt;&lt;/h1&gt;
-&lt;h2</summary>
-        
-      
+    <summary type="html">&lt;!-- # **CS186 Note** --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SQL真的这么难吗?&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -191,17 +149,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/cmu15445-project1/"/>
     <id>https://mitmoksha.github.io/2022/05/16/cmu15445-project1/</id>
     <published>2022-05-16T10:02:20.000Z</published>
-    <updated>2022-05-18T01:47:28.688Z</updated>
+    <updated>2022-05-18T09:44:19.486Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cmu-15-445-project1-buffer-pool-manager&quot;&gt;CMU 15-445 Project1: BUFFER POOL MANAGER&lt;/h1&gt;
-&lt;h2</summary>
-        
-      
+    <summary type="html">&lt;!-- # CMU 15-445 Project1: BUFFER POOL MANAGER --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;OS vs. DB&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -215,19 +168,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/"/>
     <id>https://mitmoksha.github.io/2022/05/16/cs61c-lab2/</id>
     <published>2022-05-16T09:59:00.000Z</published>
-    <updated>2022-05-18T01:47:38.850Z</updated>
+    <updated>2022-05-18T09:47:51.426Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cs61c-lab2&quot;&gt;CS61C Lab2&lt;/h1&gt;
-&lt;h2 id=&quot;exercise-0-makefiles&quot;&gt;&lt;strong&gt;Exercise 0: Makefiles&lt;/strong&gt;&lt;/h2&gt;
-&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;Which</summary>
-        
-      
+    <summary type="html">&lt;!-- # CS61C Lab2 --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;覆盖广的一个lab&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -241,17 +187,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/cs144-lab0/"/>
     <id>https://mitmoksha.github.io/2022/05/16/cs144-lab0/</id>
     <published>2022-05-16T09:58:51.000Z</published>
-    <updated>2022-05-18T01:47:41.731Z</updated>
+    <updated>2022-05-18T09:48:20.539Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;stanford-cs144-lab0-networking-warmup&quot;&gt;Stanford CS144 Lab0: Networking Warmup&lt;/h1&gt;
-&lt;h2 id=&quot;fetch-a-web-page&quot;&gt;&lt;strong&gt;1. Fetch a</summary>
-        
-      
+    <summary type="html">&lt;!-- # Stanford CS144 Lab0: Networking Warmup --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;应用层Overview&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -265,17 +206,11 @@
     <link href="https://mitmoksha.github.io/2022/05/16/s081-lab5/"/>
     <id>https://mitmoksha.github.io/2022/05/16/s081-lab5/</id>
     <published>2022-05-16T09:55:02.000Z</published>
-    <updated>2022-05-18T01:48:35.316Z</updated>
+    <updated>2022-05-18T09:51:07.336Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;mit-6.s081-lab5-xv6-lazy-page-allocation&quot;&gt;MIT 6.S081 Lab5: xv6 lazy page allocation&lt;/h1&gt;
-&lt;p&gt;很多方法都用到了Lazy allocation, 比如: - paging</summary>
-        
-      
+    <summary type="html">&lt;!-- # MIT 6.S081 Lab5: xv6 lazy page allocation --&gt;
+&lt;p&gt;很多情况都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files&lt;/p&gt;</summary>
     
     
     
@@ -289,16 +224,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/s081-lab4/"/>
     <id>https://mitmoksha.github.io/2022/05/16/s081-lab4/</id>
     <published>2022-05-16T09:54:57.000Z</published>
-    <updated>2022-05-18T01:48:31.108Z</updated>
+    <updated>2022-05-18T09:41:02.965Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;mit-6.s081-lab4-traps&quot;&gt;MIT 6.S081 Lab4:</summary>
-        
-      
+    <summary type="html">&lt;!-- # MIT 6.S081 Lab4: Traps --&gt;
+&lt;ul&gt;
+&lt;li&gt;跟着视频走一遍系统调用&lt;code&gt;gdb&lt;/code&gt;的流程。&lt;code&gt;tmux&lt;/code&gt;分割两个窗口，一个窗口作为服务器&lt;code&gt;make CPUS=1 qemu-gdb&lt;/code&gt;，另一个窗口作为&lt;code&gt;gdb&lt;/code&gt;调试窗口&lt;code&gt;gdb-multiarch&lt;/code&gt;。将断点打在&lt;code&gt;ecall指令处&lt;/code&gt;, &lt;code&gt;continue&lt;/code&gt;执行，随后再将第二个断点打到&lt;code&gt;print/x $stvec&lt;/code&gt;处也就是，&lt;code&gt;TRAPFRAME&lt;/code&gt;的起始地址。&lt;code&gt;ecall&lt;/code&gt;指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。&lt;/li&gt;&lt;/ul&gt;</summary>
     
     
     
@@ -312,17 +243,11 @@
     <link href="https://mitmoksha.github.io/2022/05/16/s081-lab3/"/>
     <id>https://mitmoksha.github.io/2022/05/16/s081-lab3/</id>
     <published>2022-05-16T09:54:53.000Z</published>
-    <updated>2022-05-18T01:48:28.970Z</updated>
+    <updated>2022-05-18T09:40:53.323Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;mit-6.s081-lab3-page-tables&quot;&gt;MIT 6.S081 Lab3: Page tables&lt;/h1&gt;
-&lt;h2 id=&quot;print-a-page-table&quot;&gt;&lt;strong&gt;1. Print a page</summary>
-        
-      
+    <summary type="html">&lt;!-- # MIT 6.S081 Lab3: Page tables --&gt;
+&lt;h2 id=&quot;print-a-page-table&quot;&gt;&lt;strong&gt;1. Print a page table&lt;/strong&gt;&lt;/h2&gt;</summary>
     
     
     
@@ -336,17 +261,11 @@
     <link href="https://mitmoksha.github.io/2022/05/16/s081-lab2/"/>
     <id>https://mitmoksha.github.io/2022/05/16/s081-lab2/</id>
     <published>2022-05-16T09:54:49.000Z</published>
-    <updated>2022-05-18T01:48:26.870Z</updated>
+    <updated>2022-05-18T09:40:48.601Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;mit-6.s081-lab2-system-calls&quot;&gt;MIT 6.S081 Lab2: System Calls&lt;/h1&gt;
-&lt;h2 id=&quot;system-call-tracing&quot;&gt;&lt;strong&gt;1. System call</summary>
-        
-      
+    <summary type="html">&lt;!-- # MIT 6.S081 Lab2: System Calls --&gt;
+&lt;h2 id=&quot;system-call-tracing&quot;&gt;&lt;strong&gt;1. System call tracing&lt;/strong&gt;&lt;/h2&gt;</summary>
     
     
     
@@ -360,17 +279,11 @@
     <link href="https://mitmoksha.github.io/2022/05/16/s081-lab1/"/>
     <id>https://mitmoksha.github.io/2022/05/16/s081-lab1/</id>
     <published>2022-05-16T09:53:02.000Z</published>
-    <updated>2022-05-18T01:48:24.893Z</updated>
+    <updated>2022-05-18T09:40:43.072Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;mit-6.s081-lab1-xv6-and-unix-utilities&quot;&gt;MIT 6.S081 Lab1: Xv6 and Unix utilities&lt;/h1&gt;
-&lt;h2 id=&quot;sleep&quot;&gt;&lt;strong&gt;1.</summary>
-        
-      
+    <summary type="html">&lt;!-- # MIT 6.S081 Lab1: Xv6 and Unix utilities --&gt;
+&lt;h2 id=&quot;sleep&quot;&gt;&lt;strong&gt;1. sleep&lt;/strong&gt;&lt;/h2&gt;</summary>
     
     
     
@@ -384,18 +297,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/</id>
     <published>2022-05-16T09:39:52.000Z</published>
-    <updated>2022-05-18T01:47:34.312Z</updated>
+    <updated>2022-05-18T09:45:19.042Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cs61b-gitlet&quot;&gt;CS61B Gitlet&lt;/h1&gt;
-&lt;h2 id=&quot;project-2-getting-startedlab6&quot;&gt;&lt;strong&gt;Project 2 Getting Started(Lab6)&lt;/strong&gt;&lt;/h2&gt;
-&lt;h3</summary>
-        
-      
+    <summary type="html">&lt;!-- # CS61B Gitlet --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简化版Git，深入探索Git的底层结构&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -409,17 +316,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CS61C-CPU-PROJECT/</id>
     <published>2022-05-16T09:37:37.000Z</published>
-    <updated>2022-05-18T01:47:36.587Z</updated>
+    <updated>2022-05-18T09:47:17.201Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;cs61c-cpu-project&quot;&gt;&lt;strong&gt;CS61C CPU PROJECT&lt;/strong&gt;&lt;/h1&gt;
-&lt;h2</summary>
-        
-      
+    <summary type="html">&lt;!-- # **CS61C CPU PROJECT** --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用时4天，体验CPU设计&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -433,18 +335,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/</id>
     <published>2022-05-16T09:36:28.000Z</published>
-    <updated>2022-05-18T01:48:02.146Z</updated>
+    <updated>2022-05-18T09:49:27.135Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;csapp-lab2-bomb-lab&quot;&gt;CSAPP Lab2: Bomb Lab&lt;/h1&gt;
-&lt;h2 id=&quot;preparation&quot;&gt;&lt;strong&gt;Preparation&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;建议在实验大致看一下lab相关的&lt;a</summary>
-        
-      
+    <summary type="html">&lt;!-- # CSAPP Lab2: Bomb Lab --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;熟悉GDB&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -458,18 +354,13 @@
     <link href="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/"/>
     <id>https://mitmoksha.github.io/2022/05/16/CSAPP-Lab1-Data-Lab/</id>
     <published>2022-05-16T09:32:17.000Z</published>
-    <updated>2022-05-18T01:47:59.504Z</updated>
+    <updated>2022-05-18T09:48:59.833Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;csapp-lab1-data-lab&quot;&gt;CSAPP Lab1: Data Lab&lt;/h1&gt;
-&lt;h2 id=&quot;some-restriction&quot;&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;
-&lt;h4</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;some-restriction&quot;&gt;&lt;strong&gt;Some Restriction&lt;/strong&gt;&lt;/h2&gt;
+&lt;!-- # CSAPP Lab1: Data Lab --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;又复习了一次位级表示&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -483,18 +374,12 @@
     <link href="https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/"/>
     <id>https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/</id>
     <published>2022-05-16T09:26:09.000Z</published>
-    <updated>2022-05-18T01:47:16.393Z</updated>
+    <updated>2022-05-18T09:43:30.813Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;null-video-note&quot;&gt;6.NULL Video Note&lt;/h1&gt;
-&lt;h2 id=&quot;video-1-the-shell&quot;&gt;&lt;strong&gt;VIDEO 1&lt;/strong&gt; The Shell&lt;/h2&gt;
-&lt;ol</summary>
-        
-      
+    <summary type="html">&lt;!-- # 6.NULL Video Note --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;好的工具总是能带来高的效率&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     

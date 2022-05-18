@@ -83,7 +83,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-目录"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>目录</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -233,7 +233,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:16" itemprop="dateModified" datetime="2022-05-18T09:48:16+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:50:46" itemprop="dateModified" datetime="2022-05-18T17:50:46+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,8 +255,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="makefile-note">Makefile Note</h1>
-<p>参考<a target="_blank" rel="noopener" href="https://seisman.github.io/how-to-write-makefile/introduction.html">跟我一起写Makefile</a>做点笔记。 - 第一个<code>target</code>为<code>make</code>的默认目标 - <code>prerequisites</code>中如果有一个以上的文件比<code>target</code>文件要新的话，<code>command</code>所定义的命令就会被执行 </p><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target ... : prerequisites ...</span><br><span class="line">    command</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure> - 最开始的实例 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">edit : main.o kbd.o command.o display.o \</span><br><span class="line">        insert.o search.o files.o utils.o</span><br><span class="line">    cc -o edit main.o kbd.o command.o display.o \</span><br><span class="line">        insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">main.o : main.c defs.h</span><br><span class="line">    cc -c main.c</span><br><span class="line">kbd.o : kbd.c defs.h command.h</span><br><span class="line">    cc -c kbd.c</span><br><span class="line">command.o : command.c defs.h command.h</span><br><span class="line">    cc -c command.c</span><br><span class="line">display.o : display.c defs.h buffer.h</span><br><span class="line">    cc -c display.c</span><br><span class="line">insert.o : insert.c defs.h buffer.h</span><br><span class="line">    cc -c insert.c</span><br><span class="line">search.o : search.c defs.h buffer.h</span><br><span class="line">    cc -c search.c</span><br><span class="line">files.o : files.c defs.h buffer.h command.h</span><br><span class="line">    cc -c files.c</span><br><span class="line">utils.o : utils.c defs.h</span><br><span class="line">    cc -c utils.c</span><br><span class="line">clean :</span><br><span class="line">    rm edit main.o kbd.o command.o display.o \</span><br><span class="line">        insert.o search.o files.o utils.o</span><br></pre></td></tr></table></figure> - 为了复用可以在<code>Makefile</code>中使用<code>shell</code>的变量 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o kbd.o command.o display.o \</span><br><span class="line">    insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">edit : <span class="variable">$(objects)</span></span><br><span class="line">    cc -o edit <span class="variable">$(objects)</span></span><br><span class="line">main.o : main.c defs.h</span><br><span class="line">    cc -c main.c</span><br><span class="line">kbd.o : kbd.c defs.h command.h</span><br><span class="line">    cc -c kbd.c</span><br><span class="line">command.o : command.c defs.h command.h</span><br><span class="line">    cc -c command.c</span><br><span class="line">display.o : display.c defs.h buffer.h</span><br><span class="line">    cc -c display.c</span><br><span class="line">insert.o : insert.c defs.h buffer.h</span><br><span class="line">    cc -c insert.c</span><br><span class="line">search.o : search.c defs.h buffer.h</span><br><span class="line">    cc -c search.c</span><br><span class="line">files.o : files.c defs.h buffer.h command.h</span><br><span class="line">    cc -c files.c</span><br><span class="line">utils.o : utils.c defs.h</span><br><span class="line">    cc -c utils.c</span><br><span class="line">clean :</span><br><span class="line">    rm edit <span class="variable">$(objects)</span></span><br></pre></td></tr></table></figure> - <code>make</code>会自动推导命令，只要<code>Make</code>看到一个<code>.o</code>
+          <blockquote>
+<p>Linux工程构建必备工具</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/Makefile-Note/#more" rel="contents">
@@ -326,7 +326,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:42" itemprop="dateModified" datetime="2022-05-18T09:48:42+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:42:15" itemprop="dateModified" datetime="2022-05-18T17:42:15+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -348,100 +348,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="vimvscodetmuxgdbgit">vim+vscode+tmux+gdb+git</h1>
-<p>个人的一些认为比较常用以及不经常用到的的快捷操作 ## <strong>vscode</strong> 1. 查找文件ctrl+p， esc退出 2. 分割屏幕ctrl+，通过ctrl+1/2/3来切换分割屏幕的焦点 3. ctrl+` 打开/关闭终端 4. ctrl+tab, 在tab之间切换 5. 模糊查找当前工作目录下的所有文件ctrl+p, # 6. Ctrl + Shift + Tab 导航tab 7. alt + &lt;-/-&gt;切换tab</p>
-<h2 id="vim"><strong>vim</strong></h2>
-<ol type="1">
-<li>跳转到指定行号n, ngg</li>
-<li>复制整行 yy, 复制包括当前行接下来n行， nyy</li>
-<li>复制指定行v模式下指定复制内容，然后y键复制。</li>
-<li>粘贴 如复制内容不是一整行：p粘贴到当前光标处，P粘贴到当前行首。 如复制内容是一整行：p粘贴到当前行的下一行，P粘贴到当前行的上一行</li>
-<li>剪切dd</li>
-<li>在当前文件查找指定内容，/+内容</li>
-<li>ctrl+] 跳转到函数的定义处，ctrl+t返回上一次光标处</li>
-<li>u撤销，ctrl+r恢复</li>
-<li><code>^y</code>向上移动一行, <code>^e</code>向下移动一行</li>
-<li><code>^b</code>向上移动一页，<code>^f</code>向下移动一页</li>
-<li>number + shift + G, 跳到第number行</li>
-<li>在<code>tab</code>之间切换, <code>Alt</code>+<code>number</code>.</li>
-<li>可视条件下选中后<code>&lt;</code>或<code>&gt;</code>完成缩进。</li>
-<li>要想跳转到函数定义处，需要在项目目录中输入<code>ctags -R</code>命令。<code>ctrl+]</code>跳转, <code>ctrl+o</code>返回。</li>
-<li>可视模式下注释+<code>d</code>。</li>
-<li>替换变量名<code>:%s/foo/bar/g</code>将整个文件中的<code>foo</code>替换为<code>bar</code></li>
-<li>在vim文件内使用shell命令<code>:! command</code></li>
-<li>在当前文件中打开另一个文件<code>:e file</code></li>
-<li>在Vim中编译代码<code>:!gcc %</code>, 编译并运行代码<code>:!gcc % || ./a.out</code></li>
-</ol>
-<h2 id="tmux"><strong>tmux</strong></h2>
-<ol type="1">
-<li>任何命令都需要加ctrl+b前缀</li>
-<li>c创建窗口；n, p切换窗口</li>
-<li>%垂直分屏, "水平分屏</li>
-<li>x关闭窗口</li>
-<li>o在窗口之间切换</li>
-<li>PgUp开启tmux终端界面的翻页，q退出。</li>
-</ol>
-<h2 id="gdb"><strong>gdb</strong></h2>
-<ol type="1">
-<li>delete 删除所有断点</li>
-<li>layout src/reg/asm 显示c源代码、寄存器和汇编，但未分屏；focus src/reg/asm在src、reg和asm的tui中来回切换</li>
-<li>layout split获得c和asm的分屏。</li>
-<li>info/i frame 查看栈帧, info/i args查看传递给main的参数, i locals显示当前的本地变量。</li>
-<li>通过backtrace查看栈帧，frame n(n为bt结果的栈帧号)，然后i frame查看当前栈帧号的详细内容</li>
-<li>print/p查看argv数据;print/p <em>argv(默认打印一个参数);可以通过print/p </em>argv@n 来选择argv数组中的n个元素即参数; p *argv@argc打印所有参数</li>
-<li><code>print</code>是打印值，<code>x</code>是访问主存。</li>
-<li><code>Ctrl + x</code>，再按1：单窗口模式，显示一个窗口</li>
-<li><code>Ctrl + x</code>，再按2：双窗口模式，显示两个窗口</li>
-<li><code>Ctrl + x</code>，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口。</li>
-<li><code>^x+a</code>关闭可视化</li>
-<li><code>wa</code>跟踪某个变量(watch point)</li>
-</ol>
-<h2 id="gdb续"><strong>&lt;<debug hacks>&gt;(gdb续)</debug></strong></h2>
-<ol type="1">
-<li><code>break/b</code>
-<ul>
-<li><code>break 函数名</code></li>
-<li><code>break 行号</code></li>
-<li><code>break 文件名:行号</code></li>
-<li><code>break 文件名:函数名</code></li>
-<li><code>break +偏移量</code></li>
-<li><code>break -偏移量</code></li>
-<li><code>break *地址</code></li>
-<li><code>break 断点 if 条件</code></li>
-<li>若不指定位置就默认在下一行代码上设置断点</li>
-<li><code>info break</code>显示断点信息</li>
-</ul></li>
-<li><code>run/r</code>, 如果不加参数，执行到断点位置后暂停运行(和start命令一样的效果)</li>
-<li><code>print/p</code>
-<ul>
-<li><code>p $eax</code>，显示寄存器(寄存器名前加$)</li>
-</ul></li>
-<li><code>p/格式 变量</code>, 显示寄存器可用的格式:
-<ul>
-<li>x, 显示为十六进制数</li>
-<li>d, 显示为十进制数</li>
-<li>u, 显示无符号十进制数</li>
-<li>o, 显示八进制数</li>
-<li>t, 显示二进制数(two)</li>
-<li>a, 显示地址</li>
-<li>c, 显示为字符</li>
-<li>f, 浮点小数</li>
-<li>s, 显示为字符串</li>
-<li>i, 显示为机器语言</li>
-</ul></li>
-<li><code>x/NFU ADDR</code>, 显示内存的内容(eXamining):
-<ul>
-<li><code>N</code>为重复次数</li>
-<li><code>F</code>为上述的P格式</li>
-<li><code>U</code>代表的单位：
-<ul>
-<li>b, 字节</li>
-<li>h, 半字</li>
-<li>w, 字(4字节默认)</li>
-<li>g, 双字</li>
-</ul></li>
-</ul></li>
-</ol>
+          <!-- # vim+vscode+tmux+gdb+git -->
+<p>个人的一些认为比较常用以及不经常用到的的快捷操作</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/vim-vscode-tmux-gdb/#more" rel="contents">
@@ -511,7 +419,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:32" itemprop="dateModified" datetime="2022-05-18T09:47:32+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:44:36" itemprop="dateModified" datetime="2022-05-18T17:44:36+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -533,44 +441,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="一stdfunction和bind绑定器">一、std::function和bind绑定器</h2>
-<h3 id="可调用对象">可调用对象</h3>
-<ul>
-<li>是一个函数指针</li>
-<li>是一个具有<code>operator()</code>成员函数的类对象（仿函数）</li>
-<li>是一个可被转换为函数指针的类对象</li>
-<li>是一个类成员（函数）指针</li>
-</ul>
-<h3 id="可调用对象包装器stdfuntion">可调用对象包装器std::funtion</h3>
-<ul>
-<li>头文件<code>&lt;functional&gt;</code></li>
-<li>可以容纳除了类成员（函数）指针之外的所有可调用对象</li>
-<li>可以用统一的方式处理函数、函数对象、函数指针，并允许保存和延迟执行它们</li>
-<li><code>function</code>比普通函数指针更灵活和便利</li>
-</ul>
-<h3 id="stdbind绑定器">std::bind绑定器</h3>
-<ul>
-<li>头文件<code>&lt;functional&gt;</code></li>
-<li>接受一个可调用对象，生成一个新的可调用对象</li>
-<li><code>std::bind</code>用来将可调用对象与其参数一起进行绑定，绑定后的结果可以使用<code>std::function</code>进行保存，并延迟调用到任何我们需要的时候</li>
-<li>作用
-<ul>
-<li>将可调用对象与其参数一起绑定成一个仿函数(functor)</li>
-<li>将多元（参数个数为n）可调用对象转成一元或者（n-1）元可调用对象，却只绑定部分参数 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">1</span>, <span class="number">2</span>)();  <span class="comment">// 输出：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, std::placeholders::_1, <span class="number">2</span>)(<span class="number">1</span>);  <span class="comment">// 输出 ：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">2</span>, std::placeholders::_1)(<span class="number">1</span>);  <span class="comment">// 输出 ：2 1</span></span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><code>std::bind</code>的返回类型是一个stl内部定义的仿函数类型</li>
-<li><code>std::placeholders::_1</code>是一个占位符，代表这个位置将在函数调用时被传入的第一个参数所替代</li>
-<li>组合bind函数
-<ul>
-<li><code>std::bind(std::greater&lt;int&gt;(), std::placeholders::_1, 5);</code>
-<ul>
-<li>判断是否大于5的功能闭包</li>
-</ul></li>
-</ul></li>
-</ul>
-<h3 id="c11通过提供stdfunction和stdbind统一了可调用对象的各种操作">C++11通过提供std::function和std::bind统一了可调用对象的各种操作</h3>
-<h2 id="二lambda表达式">二、lambda表达式</h2>
-<h3 id="语法形式">语法形式</h3>
+          <blockquote>
+<p>工业级的Cpp语法</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/cpp%20Note/#more" rel="contents">
@@ -640,7 +512,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:21" itemprop="dateModified" datetime="2022-05-18T09:47:21+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:32:04" itemprop="dateModified" datetime="2022-05-18T17:32:04+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -663,7 +535,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="一题目">一、题目</h1>
-<p>给定石子位置的列表stones（升序），青蛙可以跳上石子，但不能跳入水中。 如果青蛙一步跳跃了k个单位，那么它接下来跳跃的距离只能为k-1、k或k+1个单位。 青蛙只能向前方跳跃。 <strong>输入</strong>： </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stones = [0,1,3,5,6,8,12,17]</span><br></pre></td></tr></table></figure> <strong>输出</strong>： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure> <strong>解释</strong>： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">青蛙可以成功过河，按照如下方案跳跃：</span><br><span class="line">跳 1 个单位到第 2 块石子, 然后跳 2 个单位到第 3 块石子, 接着 跳 2 个单位到第 4 块石子, </span><br><span class="line">然后跳 3 个单位到第 6 块石子, 跳 4 个单位到第 7 块石子, 最后，跳 5 个单位到第 8 个石子（即最后一块石子）。</span><br></pre></td></tr></table></figure> # 二、解法 思路：本题为二维动态规划，使用动态规划的方法，令<code>dp[i][k]</code>为跳跃k个单位能否到达第i个石子，初始化<code>dp[0][0] = true;</code>，得出状态转移方程<code>dp[i][k] = dp[j][k-1] | dp[j][k] | dp[j][k+1];</code>
+<p>给定石子位置的列表stones（升序），青蛙可以跳上石子，但不能跳入水中。 如果青蛙一步跳跃了k个单位，那么它接下来跳跃的距离只能为k-1、k或k+1个单位。 青蛙只能向前方跳跃。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/29/%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/#more" rel="contents">
@@ -733,7 +605,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:40" itemprop="dateModified" datetime="2022-05-18T09:48:40+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:42:01" itemprop="dateModified" datetime="2022-05-18T17:42:01+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -755,46 +627,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="tcpip详解">TCP/IP详解</h1>
-<h2 id="一tcp超时与重传">一、TCP超时与重传</h2>
-<h3 id="引言">引言</h3>
-<ul>
-<li>计时器超时称为重传超时（RTO）</li>
-<li>若TCP累计确认无法返回新的ACK，或者当ACK包含的选择确认信息（SACK）表明出现失序报文段时，快速重传会推断出现丢包</li>
-<li>由下层网络（IP）可能出现丢失重复或失序包，TCP重传其认为已经丢失的包</li>
-</ul>
-<h3 id="简单的超时与重传举例">简单的超时与重传举例</h3>
-<ul>
-<li>二进制指数退避
-<ul>
-<li>每次重传间隔时间加倍</li>
-</ul></li>
-<li>TCP拥有两个阈值来决定如何重传同一个报文段
-<ul>
-<li>R1表示TCP在向IP层传递“消极建议”（如重新评估当前路径）前，愿意尝试重传的次数</li>
-<li>R2（大于R1）指示TCP应放弃当前连接的时机</li>
-</ul></li>
-</ul>
-<h3 id="设置重传超时">设置重传超时</h3>
-<ul>
-<li>TCP超时和重传的基础根据给定连接的RTT（往返时间）设置RTO
-<ul>
-<li>若TCP先于RTT开始重传，可能会在网络中引入不必要的重复数据</li>
-<li>若延迟远大于RTT的间隔发送重传数据，整体网络利用率（及单个连接吞吐量）会随之下降</li>
-</ul></li>
-<li>RTO设置得当是保证TCP性能的关键</li>
-<li>当分组失序（或丢失）时，RTT会被过高估算。较大的RTT估计值使得RTO也更大</li>
-<li>时间戳选项（TSOPT）使得发送端即使在丢包、延时、失序的情况下也能测量RTT</li>
-</ul>
-<h3 id="基于计时器的重传">基于计时器的重传</h3>
-<ul>
-<li>对于TCP来说，计时器需要有效地实现被设置、重新设置或取消的功能</li>
-<li>RTO的设置通常大于RTT（两倍或更大）
-<ul>
-<li>因此基于计时器的重传会导致网络利用率的下降</li>
-</ul></li>
-<li>快速重传不需要计时器超时来触发且比超时重传更高效</li>
-</ul>
+          <blockquote>
+<p>《TCP/IP详解》读书笔记</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/28/tcp%20note/#more" rel="contents">
@@ -864,7 +698,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:22" itemprop="dateModified" datetime="2022-05-18T09:47:22+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:43:58" itemprop="dateModified" datetime="2022-05-18T17:43:58+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -886,56 +720,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="新特性">新特性</h2>
-<ul>
-<li>表达式主体方法
-<ul>
-<li>=&gt;操作符引用构成方法主体的表达式，而且没有return语句。表达式的值自动作为返回值；如果表达式不返回值，则方法自动为void方法 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showResult</span>(<span class="params"><span class="built_in">int</span> answer</span>)</span> =&gt; Console.WriteLine(<span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li>差值表达式
-<ul>
-<li>$符号表明这是个差值字符串，{和}之间的任何表达式都需求值并置换，字符串差值比+操作符高效得多 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$&quot;The answer is <span class="subst">&#123;answer&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h2 id="变量">变量</h2>
-<ul>
-<li>只有<code>float</code>和<code>double</code>除以0得到<code>Infinity</code>（不会出错）</li>
-<li><code>int</code>的最大最小值<code>int.MaxValue</code>和<code>int.MinValue</code></li>
-<li>隐式类型变量<code>var</code>,作用类似于C++的<code>auto</code></li>
-</ul>
-<h2 id="逻辑">逻辑</h2>
-<ul>
-<li>与C++不一致 -<code>if</code>语句中表达式必须是布尔值, 如：<code>if (1)</code> // 错误</li>
-<li><code>switch</code>语句的控制表达式不能用<code>float</code>和<code>double</code>类型</li>
-<li><code>case</code>标签必须是常量表达式，且必须唯一</li>
-<li>C#语句的直通规则
-<ul>
-<li>直通，标签之间不能有额外语句（即不加<code>break</code>，不允许拥有语句）</li>
-<li>每个<code>case</code>都加上<code>break</code></li>
-</ul></li>
-</ul>
-<h2 id="方法">方法</h2>
-<ul>
-<li>C#所有方法都必须在类的内部声明</li>
-<li>默认参数中如果参数匹配则不会出现歧义</li>
-<li>默认参数（可选参数）必须放在后面</li>
-<li>具名参数
-<ul>
-<li><code>optMethod(first: 99, third: "Word");</code> // 传递具名参数（参数名:传递的值），实参可以按任意顺序传递，second参数使用<code>默认值</code></li>
-</ul></li>
-</ul>
-<h2 id="结构结构体">结构（结构体）</h2>
-<ul>
-<li>与C++不一致，结构主体后不加<code>;</code></li>
-<li>值类型
-<ul>
-<li>对于简单的、比较小的数据值，复制值的效率等同于或基本等同于复制地址的效率，但较复杂的数据就考虑使用类，这样就可选择只复制数据的地址，从而提高代码的执行效率</li>
-</ul></li>
-<li>不能为结构声明默认构造器（无参构造器），否则无法编译，因为编译器始终会自动生成默认构造器（不同于类）</li>
-<li>类的实例字段可在声明时初始化，但结构不允许 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Time</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">private</span> <span class="built_in">int</span> hours = <span class="number">0</span>;  <span class="comment">// 编译时错误</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
-<li>编译器不会自动初始化结构中的字段（与类不一致）</li>
-<li>复制结构变量的前提时<code>=</code>操作符右侧的结构变量已完全初始化，否则编译错误</li>
-</ul>
+          <blockquote>
+<p>初衷是Unity</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/28/c#%20Note/#more" rel="contents">
@@ -1005,7 +791,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:18" itemprop="dateModified" datetime="2022-05-18T09:47:18+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:31:57" itemprop="dateModified" datetime="2022-05-18T17:31:57+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1028,9 +814,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="一题目">一、题目</h1>
-<p>打印出二叉树中节点值的和为输入整数的所有路径（从根节点一直到叶子节点的路径） <strong>输入</strong>： 给定如下二叉树，以及目标和 target = 22 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      5</span><br><span class="line">     / \</span><br><span class="line">    4   8</span><br><span class="line">   /   / \</span><br><span class="line">  11  13  4</span><br><span class="line"> /  \    / \</span><br><span class="line">7    2  5   1</span><br></pre></td></tr></table></figure> <strong>输出</strong>： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   [5,4,11,2],</span><br><span class="line">   [5,8,4,5]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p></p>
-<h1 id="二解法">二、解法</h1>
-<p>由根节点出发，首先想到先序遍历的思路 ### 2.1 回溯 </p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="type">int</span> target) &#123;</span><br><span class="line">      <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">      &#125;</span><br><span class="line">      vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">      vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; ans;</span><br><span class="line">      <span class="type">int</span> currentSum = <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">FindPath</span>(root, target, path, currentSum, ans);</span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">FindPath</span><span class="params">(TreeNode* root, <span class="type">int</span> target, vector&lt;<span class="type">int</span>&gt;&amp; path, <span class="type">int</span> currentSum, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; ans)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 先序遍历</span></span><br><span class="line">      currentSum += root-&gt;val;  <span class="comment">// 更新当前路径</span></span><br><span class="line">      path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">      <span class="comment">// 如果是叶子节点，并且路径上的节点的和等于输入的值，则打印这条路径</span></span><br><span class="line">      <span class="type">bool</span> isLeaf = root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>;</span><br><span class="line">      <span class="keyword">if</span> (currentSum == target &amp;&amp; isLeaf) &#123;</span><br><span class="line">        ans.<span class="built_in">push_back</span>(path);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 若不是叶子节点，则遍历它的子节点</span></span><br><span class="line">      <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="built_in">FindPath</span>(root-&gt;left, target, path, currentSum, ans);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="built_in">FindPath</span>(root-&gt;right, target, path, currentSum, ans);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 在返回父节点之前，在路径上删除当前节点</span></span><br><span class="line">      path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> ### 复杂度分析 - <strong>时间复杂度</strong>
+<p>打印出二叉树中节点值的和为输入整数的所有路径（从根节点一直到叶子节点的路径）</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/28/%E5%89%91%E6%8C%87%20Offer%2034.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/#more" rel="contents">
@@ -1100,7 +884,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:11" itemprop="dateModified" datetime="2022-05-18T09:48:11+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:39:44" itemprop="dateModified" datetime="2022-05-18T17:39:44+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1123,16 +907,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="一题目">一、题目</h1>
-<p>找出无向图中的冗余连接，即将无向图还原成二叉树 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: [[1,2], [1,3], [2,3]]</span><br><span class="line">输出: [2,3]</span><br><span class="line">解释: 给定的无向图为:</span><br><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2 - 3</span><br></pre></td></tr></table></figure><p></p>
-<h1 id="二解法">二、解法</h1>
-<h3 id="并查集">2.1 并查集</h3>
-<p>思路：通过并查集寻找附加的边，初始时每个节点都属于不同的连通分量，遍历每一条边，判断这条边连接的两个顶点是否属于相同的连通分量 - 如果两个顶点属于不同的连通分量，则说明在遍历到当前的边之前，这两个顶点之间不连通，因此当前的边不会导致环出现，合并这两个顶点的连通分量。 - 如果两个顶点属于相同的连通分量，则说明在遍历到当前的边之前，这两个顶点之间已经连通，因此当前的边导致环出现，为附加的边，将当前的边作为答案返回。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; parent, <span class="type">int</span> index)</span> </span>&#123;  <span class="comment">// 查找根节点</span></span><br><span class="line">      <span class="keyword">if</span> (index != parent[index])  <span class="comment">// 若当前节点不为根节点</span></span><br><span class="line">        parent[index] = <span class="built_in">Find</span>(parent, parent[index]]); </span><br><span class="line">      <span class="keyword">return</span> parent[index];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; parent, <span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;  <span class="comment">// 合并两个集合</span></span><br><span class="line">      parent[<span class="built_in">Find</span>(parent, x)] = <span class="built_in">Find</span>(parent, y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findRedundantConnection</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">      <span class="type">int</span> size = edges.<span class="built_in">size</span>();</span><br><span class="line">      <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">parent</span><span class="params">(size + <span class="number">1</span>)</span></span>;  <span class="comment">// 为下列循环防止溢出</span></span><br><span class="line">      <span class="built_in">iota</span>(parent.<span class="built_in">begin</span>(), parent.<span class="built_in">end</span>(), <span class="number">0</span>);  <span class="comment">// 0, 1, 2, 3...</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> edge: edges) &#123;</span><br><span class="line">        <span class="type">int</span> u = edge[<span class="number">0</span>], v = edge[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Find</span>(parent, u) != <span class="built_in">Find</span>(parent, v)) &#123;  <span class="comment">// 若两个集合的根节点不同</span></span><br><span class="line">          <span class="built_in">Union</span>(parent, u, v);  <span class="comment">// 则将它们连接起来</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> edge;  <span class="comment">// 返回合并的森林</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> vector&lt;<span class="type">int</span>&gt; &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="复杂度分析">复杂度分析</h3>
-<ul>
-<li>时间复杂度：O(klogk)，其中k是图中的节点个数</li>
-<li>空间复杂度：O(n)</li>
-</ul>
+<p>找出无向图中的冗余连接，即将无向图还原成二叉树</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/28/leetcode%20684.%20%E5%86%97%E4%BD%99%E8%BF%9E%E6%8E%A5/#more" rel="contents">
@@ -1202,7 +977,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:20" itemprop="dateModified" datetime="2022-05-18T09:48:20+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:33:57" itemprop="dateModified" datetime="2022-05-18T17:33:57+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1225,148 +1000,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="一基本概念">一、基本概念</h2>
-<ul>
-<li>表名是唯一的</li>
-<li>表中的数据是按行存储的</li>
-<li>行（别名 记录）</li>
-<li>主键：一列，其值能够区分表中每个行
-<ul>
-<li>每个行都必须有一个主键值（不允许为NULL）</li>
-<li>任意两行都不具有相同的主键值</li>
-<li>不更新主键列中的值</li>
-<li>不在主键列中使用可能会更改的值</li>
-</ul></li>
-<li>命令用分号；结束</li>
-<li>连接到mysql需要以下信息
-<ul>
-<li>主机名：本地服务器为localhost</li>
-<li>端口：默认为3036</li>
-<li>一个合法的用户名</li>
-<li>用户口令（如果需要的话）</li>
-</ul></li>
-<li><code>use&lt;数据库名字&gt;</code>来选择数据库</li>
-<li><code>show databases</code>返回可用数据库的一个列表</li>
-<li><code>show tables</code>返回该数据库内的可用表的一个列表</li>
-<li><code>show columns from &lt;表名&gt;</code> = <code>describe &lt;表名&gt;</code>来显示表中的所有列</li>
-<li>自动增量：Mysql可以自动地为每个行分配下一个可用的编号，需要create语句</li>
-<li><code>show status</code>显示广泛的服务器状态信息</li>
-<li><code>show create databases/table</code>分别用来显示创建特定数据库或表的语句</li>
-<li><code>show grants</code>显示授予用户的安全权限</li>
-<li><code>show errors</code>和<code>show warnings</code>显示服务器错误或警告信息</li>
-</ul>
-<h2 id="二select语句">二、SELECT语句</h2>
-<ul>
-<li><code>SELECT &lt;列名&gt; FROM &lt;表名&gt;</code>在表中检索单个列 &gt;SELECT检索多个列，列名用逗号分隔 &gt;检索所有列，用<code>*</code>通配符</li>
-<li>sql语句不区分大小写</li>
-<li>SQL开发人员喜欢对所有SQL关键字使用大写，而对所有列和表名使用小写</li>
-<li>处理SQL语句空格会被忽略</li>
-<li><code>SELECT DISTINCT ... FROM</code>返回不重复的行（distinct要放在列名前面）</li>
-<li>使用完全限定的表名<code>SELECT db.host FROM mysql.db</code></li>
-<li><code>FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT</code>是<code>SELECT</code>的子句，其出现次序必须为上述顺序，次序不对将产生错误信息</li>
-<li><code>ORDER BY</code>子句取一个或多个列的名字对输出进行排序 &gt;默认为asc升序，在列名后加<code>DESC</code>关键字按降序排列，desc关键字只应用到直接位于其前面的列名</li>
-<li><code>GROUP BY</code>子句，分组允许把数据分为多个逻辑组</li>
-<li><code>HAVING</code>和<code>WHERE</code>的区别：<code>HAVING</code>过滤分组，<code>WHERE</code>过滤行</li>
-<li><code>WHERE</code>是<code>SELECT</code>的子句（在from子句之后给出）用来指定搜索条件</li>
-<li><strong>WHERE子句操作符</strong></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">操作符</th>
-<th style="text-align: center;">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">=</td>
-<td style="text-align: center;">等于</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">&lt;&gt;</td>
-<td style="text-align: center;">不等于</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">!=</td>
-<td style="text-align: center;">不等于</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">BETWEEN</td>
-<td style="text-align: center;">在指定的两个值之间</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>空值检查(<code>is NULL</code>子句)<code>where...is NULL;</code></li>
-<li><code>WHERE</code>子句给出了<code>AND, OR, IN, NOT</code>逻辑操作符来进行逻辑操作</li>
-</ul>
-<h2 id="三匹配">三、匹配</h2>
-<ul>
-<li>通配符本身实际是SQL的<code>WHERE</code>子句中有特殊含义的字符，在搜索子句中使用通配符，必须使用<code>LIKE</code>操作符，<code>LIKE</code>只是Mysql后跟的搜索模式利用通配符匹配而不是直接相等匹配进行比较</li>
-<li>百分号<code>%</code>通配符匹配任意个数的任意字符，下划线<code>_</code>通配符匹配任意单个字符</li>
-<li>使用通配符的技巧
-<ul>
-<li>不要过度使用通配符</li>
-<li>把通配符置于搜索模式的开始处搜索起来是最慢的</li>
-</ul></li>
-<li><code>WHERE</code>的子句中<code>REGEXP</code>子句使用正则表达式，在<code>REGEXP</code>关键字后加上<code>BINARY</code>来区分匹配表达式的大小写 例：<br>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT Db, User FROM db </span><br><span class="line">WHERE Db REGEXP BINARY &#x27;.ys&#x27;;</span><br></pre></td></tr></table></figure></li>
-<li>匹配正则表达式内具有特殊意义的所有字符都必须以\</li>
-</ul>
-<p><strong>常用字符类</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">类</th>
-<th style="text-align: center;">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">[:alnum:]</td>
-<td style="text-align: center;">任意字母和数字（同[a-zA-Z0-9])</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">[:alpha:]</td>
-<td style="text-align: center;">任意字符（同[a-zA-Z]）</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">[:blank:]</td>
-<td style="text-align: center;">空格和制表</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">[:cntrl:]</td>
-<td style="text-align: center;">ASCII控制字符</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">[:digit:]</td>
-<td style="text-align: center;">任意数字</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">[:graph:]</td>
-<td style="text-align: center;">与[:print:]相同，但不包括空格</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">[:lower:]</td>
-<td style="text-align: center;">任意小写字母</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">[:print:]</td>
-<td style="text-align: center;">任意可打印字符</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">[:space:]</td>
-<td style="text-align: center;">任意空白字符</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">[:upper:]</td>
-<td style="text-align: center;">任意大写字母</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">[:xdigit:]</td>
-<td style="text-align: center;">任意十六进制数</td>
-</tr>
-</tbody>
-</table>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/28/mysql%20note/#more" rel="contents">
@@ -1436,7 +1069,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:14" itemprop="dateModified" datetime="2022-05-18T09:48:14+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:50:24" itemprop="dateModified" datetime="2022-05-18T17:50:24+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1458,92 +1091,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="交互模式">交互模式</h2>
-<ul>
-<li><code>lua -i</code>，<code>-i</code>参数用于在运行完其他命令行参数后进入交互模式</li>
-<li>不在交互模式下必须把表达式包在函数<code>print</code>的调用中</li>
-<li>如果不想输出结果，可以在行末加上一个<code>;</code></li>
-</ul>
-<h2 id="词法规范">词法规范</h2>
-<ul>
-<li><p>标识符由任意字母、数字和下划线组成的字符串（不能以数字开头）</p></li>
-<li><p><code>_</code>+大写字母（特殊用途）</p></li>
-<li><p><code>_</code>+小写字母（哑变量）</p></li>
-<li><p>注释</p>
-<ul>
-<li>单行注释<code>--</code></li>
-<li>多行注释 <code>--[[       多行注释   ]]</code></li>
-</ul></li>
-<li><p>分隔符<code>;</code></p>
-<ul>
-<li>增加可读性，不是必须的</li>
-</ul></li>
-<li><p>表达式之间的换行不起任何作用</p></li>
-</ul>
-<h2 id="全局变量">全局变量</h2>
-<ul>
-<li>无须声明即可使用</li>
-<li>使用未经初始化的全局变量，得到的结果时<code>nil</code></li>
-<li><code>nil</code>赋值给全局变量时，Lua会回收该全局变量</li>
-</ul>
-<h2 id="类型和值">类型和值</h2>
-<ul>
-<li><p>Lua语言有8种基本类型</p>
-<ul>
-<li><p><code>nil</code>（空）</p>
-<ul>
-<li>nil赋值给全局变量时，则相当于将其删除（Lua会回收）</li>
-</ul></li>
-<li><p><code>boolean</code>（布尔）</p>
-<ul>
-<li>除false和nil之外的所有值都为真（与C++差异）</li>
-<li>not运算符永远返回boolean类型的值
-<ul>
-<li><code>not nil</code> -- true</li>
-<li><code>not false</code> -- true</li>
-</ul></li>
-</ul></li>
-<li><p><code>number</code>（数值）</p></li>
-<li><p><code>string</code>（字符串）</p></li>
-<li><p><code>userdata</code>（用户数据）</p>
-<ul>
-<li>允许把任意的C语言数据保存在Lua语言变量中</li>
-</ul></li>
-<li><p><code>function</code>（函数）</p></li>
-<li><p><code>thread</code>（线程）</p></li>
-<li><p><code>table</code>（表）</p></li>
-</ul></li>
-<li><p><code>type</code>函数</p>
-<ul>
-<li>获取一个值对应的类型</li>
-<li>返回值永远是一个字符串</li>
-</ul></li>
-</ul>
-<h2 id="独立解释器">独立解释器</h2>
-<ul>
-<li>是一个可以直接使用Lua语言的小程序</li>
-<li>源代码文件第一行以井号<code>#</code>开头，那么解释器在加载文件时会忽略这一行，主要是为了方便在POSIX系统中将Lua作为一种脚本解释器来使用</li>
-<li>假设独立解释器位于<code>/usr/local/bin</code>下
-<ul>
-<li><code>#!/usr/local/bin/lua</code> 或 <code>#!/usr/bin/env lua</code>
-<ul>
-<li>不需要显式调用Lua语言解释器也可以直接运行Lua脚本</li>
-</ul></li>
-</ul></li>
-<li>编译器在运行代码前会创建一个名为arg的表
-<ul>
-<li>索引0中保存的内容为脚本名
-<ul>
-<li><code>arg[0]</code></li>
-</ul></li>
-<li>索引1保存的内容为第一个参数
-<ul>
-<li><code>arg[1]</code></li>
-</ul></li>
-<li>以此类推</li>
-</ul></li>
-<li>Lua语言也支持可变长参数(...)</li>
-</ul>
+          <blockquote>
+<p>初衷还是Unity</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/28/Lua%20Note/#more" rel="contents">

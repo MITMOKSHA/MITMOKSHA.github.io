@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Stanford CS144 Lab0: Networking Warmup 1. Fetch a Web page 使用telnet通过http协议访问远端服务器  2. Writing webget 2.1 描述 实现webget来通过Internet获取网页，使用TCP协议和套接字抽象。实现简单的Web客户端，使用上述HTTP的形式。读数据时遇到EOF则结束，使用轮询的方式读取数据">
+    <meta name="description" content="应用层Overview">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stanford CS144 Lab0: Networking Warmup">
 <meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/cs144-lab0/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="Stanford CS144 Lab0: Networking Warmup 1. Fetch a Web page 使用telnet通过http协议访问远端服务器  2. Writing webget 2.1 描述 实现webget来通过Internet获取网页，使用TCP协议和套接字抽象。实现简单的Web客户端，使用上述HTTP的形式。读数据时遇到EOF则结束，使用轮询的方式读取数据">
+<meta property="og:description" content="应用层Overview">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-0f3f73376b27537497d7778b962aa839.png">
 <meta property="article:published_time" content="2022-05-16T09:58:51.000Z">
-<meta property="article:modified_time" content="2022-05-18T01:47:41.731Z">
+<meta property="article:modified_time" content="2022-05-18T09:48:20.539Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-0f3f73376b27537497d7778b962aa839.png">
@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-目录"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>目录</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#stanford-cs144-lab0-networking-warmup"><span class="nav-number">1.</span> <span class="nav-text">Stanford CS144 Lab0: Networking Warmup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch-a-web-page"><span class="nav-number">1.1.</span> <span class="nav-text">1. Fetch a Web page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#writing-webget"><span class="nav-number">1.2.</span> <span class="nav-text">2. Writing webget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#an-in-memory-reliable-byte-stream"><span class="nav-number">1.3.</span> <span class="nav-text">3. An in-memory reliable byte stream</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 实现</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#writing-webget"><span class="nav-number">1.</span> <span class="nav-text">2. Writing webget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#an-in-memory-reliable-byte-stream"><span class="nav-number">2.</span> <span class="nav-text">3. An in-memory reliable byte stream</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 实现</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -239,7 +239,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:41" itemprop="dateModified" datetime="2022-05-18T09:47:41+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:48:20" itemprop="dateModified" datetime="2022-05-18T17:48:20+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,9 +261,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="stanford-cs144-lab0-networking-warmup">Stanford CS144 Lab0: Networking Warmup</h1>
-<h2 id="fetch-a-web-page"><strong>1. Fetch a Web page</strong></h2>
-<p>使用<code>telnet</code>通过<code>http</code>协议访问远端服务器 <img src="https://pic4.zhimg.com/80/v2-0f3f73376b27537497d7778b962aa839.png" alt="Image"></p>
+        <!-- # Stanford CS144 Lab0: Networking Warmup -->
+<blockquote>
+<p>应用层Overview <span id="more"></span> ## <strong>1. Fetch a Web page</strong> 使用<code>telnet</code>通过<code>http</code>协议访问远端服务器 <img src="https://pic4.zhimg.com/80/v2-0f3f73376b27537497d7778b962aa839.png" alt="Image"></p>
+</blockquote>
 <h2 id="writing-webget"><strong>2. Writing webget</strong></h2>
 <h3 id="描述"><strong>2.1 描述</strong></h3>
 <p>实现<code>webget</code>来通过Internet获取网页，使用TCP协议和套接字抽象。实现简单的Web客户端，使用上述<code>HTTP</code>的形式。读数据时遇到<code>EOF</code>则结束，使用轮询的方式读取数据。</p>

@@ -83,7 +83,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-目录"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>目录</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -233,7 +233,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:35" itemprop="dateModified" datetime="2022-05-18T09:48:35+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:51:07" itemprop="dateModified" datetime="2022-05-18T17:51:07+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,11 +255,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="mit-6.s081-lab5-xv6-lazy-page-allocation">MIT 6.S081 Lab5: xv6 lazy page allocation</h1>
-<p>很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files</p>
-<p>xv6使用<code>sbrk()</code>申请<strong>物理地址空间</strong>并将其映射到进程的虚拟地址空间(向内核请求堆内存)。这个lab视频上也给了很多提示，重要的是理解并掌握原理。</p>
-<p>实际上复杂的内核会在分配栈空间时做这样的处理, <code>sbrk</code>没有分配物理地址空间，只是记住分配了哪些用户地址，并在用户地址将这些地址标记为无效(invalid)。当进程尝试第一次使用任何给定Lazy Allocation的页面时，CPU会产生Page Fault的异常，该异常错误的类型会存放到<code>scause</code>寄存器，而<code>stval</code>寄存器中从存放着不能被translate的虚拟地址。 <img src="https://pic4.zhimg.com/80/v2-998ad453d6ec0eed41edd98ca61aa644.png" alt="scause"></p>
-<p>Page Fault的类型: - load page faults, load指令不能translate地址 - store page faults，store指令不能translate地址 - instruction page faults，指令地址未能被tanslate ## <strong>1. Eliminate allocation from sbrk()</strong> ### <strong>1.1 Description</strong> 将<code>growproc</code>函数注释掉，不分配物理地址空间，只增加进程内存的大小。 ### <strong>1.2 Implementation</strong> <code>kernel/sysproc.c</code> </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">uint64</span><br><span class="line"><span class="title function_">sys_sbrk</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> addr;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(argint(<span class="number">0</span>, &amp;n) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  addr = myproc()-&gt;sz;</span><br><span class="line"></span><br><span class="line">  myproc()-&gt;sz += n;</span><br><span class="line">  <span class="comment">// if(growproc(n) &lt; 0)  // Not need to allocate pysical memory.</span></span><br><span class="line">  <span class="comment">//   return -1;</span></span><br><span class="line">  <span class="keyword">return</span> addr;  <span class="comment">// return the old size of process</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## <strong>2. Lazy allocation</strong> ### <strong>2.1 Description</strong> 比如说要实现<code>Lazy allocation</code>, 在<code>sbrk()</code>
+          <!-- # MIT 6.S081 Lab5: xv6 lazy page allocation -->
+<p>很多情况都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab5/#more" rel="contents">
@@ -329,7 +326,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:31" itemprop="dateModified" datetime="2022-05-18T09:48:31+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:41:02" itemprop="dateModified" datetime="2022-05-18T17:41:02+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,40 +348,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="mit-6.s081-lab4-traps">MIT 6.S081 Lab4: Traps</h1>
+          <!-- # MIT 6.S081 Lab4: Traps -->
 <ul>
-<li>跟着视频走一遍系统调用<code>gdb</code>的流程。<code>tmux</code>分割两个窗口，一个窗口作为服务器<code>make CPUS=1 qemu-gdb</code>，另一个窗口作为<code>gdb</code>调试窗口<code>gdb-multiarch</code>。将断点打在<code>ecall指令处</code>, <code>continue</code>执行，随后再将第二个断点打到<code>print/x $stvec</code>处也就是，<code>TRAPFRAME</code>的起始地址。<code>ecall</code>指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。</li>
-<li>进入<code>trampoline.s</code>后，<code>csrrw a0, sscratch, a0</code>首先将非体系结构寄存器<code>sscratch</code>与<code>a0</code>的值交换，<code>sscratch</code>寄存器中保存的时<code>TRAPFRAME</code>的起始地址。</li>
-<li>然后将当前的现场(即寄存器)保存到<code>TRAPFRAME</code>中，再将<code>TRAPFRAME</code>中保存的内核栈指针，<code>hartid</code>，<code>usertrap()</code>的地址，以及内核页表所在的<code>stap</code>寄存器的值加载到当前通用寄存器中。</li>
-<li>随后将寄存器<code>t1</code>保存的内核页目录的地址写入当前<code>satp</code>寄存器中，再刷新<code>TLB</code>，将用户页表切换为内核页表 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">csrw satp, <span class="built_in">t1</span></span><br><span class="line">sfence.vma <span class="built_in">zero</span>, <span class="built_in">zero</span></span><br></pre></td></tr></table></figure></li>
-<li>将用户模式完全切换为内核模式之后，最后跳到<code>t0</code>中保存的<code>usertrap()</code>的入口地址，<code>jr t0</code>跳入<code>usertrap</code>函数。</li>
-<li>进入函数后，首先判断<code>sstatus</code>寄存器的<code>SSP</code>位是否为<code>0</code>(即是否为用户模式下发生的trap)。将<code>stvec</code>赋值为<code>kernelvec</code>的入口地址，即在当前<code>usertrap</code>发生的中断或异常则跳转到<code>stvec</code>处执行。再保存中断返回的地址到<code>sepc</code>。</li>
-<li>中断将会改变<code>sstatus</code>寄存器，因此在修改结束之后才将中断打开<code>intr_on()</code>。</li>
-<li>之后进入系统调用<code>syscall()</code>，根据<code>p-&gt;trapframe-&gt;a7</code>中保存的系统调用号来决定调用哪个系统调用(专门通过一个静态数组查找<code>syscalls[num]</code>), 随后将系统调用的返回值保存到<code>p-&gt;trapframe-&gt;a0</code>中。</li>
-<li>完成系统调用之后，随后计算<code>uservec</code>的虚拟地址并赋值给<code>stvec</code>，以便发生异常或中断的时候处理。接下来将相应的内容restore到<code>trapframe</code>中方便进行下一次<code>trap</code>。随后更新<code>sstatus</code>状态寄存器的值，清空<code>SSP</code>、设置<code>SPIE</code>位。</li>
-<li>更新<code>sepc</code>的值以及将<code>satp</code>的值设为内核页表的地址，将在<code>userret</code>中切换页表。计算<code>userret</code>在<code>trampoline.s</code>中的虚拟地址，跳转到<code>userret</code>，跳转之前传参有个小细节，即将<code>TRAMPOLINE</code>作为第一个参数，这样在<code>a0</code>与<code>sscratch</code>交换后，<code>sscratch</code>就得到<code>TRAMPOLINE</code>的起始地址了。</li>
-<li>进入到收尾阶段，将恢复到<code>trap</code>之前的状态。将<code>TRAMPOLINE</code>中的内容load到通用寄存器中，先将<code>a0</code>寄存器的值写入<code>sscratch</code>寄存器中，这样最后<code>csrrw a0, sscratch, a0</code>即可将这两个寄存器复位为各自的值。最后<code>sret</code>将<code>sepc</code>赋给<code>pc</code>完成系统调用恢复正常执行。</li>
-</ul>
-<h4 id="比较重要的非体系结构寄存器"><strong>比较重要的非体系结构寄存器</strong></h4>
-<ul>
-<li>stvec, 存放系统调用处理程序的地址</li>
-<li>sepc, 当系统调用发生时PC存放到此处，以便系统调用返回时能从下一条指令开始执行<code>sret</code>: sepc -&gt; pc。</li>
-<li>scause, ISA通过它来分析系统调用的种类</li>
-<li>sscratch, 内核将一个值放到这里，方便系统调用的开始(通用寄存器和sscratch寄存器通过csrrw来交换值<code>csrrw a0, sscratch, a0</code>)。</li>
-<li>sstatus, 状态寄存器，类似LC-3来决定是否发生中断，或者决定是用户模式还是系统模式，若存在条件码则存放条件码。</li>
-</ul>
-<h4 id="debug相关"><strong>Debug相关</strong></h4>
-<ul>
-<li><code>add-symbol-file</code>或<code>file</code>命令从文件<code>filename</code>中读取附加的符号表信息存放在<code>ELF</code>文件(可重定向目标文件)中的<code>.symtab</code> Entry中。当文件名（通过其他方式）动态加载到正在运行的程序中时，将使用此命令。</li>
-<li>解决调试alarmtest时<code>usertrap</code> C源代码不显示的, 函数和变量信息不够全，需要<code>add-symbol-file kernel/kernel</code>即可。</li>
-</ul>
-<h2 id="risc-v-assembly"><strong>1. RISC-V assembly</strong></h2>
-<h3 id="description"><strong>1.1 Description</strong></h3>
-<blockquote>
-<p>It will be important to understand a bit of RISC-V assembly, which you were exposed to in 6.004. There is a file user/call.c in your xv6 repo. make fs.img compiles it and also produces a readable assembly version of the program in user/call.asm.</p>
-<p>可以在<code>gdb</code>中使用<code>file</code>来对<code>call.o</code>文件调试，并将断点打到<code>main</code>函数上。解释调试时<code>RISCV</code>汇编出现的一些指令, <code>x</code>表示寄存器, <code>M</code>表示存储器: - <code>auipc</code>, Add Upper Immediate to PC. 将指令编码格式中的<code>Imm[31:12]</code>左移12位后的结果<code>sign-extened</code>后再加上PC。 </p><figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auipc rd, Imm  <span class="comment">; x[rd] = PC + sext(Imm[31:12] &lt;&lt; 12)</span></span><br></pre></td></tr></table></figure> - <code>li</code>(pseudoinstruction), Load Immediate. <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">li rd, Imm  <span class="comment">; x[rd] = Imm</span></span><br></pre></td></tr></table></figure> - <code>mv</code>(pseudoinstruction), Move. 注意与<code>x86 ISA</code>的<code>mov</code>传递方向不同。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv rd, rs1  <span class="comment">; x[rd] = x[rs1]</span></span><br></pre></td></tr></table></figure> - <code>jalr</code>, Jump And Link Register. <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/40453719/risc-v-why-set-least-significant-bit-to-zero-in-jalr">为什么要将最低有效位置为0?</a>字节对齐。将当前pc+4赋给ra作为返回地址并跳转到offset(rs1), 随后返回到当前指令的下一条指令继续执行。注意如果rd省略了，那么rd就默认为x1(即<code>ra</code>保存返回地址的寄存器)。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jalr </span>rd, offset(rs1)  <span class="comment">; t=pc+4; pc=(x[rs1]+sext(offset)) &amp; ~1; x[rd] = t;</span></span><br></pre></td></tr></table></figure> - <code>lbu</code>, Load Byte Unsigned. 取完一个字节后，紧接着零拓展, <code>lb</code>为符号位拓展。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lbu </span>rd, offset(rs1)  <span class="comment">; x[rd] M[x[rs1] + sext(offset)] [7:0]</span></span><br></pre></td></tr></table></figure> - <code>seqz</code>(pseudoinstruction), Set if Equal to Zero. <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seqz rd, rs1  <span class="comment">; x[rd] = (x[rs1] == 0)</span></span><br></pre></td></tr></table></figure> - <code>csrrw</code>, Control and Status Register Read and Write. 状态寄存器和通用寄存器之间的读写操作。将状态寄存器中的内容放入rd寄存器，将rs1的内容放入状态寄存器。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrrw rd, csr, rs1  <span class="comment">; t = CSRs[csr]; CSRs[csr] = x[rs1]; x[rd] = t</span></span><br></pre></td></tr></table></figure> - <code>csrw</code> <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrw csr, rs1</span><br></pre></td></tr></table></figure> - <code>csrr</code> <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrr rd, csr</span><br></pre></td></tr></table></figure> ### <strong>1.2 Implementation</strong> - 不了解RISCV指令集的建议可以把<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/su20/">CS61C</a>的Week2专门讲RISCV的slide或者视频看完，直到把调试过程中遇到的每条指令弄明白再来做这一个task。<p></p>
-</blockquote>
-<p>分析<code>user/call.asm</code> </p>
+<li>跟着视频走一遍系统调用<code>gdb</code>的流程。<code>tmux</code>分割两个窗口，一个窗口作为服务器<code>make CPUS=1 qemu-gdb</code>，另一个窗口作为<code>gdb</code>调试窗口<code>gdb-multiarch</code>。将断点打在<code>ecall指令处</code>, <code>continue</code>执行，随后再将第二个断点打到<code>print/x $stvec</code>处也就是，<code>TRAPFRAME</code>的起始地址。<code>ecall</code>指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。</li></ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab4/#more" rel="contents">
@@ -454,7 +420,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:28" itemprop="dateModified" datetime="2022-05-18T09:48:28+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:40:53" itemprop="dateModified" datetime="2022-05-18T17:40:53+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -476,36 +442,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="mit-6.s081-lab3-page-tables">MIT 6.S081 Lab3: Page tables</h1>
+          <!-- # MIT 6.S081 Lab3: Page tables -->
 <h2 id="print-a-page-table"><strong>1. Print a page table</strong></h2>
-<h3 id="description"><strong>1.1 Description</strong></h3>
-<blockquote>
-<p>Define a function called vmprint(). It should take a pagetable_t argument, and print that pagetable in the format described below. Insert if(p-&gt;pid==1) vmprint(p-&gt;pagetable) in exec.c just before the return argc, to print the first process's page table. You receive full credit for this assignment if you pass the pte printout test of make grade.</p>
-</blockquote>
-<h3 id="implementation"><strong>1.2 Implementation</strong></h3>
-<ul>
-<li>将<code>vmprint</code>函数添加到<code>kernel/vm.c</code>文件中并在<code>kernel/defs.h</code>文件中添加该函数的声明。使用格式符<code>%p</code>打印16进制数，使用<code>kernel/riscv.h</code>文件中定义的宏, 参考<code>freewalk</code>函数以递归的形式完成。实现该函数方便接下来的调试, 可以在gdb中测试其正确性。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vmprint</span><span class="params">(<span class="type">pagetable_t</span> pagetable, <span class="type">int</span> depth)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (depth == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;page table %p\n&quot;</span>, pagetable);</span><br><span class="line">  <span class="keyword">if</span> (depth == <span class="number">3</span>)  <span class="comment">// terminate condition.</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">512</span>; ++i) &#123;</span><br><span class="line">    <span class="type">pte_t</span> pte = pagetable[i];</span><br><span class="line">    <span class="keyword">if</span> (pte &amp; PTE_V) &#123;</span><br><span class="line">      uint64 pa = PTE2PA(pte);</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; depth; ++j) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;.. &quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;..%d: pte %p pa %p\n&quot;</span>, i, pte, pa);</span><br><span class="line">      vmprint((<span class="type">pagetable_t</span>)pa, ++depth);  <span class="comment">// recursive.</span></span><br><span class="line">      pagetable[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="a-kernel-page-table-per-process"><strong>2. A kernel page table per process</strong></h2>
-<h3 id="description-1"><strong>2.1 Description</strong></h3>
-<blockquote>
-<p>Your first job is to modify the kernel so that every process uses its own copy of the kernel page table when executing in the kernel. Modify struct proc to maintain a kernel page table for each process, and modify the scheduler to switch kernel page tables when switching processes. For this step, each per-process kernel page table should be identical to the existing global kernel page table. You pass this part of the lab if usertests runs correctly. - Add a field to struct proc for the process's kernel page table. - A reasonable way to produce a kernel page table for a new process is to implement a modified version of kvminit that makes a new page table instead of modifying kernel_pagetable. You'll want to call this function from allocproc. - Make sure that each process's kernel page table has a mapping for that process's kernel stack. In unmodified xv6, all the kernel stacks are set up in procinit. You will need to move some or all of this functionality to allocproc. - Modify scheduler() to load the process's kernel page table into the core's satp register (see kvminithart for inspiration). Don't forget to call sfence_vma() after calling w_satp(). - scheduler() should use kernel_pagetable when no process is running. - Free a process's kernel page table in freeproc. - You'll need a way to free a page table without also freeing the leaf physical memory pages. - vmprint may come in handy to debug page tables. - It's OK to modify xv6 functions or add new functions; you'll probably need to do this in at least kernel/vm.c and kernel/proc.c. (But, don't modify kernel/vmcopyin.c, kernel/stats.c, user/usertests.c, and user/stats.c.) - A missing page table mapping will likely cause the kernel to encounter a page fault. It will print an error that includes sepc=0x00000000XXXXXXXX. You can find out where the fault occurred by searching for XXXXXXXX in kernel/kernel.asm. ### <strong>2.2 Implementation</strong> - 在<code>proc.h</code>进程的结构体中加入内核页表的属性<code>pkpagetable</code>。 </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> <span class="title">lock</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// p-&gt;lock must be held when using these:</span></span><br><span class="line">  <span class="class"><span class="keyword">enum</span> <span class="title">procstate</span> <span class="title">state</span>;</span>        <span class="comment">// Process state</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">parent</span>;</span>         <span class="comment">// Parent process</span></span><br><span class="line">  <span class="type">void</span> *chan;                  <span class="comment">// If non-zero, sleeping on chan</span></span><br><span class="line">  <span class="type">int</span> killed;                  <span class="comment">// If non-zero, have been killed</span></span><br><span class="line">  <span class="type">int</span> xstate;                  <span class="comment">// Exit status to be returned to parent&#x27;s wait</span></span><br><span class="line">  <span class="type">int</span> pid;                     <span class="comment">// Process ID</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// these are private to the process, so p-&gt;lock need not be held.</span></span><br><span class="line">  uint64 kstack;               <span class="comment">// Virtual address of kernel stack</span></span><br><span class="line">  uint64 sz;                   <span class="comment">// Size of process memory (bytes)</span></span><br><span class="line">  <span class="type">pagetable_t</span> pagetable;       <span class="comment">// User page table</span></span><br><span class="line">  <span class="type">pagetable_t</span> pkpagetable;     <span class="comment">// process&#x27;s kernel page table</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">trapframe</span> *<span class="title">trapframe</span>;</span> <span class="comment">// data page for trampoline.S</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">context</span> <span class="title">context</span>;</span>      <span class="comment">// swtch() here to run process</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">ofile</span>[<span class="title">NOFILE</span>];</span>  <span class="comment">// Open files</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">inode</span> *<span class="title">cwd</span>;</span>           <span class="comment">// Current directory</span></span><br><span class="line">  <span class="type">char</span> name[<span class="number">16</span>];               <span class="comment">// Process name (debugging)</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> - 实现<code>kvminit</code>函数的另一个版本来初始化进程的内核页表。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create processes&#x27;s kernel table</span></span><br><span class="line"><span class="type">pagetable_t</span></span><br><span class="line"><span class="title function_">ukvmcreate</span><span class="params">()</span>  </span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">pagetable_t</span> kpagetable = (<span class="type">pagetable_t</span>) kalloc();</span><br><span class="line">  <span class="built_in">memset</span>(kpagetable, <span class="number">0</span>, PGSIZE);</span><br><span class="line">  uvmmap(kpagetable, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, CLINT, CLINT, <span class="number">0x10000</span>, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, PLIC, PLIC, <span class="number">0x400000</span>, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span><br><span class="line">  uvmmap(kpagetable, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span><br><span class="line">  <span class="keyword">return</span> kpagetable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> - 以及专门将映射加入进程的内核页表的函数<code>uvmmap</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add a mapping to processes&#x27;s kernel</span></span><br><span class="line"><span class="comment">// page table</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">uvmmap</span><span class="params">(<span class="type">pagetable_t</span> pagetable, uint64 va, uint64 pa, uint64 sz, <span class="type">int</span> perm)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(mappages(pagetable, va, sz, pa, perm) != <span class="number">0</span>)</span><br><span class="line">    panic(<span class="string">&quot;uvmmap&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
-</blockquote>
-<ul>
-<li>确保每个进程的内核页表中包含该进程所使用到的内核栈的映射。可以将原来在<code>boot time</code>进程初始化<code>procinit</code>函数中全局内核页表映射内核栈的代码<strong>注释</strong>掉。应题目要求在<code>allocproc</code>函数中实现映射当前进程所对应的内核栈。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Allocate a page for the process&#x27;s kernel stack.</span></span><br><span class="line"><span class="comment">// Map it high in memory, followed by an invalid</span></span><br><span class="line"><span class="comment">// guard page.</span></span><br><span class="line"><span class="type">char</span> *pa = kalloc();   <span class="comment">// allocate physical memory per page.</span></span><br><span class="line"><span class="keyword">if</span>(pa == <span class="number">0</span>)</span><br><span class="line">  panic(<span class="string">&quot;kalloc&quot;</span>);</span><br><span class="line">uint64 va = KSTACK((<span class="type">int</span>) (p - proc));  <span class="comment">// virtual address.</span></span><br><span class="line"><span class="comment">// make sure each process&#x27;s kernel page table has a mapping</span></span><br><span class="line"><span class="comment">// for that process&#x27;s kernel stack.</span></span><br><span class="line">uvmmap(p-&gt;pkpagetable, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span><br><span class="line">p-&gt;kstack = va;</span><br></pre></td></tr></table></figure></li>
-<li>在<code>scheduler</code>函数内实现，模仿<code>kvminithart</code>函数在调度时切换页表，即将进程的内核页表的地址放入<code>satp</code>寄存器，相应地刷新<code>TLB</code>，当进程没有在运行时，调度器切换回全局内核页表。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Per-CPU process scheduler.</span></span><br><span class="line"><span class="comment">// Each CPU calls scheduler() after setting itself up.</span></span><br><span class="line"><span class="comment">// Scheduler never returns.  It loops, doing:</span></span><br><span class="line"><span class="comment">//  - choose a process to run.</span></span><br><span class="line"><span class="comment">//  - swtch to start running that process.</span></span><br><span class="line"><span class="comment">//  - eventually that process transfers control</span></span><br><span class="line"><span class="comment">//    via swtch back to the scheduler.</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">scheduler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">c</span> =</span> mycpu();</span><br><span class="line">  </span><br><span class="line">  c-&gt;proc = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(;;)&#123;</span><br><span class="line">    <span class="comment">// Avoid deadlock by ensuring that devices can interrupt.</span></span><br><span class="line">    intr_on();</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> found = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(p = proc; p &lt; &amp;proc[NPROC]; p++) &#123;</span><br><span class="line">      acquire(&amp;p-&gt;lock);</span><br><span class="line">      <span class="keyword">if</span>(p-&gt;state == RUNNABLE) &#123;</span><br><span class="line">        <span class="comment">// Switch to chosen process.  It is the process&#x27;s job</span></span><br><span class="line">        <span class="comment">// to release its lock and then reacquire it</span></span><br><span class="line">        <span class="comment">// before jumping back to us.</span></span><br><span class="line">        p-&gt;state = RUNNING;</span><br><span class="line">        c-&gt;proc = p;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//  load the process&#x27;s kernel page table into the core&#x27;s satp register.</span></span><br><span class="line">        w_satp(MAKE_SATP(p-&gt;pkpagetable));</span><br><span class="line">        sfence_vma();   <span class="comment">// flush the TLB.</span></span><br><span class="line">        </span><br><span class="line">        swtch(&amp;c-&gt;context, &amp;p-&gt;context);</span><br><span class="line">        <span class="comment">// use kernel_pagetable when no process is running</span></span><br><span class="line">        kvminithart();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Process is done running for now.</span></span><br><span class="line">        <span class="comment">// It should have changed its p-&gt;state before coming back.</span></span><br><span class="line">        c-&gt;proc = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        found = <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      release(&amp;p-&gt;lock);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> !defined (LAB_FS)</span></span><br><span class="line">    <span class="keyword">if</span>(found == <span class="number">0</span>) &#123;</span><br><span class="line">      intr_on();</span><br><span class="line">      <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;wfi&quot;</span>)</span>;   <span class="comment">// wait for interrupt.</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    ;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>在<code>freeproc</code>函数中完成释放进程的内核页表操作, 同时实现函数<code>freeukpagetable</code>, 在释放页表时不释放掉<code>leaf</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p-&gt;pkpagetable) &#123;</span><br><span class="line">  freeukpagetable(p-&gt;pkpagetable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">freeukpagetable</span><span class="params">(<span class="type">pagetable_t</span> pagetable)</span> &#123;</span><br><span class="line">  <span class="comment">// there are 2^9 = 512 PTEs in a page table.</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">512</span>; i++)&#123;</span><br><span class="line">    <span class="type">pte_t</span> pte = pagetable[i];</span><br><span class="line">    <span class="keyword">if</span> (pte &amp; PTE_V) &#123;</span><br><span class="line">      pagetable[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">if</span> ((pte &amp; (PTE_R|PTE_W|PTE_X)) == <span class="number">0</span>)&#123;  <span class="comment">// not leaf.</span></span><br><span class="line">        <span class="comment">// this PTE points to a lower-level page table.</span></span><br><span class="line">        uint64 child = PTE2PA(pte);</span><br><span class="line">        freeukpagetable((<span class="type">pagetable_t</span>)child);</span><br><span class="line">      &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  kfree((<span class="type">void</span>*)pagetable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## <strong>3. Simplify</strong> ### <strong>3.1 Description</strong> &gt; Your job in this part of the lab is to add user mappings to each process's kernel page table (created in the previous section) that allow copyin (and the related string function copyinstr) to directly dereference user pointers. Replace the body of copyin in kernel/vm.c with a call to copyin_new (defined in kernel/vmcopyin.c); do the same for copyinstr and copyinstr_new. Add mappings for user addresses to each process's kernel page table so that copyin_new and copyinstr_new work. You pass this assignment if usertests runs correctly and all the make grade tests pass.</li>
-<li>Replace copyin() with a call to copyin_new first, and make it work, before moving on to copyinstr.</li>
-<li>At each point where the kernel changes a process's user mappings, change the process's kernel page table in the same way. Such points include fork(), exec(), and sbrk().</li>
-<li>Don't forget that to include the first process's user page table in its kernel page table in userinit.</li>
-<li>What permissions do the PTEs for user addresses need in a process's kernel page table? (A page with PTE_U set cannot be accessed in kernel mode.) Don't forget about the above-mentioned PLIC limit. ### <strong>3.2 Implementation</strong></li>
-<li>用<code>copy_new</code>函数替代<code>copyin</code> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy from user to kernel.</span></span><br><span class="line"><span class="comment">// Copy len bytes to dst from virtual address srcva in a given page table.</span></span><br><span class="line"><span class="comment">// Return 0 on success, -1 on error.</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">copyin</span><span class="params">(<span class="type">pagetable_t</span> pagetable, <span class="type">char</span> *dst, uint64 srcva, uint64 len)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> copyin_new(pagetable, dst, srcva, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><code>copyinstr_new</code>函数替代<code>copyinstr</code> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy a null-terminated string from user to kernel.</span></span><br><span class="line"><span class="comment">// Copy bytes to dst from virtual address srcva in a given page table,</span></span><br><span class="line"><span class="comment">// until a &#x27;\0&#x27;, or max.</span></span><br><span class="line"><span class="comment">// Return 0 on success, -1 on error.</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">copyinstr</span><span class="params">(<span class="type">pagetable_t</span> pagetable, <span class="type">char</span> *dst, uint64 srcva, uint64 max)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> copyinstr_new(pagetable, dst, srcva, max);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>在<code>fork()</code>中针对用户页表映射修改，相应进程的内核页表做出的改动。并实现将用户页表copy到内核页表并清空相应<code>PTE_U</code>标志的函数<code>copyupttokpt</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i, pid;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">np</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span> =</span> myproc();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Allocate process.</span></span><br><span class="line"><span class="keyword">if</span>((np = allocproc()) == <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Copy user memory from parent to child.</span></span><br><span class="line"><span class="keyword">if</span>(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">  freeproc(np);</span><br><span class="line">  release(&amp;np-&gt;lock);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">np-&gt;sz = p-&gt;sz;</span><br><span class="line"></span><br><span class="line">np-&gt;parent = p;</span><br><span class="line"></span><br><span class="line">copyupttokpt(np-&gt;pkpagetable, np-&gt;pagetable, <span class="number">0</span>, np-&gt;sz);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// copy saved user registers.</span></span><br><span class="line">*(np-&gt;trapframe) = *(p-&gt;trapframe);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cause fork to return 0 in the child.</span></span><br><span class="line">np-&gt;trapframe-&gt;a0 = <span class="number">0</span>;</span><br></pre></td></tr></table></figure> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">copyupttokpt</span><span class="params">(<span class="type">pagetable_t</span> ker, <span class="type">pagetable_t</span> user, uint64 old_size, uint64 new_size)</span> &#123;</span><br><span class="line">  <span class="type">pte_t</span> *pte_from, *pte_to;</span><br><span class="line">  uint64 pa, i;</span><br><span class="line">  uint flags;</span><br><span class="line">  old_size = PGROUNDUP(old_size);</span><br><span class="line">  <span class="keyword">for</span>(i = old_size; i &lt; new_size; i += PGSIZE)&#123;</span><br><span class="line">    <span class="keyword">if</span>((pte_from = walk(user, i, <span class="number">0</span>)) == <span class="number">0</span>)</span><br><span class="line">      panic(<span class="string">&quot;copyupttokpt: walk&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>((pte_to = walk(ker, i, <span class="number">1</span>)) == <span class="number">0</span>)</span><br><span class="line">      panic(<span class="string">&quot;copyupttokpt: walk&quot;</span>);</span><br><span class="line">    pa = PTE2PA(*pte_from);</span><br><span class="line">    <span class="comment">// clear PTE_U bit because of kernel page table.</span></span><br><span class="line">    flags = PTE_FLAGS(*pte_from) &amp; (~PTE_U);</span><br><span class="line">    *pte_to = PA2PTE(pa) | flags;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>函数<code>exec()</code>中，替换当前进程的用户页表时，内核页表也随之释放，并<code>copy</code>新用户页表的内容。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Save program name for debugging.</span></span><br><span class="line"><span class="keyword">for</span>(last=s=path; *s; s++)</span><br><span class="line">  <span class="keyword">if</span>(*s == <span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    last = s+<span class="number">1</span>;</span><br><span class="line">safestrcpy(p-&gt;name, last, <span class="keyword">sizeof</span>(p-&gt;name));</span><br><span class="line">  </span><br><span class="line"><span class="comment">// Commit to the user image.</span></span><br><span class="line">oldpagetable = p-&gt;pagetable;</span><br><span class="line">p-&gt;pagetable = pagetable;</span><br><span class="line">p-&gt;sz = sz;</span><br><span class="line"></span><br><span class="line">uvmunmap(p-&gt;pkpagetable, <span class="number">0</span>, PGROUNDUP(oldsz)/PGSIZE, <span class="number">0</span>);</span><br><span class="line">copyupttokpt(p-&gt;pkpagetable, p-&gt;pagetable, <span class="number">0</span>, p-&gt;sz);</span><br><span class="line"></span><br><span class="line">p-&gt;trapframe-&gt;epc = elf.entry;  <span class="comment">// initial program counter = main</span></span><br><span class="line">p-&gt;trapframe-&gt;sp = sp; <span class="comment">// initial stack pointer</span></span><br><span class="line">proc_freepagetable(oldpagetable, oldsz);</span><br></pre></td></tr></table></figure></li>
-<li>函数<code>sbrk()</code>，相应的增加和减少内存时变更用户页表，需要同时更新进程的内核页表。需要判断用户分配地址空间的限制。如果增加的内存大于<code>PLIC</code>则返回<code>-1</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">growproc</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">  uint sz;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span> =</span> myproc();</span><br><span class="line"></span><br><span class="line">  sz = p-&gt;sz;</span><br><span class="line">  <span class="keyword">if</span>(n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> ((sz + n) &gt;= PLIC) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// test overflow.</span></span><br><span class="line">    <span class="comment">// mapping the n bytes in process&#x27;s kernel table.</span></span><br><span class="line">    <span class="keyword">if</span>((sz = uvmalloc(p-&gt;pagetable, sz, sz + n)) == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    copyupttokpt(p-&gt;pkpagetable, p-&gt;pagetable, sz-n, sz);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span><br><span class="line">    <span class="comment">// ummaping the n bytes in process&#x27;s kernel table.</span></span><br><span class="line">    uvmunmap(p-&gt;pkpagetable, PGROUNDUP(sz), (PGROUNDUP(p-&gt;sz) - PGROUNDUP(sz))/PGSIZE, <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  p-&gt;sz = sz;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><code>userinit</code>，初始化第一个<code>process</code>时也需要更新进程的内核页表。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set up first user process.</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">userinit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line"></span><br><span class="line">  p = allocproc();</span><br><span class="line">  initproc = p;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// allocate one user page and copy init&#x27;s instructions</span></span><br><span class="line">  <span class="comment">// and data into it.</span></span><br><span class="line">  uvminit(p-&gt;pagetable, initcode, <span class="keyword">sizeof</span>(initcode));</span><br><span class="line">  p-&gt;sz = PGSIZE;</span><br><span class="line">  copyupttokpt(p-&gt;pkpagetable, p-&gt;pagetable, <span class="number">0</span>, PGSIZE);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// prepare for the very first &quot;return&quot; from kernel to user.</span></span><br><span class="line">  p-&gt;trapframe-&gt;epc = <span class="number">0</span>;      <span class="comment">// user program counter</span></span><br><span class="line">  p-&gt;trapframe-&gt;sp = PGSIZE;  <span class="comment">// user stack pointer</span></span><br><span class="line"></span><br><span class="line">  safestrcpy(p-&gt;name, <span class="string">&quot;initcode&quot;</span>, <span class="keyword">sizeof</span>(p-&gt;name));</span><br><span class="line">  p-&gt;cwd = namei(<span class="string">&quot;/&quot;</span>);</span><br><span class="line"></span><br><span class="line">  p-&gt;state = RUNNABLE;</span><br><span class="line"></span><br><span class="line">  release(&amp;p-&gt;lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab3/#more" rel="contents">
@@ -575,7 +513,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:26" itemprop="dateModified" datetime="2022-05-18T09:48:26+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:40:48" itemprop="dateModified" datetime="2022-05-18T17:40:48+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -597,22 +535,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="mit-6.s081-lab2-system-calls">MIT 6.S081 Lab2: System Calls</h1>
+          <!-- # MIT 6.S081 Lab2: System Calls -->
 <h2 id="system-call-tracing"><strong>1. System call tracing</strong></h2>
-<h3 id="描述"><strong>1.1 描述</strong></h3>
-<blockquote>
-<p>In this assignment you will add a system call tracing feature that may help you when debugging later labs. You'll create a new trace system call that will control tracing. It should take one argument, an integer "mask", whose bits specify which system calls to trace. For example, to trace the fork system call, a program calls trace(1 &lt;&lt; SYS_fork), where SYS_fork is a syscall number from kernel/syscall.h. You have to modify the xv6 kernel to print out a line when each system call is about to return, if the system call's number is set in the mask. The line should contain the process id, the name of the system call and the return value; you don't need to print the system call arguments. The trace system call should enable tracing for the process that calls it and any children that it subsequently forks, but should not affect other processes.</p>
-</blockquote>
-<ul>
-<li>将相应的文件添加到<em>user/user.h</em>和<em>user/usys.pl</em>中，向<em>kernel/syscall.h</em>文件中添加本实验所需要添加的系统调用号。</li>
-<li>向<em>kernel/sysproc.c</em>中添加系统调用函数<em>sys_trace</em>，以及需要在进程的结构体中，新建一个变量Mask由低位开始偏移系统调用号个bit的值(通过观察<em>syscall.h</em>文件以及题目中给的case可以发现系统调用号对应二进制的bit)。</li>
-<li>还需要再<em>kernel/proc.c/fork</em>函数中使得子进程继承父进程的Mask属性。</li>
-<li>参照<em>kernel/syscall.c</em>中别的系统调用，通过阅读<em>user/trace.c</em>代码，使用<em>argint</em>函数来提取命令行中的第一个参数作为掩码赋给进程属性Mask，还需要定义系统调用号对应的系统调用名数组。</li>
-<li>需要注意的点，a0作为返回值且a7作为系统调用号，在<em>trace</em>调用后打印信息时需要用到</li>
-</ul>
-<h3 id="实现"><strong>1.2 实现</strong></h3>
-<p>这里贴出部分代码</p>
-<p>kernel/syscall.c/syscall </p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">syscall</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">proc</span> *p = <span class="built_in">myproc</span>();</span><br><span class="line"></span><br><span class="line">    num = p-&gt;trapframe-&gt;a7;</span><br><span class="line">    <span class="keyword">if</span>(num &gt; <span class="number">0</span> &amp;&amp; num &lt; <span class="built_in">NELEM</span>(syscalls) &amp;&amp; syscalls[num]) &#123;</span><br><span class="line">        p-&gt;trapframe-&gt;a0 = syscalls[num]();  <span class="comment">// reap return value.</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="number">1</span> &lt;&lt; num) &amp; p-&gt;mask)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d: syscall %s -&gt; %d\n&quot;</span>, p-&gt;pid, syscall_name[num], p-&gt;trapframe-&gt;a0);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %s: unknown sys call %d\n&quot;</span>,</span><br><span class="line">                p-&gt;pid, p-&gt;name, num);</span><br><span class="line">        p-&gt;trapframe-&gt;a0 = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> kernel/sysproc.c/sys_trace <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">uint64</span></span><br><span class="line"><span class="function"><span class="title">sys_trace</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> mask;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">argint</span>(<span class="number">0</span>, &amp;mask) &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">myproc</span>()-&gt;mask = mask;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab2/#more" rel="contents">
@@ -682,7 +606,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:24" itemprop="dateModified" datetime="2022-05-18T09:48:24+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:40:43" itemprop="dateModified" datetime="2022-05-18T17:40:43+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -704,20 +628,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="mit-6.s081-lab1-xv6-and-unix-utilities">MIT 6.S081 Lab1: Xv6 and Unix utilities</h1>
+          <!-- # MIT 6.S081 Lab1: Xv6 and Unix utilities -->
 <h2 id="sleep"><strong>1. sleep</strong></h2>
-<h3 id="描述"><strong>1.1 描述</strong></h3>
-<blockquote>
-<p>Implement the UNIX program <strong><em>sleep</em></strong> for xv6; your <strong><em>sleep</em></strong> should pause for a user-specified number of ticks. A tick is a notion of time defined by the xv6 kernel, namely the time between two interrupts from the timer chip. Your solution should be in the file <strong><em>user/sleep.c</em></strong>.</p>
-</blockquote>
-<p>可以了解一下atoi的简单实现，参考一下user文件中的其他命令的实现。</p>
-<h3 id="实现"><strong>1.2 实现</strong></h3>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;kernel/stat.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user/user.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (argc &lt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">&quot;usage: sleep second\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> i = <span class="built_in">atoi</span>(argv[<span class="number">1</span>]);</span><br><span class="line">  <span class="built_in">sleep</span>(i);</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="pingpong"><strong>2. pingpong</strong></h2>
-<h3 id="描述-1"><strong>2.1 描述</strong></h3>
-<blockquote>
-<p>Write a program that uses UNIX system calls to ''ping-pong'' a byte between two processes over a pair of pipes, one for each direction. The parent should send a byte to the child; the child should print "<pid>: received ping", where <pid> is its process ID, write the byte on the pipe to the parent, and exit; the parent should read the byte from the child, print "<pid>: received pong", and exit. Your solution should be in the file user/pingpong.c.</pid></pid></pid></p>
-</blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab1/#more" rel="contents">
@@ -787,7 +699,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:34" itemprop="dateModified" datetime="2022-05-18T09:47:34+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:45:19" itemprop="dateModified" datetime="2022-05-18T17:45:19+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -809,16 +721,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="cs61b-gitlet">CS61B Gitlet</h1>
-<h2 id="project-2-getting-startedlab6"><strong>Project 2 Getting Started(Lab6)</strong></h2>
-<h3 id="preperation"><strong>Preperation</strong></h3>
-<p>首先使用<code>git submodule update --init --recursive</code>命令将21sp的library更新，再一并复制过来。记得再当前操作系统中设置<code>REPO_DIR</code>环境变量为所有projA、HW的根目录。切记要注意看文档, 以及其中给出的设置来实现相应的功能, 最后才发现FAQ也给了非常好的提示，另外比如说在我的机器上使用<code>python</code>而不是<code>python3</code>，<code>make check</code>是跑不通的，需要找到<code>Makefile</code>的第25行, 修改为<code>PYTHON = python</code>。 </p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main story <span class="string">&quot;Once upon a time, there was a beautiful dog.&quot;</span></span></span><br><span class="line">Once upon a time, there was a beautiful dog.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main story <span class="string">&quot;That dog was named Fjerf.&quot;</span></span></span><br><span class="line">Once upon a time, there was a beautiful dog.</span><br><span class="line">That dog was named Fjerf.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main story <span class="string">&quot;Fjerf loved to run and jump.&quot;</span></span></span><br><span class="line">Once upon a time, there was a beautiful dog.</span><br><span class="line">That dog was named Fjerf.</span><br><span class="line">Fjerf loved to run and jump.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main dog Mammoth <span class="string">&quot;German Spitz&quot;</span> 10</span></span><br><span class="line">Woof! My name is Mammoth and I am a German Spitz! I am 10 years old! Woof!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main dog Qitmir Saluki 3</span> </span><br><span class="line">Woof! My name is Qitmir and I am a Saluki! I am 3 years old! Woof!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main birthday Qitmir</span></span><br><span class="line">Woof! My name is Qitmir and I am a Saluki! I am 4 years old! Woof!</span><br><span class="line">Happy birthday! Woof! Woof!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main birthday Qitmir</span></span><br><span class="line">Woof! My name is Qitmir and I am a Saluki! I am 5 years old! Woof!</span><br><span class="line">Happy birthday! Woof! Woof!</span><br></pre></td></tr></table></figure> 准备开始Gitlet:<p></p>
-<h2 id="gitlet"><strong>Gitlet</strong></h2>
-<h3 id="参考资料"><strong>参考资料</strong></h3>
-<ul>
-<li>Git pro book</li>
-</ul>
-<h3 id="note"><strong>Note</strong></h3>
+          <!-- # CS61B Gitlet -->
+<blockquote>
+<p>简化版Git，深入探索Git的底层结构</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/CS61B-GITLET-PROJECT/#more" rel="contents">
@@ -888,7 +793,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:36" itemprop="dateModified" datetime="2022-05-18T09:47:36+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:47:17" itemprop="dateModified" datetime="2022-05-18T17:47:17+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -910,16 +815,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="cs61c-cpu-project"><strong>CS61C CPU PROJECT</strong></h1>
-<h2 id="关于如何debug"><strong>关于如何Debug</strong></h2>
-<p>相信前面的<code>lab5</code>和<code>lab6</code>已经奠定好了使用<code>logisim</code>的基础，前面相关内容同样奠定好了RISC-V ISA的知识基础。接下来Project中的一系列的task可以通过参考: - <code>61C Reference card</code> - <code>ROM</code>表 - 对应测试文件中的汇编代码和测试电路 - 通过<code>change value</code>来对电路中的bit位进行赋值，查看输入输出的值</p>
-<p>需要将所有这些结合起来构建完整的<code>big picture</code>。</p>
-<h2 id="alu"><strong>ALU</strong></h2>
-<p>根据文档中给的功能类别通过门级电路来构造基本的ALU原件，个别功能的实现所用到的元器件还需要查看手册。 <img src="https://pic4.zhimg.com/80/v2-014bf51c0d29af49c1b904c3cb4a28e2.png" alt="ALU"></p>
-<h2 id="regfile"><strong>RegFile</strong></h2>
-<p>需要用到<code>Multiplexer</code>和<code>Demultiplexer</code>，以及一些基本的逻辑，比较废鼠标... <img src="https://pic4.zhimg.com/80/v2-2bc53f743fb481fc3a22f8c141f95071.png" alt="Regfile"></p>
-<h2 id="immediate-generator"><strong>Immediate Generator</strong></h2>
-<p>这一部分跟着61C绿卡里的指令编码表。以下显示的是所有含有imm部分的指令的实现。 <img src="https://pic4.zhimg.com/80/v2-f46d246882abfdf6f28e13266e41c363.png" alt="Imm-gen"></p>
+          <!-- # **CS61C CPU PROJECT** -->
+<blockquote>
+<p>用时4天，体验CPU设计</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/CS61C-CPU-PROJECT/#more" rel="contents">
@@ -989,7 +887,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:02" itemprop="dateModified" datetime="2022-05-18T09:48:02+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:49:27" itemprop="dateModified" datetime="2022-05-18T17:49:27+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1011,12 +909,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="csapp-lab2-bomb-lab">CSAPP Lab2: Bomb Lab</h1>
-<h2 id="preparation"><strong>Preparation</strong></h2>
-<p>建议在实验大致看一下lab相关的<a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/recitations/f20New/recitation02-bomblab.pdf">pdf</a>。使用<code>man</code>手册来查看库函数，<code>callq … &lt;_exit@plt&gt;</code>类型为C的库函数。注意商用的architecture是以字节为单位编址寻址。</p>
-<p>参考CS61C所了解到的Tool, 做足了准备工作。安装<code>CGDB</code>, 相比较于<code>GDB</code>的<code>tui</code>在调试lab时显示不会出现乱码的情况。从<code>ubuntu</code>中<code>apt-get</code>下载到的版本较低，一些功能不适用。参考<a target="_blank" rel="noopener" href="https://cgdb.github.io/">CGDB官网</a>下载最新版本的<code>CGDB</code>, 简单浏览了一下<a target="_blank" rel="noopener" href="https://cgdb.github.io/docs/cgdb.pdf">CGDB官方手册</a>, 以及对应<code>CGDB</code>在<code>~/.cgdb/cgdbrc</code>文件中做了如下的配置足以满足调试需求: </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set disasm</span><br><span class="line">:set hls</span><br><span class="line">:set syn=style</span><br></pre></td></tr></table></figure> 另外gdb相关内容再推荐这两本书籍 <code>Debugs Hacks</code>和<code>Debugging with GDB</code>。<p></p>
-<p>需要用<code>chmod</code>命令修改一下<code>bomb</code>二进制文件的可执行权限</p>
-<p>接下来可以愉快地开始<code>bomb lab</code>了~</p>
+          <!-- # CSAPP Lab2: Bomb Lab -->
+<blockquote>
+<p>熟悉GDB</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/CSAPP-Lab2-Bomb-Lab/#more" rel="contents">
@@ -1086,7 +981,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:59" itemprop="dateModified" datetime="2022-05-18T09:47:59+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:48:59" itemprop="dateModified" datetime="2022-05-18T17:48:59+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1108,56 +1003,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="csapp-lab1-data-lab">CSAPP Lab1: Data Lab</h1>
-<h2 id="some-restriction"><strong>Some Restriction</strong></h2>
-<h4 id="integer-coding-rules"><strong>Integer Coding Rules</strong></h4>
-<ol type="1">
-<li>Expr
-<ol type="1">
-<li>整型操作数的值被限制在范围[0, 255]。</li>
-<li>不能使用全局变量</li>
-<li>只能使用的一元操作<code>!</code>, <code>~</code></li>
-<li>只能使用的二元操作<code>&amp;</code>, <code>^</code>, <code>|</code>, <code>+</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code></li>
-<li>一个表达式不会被限制拥有多个操作符</li>
-</ol></li>
-<li>Fobidden
-<ol type="1">
-<li>使用控制语句如<code>if</code>, <code>do</code>, <code>while</code>, <code>for</code>, <code>switch</code>等等</li>
-<li>定义或使用任何宏</li>
-<li>在当前文件中定义任何额外的函数</li>
-<li>调用任何函数</li>
-<li>使用其他操作</li>
-<li>使用类型转换</li>
-<li>使用除<code>int</code>之外的任何数据类型，使用<code>arrays</code>, <code>structs</code>, <code>unions</code></li>
-</ol></li>
-<li>假设机器的配置
-<ol type="1">
-<li>使用2的补码，<code>int</code>的表示为32-bit</li>
-<li>执行算术右移</li>
-<li>如果左移的位数小于0或者大于31则会出现未预测的行为。</li>
-</ol></li>
-</ol>
-<h4 id="floating-point-coding-rules"><strong>Floating Point Coding Rules</strong></h4>
-<ol type="1">
-<li>Forbidden
-<ol type="1">
-<li>定义或使用任何宏</li>
-<li>定义任何额外的函数</li>
-<li>调用任何函数</li>
-<li>使用任何形式的类型转换</li>
-<li>使用<code>arrays</code>, <code>structs</code>, <code>unions</code></li>
-</ol></li>
-</ol>
-<h4 id="notes"><strong>Notes</strong></h4>
-<ol type="1">
-<li>使用<code>dlc</code>(data tab checker)编译器来检查解决方案的合理性</li>
-<li>使用<code>btest</code>来检查你的函数的正确性</li>
-<li>使用<code>BDD checker</code>来正式地证实你的函数</li>
-</ol>
-<h4 id="lab-note"><strong>lab Note</strong></h4>
-<ol type="1">
-<li>64位机器上编译32位程序会出现错误<code>fatal error: bits/libc-header-start.h: 没有那个文件或目录</code>，是因为gcc没有安装<code>multilib</code>库，这个库可以在64位的机器上产生32位的程序<code>sudo apt install gcc-multilib</code></li>
-</ol>
+          <h2 id="some-restriction"><strong>Some Restriction</strong></h2>
+<!-- # CSAPP Lab1: Data Lab -->
+<blockquote>
+<p>又复习了一次位级表示</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/CSAPP-Lab1-Data-Lab/#more" rel="contents">
@@ -1227,7 +1076,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:16" itemprop="dateModified" datetime="2022-05-18T09:47:16+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 17:43:30" itemprop="dateModified" datetime="2022-05-18T17:43:30+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1249,74 +1098,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="null-video-note">6.NULL Video Note</h1>
-<h2 id="video-1-the-shell"><strong>VIDEO 1</strong> The Shell</h2>
-<ol type="1">
-<li><code>cd -</code>将会在和上一次cd的目录来回切换</li>
-<li><code>rm</code>命令默认非递归的删除，因此删除目录时需要加上-r参数(recursive)，才能完整地将目录下的文件删除;而rmdir只能删除空目录</li>
-<li>解释一下常用命令的含义<code>pwd</code>(print work directory), <code>cd</code>(change directory)</li>
-<li>-表示当前没有允许的权限。d表示目录，注意目录的x位表示当前能够访问该目录的内容，且需要保证当前目录的父目录都含有x位才能访问。</li>
-<li>redirect, &lt; 表示重定向输入, &gt; 表示重定向输出. Some example: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">missing:~$ <span class="built_in">echo</span> hello &gt; hello.txt</span><br><span class="line">missing:~$ <span class="built_in">cat</span> hello.txt</span><br><span class="line">hello</span><br><span class="line">missing:~$ <span class="built_in">cat</span> &lt; hello.txt</span><br><span class="line">hello</span><br><span class="line">missing:~$ <span class="built_in">cat</span> &lt; hello.txt &gt; hello2.txt</span><br><span class="line">missing:~$ <span class="built_in">cat</span> hello2.txt</span><br><span class="line">hello</span><br></pre></td></tr></table></figure> <code>&gt;&gt;</code>表示追加(append)</li>
-<li><code>ctrl+L</code>清空终端的命令，返回到顶部。</li>
-<li><code>tail -n</code>将数据中的末尾n行显示出来。</li>
-<li>pipe，将两个不相关联的程序连接起来通过input/output连接起来,管道的左边作为一个input, 管道的右边作为一个output。</li>
-<li><code>$</code>表示当前运行在用户模式下; <code>#</code>表示当前运行在系统模式下,可以通过命令<code>sudo su</code>来打开root下的terminal.</li>
-<li>xdg-open命令可以打开文件对应的格式</li>
-<li>double quotes: backslash, <code>\</code>前面加个<code>!</code>就不会被默认移除</li>
-<li>shebang是由脚本开头的字符数字符号和感叹号<code>#!</code>组成的字符序列。当带有shebang的文本文件被用作类Unix操作系统的"可执行文件"时，程序加载器机制将文件初始行的其余部分解析为"解释器指令"。它告诉内核用什么来运行此脚本(比如说python or shell?)</li>
-</ol>
-<h2 id="video-2-shell-tools-and-scripting"><strong>VIDEO 2</strong> Shell Tools and Scripting</h2>
-<ol type="1">
-<li>different from the single quote<code>(')</code> and double quote<code>(")</code>. echo ""中解析出变量放变量(用<code>$</code>符号来表示)。而单引号不会解析变量。</li>
-<li><ul>
-<li><code>$1</code>到<code>$9</code>表示argv中第一个到第九个参数</li>
-<li><code>$0</code>表示脚本的名字</li>
-<li><code>$_</code>(undersocre)表示上一个command的最后一个参数</li>
-<li><code>$?</code>(question mark)获取上一个command的error code(一般值为<code>0</code>表示ok, <code>1</code>表示执行出错)。</li>
-<li><code>$#</code>(hash)表示参数的个数</li>
-<li><code>$$</code>表示当前进程的ID</li>
-<li><code>$@</code>表示所有参数。</li>
-</ul></li>
-<li><code>!!</code>(bang)代替上一次执行过的command，比如说创建一个目录<code>mkdir ..</code>没有权限，这时候只需要<code>sudo !!</code>, 就会默认表示<code>sudo mkdir ..</code>从而减少了一些重复性的工作。</li>
-<li>;(semicolon)分号可以连接任何命令行。<code>false ; echo "haha"</code></li>
-<li>脚本中变量用双引号引起来<code>"$1"</code>.</li>
-<li>执行脚本<code>source ..</code></li>
-<li>globbing, *(asterisk), {}(curly braces)</li>
-<li><code>tldr</code>(too long, don't read), 精简版带example的man</li>
-<li><code>test</code>, 查看man手册</li>
-<li><strong>查找文件</strong>:</li>
-</ol>
-<ul>
-<li><code>find</code>查看man手册 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找所有名称为src的文件夹</span></span><br><span class="line">find . -name src -<span class="built_in">type</span> d</span><br><span class="line"><span class="comment"># 查找所有文件夹路径中包含test的python文件</span></span><br><span class="line">find . -path <span class="string">&#x27;*/test/*.py&#x27;</span> -<span class="built_in">type</span> f</span><br><span class="line"><span class="comment"># 查找前一天修改的所有文件</span></span><br><span class="line">find . -mtime -1</span><br><span class="line"><span class="comment"># 查找所有大小在500k至10M的tar.gz文件</span></span><br><span class="line">find . -size +500k -size -10M -name <span class="string">&#x27;*.tar.gz&#x27;</span></span><br><span class="line"><span class="comment"># 删除全部扩展名为.tmp 的文件</span></span><br><span class="line">find . -name <span class="string">&#x27;*.tmp&#x27;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br><span class="line"><span class="comment"># 查找全部的 PNG 文件并将其转换为 JPG</span></span><br><span class="line">find . -name <span class="string">&#x27;*.png&#x27;</span> -<span class="built_in">exec</span> convert &#123;&#125; &#123;&#125;.jpg \;</span><br></pre></td></tr></table></figure></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd">fd</a>, find的替代物</li>
-<li><code>locate</code>, 只能通过文件名，但速度很快。locate(1)当您只是尝试按名称查找特定文件时会更好，该文件您知道存在，但您只是不记得它的确切位置。find(1)当您有一个重点领域需要检查时，或者当您需要其众多优势中的任何一个时，效果会更好</li>
-</ul>
-<ol start="11" type="1">
-<li><code>shellcheck</code>检查shell脚本的语法。</li>
-<li><strong>查找代码</strong>:
-<ul>
-<li><code>grep</code></li>
-<li><a target="_blank" rel="noopener" href="https://beyondgrep.com/">awk</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep">rg</a>(ripgrep) <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找所有使用了 requests 库的文件</span></span><br><span class="line">rg -t py <span class="string">&#x27;import requests&#x27;</span></span><br><span class="line"><span class="comment"># 查找所有没有写 shebang 的文件（包含隐藏文件）</span></span><br><span class="line">rg -u --files-without-match <span class="string">&quot;^#!&quot;</span></span><br><span class="line"><span class="comment"># 查找所有的foo字符串，并打印其之后的5行</span></span><br><span class="line">rg foo -A 5</span><br><span class="line"><span class="comment"># 打印匹配的统计信息（匹配的行和文件的数量）</span></span><br><span class="line">rg --stats PATTERN</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><strong>查找shell命令</strong>:</li>
-</ol>
-<ul>
-<li><code>history</code></li>
-<li><code>Ctrl+R</code>, backward search. 搭配<a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-r">fzf</a></li>
-</ul>
-<ol start="14" type="1">
-<li><strong>文件夹导航</strong>:
-<ul>
-<li><code>tree</code></li>
-<li><code>broot</code></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/jarun/nnn">nnn</a>, 需要接下来去学习</li>
-</ul></li>
-<li>shell中使用变量需要加<code>""</code>(double quote), 当变量中含有命令时需要加括号比如<code>"$(pwd)"</code></li>
-<li>进行比较时需要加<code>[[]]</code>双括号，比如说<code>if [[ n -eq 12 ]]; then</code>, <strong>注意</strong>括号左右要有空格否则出错。</li>
-<li><a target="_blank" rel="noopener" href="https://linuxhint.com/bash_globbing_tutorial/">globbing</a></li>
-</ol>
-<h2 id="exercise2"><strong>Exercise2</strong></h2>
+          <!-- # 6.NULL Video Note -->
+<blockquote>
+<p>好的工具总是能带来高的效率</p></blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/6-NULL-Video-Note/#more" rel="contents">

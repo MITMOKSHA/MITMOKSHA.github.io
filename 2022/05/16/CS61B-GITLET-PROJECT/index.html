@@ -20,17 +20,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="CS61B Gitlet Project 2 Getting Started(Lab6) Preperation 首先使用git submodule update --init --recursive命令将21sp的library更新，再一并复制过来。记得再当前操作系统中设置REPO_DIR环境变量为所有projA、HW的根目录。切记要注意看文档, 以及其中给出的设置来实现相应的功能, 最后">
+    <meta name="description" content="CS61B Gitlet Project 2 Getting Started(Lab6) Preperation 首先使用git submodule update --init --recursive命令将21sp的library更新，再一并复制过来。记得再当前操作系统中设置REPO_DIR环境变量为所有projA、HW的根目录。切记要注意看文档, 以及其中给出的设置来实现相应的功能,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS61B GITLET PROJECT">
 <meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/CS61B-GITLET-PROJECT/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="CS61B Gitlet Project 2 Getting Started(Lab6) Preperation 首先使用git submodule update --init --recursive命令将21sp的library更新，再一并复制过来。记得再当前操作系统中设置REPO_DIR环境变量为所有projA、HW的根目录。切记要注意看文档, 以及其中给出的设置来实现相应的功能, 最后">
+<meta property="og:description" content="CS61B Gitlet Project 2 Getting Started(Lab6) Preperation 首先使用git submodule update --init --recursive命令将21sp的library更新，再一并复制过来。记得再当前操作系统中设置REPO_DIR环境变量为所有projA、HW的根目录。切记要注意看文档, 以及其中给出的设置来实现相应的功能,">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-5b2470a6def367603e617ea9c709c231.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-de14f3c3a0f560d423afde1fdd05300b.png">
 <meta property="article:published_time" content="2022-05-16T09:39:52.000Z">
-<meta property="article:modified_time" content="2022-05-16T09:40:17.904Z">
+<meta property="article:modified_time" content="2022-05-18T01:15:26.145Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-5b2470a6def367603e617ea9c709c231.png">
@@ -233,9 +233,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-05-16 17:39:52 / Modified: 17:40:17" itemprop="dateCreated datePublished" datetime="2022-05-16T17:39:52+08:00">2022-05-16</time>
+      <time title="Created: 2022-05-16 17:39:52" itemprop="dateCreated datePublished" datetime="2022-05-16T17:39:52+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-18 09:15:26" itemprop="dateModified" datetime="2022-05-18T09:15:26+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,7 +263,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="cs61b-gitlet">CS61B Gitlet</h1>
+        <span id="more"></span>
+<h1 id="cs61b-gitlet">CS61B Gitlet</h1>
 <h2 id="project-2-getting-startedlab6"><strong>Project 2 Getting Started(Lab6)</strong></h2>
 <h3 id="preperation"><strong>Preperation</strong></h3>
 <p>首先使用<code>git submodule update --init --recursive</code>命令将21sp的library更新，再一并复制过来。记得再当前操作系统中设置<code>REPO_DIR</code>环境变量为所有projA、HW的根目录。切记要注意看文档, 以及其中给出的设置来实现相应的功能, 最后才发现FAQ也给了非常好的提示，另外比如说在我的机器上使用<code>python</code>而不是<code>python3</code>，<code>make check</code>是跑不通的，需要找到<code>Makefile</code>的第25行, 修改为<code>PYTHON = python</code>。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main story <span class="string">&quot;Once upon a time, there was a beautiful dog.&quot;</span></span></span><br><span class="line">Once upon a time, there was a beautiful dog.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main story <span class="string">&quot;That dog was named Fjerf.&quot;</span></span></span><br><span class="line">Once upon a time, there was a beautiful dog.</span><br><span class="line">That dog was named Fjerf.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main story <span class="string">&quot;Fjerf loved to run and jump.&quot;</span></span></span><br><span class="line">Once upon a time, there was a beautiful dog.</span><br><span class="line">That dog was named Fjerf.</span><br><span class="line">Fjerf loved to run and jump.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main dog Mammoth <span class="string">&quot;German Spitz&quot;</span> 10</span></span><br><span class="line">Woof! My name is Mammoth and I am a German Spitz! I am 10 years old! Woof!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main dog Qitmir Saluki 3</span> </span><br><span class="line">Woof! My name is Qitmir and I am a Saluki! I am 3 years old! Woof!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main birthday Qitmir</span></span><br><span class="line">Woof! My name is Qitmir and I am a Saluki! I am 4 years old! Woof!</span><br><span class="line">Happy birthday! Woof! Woof!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">java capers.Main birthday Qitmir</span></span><br><span class="line">Woof! My name is Qitmir and I am a Saluki! I am 5 years old! Woof!</span><br><span class="line">Happy birthday! Woof! Woof!</span><br></pre></td></tr></table></figure> 准备开始Gitlet:</p>

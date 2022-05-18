@@ -20,17 +20,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="CSAPP Lab2: Bomb Lab Preparation 建议在实验大致看一下lab相关的pdf。使用man手册来查看库函数，callq … &lt;_exit@plt&gt;类型为C的库函数。注意商用的architecture是以字节为单位编址寻址。 参考CS61C所了解到的Tool, 做足了准备工作。安装CGDB, 相比较于GDB的tui在调试lab时显示不会出现乱码的情况。从u">
+    <meta name="description" content="CSAPP Lab2: Bomb Lab Preparation 建议在实验大致看一下lab相关的pdf。使用man手册来查看库函数，callq … &lt;_exit@plt&gt;类型为C的库函数。注意商用的architecture是以字节为单位编址寻址。 参考CS61C所了解到的Tool, 做足了准备工作。安装CGDB, 相比较于GDB的tui在调试lab时显示不会出现乱码的情况。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSAPP Lab2: Bomb Lab">
 <meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/CSAPP-Lab2-Bomb-Lab/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="CSAPP Lab2: Bomb Lab Preparation 建议在实验大致看一下lab相关的pdf。使用man手册来查看库函数，callq … &lt;_exit@plt&gt;类型为C的库函数。注意商用的architecture是以字节为单位编址寻址。 参考CS61C所了解到的Tool, 做足了准备工作。安装CGDB, 相比较于GDB的tui在调试lab时显示不会出现乱码的情况。从u">
+<meta property="og:description" content="CSAPP Lab2: Bomb Lab Preparation 建议在实验大致看一下lab相关的pdf。使用man手册来查看库函数，callq … &lt;_exit@plt&gt;类型为C的库函数。注意商用的architecture是以字节为单位编址寻址。 参考CS61C所了解到的Tool, 做足了准备工作。安装CGDB, 相比较于GDB的tui在调试lab时显示不会出现乱码的情况。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-bd761cefa9fec00f19cf892677e0e12d.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-77b2f6513b85ca11bed6e27cf04ea16d.png">
 <meta property="article:published_time" content="2022-05-16T09:36:28.000Z">
-<meta property="article:modified_time" content="2022-05-16T09:38:42.677Z">
+<meta property="article:modified_time" content="2022-05-18T01:15:48.818Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-bd761cefa9fec00f19cf892677e0e12d.png">
@@ -233,9 +233,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-05-16 17:36:28 / Modified: 17:38:42" itemprop="dateCreated datePublished" datetime="2022-05-16T17:36:28+08:00">2022-05-16</time>
+      <time title="Created: 2022-05-16 17:36:28" itemprop="dateCreated datePublished" datetime="2022-05-16T17:36:28+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-18 09:15:48" itemprop="dateModified" datetime="2022-05-18T09:15:48+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,7 +263,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="csapp-lab2-bomb-lab">CSAPP Lab2: Bomb Lab</h1>
+        <span id="more"></span>
+<h1 id="csapp-lab2-bomb-lab">CSAPP Lab2: Bomb Lab</h1>
 <h2 id="preparation"><strong>Preparation</strong></h2>
 <p>建议在实验大致看一下lab相关的<a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/recitations/f20New/recitation02-bomblab.pdf">pdf</a>。使用<code>man</code>手册来查看库函数，<code>callq … &lt;_exit@plt&gt;</code>类型为C的库函数。注意商用的architecture是以字节为单位编址寻址。</p>
 <p>参考CS61C所了解到的Tool, 做足了准备工作。安装<code>CGDB</code>, 相比较于<code>GDB</code>的<code>tui</code>在调试lab时显示不会出现乱码的情况。从<code>ubuntu</code>中<code>apt-get</code>下载到的版本较低，一些功能不适用。参考<a target="_blank" rel="noopener" href="https://cgdb.github.io/">CGDB官网</a>下载最新版本的<code>CGDB</code>, 简单浏览了一下<a target="_blank" rel="noopener" href="https://cgdb.github.io/docs/cgdb.pdf">CGDB官方手册</a>, 以及对应<code>CGDB</code>在<code>~/.cgdb/cgdbrc</code>文件中做了如下的配置足以满足调试需求: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set disasm</span><br><span class="line">:set hls</span><br><span class="line">:set syn=style</span><br></pre></td></tr></table></figure> 另外gdb相关内容再推荐这两本书籍 <code>Debugs Hacks</code>和<code>Debugging with GDB</code>。</p>

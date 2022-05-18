@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -189,6 +189,127 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/s081-lab3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/16/s081-lab3/" class="post-title-link" itemprop="url">MIT 6.S081 Lab3: Page tables</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-16 17:54:53" itemprop="dateCreated datePublished" datetime="2022-05-16T17:54:53+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-18 09:48:28" itemprop="dateModified" datetime="2022-05-18T09:48:28+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MIT-6-S081/" itemprop="url" rel="index"><span itemprop="name">MIT 6.S081</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="mit-6.s081-lab3-page-tables">MIT 6.S081 Lab3: Page tables</h1>
+<h2 id="print-a-page-table"><strong>1. Print a page table</strong></h2>
+<h3 id="description"><strong>1.1 Description</strong></h3>
+<blockquote>
+<p>Define a function called vmprint(). It should take a pagetable_t argument, and print that pagetable in the format described below. Insert if(p-&gt;pid==1) vmprint(p-&gt;pagetable) in exec.c just before the return argc, to print the first process's page table. You receive full credit for this assignment if you pass the pte printout test of make grade.</p>
+</blockquote>
+<h3 id="implementation"><strong>1.2 Implementation</strong></h3>
+<ul>
+<li>将<code>vmprint</code>函数添加到<code>kernel/vm.c</code>文件中并在<code>kernel/defs.h</code>文件中添加该函数的声明。使用格式符<code>%p</code>打印16进制数，使用<code>kernel/riscv.h</code>文件中定义的宏, 参考<code>freewalk</code>函数以递归的形式完成。实现该函数方便接下来的调试, 可以在gdb中测试其正确性。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vmprint</span><span class="params">(<span class="type">pagetable_t</span> pagetable, <span class="type">int</span> depth)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (depth == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;page table %p\n&quot;</span>, pagetable);</span><br><span class="line">  <span class="keyword">if</span> (depth == <span class="number">3</span>)  <span class="comment">// terminate condition.</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">512</span>; ++i) &#123;</span><br><span class="line">    <span class="type">pte_t</span> pte = pagetable[i];</span><br><span class="line">    <span class="keyword">if</span> (pte &amp; PTE_V) &#123;</span><br><span class="line">      uint64 pa = PTE2PA(pte);</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; depth; ++j) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;.. &quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;..%d: pte %p pa %p\n&quot;</span>, i, pte, pa);</span><br><span class="line">      vmprint((<span class="type">pagetable_t</span>)pa, ++depth);  <span class="comment">// recursive.</span></span><br><span class="line">      pagetable[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="a-kernel-page-table-per-process"><strong>2. A kernel page table per process</strong></h2>
+<h3 id="description-1"><strong>2.1 Description</strong></h3>
+<blockquote>
+<p>Your first job is to modify the kernel so that every process uses its own copy of the kernel page table when executing in the kernel. Modify struct proc to maintain a kernel page table for each process, and modify the scheduler to switch kernel page tables when switching processes. For this step, each per-process kernel page table should be identical to the existing global kernel page table. You pass this part of the lab if usertests runs correctly. - Add a field to struct proc for the process's kernel page table. - A reasonable way to produce a kernel page table for a new process is to implement a modified version of kvminit that makes a new page table instead of modifying kernel_pagetable. You'll want to call this function from allocproc. - Make sure that each process's kernel page table has a mapping for that process's kernel stack. In unmodified xv6, all the kernel stacks are set up in procinit. You will need to move some or all of this functionality to allocproc. - Modify scheduler() to load the process's kernel page table into the core's satp register (see kvminithart for inspiration). Don't forget to call sfence_vma() after calling w_satp(). - scheduler() should use kernel_pagetable when no process is running. - Free a process's kernel page table in freeproc. - You'll need a way to free a page table without also freeing the leaf physical memory pages. - vmprint may come in handy to debug page tables. - It's OK to modify xv6 functions or add new functions; you'll probably need to do this in at least kernel/vm.c and kernel/proc.c. (But, don't modify kernel/vmcopyin.c, kernel/stats.c, user/usertests.c, and user/stats.c.) - A missing page table mapping will likely cause the kernel to encounter a page fault. It will print an error that includes sepc=0x00000000XXXXXXXX. You can find out where the fault occurred by searching for XXXXXXXX in kernel/kernel.asm. ### <strong>2.2 Implementation</strong> - 在<code>proc.h</code>进程的结构体中加入内核页表的属性<code>pkpagetable</code>。 </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> <span class="title">lock</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// p-&gt;lock must be held when using these:</span></span><br><span class="line">  <span class="class"><span class="keyword">enum</span> <span class="title">procstate</span> <span class="title">state</span>;</span>        <span class="comment">// Process state</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">parent</span>;</span>         <span class="comment">// Parent process</span></span><br><span class="line">  <span class="type">void</span> *chan;                  <span class="comment">// If non-zero, sleeping on chan</span></span><br><span class="line">  <span class="type">int</span> killed;                  <span class="comment">// If non-zero, have been killed</span></span><br><span class="line">  <span class="type">int</span> xstate;                  <span class="comment">// Exit status to be returned to parent&#x27;s wait</span></span><br><span class="line">  <span class="type">int</span> pid;                     <span class="comment">// Process ID</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// these are private to the process, so p-&gt;lock need not be held.</span></span><br><span class="line">  uint64 kstack;               <span class="comment">// Virtual address of kernel stack</span></span><br><span class="line">  uint64 sz;                   <span class="comment">// Size of process memory (bytes)</span></span><br><span class="line">  <span class="type">pagetable_t</span> pagetable;       <span class="comment">// User page table</span></span><br><span class="line">  <span class="type">pagetable_t</span> pkpagetable;     <span class="comment">// process&#x27;s kernel page table</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">trapframe</span> *<span class="title">trapframe</span>;</span> <span class="comment">// data page for trampoline.S</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">context</span> <span class="title">context</span>;</span>      <span class="comment">// swtch() here to run process</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">ofile</span>[<span class="title">NOFILE</span>];</span>  <span class="comment">// Open files</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">inode</span> *<span class="title">cwd</span>;</span>           <span class="comment">// Current directory</span></span><br><span class="line">  <span class="type">char</span> name[<span class="number">16</span>];               <span class="comment">// Process name (debugging)</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> - 实现<code>kvminit</code>函数的另一个版本来初始化进程的内核页表。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create processes&#x27;s kernel table</span></span><br><span class="line"><span class="type">pagetable_t</span></span><br><span class="line"><span class="title function_">ukvmcreate</span><span class="params">()</span>  </span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">pagetable_t</span> kpagetable = (<span class="type">pagetable_t</span>) kalloc();</span><br><span class="line">  <span class="built_in">memset</span>(kpagetable, <span class="number">0</span>, PGSIZE);</span><br><span class="line">  uvmmap(kpagetable, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, CLINT, CLINT, <span class="number">0x10000</span>, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, PLIC, PLIC, <span class="number">0x400000</span>, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span><br><span class="line">  uvmmap(kpagetable, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span><br><span class="line">  uvmmap(kpagetable, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span><br><span class="line">  <span class="keyword">return</span> kpagetable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> - 以及专门将映射加入进程的内核页表的函数<code>uvmmap</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add a mapping to processes&#x27;s kernel</span></span><br><span class="line"><span class="comment">// page table</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">uvmmap</span><span class="params">(<span class="type">pagetable_t</span> pagetable, uint64 va, uint64 pa, uint64 sz, <span class="type">int</span> perm)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(mappages(pagetable, va, sz, pa, perm) != <span class="number">0</span>)</span><br><span class="line">    panic(<span class="string">&quot;uvmmap&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+</blockquote>
+<ul>
+<li>确保每个进程的内核页表中包含该进程所使用到的内核栈的映射。可以将原来在<code>boot time</code>进程初始化<code>procinit</code>函数中全局内核页表映射内核栈的代码<strong>注释</strong>掉。应题目要求在<code>allocproc</code>函数中实现映射当前进程所对应的内核栈。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Allocate a page for the process&#x27;s kernel stack.</span></span><br><span class="line"><span class="comment">// Map it high in memory, followed by an invalid</span></span><br><span class="line"><span class="comment">// guard page.</span></span><br><span class="line"><span class="type">char</span> *pa = kalloc();   <span class="comment">// allocate physical memory per page.</span></span><br><span class="line"><span class="keyword">if</span>(pa == <span class="number">0</span>)</span><br><span class="line">  panic(<span class="string">&quot;kalloc&quot;</span>);</span><br><span class="line">uint64 va = KSTACK((<span class="type">int</span>) (p - proc));  <span class="comment">// virtual address.</span></span><br><span class="line"><span class="comment">// make sure each process&#x27;s kernel page table has a mapping</span></span><br><span class="line"><span class="comment">// for that process&#x27;s kernel stack.</span></span><br><span class="line">uvmmap(p-&gt;pkpagetable, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span><br><span class="line">p-&gt;kstack = va;</span><br></pre></td></tr></table></figure></li>
+<li>在<code>scheduler</code>函数内实现，模仿<code>kvminithart</code>函数在调度时切换页表，即将进程的内核页表的地址放入<code>satp</code>寄存器，相应地刷新<code>TLB</code>，当进程没有在运行时，调度器切换回全局内核页表。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Per-CPU process scheduler.</span></span><br><span class="line"><span class="comment">// Each CPU calls scheduler() after setting itself up.</span></span><br><span class="line"><span class="comment">// Scheduler never returns.  It loops, doing:</span></span><br><span class="line"><span class="comment">//  - choose a process to run.</span></span><br><span class="line"><span class="comment">//  - swtch to start running that process.</span></span><br><span class="line"><span class="comment">//  - eventually that process transfers control</span></span><br><span class="line"><span class="comment">//    via swtch back to the scheduler.</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">scheduler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">c</span> =</span> mycpu();</span><br><span class="line">  </span><br><span class="line">  c-&gt;proc = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(;;)&#123;</span><br><span class="line">    <span class="comment">// Avoid deadlock by ensuring that devices can interrupt.</span></span><br><span class="line">    intr_on();</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> found = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(p = proc; p &lt; &amp;proc[NPROC]; p++) &#123;</span><br><span class="line">      acquire(&amp;p-&gt;lock);</span><br><span class="line">      <span class="keyword">if</span>(p-&gt;state == RUNNABLE) &#123;</span><br><span class="line">        <span class="comment">// Switch to chosen process.  It is the process&#x27;s job</span></span><br><span class="line">        <span class="comment">// to release its lock and then reacquire it</span></span><br><span class="line">        <span class="comment">// before jumping back to us.</span></span><br><span class="line">        p-&gt;state = RUNNING;</span><br><span class="line">        c-&gt;proc = p;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//  load the process&#x27;s kernel page table into the core&#x27;s satp register.</span></span><br><span class="line">        w_satp(MAKE_SATP(p-&gt;pkpagetable));</span><br><span class="line">        sfence_vma();   <span class="comment">// flush the TLB.</span></span><br><span class="line">        </span><br><span class="line">        swtch(&amp;c-&gt;context, &amp;p-&gt;context);</span><br><span class="line">        <span class="comment">// use kernel_pagetable when no process is running</span></span><br><span class="line">        kvminithart();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Process is done running for now.</span></span><br><span class="line">        <span class="comment">// It should have changed its p-&gt;state before coming back.</span></span><br><span class="line">        c-&gt;proc = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        found = <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      release(&amp;p-&gt;lock);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> !defined (LAB_FS)</span></span><br><span class="line">    <span class="keyword">if</span>(found == <span class="number">0</span>) &#123;</span><br><span class="line">      intr_on();</span><br><span class="line">      <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;wfi&quot;</span>)</span>;   <span class="comment">// wait for interrupt.</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    ;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在<code>freeproc</code>函数中完成释放进程的内核页表操作, 同时实现函数<code>freeukpagetable</code>, 在释放页表时不释放掉<code>leaf</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p-&gt;pkpagetable) &#123;</span><br><span class="line">  freeukpagetable(p-&gt;pkpagetable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">freeukpagetable</span><span class="params">(<span class="type">pagetable_t</span> pagetable)</span> &#123;</span><br><span class="line">  <span class="comment">// there are 2^9 = 512 PTEs in a page table.</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">512</span>; i++)&#123;</span><br><span class="line">    <span class="type">pte_t</span> pte = pagetable[i];</span><br><span class="line">    <span class="keyword">if</span> (pte &amp; PTE_V) &#123;</span><br><span class="line">      pagetable[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">if</span> ((pte &amp; (PTE_R|PTE_W|PTE_X)) == <span class="number">0</span>)&#123;  <span class="comment">// not leaf.</span></span><br><span class="line">        <span class="comment">// this PTE points to a lower-level page table.</span></span><br><span class="line">        uint64 child = PTE2PA(pte);</span><br><span class="line">        freeukpagetable((<span class="type">pagetable_t</span>)child);</span><br><span class="line">      &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  kfree((<span class="type">void</span>*)pagetable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## <strong>3. Simplify</strong> ### <strong>3.1 Description</strong> &gt; Your job in this part of the lab is to add user mappings to each process's kernel page table (created in the previous section) that allow copyin (and the related string function copyinstr) to directly dereference user pointers. Replace the body of copyin in kernel/vm.c with a call to copyin_new (defined in kernel/vmcopyin.c); do the same for copyinstr and copyinstr_new. Add mappings for user addresses to each process's kernel page table so that copyin_new and copyinstr_new work. You pass this assignment if usertests runs correctly and all the make grade tests pass.</li>
+<li>Replace copyin() with a call to copyin_new first, and make it work, before moving on to copyinstr.</li>
+<li>At each point where the kernel changes a process's user mappings, change the process's kernel page table in the same way. Such points include fork(), exec(), and sbrk().</li>
+<li>Don't forget that to include the first process's user page table in its kernel page table in userinit.</li>
+<li>What permissions do the PTEs for user addresses need in a process's kernel page table? (A page with PTE_U set cannot be accessed in kernel mode.) Don't forget about the above-mentioned PLIC limit. ### <strong>3.2 Implementation</strong></li>
+<li>用<code>copy_new</code>函数替代<code>copyin</code> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy from user to kernel.</span></span><br><span class="line"><span class="comment">// Copy len bytes to dst from virtual address srcva in a given page table.</span></span><br><span class="line"><span class="comment">// Return 0 on success, -1 on error.</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">copyin</span><span class="params">(<span class="type">pagetable_t</span> pagetable, <span class="type">char</span> *dst, uint64 srcva, uint64 len)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> copyin_new(pagetable, dst, srcva, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>copyinstr_new</code>函数替代<code>copyinstr</code> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy a null-terminated string from user to kernel.</span></span><br><span class="line"><span class="comment">// Copy bytes to dst from virtual address srcva in a given page table,</span></span><br><span class="line"><span class="comment">// until a &#x27;\0&#x27;, or max.</span></span><br><span class="line"><span class="comment">// Return 0 on success, -1 on error.</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">copyinstr</span><span class="params">(<span class="type">pagetable_t</span> pagetable, <span class="type">char</span> *dst, uint64 srcva, uint64 max)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> copyinstr_new(pagetable, dst, srcva, max);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在<code>fork()</code>中针对用户页表映射修改，相应进程的内核页表做出的改动。并实现将用户页表copy到内核页表并清空相应<code>PTE_U</code>标志的函数<code>copyupttokpt</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i, pid;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">np</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span> =</span> myproc();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Allocate process.</span></span><br><span class="line"><span class="keyword">if</span>((np = allocproc()) == <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Copy user memory from parent to child.</span></span><br><span class="line"><span class="keyword">if</span>(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">  freeproc(np);</span><br><span class="line">  release(&amp;np-&gt;lock);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">np-&gt;sz = p-&gt;sz;</span><br><span class="line"></span><br><span class="line">np-&gt;parent = p;</span><br><span class="line"></span><br><span class="line">copyupttokpt(np-&gt;pkpagetable, np-&gt;pagetable, <span class="number">0</span>, np-&gt;sz);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// copy saved user registers.</span></span><br><span class="line">*(np-&gt;trapframe) = *(p-&gt;trapframe);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cause fork to return 0 in the child.</span></span><br><span class="line">np-&gt;trapframe-&gt;a0 = <span class="number">0</span>;</span><br></pre></td></tr></table></figure> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">copyupttokpt</span><span class="params">(<span class="type">pagetable_t</span> ker, <span class="type">pagetable_t</span> user, uint64 old_size, uint64 new_size)</span> &#123;</span><br><span class="line">  <span class="type">pte_t</span> *pte_from, *pte_to;</span><br><span class="line">  uint64 pa, i;</span><br><span class="line">  uint flags;</span><br><span class="line">  old_size = PGROUNDUP(old_size);</span><br><span class="line">  <span class="keyword">for</span>(i = old_size; i &lt; new_size; i += PGSIZE)&#123;</span><br><span class="line">    <span class="keyword">if</span>((pte_from = walk(user, i, <span class="number">0</span>)) == <span class="number">0</span>)</span><br><span class="line">      panic(<span class="string">&quot;copyupttokpt: walk&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>((pte_to = walk(ker, i, <span class="number">1</span>)) == <span class="number">0</span>)</span><br><span class="line">      panic(<span class="string">&quot;copyupttokpt: walk&quot;</span>);</span><br><span class="line">    pa = PTE2PA(*pte_from);</span><br><span class="line">    <span class="comment">// clear PTE_U bit because of kernel page table.</span></span><br><span class="line">    flags = PTE_FLAGS(*pte_from) &amp; (~PTE_U);</span><br><span class="line">    *pte_to = PA2PTE(pa) | flags;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>函数<code>exec()</code>中，替换当前进程的用户页表时，内核页表也随之释放，并<code>copy</code>新用户页表的内容。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Save program name for debugging.</span></span><br><span class="line"><span class="keyword">for</span>(last=s=path; *s; s++)</span><br><span class="line">  <span class="keyword">if</span>(*s == <span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    last = s+<span class="number">1</span>;</span><br><span class="line">safestrcpy(p-&gt;name, last, <span class="keyword">sizeof</span>(p-&gt;name));</span><br><span class="line">  </span><br><span class="line"><span class="comment">// Commit to the user image.</span></span><br><span class="line">oldpagetable = p-&gt;pagetable;</span><br><span class="line">p-&gt;pagetable = pagetable;</span><br><span class="line">p-&gt;sz = sz;</span><br><span class="line"></span><br><span class="line">uvmunmap(p-&gt;pkpagetable, <span class="number">0</span>, PGROUNDUP(oldsz)/PGSIZE, <span class="number">0</span>);</span><br><span class="line">copyupttokpt(p-&gt;pkpagetable, p-&gt;pagetable, <span class="number">0</span>, p-&gt;sz);</span><br><span class="line"></span><br><span class="line">p-&gt;trapframe-&gt;epc = elf.entry;  <span class="comment">// initial program counter = main</span></span><br><span class="line">p-&gt;trapframe-&gt;sp = sp; <span class="comment">// initial stack pointer</span></span><br><span class="line">proc_freepagetable(oldpagetable, oldsz);</span><br></pre></td></tr></table></figure></li>
+<li>函数<code>sbrk()</code>，相应的增加和减少内存时变更用户页表，需要同时更新进程的内核页表。需要判断用户分配地址空间的限制。如果增加的内存大于<code>PLIC</code>则返回<code>-1</code>。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">growproc</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">  uint sz;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span> =</span> myproc();</span><br><span class="line"></span><br><span class="line">  sz = p-&gt;sz;</span><br><span class="line">  <span class="keyword">if</span>(n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> ((sz + n) &gt;= PLIC) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// test overflow.</span></span><br><span class="line">    <span class="comment">// mapping the n bytes in process&#x27;s kernel table.</span></span><br><span class="line">    <span class="keyword">if</span>((sz = uvmalloc(p-&gt;pagetable, sz, sz + n)) == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    copyupttokpt(p-&gt;pkpagetable, p-&gt;pagetable, sz-n, sz);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span><br><span class="line">    <span class="comment">// ummaping the n bytes in process&#x27;s kernel table.</span></span><br><span class="line">    uvmunmap(p-&gt;pkpagetable, PGROUNDUP(sz), (PGROUNDUP(p-&gt;sz) - PGROUNDUP(sz))/PGSIZE, <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  p-&gt;sz = sz;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>userinit</code>，初始化第一个<code>process</code>时也需要更新进程的内核页表。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set up first user process.</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">userinit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line"></span><br><span class="line">  p = allocproc();</span><br><span class="line">  initproc = p;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// allocate one user page and copy init&#x27;s instructions</span></span><br><span class="line">  <span class="comment">// and data into it.</span></span><br><span class="line">  uvminit(p-&gt;pagetable, initcode, <span class="keyword">sizeof</span>(initcode));</span><br><span class="line">  p-&gt;sz = PGSIZE;</span><br><span class="line">  copyupttokpt(p-&gt;pkpagetable, p-&gt;pagetable, <span class="number">0</span>, PGSIZE);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// prepare for the very first &quot;return&quot; from kernel to user.</span></span><br><span class="line">  p-&gt;trapframe-&gt;epc = <span class="number">0</span>;      <span class="comment">// user program counter</span></span><br><span class="line">  p-&gt;trapframe-&gt;sp = PGSIZE;  <span class="comment">// user stack pointer</span></span><br><span class="line"></span><br><span class="line">  safestrcpy(p-&gt;name, <span class="string">&quot;initcode&quot;</span>, <span class="keyword">sizeof</span>(p-&gt;name));</span><br><span class="line">  p-&gt;cwd = namei(<span class="string">&quot;/&quot;</span>);</span><br><span class="line"></span><br><span class="line">  p-&gt;state = RUNNABLE;</span><br><span class="line"></span><br><span class="line">  release(&amp;p-&gt;lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/16/s081-lab3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1257,135 +1378,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/vim-vscode-tmux-gdb/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/cpp%20Note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Pishun Huang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moksha's Blog">
-      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Moksha's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/16/cpp%20Note/" class="post-title-link" itemprop="url">Advanced Cpp Note</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-16 15:39:40" itemprop="dateCreated datePublished" datetime="2022-05-16T15:39:40+08:00">2022-05-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:47:32" itemprop="dateModified" datetime="2022-05-18T09:47:32+08:00">2022-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/PL/" itemprop="url" rel="index"><span itemprop="name">PL</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="一stdfunction和bind绑定器">一、std::function和bind绑定器</h2>
-<h3 id="可调用对象">可调用对象</h3>
-<ul>
-<li>是一个函数指针</li>
-<li>是一个具有<code>operator()</code>成员函数的类对象（仿函数）</li>
-<li>是一个可被转换为函数指针的类对象</li>
-<li>是一个类成员（函数）指针</li>
-</ul>
-<h3 id="可调用对象包装器stdfuntion">可调用对象包装器std::funtion</h3>
-<ul>
-<li>头文件<code>&lt;functional&gt;</code></li>
-<li>可以容纳除了类成员（函数）指针之外的所有可调用对象</li>
-<li>可以用统一的方式处理函数、函数对象、函数指针，并允许保存和延迟执行它们</li>
-<li><code>function</code>比普通函数指针更灵活和便利</li>
-</ul>
-<h3 id="stdbind绑定器">std::bind绑定器</h3>
-<ul>
-<li>头文件<code>&lt;functional&gt;</code></li>
-<li>接受一个可调用对象，生成一个新的可调用对象</li>
-<li><code>std::bind</code>用来将可调用对象与其参数一起进行绑定，绑定后的结果可以使用<code>std::function</code>进行保存，并延迟调用到任何我们需要的时候</li>
-<li>作用
-<ul>
-<li>将可调用对象与其参数一起绑定成一个仿函数(functor)</li>
-<li>将多元（参数个数为n）可调用对象转成一元或者（n-1）元可调用对象，却只绑定部分参数 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">1</span>, <span class="number">2</span>)();  <span class="comment">// 输出：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, std::placeholders::_1, <span class="number">2</span>)(<span class="number">1</span>);  <span class="comment">// 输出 ：1 2</span></span><br><span class="line">std::<span class="built_in">bind</span>(output, <span class="number">2</span>, std::placeholders::_1)(<span class="number">1</span>);  <span class="comment">// 输出 ：2 1</span></span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><code>std::bind</code>的返回类型是一个stl内部定义的仿函数类型</li>
-<li><code>std::placeholders::_1</code>是一个占位符，代表这个位置将在函数调用时被传入的第一个参数所替代</li>
-<li>组合bind函数
-<ul>
-<li><code>std::bind(std::greater&lt;int&gt;(), std::placeholders::_1, 5);</code>
-<ul>
-<li>判断是否大于5的功能闭包</li>
-</ul></li>
-</ul></li>
-</ul>
-<h3 id="c11通过提供stdfunction和stdbind统一了可调用对象的各种操作">C++11通过提供std::function和std::bind统一了可调用对象的各种操作</h3>
-<h2 id="二lambda表达式">二、lambda表达式</h2>
-<h3 id="语法形式">语法形式</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/16/cpp%20Note/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

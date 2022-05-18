@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="MIT 6.S081 Lab5: xv6 lazy page allocation 很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files xv6使用sbrk()申请物理地址空间并将其映射到进程的虚拟地址空间(向内核请求堆">
+    <meta name="description" content="MIT 6.S081 Lab5: xv6 lazy page allocation 很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files xv6使用sbrk()申请物理地址空间并将其映射到进程的虚拟地址空间(向内核请求堆内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIT 6.S081 Lab5: xv6 lazy page allocation">
 <meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/s081-lab5/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="MIT 6.S081 Lab5: xv6 lazy page allocation 很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files xv6使用sbrk()申请物理地址空间并将其映射到进程的虚拟地址空间(向内核请求堆">
+<meta property="og:description" content="MIT 6.S081 Lab5: xv6 lazy page allocation 很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files xv6使用sbrk()申请物理地址空间并将其映射到进程的虚拟地址空间(向内核请求堆内存">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-998ad453d6ec0eed41edd98ca61aa644.png">
 <meta property="article:published_time" content="2022-05-16T09:55:02.000Z">
-<meta property="article:modified_time" content="2022-05-18T01:16:28.768Z">
+<meta property="article:modified_time" content="2022-05-18T01:48:35.316Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-998ad453d6ec0eed41edd98ca61aa644.png">
@@ -240,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:16:28" itemprop="dateModified" datetime="2022-05-18T09:16:28+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 09:48:35" itemprop="dateModified" datetime="2022-05-18T09:48:35+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,8 +262,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <span id="more"></span>
-<h1 id="mit-6.s081-lab5-xv6-lazy-page-allocation">MIT 6.S081 Lab5: xv6 lazy page allocation</h1>
+        <h1 id="mit-6.s081-lab5-xv6-lazy-page-allocation">MIT 6.S081 Lab5: xv6 lazy page allocation</h1>
 <p>很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files</p>
 <p>xv6使用<code>sbrk()</code>申请<strong>物理地址空间</strong>并将其映射到进程的虚拟地址空间(向内核请求堆内存)。这个lab视频上也给了很多提示，重要的是理解并掌握原理。</p>
 <p>实际上复杂的内核会在分配栈空间时做这样的处理, <code>sbrk</code>没有分配物理地址空间，只是记住分配了哪些用户地址，并在用户地址将这些地址标记为无效(invalid)。当进程尝试第一次使用任何给定Lazy Allocation的页面时，CPU会产生Page Fault的异常，该异常错误的类型会存放到<code>scause</code>寄存器，而<code>stval</code>寄存器中从存放着不能被translate的虚拟地址。 <img src="https://pic4.zhimg.com/80/v2-998ad453d6ec0eed41edd98ca61aa644.png" alt="scause" /></p>

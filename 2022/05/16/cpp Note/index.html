@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="一、std::function和bind绑定器 可调用对象  是一个函数指针 是一个具有operator()成员函数的类对象（仿函数） 是一个可被转换为函数指针的类对象 是一个类成员（函数）指针  可调用对象包装器std::funtion  头文件&lt;functional&gt; 可以容纳除了类成员（函数）指针之外的所有可调用对象 可以用统一的方式处理函数、函数对象">
+    <meta name="description" content="一、std::function和bind绑定器 可调用对象  是一个函数指针 是一个具有operator()成员函数的类对象（仿函数） 是一个可被转换为函数指针的类对象 是一个类成员（函数）指针  可调用对象包装器std::funtion  头文件&lt;functional&gt; 可以容纳除了类成员（函数）指针之外的所有可调用对象 可以用统一的方式处理函数、函数对象、函">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Advanced Cpp Note">
 <meta property="og:url" content="https://mitmoksha.github.io/2022/05/16/cpp%20Note/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="一、std::function和bind绑定器 可调用对象  是一个函数指针 是一个具有operator()成员函数的类对象（仿函数） 是一个可被转换为函数指针的类对象 是一个类成员（函数）指针  可调用对象包装器std::funtion  头文件&lt;functional&gt; 可以容纳除了类成员（函数）指针之外的所有可调用对象 可以用统一的方式处理函数、函数对象">
+<meta property="og:description" content="一、std::function和bind绑定器 可调用对象  是一个函数指针 是一个具有operator()成员函数的类对象（仿函数） 是一个可被转换为函数指针的类对象 是一个类成员（函数）指针  可调用对象包装器std::funtion  头文件&lt;functional&gt; 可以容纳除了类成员（函数）指针之外的所有可调用对象 可以用统一的方式处理函数、函数对象、函">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-16T07:39:40.000Z">
-<meta property="article:modified_time" content="2022-05-18T01:15:22.631Z">
+<meta property="article:modified_time" content="2022-05-18T01:47:32.058Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:15:22" itemprop="dateModified" datetime="2022-05-18T09:15:22+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 09:47:32" itemprop="dateModified" datetime="2022-05-18T09:47:32+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,8 +260,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <span id="more"></span>
-<h2 id="一stdfunction和bind绑定器">一、std::function和bind绑定器</h2>
+        <h2 id="一stdfunction和bind绑定器">一、std::function和bind绑定器</h2>
 <h3 id="可调用对象">可调用对象</h3>
 <ul>
 <li>是一个函数指针</li>

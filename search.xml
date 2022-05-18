@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>CSAPP-Ch2</title>
+      <link href="/2022/05/18/CSAPP-Ch2/"/>
+      <url>/2022/05/18/CSAPP-Ch2/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>第二章后面部分Yale patt讲的比较清楚，因此在读第二遍的时候就没有继续总结了</p></blockquote><span id="more"></span><h1 id="信息的表示和处理"><strong>信息的表示和处理</strong></h1><ul><li>编译器维护着数据类型的信息，机器级程序不包含所谓的数据类型信息。</li><li>可以将2的幂次十进制数通过<span class="math inline">\(n=i+4*j\)</span>这个公式来直接转换成十六进制数。其中<span class="math inline">\(0\leq i\leq3\)</span>， 1(i=0), 2(i=1), 4(i=2), 8(i=3)，可以把十六进制数写成高位是<code>i</code>对应的值，后面跟<code>j</code>个0。如：<span class="math inline">\(2^{11}\)</span>转换成十六进制数，<span class="math inline">\(n=11=3+4\times2\)</span>，<code>i</code>对应的值是8，后面跟2个0，得到的结果是<code>0x800</code></li><li><code>大端字节序/网络字节序</code>: 最高有效字节在最前面; <code>小端字节序/主机字节序</code>: 最低有效字节在最前面</li><li><code>ISA</code>可以同时拥有两种以上顺序模式，如：ARM。而具体决定使用什么字节顺序由操作系统来决定。 (未完，吃饭去了...)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> CSAPP Reading </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CSAPP Ch1</title>
       <link href="/2022/05/18/CSAPP-Ch1/"/>
       <url>/2022/05/18/CSAPP-Ch1/</url>

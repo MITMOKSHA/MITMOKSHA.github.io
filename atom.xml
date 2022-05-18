@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-18T09:55:41.839Z</updated>
+  <updated>2022-05-18T10:30:44.975Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSAPP-Ch2</title>
+    <link href="https://mitmoksha.github.io/2022/05/18/CSAPP-Ch2/"/>
+    <id>https://mitmoksha.github.io/2022/05/18/CSAPP-Ch2/</id>
+    <published>2022-05-18T10:11:57.000Z</published>
+    <updated>2022-05-18T10:30:44.975Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;第二章后面部分Yale patt讲的比较清楚，因此在读第二遍的时候就没有继续总结了&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="CSAPP Reading" scheme="https://mitmoksha.github.io/categories/CSAPP-Reading/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>CSAPP Ch1</title>
@@ -379,26 +398,6 @@
     
     
     <category term="CMU15-213" scheme="https://mitmoksha.github.io/categories/CMU15-213/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>6.NULL Video Note</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/6-NULL-Video-Note/</id>
-    <published>2022-05-16T09:26:09.000Z</published>
-    <updated>2022-05-18T09:56:12.463Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # 6.NULL Video Note --&gt;
-&lt;blockquote&gt;
-&lt;p&gt;好的工具总是能带来高的效率&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="6.NULL" scheme="https://mitmoksha.github.io/categories/6-NULL/"/>
     
     
   </entry>

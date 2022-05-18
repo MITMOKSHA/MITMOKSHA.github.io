@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="计算机系统漫游  计算机系统是由硬件和系统软件组成的 源程序中由ASCII字符构成的文件称为文本文件, 所有其他文都称为二进制文件  预处理阶段预处理器根据以字符#开头的命令，修改原始C程序，读取系统头文件的内容，并把它直接插入程序文本中，如： 123#if 0--#endif 字(word): 总线传送定长字节块的大小 磁盘驱动器(HDD)简单说其实就是磁盘 适配器: 插在主板">
+    <meta name="description" content="计算机系统漫游  计算机系统是由硬件和系统软件组成的 源程序中由ASCII字符构成的文件称为文本文件, 所有其他文都称为二进制文件  预处理阶段预处理器根据以字符#开头的命令，修改原始C程序，读取系统头文件的内容，并把它直接插入程序文本中，如： 123#if 0--#endif 字(word): 总线传送定长字节块的大小 磁盘驱动器(HDD)简单说其实就是磁盘 适配器: 插在主板插槽">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSAPP Ch.1">
 <meta property="og:url" content="https://mitmoksha.github.io/2022/05/17/csappCh1/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="计算机系统漫游  计算机系统是由硬件和系统软件组成的 源程序中由ASCII字符构成的文件称为文本文件, 所有其他文都称为二进制文件  预处理阶段预处理器根据以字符#开头的命令，修改原始C程序，读取系统头文件的内容，并把它直接插入程序文本中，如： 123#if 0--#endif 字(word): 总线传送定长字节块的大小 磁盘驱动器(HDD)简单说其实就是磁盘 适配器: 插在主板">
+<meta property="og:description" content="计算机系统漫游  计算机系统是由硬件和系统软件组成的 源程序中由ASCII字符构成的文件称为文本文件, 所有其他文都称为二进制文件  预处理阶段预处理器根据以字符#开头的命令，修改原始C程序，读取系统头文件的内容，并把它直接插入程序文本中，如： 123#if 0--#endif 字(word): 总线传送定长字节块的大小 磁盘驱动器(HDD)简单说其实就是磁盘 适配器: 插在主板插槽">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/17/images/img-2022-05-17-23-21-05.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/17/images/img-2022-05-17-23-29-59.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/17/images/img-2022-05-17-23-40-48.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/17/images/img-2022-05-17-23-44-21.png">
 <meta property="article:published_time" content="2022-05-17T15:14:00.000Z">
-<meta property="article:modified_time" content="2022-05-18T01:24:09.395Z">
+<meta property="article:modified_time" content="2022-05-18T01:35:00.799Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/17/images/img-2022-05-17-23-21-05.png">
@@ -245,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:24:09" itemprop="dateModified" datetime="2022-05-18T09:24:09+08:00">2022-05-18</time>
+      <time title="Modified: 2022-05-18 09:35:00" itemprop="dateModified" datetime="2022-05-18T09:35:00+08:00">2022-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,8 +267,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <span id="more"></span>
-<h1 id="计算机系统漫游"><strong>计算机系统漫游</strong></h1>
+        <h1 id="计算机系统漫游"><strong>计算机系统漫游</strong></h1>
 <ul>
 <li>计算机系统是由<strong>硬件</strong>和<strong>系统软件</strong>组成的</li>
 <li>源程序中由<code>ASCII</code>字符构成的文件称为<strong>文本文件</strong>, 所有其他文都称为<strong>二进制文件</strong> <img src="../images/img-2022-05-17-23-21-05.png" /></li>

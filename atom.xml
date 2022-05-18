@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-18T01:24:09.395Z</updated>
+  <updated>2022-05-18T01:35:00.799Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -21,17 +21,29 @@
     <link href="https://mitmoksha.github.io/2022/05/17/csappCh1/"/>
     <id>https://mitmoksha.github.io/2022/05/17/csappCh1/</id>
     <published>2022-05-17T15:14:00.000Z</published>
-    <updated>2022-05-18T01:24:09.395Z</updated>
+    <updated>2022-05-18T01:35:00.799Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1</summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;计算机系统漫游&quot;&gt;&lt;strong&gt;计算机系统漫游&lt;/strong&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;计算机系统是由&lt;strong&gt;硬件&lt;/strong&gt;和&lt;strong&gt;系统软件&lt;/strong&gt;组成的&lt;/li&gt;
+&lt;li&gt;源程序中由&lt;code&gt;ASCII&lt;/code&gt;字符构成的文件称为&lt;strong&gt;文本文件&lt;/strong&gt;, 所有其他文都称为&lt;strong&gt;二进制文件&lt;/strong&gt; &lt;img src=&quot;../images/img-2022-05-17-23-21-05.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;预处理阶段预处理器根据以字符&lt;code&gt;#&lt;/code&gt;开头的命令，修改原始C程序，读取系统头文件的内容，并把它直接插入程序文本中，如： &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#if 0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;--&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#endif&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;字(word)&lt;/code&gt;: 总线传送定长字节块的大小&lt;/li&gt;
+&lt;li&gt;磁盘驱动器(HDD)简单说其实就是磁盘&lt;/li&gt;
+&lt;li&gt;适配器: 插在主板插槽的卡(比如图形适配器，显示屏); 控制器：I/O设备本身或系统主板上的芯片组 &lt;img src=&quot;../images/img-2022-05-17-23-29-59.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;在键盘上读取&lt;code&gt;hello&lt;/code&gt;命令。通过将数据读取到&lt;code&gt;KBDR&lt;/code&gt;中(中间涉及到ASCII到Binary的转换)，再将&lt;code&gt;KBDR&lt;/code&gt;中的数据存入主存中。整个过程需要CPU参与，引出了概念&lt;code&gt;可编程I/O&lt;/code&gt; &lt;img src=&quot;../images/img-2022-05-17-23-34-32.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;因此也延伸出了优化的方案(使用&lt;code&gt;DMA&lt;/code&gt;) &lt;img src=&quot;../images/img-2022-05-17-23-35-01.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;将字符串显示到显示器上。通过将数据写入到&lt;code&gt;DDR&lt;/code&gt;中(要将Binary转换为ASCII)，再将&lt;code&gt;DDR&lt;/code&gt;中的数据显示到图形适配器上&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Cache&lt;/code&gt;产生的原因：随着时间的推移&lt;code&gt;DRAM&lt;/code&gt;的性能和&lt;code&gt;Disk&lt;/code&gt;相差三个数量级; Cache充分利用了&lt;strong&gt;局部性原理&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Posix标准&lt;/code&gt;：标准化&lt;code&gt;Unix&lt;/code&gt;的开发&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;上下文切换&lt;/code&gt;涉及到&lt;code&gt;PC&lt;/code&gt;和&lt;code&gt;寄存器组&lt;/code&gt;的Save和Restore &lt;img src=&quot;../images/img-2022-05-17-23-40-48.png&quot; alt=&quot;存储器层次结构&quot;&gt; &lt;img src=&quot;../images/img-2022-05-17-23-44-21.png&quot; alt=&quot;进程虚拟地址空间&quot;&gt;&lt;/li&gt;
+&lt;li&gt;进程虚拟内存中的内容存储在磁盘上，而主存作为磁盘的缓存, 造成&lt;code&gt;容量又大速度又快&lt;/code&gt;的假象。&lt;/li&gt;
+&lt;li&gt;Unix I/O的读写系统调用为&lt;code&gt;逻辑读写&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;网络适配器&lt;/code&gt;可以在不同主机之间在交换主存中的数据&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Amdahl&#39;s law&lt;/code&gt;: &lt;span class=&quot;math inline&quot;&gt;\(S=\frac{1}{(1-\alpha)+\alpha/k}\)&lt;/span&gt;, 其中&lt;span class=&quot;math inline&quot;&gt;\(S\)&lt;/span&gt;为加速比, &lt;span class=&quot;math inline&quot;&gt;\(\alpha\)&lt;/span&gt;为所需执行时间占总时间的比例, &lt;span class=&quot;math inline&quot;&gt;\(k\)&lt;/span&gt;为该部分性能提升的比例&lt;/li&gt;
+&lt;/ul&gt;
+</summary>
     
     
     

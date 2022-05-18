@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -312,39 +312,39 @@
 <p>1.编写完程序之后发现有报错log, 于是配合上vscode+vim插件可以直接在代码中定位错误信息，将报错log(主要时label名字输入错误)全部修改正确。</p>
 <p>2.汇编成功后，debug发现书上有两个小错误，最开始以为x-0A是0x0A但后面发现并不是，而是0x0A的取补数来判定值, 还有x-03和x-09也是一样的。后来ADD后面只能跟5个Bit的值，遂用#-10表示,因此改为:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-812c175efddbad0e4dc2b76e381e3064.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-812c175efddbad0e4dc2b76e381e3064.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>3.debug发现这一段条件码判断的有问题，应该是照着敲的时候敲错了太粗心了...!第一步和负的ASCII的0比较应该是判断BRn才为NOT A integer, 事实上我写成了BRp才造成了这样的错误，而且还漏写了大于9的边界判断，下面是Debug错误图:</p>
-<p><img src="https://pic4.zhimg.com/80/v2-90401b2396aac9499e8c7c5c69eebe6a.png" alt="Image" /><img src="https://pic4.zhimg.com/80/v2-790558c0ce2a716b2a8942c46c83b599.png" alt="Image" /></p>
+<p><img src="https://pic4.zhimg.com/80/v2-90401b2396aac9499e8c7c5c69eebe6a.png" alt="Image"><img src="https://pic4.zhimg.com/80/v2-790558c0ce2a716b2a8942c46c83b599.png" alt="Image"></p>
 <p><strong>正确</strong>应该改为:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-3cd596729cfb00576d353da469fe8e5b.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-3cd596729cfb00576d353da469fe8e5b.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>4.输入+测试会crash，随后我设置断点缩小了BUG的范围，找到了对应的位置，最后确定是因为这一段代码输入错，可以能是因为重复恢复R5寄存器，也可能是以为忘记恢复R7寄存器的值。crash的图片:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-bae4d8bc8edf58837b97b96dcdd5430a.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-bae4d8bc8edf58837b97b96dcdd5430a.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>错误代码的图片:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-dce739185fc63a23b13334f0a3f8b0b7.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-dce739185fc63a23b13334f0a3f8b0b7.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>改正了这部分代码, 恢复正常:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-e9bccf6f55cf7287a06b29ea514e85da.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-e9bccf6f55cf7287a06b29ea514e85da.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>5.debug排错技巧，先在某个特定的函数位置打好断点再看源代码是否有误，并屏感觉有不合理的地方对照课本，最后走一遍单步调试.</p>
 <p>6.仔细查看这行代码并没有实际的意义，于是对照可课本发现确实是敲错了:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-24cbd8d35456387479b36ffc0ab9c213.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-24cbd8d35456387479b36ffc0ab9c213.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>7.查看了Display的源代码发现显示的其实是栈顶元素(一个符号位三个数字)，也就是刚输入的ASCIIBUFF。衍生出了一个问题，如果上上次输入的是一个3位数字，且上次输入的是一个2位数字，那么ASCIIBUF的2位数字会和3位数字的百位一起显示吗？因为实际上在ASCIItoBinary函数中会覆盖掉之前的内容。</p>
 <p>8.测试了一下栈内一共可以存10个元素，于是看了一下地址分布，又确认了一下确实是这样(1 stackbase location + 9 stackmax locations):</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-c16ad818c2c0113c2c065f26ec96a56c.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-c16ad818c2c0113c2c065f26ec96a56c.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>9.实际上POP和PUSH操作在发生underflow/overflow时是不会移动栈顶指针的，而是直接打印信息改变寄存器R5的值然后返回:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-e64de1d0088a29d4552ccaac0bf33758.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-e64de1d0088a29d4552ccaac0bf33758.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>10.每一次ADD操作弹栈取两个操作后求和，会检查值是否超出范围([-999, 999]).</p>
 <p>11.MULT操作专门有一个寄存器存放sign bit, 方便两个操作数进行累加来完成乘法。还有如果其中有一个操作数为0则直接将这个值压入栈中，退出乘法操作。而且乘法只需要将作为累加次数的乘数的值变为正数即可，最后根据符号位取结果的时候，可以发现四种结果都是正确的。</p>
@@ -352,20 +352,20 @@
 <p>13.PUSH和POP默认操作的都是R0寄存器</p>
 <p>14.查看clear函数源码，发现仅仅是将栈顶指针初始化为空(即初始化为stackbase再-1)</p>
 <p>15.又发现一个BUG：输入百位数Display显示乱码，进而导致相加的结果出错。有两个原因：1.push值到栈中出错(PUSH_VALUE)A2B。2.或者B2A的过程中出错。经过定位之后发现输入到ASCIIBUFF中的三个数字是完整的存在里面的，难道是转换出错？开始往Display函数上打断点，可以发现在单步执行通过Binary2ASCII前后ASCIIBUF的值发生了变化，经过之前:</p>
-<p><img src="https://pic4.zhimg.com/80/v2-f8f064c63aee48c35230e6c2f40972f1.png" alt="Image" /> <img src="https://pic4.zhimg.com/80/v2-fc118d61d731129e1ba81f336f17015a.png" alt="Image" /></p>
+<p><img src="https://pic4.zhimg.com/80/v2-f8f064c63aee48c35230e6c2f40972f1.png" alt="Image"> <img src="https://pic4.zhimg.com/80/v2-fc118d61d731129e1ba81f336f17015a.png" alt="Image"></p>
 <p>经过之后，可以看出ASCIIBUFF中的值已经发生了变化：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-943b0e7832ae7bd4226d27f845a828d6.png" alt="Image" /> <img src="https://pic4.zhimg.com/80/v2-ac2006c2c1cf9c2b19d0dfb80e4e07ca.png" alt="Image" /></p>
+<p><img src="https://pic4.zhimg.com/80/v2-943b0e7832ae7bd4226d27f845a828d6.png" alt="Image"> <img src="https://pic4.zhimg.com/80/v2-ac2006c2c1cf9c2b19d0dfb80e4e07ca.png" alt="Image"></p>
 <p>接下来又试了一下两位数，经过这个函数后显示的结果是正确的，难道是课本代码出错？？？Not！又进一步精确了错误的位置，发现如果是两位数，在发现在栈中的值就是所输入的两位数的值，而三位数的时候就变成了随机的值，因此可以推断问题不是出在B2A而是处在A2B往栈中存的值不正确导致最后Display从栈中取二进制数时打印出错!(刚好就只剩A2B的源代码没看哈哈哈)。以下是输入123，栈中值错误：</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-17b94c6024eebac989a7adaf9ec1b6e4.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-17b94c6024eebac989a7adaf9ec1b6e4.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>仔细阅读了A2B的源代码定位到了错误(从十六进制转化为十进制时使用MASK的对象应该是R4,也就是刚LD过来的内容):</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-c69df62813b011e7fb9b5c15daff2404.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-c69df62813b011e7fb9b5c15daff2404.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>修改过后，成功了！:</p>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-634e98e287e5de31e3de86f7f7de08a7.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-634e98e287e5de31e3de86f7f7de08a7.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 <p>16.最后说一下A2B的设计，我本以为是数位的ASCII码来和'0'做减，没想到是和x000F的MASK取模也行，太妙了！</p>
 <ul>

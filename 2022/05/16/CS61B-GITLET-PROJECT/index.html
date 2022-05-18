@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -414,7 +414,7 @@
 </ul>
 <h4 id="处理case"><strong>处理case</strong></h4>
 <ul>
-<li><img src="https://pic4.zhimg.com/80/v2-5b2470a6def367603e617ea9c709c231.png" title="fig:" alt="Image" /></li>
+<li><img src="https://pic4.zhimg.com/80/v2-5b2470a6def367603e617ea9c709c231.png" title="fig:" alt="Image"></li>
 <li>想到了一个比较情况的好方法，将当前分支，给定分支以及split point三个集合中含有的文件名的并集放到集合里。比较时需要各个集合的BlobId和文件名的映射，以及BlobId和content的映射。</li>
 <li>由两个值来区分所有情况分别是<code>isPresent</code>和<code>IsModified</code>。</li>
 <li><code>Modifed</code>只需要通过当前分支分支或给定分支， 与<code>split point blobId</code>比较来区分就行了, 程序里我将不存在的文件的blobId赋值为空串。</li>
@@ -425,7 +425,7 @@
 <li><code>getBytes</code>方法可以将字符串转化为字节数组(byte[])。</li>
 </ul>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-de14f3c3a0f560d423afde1fdd05300b.png" alt="Image" /><figcaption aria-hidden="true">Image</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-de14f3c3a0f560d423afde1fdd05300b.png" alt="Image"><figcaption aria-hidden="true">Image</figcaption>
 </figure>
 
     </div>

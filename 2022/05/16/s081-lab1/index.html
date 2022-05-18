@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -272,7 +272,7 @@
 <h2 id="pingpong"><strong>2. pingpong</strong></h2>
 <h3 id="描述-1"><strong>2.1 描述</strong></h3>
 <blockquote>
-<p>Write a program that uses UNIX system calls to ''ping-pong'' a byte between two processes over a pair of pipes, one for each direction. The parent should send a byte to the child; the child should print "<pid>: received ping", where <pid> is its process ID, write the byte on the pipe to the parent, and exit; the parent should read the byte from the child, print "<pid>: received pong", and exit. Your solution should be in the file user/pingpong.c.</p>
+<p>Write a program that uses UNIX system calls to ''ping-pong'' a byte between two processes over a pair of pipes, one for each direction. The parent should send a byte to the child; the child should print "<pid>: received ping", where <pid> is its process ID, write the byte on the pipe to the parent, and exit; the parent should read the byte from the child, print "<pid>: received pong", and exit. Your solution should be in the file user/pingpong.c.</pid></pid></pid></p>
 </blockquote>
 <p>需要熟悉fork、write、read、pipe等系统调用的使用，来实现父进程与子进程之间的通过管道的数据传输，应用在xv6中的实现的一组库函数(在user/user.h中)来实现本例。</p>
 <h3 id="实现-1"><strong>2.2 实现</strong></h3>

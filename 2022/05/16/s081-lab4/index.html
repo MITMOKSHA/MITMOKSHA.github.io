@@ -158,7 +158,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -311,7 +311,7 @@
 <p>用户级别的时钟中断是在系统调用<code>sigalarm</code>时对硬件进行操作使得其周期性地发生中断?</p>
 <h3 id="all-test-passed"><strong>All Test Passed</strong></h3>
 <figure>
-<img src="https://pic4.zhimg.com/80/v2-a5ba7b96aa580477641e72690d8b2044.png" alt="Test" /><figcaption aria-hidden="true">Test</figcaption>
+<img src="https://pic4.zhimg.com/80/v2-a5ba7b96aa580477641e72690d8b2044.png" alt="Test"><figcaption aria-hidden="true">Test</figcaption>
 </figure>
 <h2 id="总结"><strong>总结</strong></h2>
 <p>终于结束lab4了，呼~, gdb调的真舒服，基本的syscall逻辑大致都搞明白了。Backtrace按照hint写入一些函数，实际上就是要理解上一节video讲的frame point的一些概念，当前stack frame的第1个entry会指向前一个frame同时也给出了stack frame的分布图，间接地实现了gdb的查看栈帧的backtrace命令; 系统调用alarm会在进程使用CPU时间定期发出警报，手把手实现一个<strong>用户级别</strong>的中断。通过trap中根据devintr()的返回值判断中断的类型，1为设备中断，2为时钟中断，0为未识别。进而tick控制在指定intervel内调用中断处理程序handler。同时还需要在proc.h中加入字段，防止中断发生时的重入。涉及到部分寄存器的store/restore。另外<code>ecall</code>指令完成三件事：1.将用户模式切换到管理员模式; 2.将PC保存到sepc寄存器中; 3.将跳转到stvec寄存器中存储的地址处执行，即将stvec赋给PC。</p>

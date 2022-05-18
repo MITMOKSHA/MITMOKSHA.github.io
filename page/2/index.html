@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -189,6 +189,227 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/s081-lab5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/16/s081-lab5/" class="post-title-link" itemprop="url">MIT 6.S081 Lab5: xv6 lazy page allocation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-16 17:55:02" itemprop="dateCreated datePublished" datetime="2022-05-16T17:55:02+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-18 09:48:35" itemprop="dateModified" datetime="2022-05-18T09:48:35+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MIT-6-S081/" itemprop="url" rel="index"><span itemprop="name">MIT 6.S081</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="mit-6.s081-lab5-xv6-lazy-page-allocation">MIT 6.S081 Lab5: xv6 lazy page allocation</h1>
+<p>很多方法都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files</p>
+<p>xv6使用<code>sbrk()</code>申请<strong>物理地址空间</strong>并将其映射到进程的虚拟地址空间(向内核请求堆内存)。这个lab视频上也给了很多提示，重要的是理解并掌握原理。</p>
+<p>实际上复杂的内核会在分配栈空间时做这样的处理, <code>sbrk</code>没有分配物理地址空间，只是记住分配了哪些用户地址，并在用户地址将这些地址标记为无效(invalid)。当进程尝试第一次使用任何给定Lazy Allocation的页面时，CPU会产生Page Fault的异常，该异常错误的类型会存放到<code>scause</code>寄存器，而<code>stval</code>寄存器中从存放着不能被translate的虚拟地址。 <img src="https://pic4.zhimg.com/80/v2-998ad453d6ec0eed41edd98ca61aa644.png" alt="scause"></p>
+<p>Page Fault的类型: - load page faults, load指令不能translate地址 - store page faults，store指令不能translate地址 - instruction page faults，指令地址未能被tanslate ## <strong>1. Eliminate allocation from sbrk()</strong> ### <strong>1.1 Description</strong> 将<code>growproc</code>函数注释掉，不分配物理地址空间，只增加进程内存的大小。 ### <strong>1.2 Implementation</strong> <code>kernel/sysproc.c</code> </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">uint64</span><br><span class="line"><span class="title function_">sys_sbrk</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> addr;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(argint(<span class="number">0</span>, &amp;n) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  addr = myproc()-&gt;sz;</span><br><span class="line"></span><br><span class="line">  myproc()-&gt;sz += n;</span><br><span class="line">  <span class="comment">// if(growproc(n) &lt; 0)  // Not need to allocate pysical memory.</span></span><br><span class="line">  <span class="comment">//   return -1;</span></span><br><span class="line">  <span class="keyword">return</span> addr;  <span class="comment">// return the old size of process</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## <strong>2. Lazy allocation</strong> ### <strong>2.1 Description</strong> 比如说要实现<code>Lazy allocation</code>, 在<code>sbrk()</code>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/16/s081-lab5/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/s081-lab4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/16/s081-lab4/" class="post-title-link" itemprop="url">MIT 6.S081 Lab4: Traps</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-16 17:54:57" itemprop="dateCreated datePublished" datetime="2022-05-16T17:54:57+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-18 09:48:31" itemprop="dateModified" datetime="2022-05-18T09:48:31+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MIT-6-S081/" itemprop="url" rel="index"><span itemprop="name">MIT 6.S081</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="mit-6.s081-lab4-traps">MIT 6.S081 Lab4: Traps</h1>
+<ul>
+<li>跟着视频走一遍系统调用<code>gdb</code>的流程。<code>tmux</code>分割两个窗口，一个窗口作为服务器<code>make CPUS=1 qemu-gdb</code>，另一个窗口作为<code>gdb</code>调试窗口<code>gdb-multiarch</code>。将断点打在<code>ecall指令处</code>, <code>continue</code>执行，随后再将第二个断点打到<code>print/x $stvec</code>处也就是，<code>TRAPFRAME</code>的起始地址。<code>ecall</code>指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。</li>
+<li>进入<code>trampoline.s</code>后，<code>csrrw a0, sscratch, a0</code>首先将非体系结构寄存器<code>sscratch</code>与<code>a0</code>的值交换，<code>sscratch</code>寄存器中保存的时<code>TRAPFRAME</code>的起始地址。</li>
+<li>然后将当前的现场(即寄存器)保存到<code>TRAPFRAME</code>中，再将<code>TRAPFRAME</code>中保存的内核栈指针，<code>hartid</code>，<code>usertrap()</code>的地址，以及内核页表所在的<code>stap</code>寄存器的值加载到当前通用寄存器中。</li>
+<li>随后将寄存器<code>t1</code>保存的内核页目录的地址写入当前<code>satp</code>寄存器中，再刷新<code>TLB</code>，将用户页表切换为内核页表 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">csrw satp, <span class="built_in">t1</span></span><br><span class="line">sfence.vma <span class="built_in">zero</span>, <span class="built_in">zero</span></span><br></pre></td></tr></table></figure></li>
+<li>将用户模式完全切换为内核模式之后，最后跳到<code>t0</code>中保存的<code>usertrap()</code>的入口地址，<code>jr t0</code>跳入<code>usertrap</code>函数。</li>
+<li>进入函数后，首先判断<code>sstatus</code>寄存器的<code>SSP</code>位是否为<code>0</code>(即是否为用户模式下发生的trap)。将<code>stvec</code>赋值为<code>kernelvec</code>的入口地址，即在当前<code>usertrap</code>发生的中断或异常则跳转到<code>stvec</code>处执行。再保存中断返回的地址到<code>sepc</code>。</li>
+<li>中断将会改变<code>sstatus</code>寄存器，因此在修改结束之后才将中断打开<code>intr_on()</code>。</li>
+<li>之后进入系统调用<code>syscall()</code>，根据<code>p-&gt;trapframe-&gt;a7</code>中保存的系统调用号来决定调用哪个系统调用(专门通过一个静态数组查找<code>syscalls[num]</code>), 随后将系统调用的返回值保存到<code>p-&gt;trapframe-&gt;a0</code>中。</li>
+<li>完成系统调用之后，随后计算<code>uservec</code>的虚拟地址并赋值给<code>stvec</code>，以便发生异常或中断的时候处理。接下来将相应的内容restore到<code>trapframe</code>中方便进行下一次<code>trap</code>。随后更新<code>sstatus</code>状态寄存器的值，清空<code>SSP</code>、设置<code>SPIE</code>位。</li>
+<li>更新<code>sepc</code>的值以及将<code>satp</code>的值设为内核页表的地址，将在<code>userret</code>中切换页表。计算<code>userret</code>在<code>trampoline.s</code>中的虚拟地址，跳转到<code>userret</code>，跳转之前传参有个小细节，即将<code>TRAMPOLINE</code>作为第一个参数，这样在<code>a0</code>与<code>sscratch</code>交换后，<code>sscratch</code>就得到<code>TRAMPOLINE</code>的起始地址了。</li>
+<li>进入到收尾阶段，将恢复到<code>trap</code>之前的状态。将<code>TRAMPOLINE</code>中的内容load到通用寄存器中，先将<code>a0</code>寄存器的值写入<code>sscratch</code>寄存器中，这样最后<code>csrrw a0, sscratch, a0</code>即可将这两个寄存器复位为各自的值。最后<code>sret</code>将<code>sepc</code>赋给<code>pc</code>完成系统调用恢复正常执行。</li>
+</ul>
+<h4 id="比较重要的非体系结构寄存器"><strong>比较重要的非体系结构寄存器</strong></h4>
+<ul>
+<li>stvec, 存放系统调用处理程序的地址</li>
+<li>sepc, 当系统调用发生时PC存放到此处，以便系统调用返回时能从下一条指令开始执行<code>sret</code>: sepc -&gt; pc。</li>
+<li>scause, ISA通过它来分析系统调用的种类</li>
+<li>sscratch, 内核将一个值放到这里，方便系统调用的开始(通用寄存器和sscratch寄存器通过csrrw来交换值<code>csrrw a0, sscratch, a0</code>)。</li>
+<li>sstatus, 状态寄存器，类似LC-3来决定是否发生中断，或者决定是用户模式还是系统模式，若存在条件码则存放条件码。</li>
+</ul>
+<h4 id="debug相关"><strong>Debug相关</strong></h4>
+<ul>
+<li><code>add-symbol-file</code>或<code>file</code>命令从文件<code>filename</code>中读取附加的符号表信息存放在<code>ELF</code>文件(可重定向目标文件)中的<code>.symtab</code> Entry中。当文件名（通过其他方式）动态加载到正在运行的程序中时，将使用此命令。</li>
+<li>解决调试alarmtest时<code>usertrap</code> C源代码不显示的, 函数和变量信息不够全，需要<code>add-symbol-file kernel/kernel</code>即可。</li>
+</ul>
+<h2 id="risc-v-assembly"><strong>1. RISC-V assembly</strong></h2>
+<h3 id="description"><strong>1.1 Description</strong></h3>
+<blockquote>
+<p>It will be important to understand a bit of RISC-V assembly, which you were exposed to in 6.004. There is a file user/call.c in your xv6 repo. make fs.img compiles it and also produces a readable assembly version of the program in user/call.asm.</p>
+<p>可以在<code>gdb</code>中使用<code>file</code>来对<code>call.o</code>文件调试，并将断点打到<code>main</code>函数上。解释调试时<code>RISCV</code>汇编出现的一些指令, <code>x</code>表示寄存器, <code>M</code>表示存储器: - <code>auipc</code>, Add Upper Immediate to PC. 将指令编码格式中的<code>Imm[31:12]</code>左移12位后的结果<code>sign-extened</code>后再加上PC。 </p><figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auipc rd, Imm  <span class="comment">; x[rd] = PC + sext(Imm[31:12] &lt;&lt; 12)</span></span><br></pre></td></tr></table></figure> - <code>li</code>(pseudoinstruction), Load Immediate. <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">li rd, Imm  <span class="comment">; x[rd] = Imm</span></span><br></pre></td></tr></table></figure> - <code>mv</code>(pseudoinstruction), Move. 注意与<code>x86 ISA</code>的<code>mov</code>传递方向不同。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv rd, rs1  <span class="comment">; x[rd] = x[rs1]</span></span><br></pre></td></tr></table></figure> - <code>jalr</code>, Jump And Link Register. <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/40453719/risc-v-why-set-least-significant-bit-to-zero-in-jalr">为什么要将最低有效位置为0?</a>字节对齐。将当前pc+4赋给ra作为返回地址并跳转到offset(rs1), 随后返回到当前指令的下一条指令继续执行。注意如果rd省略了，那么rd就默认为x1(即<code>ra</code>保存返回地址的寄存器)。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jalr </span>rd, offset(rs1)  <span class="comment">; t=pc+4; pc=(x[rs1]+sext(offset)) &amp; ~1; x[rd] = t;</span></span><br></pre></td></tr></table></figure> - <code>lbu</code>, Load Byte Unsigned. 取完一个字节后，紧接着零拓展, <code>lb</code>为符号位拓展。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lbu </span>rd, offset(rs1)  <span class="comment">; x[rd] M[x[rs1] + sext(offset)] [7:0]</span></span><br></pre></td></tr></table></figure> - <code>seqz</code>(pseudoinstruction), Set if Equal to Zero. <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seqz rd, rs1  <span class="comment">; x[rd] = (x[rs1] == 0)</span></span><br></pre></td></tr></table></figure> - <code>csrrw</code>, Control and Status Register Read and Write. 状态寄存器和通用寄存器之间的读写操作。将状态寄存器中的内容放入rd寄存器，将rs1的内容放入状态寄存器。 <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrrw rd, csr, rs1  <span class="comment">; t = CSRs[csr]; CSRs[csr] = x[rs1]; x[rd] = t</span></span><br></pre></td></tr></table></figure> - <code>csrw</code> <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrw csr, rs1</span><br></pre></td></tr></table></figure> - <code>csrr</code> <figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrr rd, csr</span><br></pre></td></tr></table></figure> ### <strong>1.2 Implementation</strong> - 不了解RISCV指令集的建议可以把<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/su20/">CS61C</a>的Week2专门讲RISCV的slide或者视频看完，直到把调试过程中遇到的每条指令弄明白再来做这一个task。<p></p>
+</blockquote>
+<p>分析<code>user/call.asm</code> </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/16/s081-lab4/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1100,284 +1321,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/6-NULL-Video-Note/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/Makefile-Note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Pishun Huang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moksha's Blog">
-      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Moksha's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/16/Makefile-Note/" class="post-title-link" itemprop="url">Makefile Note</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-16 17:24:07" itemprop="dateCreated datePublished" datetime="2022-05-16T17:24:07+08:00">2022-05-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:16" itemprop="dateModified" datetime="2022-05-18T09:48:16+08:00">2022-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Science Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="makefile-note">Makefile Note</h1>
-<p>参考<a target="_blank" rel="noopener" href="https://seisman.github.io/how-to-write-makefile/introduction.html">跟我一起写Makefile</a>做点笔记。 - 第一个<code>target</code>为<code>make</code>的默认目标 - <code>prerequisites</code>中如果有一个以上的文件比<code>target</code>文件要新的话，<code>command</code>所定义的命令就会被执行 </p><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target ... : prerequisites ...</span><br><span class="line">    command</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure> - 最开始的实例 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">edit : main.o kbd.o command.o display.o \</span><br><span class="line">        insert.o search.o files.o utils.o</span><br><span class="line">    cc -o edit main.o kbd.o command.o display.o \</span><br><span class="line">        insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">main.o : main.c defs.h</span><br><span class="line">    cc -c main.c</span><br><span class="line">kbd.o : kbd.c defs.h command.h</span><br><span class="line">    cc -c kbd.c</span><br><span class="line">command.o : command.c defs.h command.h</span><br><span class="line">    cc -c command.c</span><br><span class="line">display.o : display.c defs.h buffer.h</span><br><span class="line">    cc -c display.c</span><br><span class="line">insert.o : insert.c defs.h buffer.h</span><br><span class="line">    cc -c insert.c</span><br><span class="line">search.o : search.c defs.h buffer.h</span><br><span class="line">    cc -c search.c</span><br><span class="line">files.o : files.c defs.h buffer.h command.h</span><br><span class="line">    cc -c files.c</span><br><span class="line">utils.o : utils.c defs.h</span><br><span class="line">    cc -c utils.c</span><br><span class="line">clean :</span><br><span class="line">    rm edit main.o kbd.o command.o display.o \</span><br><span class="line">        insert.o search.o files.o utils.o</span><br></pre></td></tr></table></figure> - 为了复用可以在<code>Makefile</code>中使用<code>shell</code>的变量 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o kbd.o command.o display.o \</span><br><span class="line">    insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">edit : <span class="variable">$(objects)</span></span><br><span class="line">    cc -o edit <span class="variable">$(objects)</span></span><br><span class="line">main.o : main.c defs.h</span><br><span class="line">    cc -c main.c</span><br><span class="line">kbd.o : kbd.c defs.h command.h</span><br><span class="line">    cc -c kbd.c</span><br><span class="line">command.o : command.c defs.h command.h</span><br><span class="line">    cc -c command.c</span><br><span class="line">display.o : display.c defs.h buffer.h</span><br><span class="line">    cc -c display.c</span><br><span class="line">insert.o : insert.c defs.h buffer.h</span><br><span class="line">    cc -c insert.c</span><br><span class="line">search.o : search.c defs.h buffer.h</span><br><span class="line">    cc -c search.c</span><br><span class="line">files.o : files.c defs.h buffer.h command.h</span><br><span class="line">    cc -c files.c</span><br><span class="line">utils.o : utils.c defs.h</span><br><span class="line">    cc -c utils.c</span><br><span class="line">clean :</span><br><span class="line">    rm edit <span class="variable">$(objects)</span></span><br></pre></td></tr></table></figure> - <code>make</code>会自动推导命令，只要<code>Make</code>看到一个<code>.o</code>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/16/Makefile-Note/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/16/vim-vscode-tmux-gdb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Pishun Huang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moksha's Blog">
-      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Moksha's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/16/vim-vscode-tmux-gdb/" class="post-title-link" itemprop="url">vim+vscode+tmux+gdb</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-16 17:09:48" itemprop="dateCreated datePublished" datetime="2022-05-16T17:09:48+08:00">2022-05-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-18 09:48:42" itemprop="dateModified" datetime="2022-05-18T09:48:42+08:00">2022-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Science Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="vimvscodetmuxgdbgit">vim+vscode+tmux+gdb+git</h1>
-<p>个人的一些认为比较常用以及不经常用到的的快捷操作 ## <strong>vscode</strong> 1. 查找文件ctrl+p， esc退出 2. 分割屏幕ctrl+，通过ctrl+1/2/3来切换分割屏幕的焦点 3. ctrl+` 打开/关闭终端 4. ctrl+tab, 在tab之间切换 5. 模糊查找当前工作目录下的所有文件ctrl+p, # 6. Ctrl + Shift + Tab 导航tab 7. alt + &lt;-/-&gt;切换tab</p>
-<h2 id="vim"><strong>vim</strong></h2>
-<ol type="1">
-<li>跳转到指定行号n, ngg</li>
-<li>复制整行 yy, 复制包括当前行接下来n行， nyy</li>
-<li>复制指定行v模式下指定复制内容，然后y键复制。</li>
-<li>粘贴 如复制内容不是一整行：p粘贴到当前光标处，P粘贴到当前行首。 如复制内容是一整行：p粘贴到当前行的下一行，P粘贴到当前行的上一行</li>
-<li>剪切dd</li>
-<li>在当前文件查找指定内容，/+内容</li>
-<li>ctrl+] 跳转到函数的定义处，ctrl+t返回上一次光标处</li>
-<li>u撤销，ctrl+r恢复</li>
-<li><code>^y</code>向上移动一行, <code>^e</code>向下移动一行</li>
-<li><code>^b</code>向上移动一页，<code>^f</code>向下移动一页</li>
-<li>number + shift + G, 跳到第number行</li>
-<li>在<code>tab</code>之间切换, <code>Alt</code>+<code>number</code>.</li>
-<li>可视条件下选中后<code>&lt;</code>或<code>&gt;</code>完成缩进。</li>
-<li>要想跳转到函数定义处，需要在项目目录中输入<code>ctags -R</code>命令。<code>ctrl+]</code>跳转, <code>ctrl+o</code>返回。</li>
-<li>可视模式下注释+<code>d</code>。</li>
-<li>替换变量名<code>:%s/foo/bar/g</code>将整个文件中的<code>foo</code>替换为<code>bar</code></li>
-<li>在vim文件内使用shell命令<code>:! command</code></li>
-<li>在当前文件中打开另一个文件<code>:e file</code></li>
-<li>在Vim中编译代码<code>:!gcc %</code>, 编译并运行代码<code>:!gcc % || ./a.out</code></li>
-</ol>
-<h2 id="tmux"><strong>tmux</strong></h2>
-<ol type="1">
-<li>任何命令都需要加ctrl+b前缀</li>
-<li>c创建窗口；n, p切换窗口</li>
-<li>%垂直分屏, "水平分屏</li>
-<li>x关闭窗口</li>
-<li>o在窗口之间切换</li>
-<li>PgUp开启tmux终端界面的翻页，q退出。</li>
-</ol>
-<h2 id="gdb"><strong>gdb</strong></h2>
-<ol type="1">
-<li>delete 删除所有断点</li>
-<li>layout src/reg/asm 显示c源代码、寄存器和汇编，但未分屏；focus src/reg/asm在src、reg和asm的tui中来回切换</li>
-<li>layout split获得c和asm的分屏。</li>
-<li>info/i frame 查看栈帧, info/i args查看传递给main的参数, i locals显示当前的本地变量。</li>
-<li>通过backtrace查看栈帧，frame n(n为bt结果的栈帧号)，然后i frame查看当前栈帧号的详细内容</li>
-<li>print/p查看argv数据;print/p <em>argv(默认打印一个参数);可以通过print/p </em>argv@n 来选择argv数组中的n个元素即参数; p *argv@argc打印所有参数</li>
-<li><code>print</code>是打印值，<code>x</code>是访问主存。</li>
-<li><code>Ctrl + x</code>，再按1：单窗口模式，显示一个窗口</li>
-<li><code>Ctrl + x</code>，再按2：双窗口模式，显示两个窗口</li>
-<li><code>Ctrl + x</code>，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口。</li>
-<li><code>^x+a</code>关闭可视化</li>
-<li><code>wa</code>跟踪某个变量(watch point)</li>
-</ol>
-<h2 id="gdb续"><strong>&lt;<debug hacks>&gt;(gdb续)</debug></strong></h2>
-<ol type="1">
-<li><code>break/b</code>
-<ul>
-<li><code>break 函数名</code></li>
-<li><code>break 行号</code></li>
-<li><code>break 文件名:行号</code></li>
-<li><code>break 文件名:函数名</code></li>
-<li><code>break +偏移量</code></li>
-<li><code>break -偏移量</code></li>
-<li><code>break *地址</code></li>
-<li><code>break 断点 if 条件</code></li>
-<li>若不指定位置就默认在下一行代码上设置断点</li>
-<li><code>info break</code>显示断点信息</li>
-</ul></li>
-<li><code>run/r</code>, 如果不加参数，执行到断点位置后暂停运行(和start命令一样的效果)</li>
-<li><code>print/p</code>
-<ul>
-<li><code>p $eax</code>，显示寄存器(寄存器名前加$)</li>
-</ul></li>
-<li><code>p/格式 变量</code>, 显示寄存器可用的格式:
-<ul>
-<li>x, 显示为十六进制数</li>
-<li>d, 显示为十进制数</li>
-<li>u, 显示无符号十进制数</li>
-<li>o, 显示八进制数</li>
-<li>t, 显示二进制数(two)</li>
-<li>a, 显示地址</li>
-<li>c, 显示为字符</li>
-<li>f, 浮点小数</li>
-<li>s, 显示为字符串</li>
-<li>i, 显示为机器语言</li>
-</ul></li>
-<li><code>x/NFU ADDR</code>, 显示内存的内容(eXamining):
-<ul>
-<li><code>N</code>为重复次数</li>
-<li><code>F</code>为上述的P格式</li>
-<li><code>U</code>代表的单位：
-<ul>
-<li>b, 字节</li>
-<li>h, 半字</li>
-<li>w, 字(4字节默认)</li>
-<li>g, 双字</li>
-</ul></li>
-</ul></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/16/vim-vscode-tmux-gdb/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

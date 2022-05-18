@@ -158,7 +158,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -346,7 +346,7 @@
 <li>不要过度使用通配符</li>
 <li>把通配符置于搜索模式的开始处搜索起来是最慢的</li>
 </ul></li>
-<li><code>WHERE</code>的子句中<code>REGEXP</code>子句使用正则表达式，在<code>REGEXP</code>关键字后加上<code>BINARY</code>来区分匹配表达式的大小写 例：<br />
+<li><code>WHERE</code>的子句中<code>REGEXP</code>子句使用正则表达式，在<code>REGEXP</code>关键字后加上<code>BINARY</code>来区分匹配表达式的大小写 例：<br>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT Db, User FROM db </span><br><span class="line">WHERE Db REGEXP BINARY &#x27;.ys&#x27;;</span><br></pre></td></tr></table></figure></li>
 <li>匹配正则表达式内具有特殊意义的所有字符都必须以\</li>
 </ul>
@@ -609,7 +609,7 @@
 <li>使用在<code>WHERE</code>子句中使用<code>AND</code>可以联结多个表</li>
 <li>等值连接也称为内部联结</li>
 <li>尽量使用自联结而不用子查询</li>
-<li><strong>联结的方式</strong> <img src="https://img-blog.csdnimg.cn/20210428125629111.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2ODAyNzEz,size_16,color_FFFFFF,t_70#pic_center" alt="联结" /></li>
+<li><strong>联结的方式</strong> <img src="https://img-blog.csdnimg.cn/20210428125629111.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2ODAyNzEz,size_16,color_FFFFFF,t_70#pic_center" alt="联结"></li>
 <li>外键：外键为某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系</li>
 <li>外键的意义：在于解耦合，定义外键的方法<code>FOREIGN KEY (主键）references &lt;表名&gt;(另一个表的主键）</code></li>
 </ul>

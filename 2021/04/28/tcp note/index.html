@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="TCP&#x2F;IP详解一、TCP超时与重传引言 计时器超时称为重传超时（RTO） 若TCP累计确认无法返回新的ACK，或者当ACK包含的选择确认信息（SACK）表明出现失序报文段时，快速重传会推断出现丢包 由下层网络（IP）可能出现丢失重复或失序包，TCP重传其认为已经丢失的包  简单的超时与重传举例 二进制指数退避 每次重传间隔时间加倍   TCP拥有两个阈值来决定如何重传同一个报文段 R">
+    <meta name="description" content="TCP&#x2F;IP详解 一、TCP超时与重传 引言  计时器超时称为重传超时（RTO） 若TCP累计确认无法返回新的ACK，或者当ACK包含的选择确认信息（SACK）表明出现失序报文段时，快速重传会推断出现丢包 由下层网络（IP）可能出现丢失重复或失序包，TCP重传其认为已经丢失的包  简单的超时与重传举例  二进制指数退避  每次重传间隔时间加倍  TCP拥有两个阈值来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP&#x2F;IP Note">
 <meta property="og:url" content="https://mitmoksha.github.io/2021/04/28/tcp%20note/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="TCP&#x2F;IP详解一、TCP超时与重传引言 计时器超时称为重传超时（RTO） 若TCP累计确认无法返回新的ACK，或者当ACK包含的选择确认信息（SACK）表明出现失序报文段时，快速重传会推断出现丢包 由下层网络（IP）可能出现丢失重复或失序包，TCP重传其认为已经丢失的包  简单的超时与重传举例 二进制指数退避 每次重传间隔时间加倍   TCP拥有两个阈值来决定如何重传同一个报文段 R">
+<meta property="og:description" content="TCP&#x2F;IP详解 一、TCP超时与重传 引言  计时器超时称为重传超时（RTO） 若TCP累计确认无法返回新的ACK，或者当ACK包含的选择确认信息（SACK）表明出现失序报文段时，快速重传会推断出现丢包 由下层网络（IP）可能出现丢失重复或失序包，TCP重传其认为已经丢失的包  简单的超时与重传举例  二进制指数退避  每次重传间隔时间加倍  TCP拥有两个阈值来">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-28T15:00:13.000Z">
 <meta property="article:modified_time" content="2022-05-18T01:16:32.550Z">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-x2F-IP%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">TCP&#x2F;IP详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81TCP%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.</span> <span class="nav-text">一、TCP超时与重传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">简单的超时与重传举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%87%8D%E4%BC%A0%E8%B6%85%E6%97%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">设置重传超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%AE%A1%E6%97%B6%E5%99%A8%E7%9A%84%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.4.</span> <span class="nav-text">基于计时器的重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.5.</span> <span class="nav-text">快速重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E9%80%89%E6%8B%A9%E7%A1%AE%E8%AE%A4%EF%BC%88SACK%EF%BC%89%E7%9A%84%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.6.</span> <span class="nav-text">带选择确认（SACK）的重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.7.</span> <span class="nav-text">伪超时与重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E5%A4%B1%E5%BA%8F%E4%B8%8E%E9%87%8D%E5%A4%8D"><span class="nav-number">1.1.8.</span> <span class="nav-text">包失序与重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%BB%84%E5%8C%85"><span class="nav-number">1.1.9.</span> <span class="nav-text">重新组包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81TCP%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">二、TCP数据流与窗口管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E9%80%9A%E4%BF%A1"><span class="nav-number">1.2.1.</span> <span class="nav-text">交互式通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E6%97%B6%E7%A1%AE%E8%AE%A4"><span class="nav-number">1.2.2.</span> <span class="nav-text">延时确认</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nagle%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">Nagle算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.4.</span> <span class="nav-text">流量控制与窗口管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.</span> <span class="nav-text">三、TCP拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%A3%80%E6%B5%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">TCP拥塞检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E7%BC%93TCP%E5%8F%91%E9%80%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">减缓TCP发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.4.</span> <span class="nav-text">经典算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="nav-number">1.3.5.</span> <span class="nav-text">慢启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="nav-number">1.3.6.</span> <span class="nav-text">拥塞避免</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.3.7.</span> <span class="nav-text">慢启动和拥塞避免的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86TCP"><span class="nav-number">1.3.8.</span> <span class="nav-text">标准TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91%E7%A1%AE%E8%AE%A4%EF%BC%88FACK%EF%BC%89%E5%92%8C%E9%80%9F%E7%8E%87%E5%87%8F%E5%8D%8A"><span class="nav-number">1.3.9.</span> <span class="nav-text">转发确认（FACK）和速率减半</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">1.3.10.</span> <span class="nav-text">限制传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E7%AA%97%E5%8F%A3%E6%A0%A1%E9%AA%8C%EF%BC%88CWV%EF%BC%89"><span class="nav-number">1.3.11.</span> <span class="nav-text">拥塞窗口校验（CWV）</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tcpip%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">TCP&#x2F;IP详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80tcp%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.</span> <span class="nav-text">一、TCP超时与重传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">简单的超时与重传举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%87%8D%E4%BC%A0%E8%B6%85%E6%97%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">设置重传超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%AE%A1%E6%97%B6%E5%99%A8%E7%9A%84%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.4.</span> <span class="nav-text">基于计时器的重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.5.</span> <span class="nav-text">快速重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E9%80%89%E6%8B%A9%E7%A1%AE%E8%AE%A4sack%E7%9A%84%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.6.</span> <span class="nav-text">带选择确认（SACK）的重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0"><span class="nav-number">1.1.7.</span> <span class="nav-text">伪超时与重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E5%A4%B1%E5%BA%8F%E4%B8%8E%E9%87%8D%E5%A4%8D"><span class="nav-number">1.1.8.</span> <span class="nav-text">包失序与重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%BB%84%E5%8C%85"><span class="nav-number">1.1.9.</span> <span class="nav-text">重新组包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Ctcp%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">二、TCP数据流与窗口管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E9%80%9A%E4%BF%A1"><span class="nav-number">1.2.1.</span> <span class="nav-text">交互式通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E6%97%B6%E7%A1%AE%E8%AE%A4"><span class="nav-number">1.2.2.</span> <span class="nav-text">延时确认</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nagle%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">Nagle算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.4.</span> <span class="nav-text">流量控制与窗口管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89tcp%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.</span> <span class="nav-text">三、TCP拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp%E6%8B%A5%E5%A1%9E%E6%A3%80%E6%B5%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">TCP拥塞检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E7%BC%93tcp%E5%8F%91%E9%80%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">减缓TCP发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.4.</span> <span class="nav-text">经典算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="nav-number">1.3.5.</span> <span class="nav-text">慢启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="nav-number">1.3.6.</span> <span class="nav-text">拥塞避免</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.3.7.</span> <span class="nav-text">慢启动和拥塞避免的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86tcp"><span class="nav-number">1.3.8.</span> <span class="nav-text">标准TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91%E7%A1%AE%E8%AE%A4fack%E5%92%8C%E9%80%9F%E7%8E%87%E5%87%8F%E5%8D%8A"><span class="nav-number">1.3.9.</span> <span class="nav-text">转发确认（FACK）和速率减半</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">1.3.10.</span> <span class="nav-text">限制传输</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -261,337 +261,362 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-<h1 id="TCP-x2F-IP详解"><a href="#TCP-x2F-IP详解" class="headerlink" title="TCP&#x2F;IP详解"></a>TCP&#x2F;IP详解</h1><h2 id="一、TCP超时与重传"><a href="#一、TCP超时与重传" class="headerlink" title="一、TCP超时与重传"></a>一、TCP超时与重传</h2><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><ul>
+<h1 id="tcpip详解">TCP/IP详解</h1>
+<h2 id="一tcp超时与重传">一、TCP超时与重传</h2>
+<h3 id="引言">引言</h3>
+<ul>
 <li>计时器超时称为重传超时（RTO）</li>
 <li>若TCP累计确认无法返回新的ACK，或者当ACK包含的选择确认信息（SACK）表明出现失序报文段时，快速重传会推断出现丢包</li>
 <li>由下层网络（IP）可能出现丢失重复或失序包，TCP重传其认为已经丢失的包</li>
 </ul>
-<h3 id="简单的超时与重传举例"><a href="#简单的超时与重传举例" class="headerlink" title="简单的超时与重传举例"></a>简单的超时与重传举例</h3><ul>
-<li>二进制指数退避<ul>
+<h3 id="简单的超时与重传举例">简单的超时与重传举例</h3>
+<ul>
+<li>二进制指数退避
+<ul>
 <li>每次重传间隔时间加倍</li>
-</ul>
-</li>
-<li>TCP拥有两个阈值来决定如何重传同一个报文段<ul>
+</ul></li>
+<li>TCP拥有两个阈值来决定如何重传同一个报文段
+<ul>
 <li>R1表示TCP在向IP层传递“消极建议”（如重新评估当前路径）前，愿意尝试重传的次数</li>
 <li>R2（大于R1）指示TCP应放弃当前连接的时机</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="设置重传超时"><a href="#设置重传超时" class="headerlink" title="设置重传超时"></a>设置重传超时</h3><ul>
-<li>TCP超时和重传的基础根据给定连接的RTT（往返时间）设置RTO<ul>
+<h3 id="设置重传超时">设置重传超时</h3>
+<ul>
+<li>TCP超时和重传的基础根据给定连接的RTT（往返时间）设置RTO
+<ul>
 <li>若TCP先于RTT开始重传，可能会在网络中引入不必要的重复数据</li>
 <li>若延迟远大于RTT的间隔发送重传数据，整体网络利用率（及单个连接吞吐量）会随之下降</li>
-</ul>
-</li>
+</ul></li>
 <li>RTO设置得当是保证TCP性能的关键</li>
 <li>当分组失序（或丢失）时，RTT会被过高估算。较大的RTT估计值使得RTO也更大</li>
 <li>时间戳选项（TSOPT）使得发送端即使在丢包、延时、失序的情况下也能测量RTT</li>
 </ul>
-<h3 id="基于计时器的重传"><a href="#基于计时器的重传" class="headerlink" title="基于计时器的重传"></a>基于计时器的重传</h3><ul>
+<h3 id="基于计时器的重传">基于计时器的重传</h3>
+<ul>
 <li>对于TCP来说，计时器需要有效地实现被设置、重新设置或取消的功能</li>
-<li>RTO的设置通常大于RTT（两倍或更大）<ul>
+<li>RTO的设置通常大于RTT（两倍或更大）
+<ul>
 <li>因此基于计时器的重传会导致网络利用率的下降</li>
-</ul>
-</li>
+</ul></li>
 <li>快速重传不需要计时器超时来触发且比超时重传更高效</li>
 </ul>
-<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><ul>
+<h3 id="快速重传">快速重传</h3>
+<ul>
 <li>快速重传机制基于接收端的反馈信息来引发重传</li>
 <li>快速重传是根据收到重复ACK来推断出现丢包并启动重传，而不必等待重传计时器超时</li>
 <li>快读重传仅在达到重复阈值后才被触发，而不是一旦收到重复ACK就出发，减少了大量不必要的重传发生</li>
 </ul>
-<h3 id="带选择确认（SACK）的重传"><a href="#带选择确认（SACK）的重传" class="headerlink" title="带选择确认（SACK）的重传"></a>带选择确认（SACK）的重传</h3><ul>
-<li>空缺<ul>
+<h3 id="带选择确认sack的重传">带选择确认（SACK）的重传</h3>
+<ul>
+<li>空缺
+<ul>
 <li>ACK号与接收端缓存中的其他数据之间的间隔</li>
-</ul>
-</li>
-<li>失序数据<ul>
+</ul></li>
+<li>失序数据
+<ul>
 <li>序列号高于空缺的数据</li>
-</ul>
-</li>
+</ul></li>
 <li>在很多情况下，合理采用SACK信息能更快地实现空缺填补，且能减少不必要的重传</li>
-<li>SACK接收端行为<ul>
+<li>SACK接收端行为
+<ul>
 <li>SACK选项的空间有限，应尽可能确保向TCP发送端提供最新信息，其余的SACK块包含的内容也按照接收的先后依次排序</li>
-</ul>
-</li>
-<li>SACK发送端行为<ul>
+</ul></li>
+<li>SACK发送端行为
+<ul>
 <li>SACK发送端记录接收到的累计ACK信息，还需要记录接收到的SACK信息</li>
 <li>当SACK发送端执行重传时，通常是由于其收到了SACK或重复SACK（D-SACK）</li>
-</ul>
-</li>
+</ul></li>
 <li>为提高对ACK丢失的鲁棒性，第一个SACK块中需要包含之前的重复SACK信息</li>
 </ul>
-<h3 id="伪超时与重传"><a href="#伪超时与重传" class="headerlink" title="伪超时与重传"></a>伪超时与重传</h3><ul>
-<li><p>伪重传</p>
+<h3 id="伪超时与重传">伪超时与重传</h3>
+<ul>
+<li>伪重传
 <ul>
 <li>即使没有出现数据丢失也可能引发的重传</li>
 <li>主要原因是伪超时</li>
-</ul>
-</li>
-<li><p>DSACK</p>
+</ul></li>
+<li>DSACK
 <ul>
 <li>主要目的是判断何时重传是不必要的</li>
 <li>因此发送端至少可以判断是否发生了包失序、ACK丢失、包重复</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="包失序与重复"><a href="#包失序与重复" class="headerlink" title="包失序与重复"></a>包失序与重复</h3><ul>
-<li>失序<ul>
+<h3 id="包失序与重复">包失序与重复</h3>
+<ul>
+<li>失序
+<ul>
 <li>IP层不能保证包传输是有序进行的</li>
 <li>如果失序发生在正向链路上，TCP可能无法正确识别失序和丢包</li>
-</ul>
-</li>
-<li>重复<ul>
+</ul></li>
+<li>重复
+<ul>
 <li>采用DSACK避免</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="重新组包"><a href="#重新组包" class="headerlink" title="重新组包"></a>重新组包</h3><ul>
+<h3 id="重新组包">重新组包</h3>
+<ul>
 <li>定义：发送一个更大的报文段来提高性能（不能超过接收端通告的MSS，也不能大于路径MTU）</li>
 <li>当TCP超时重传，它并不需要完全重传相同的报文段</li>
 <li>解决了重传二义性问题</li>
 </ul>
-<h2 id="二、TCP数据流与窗口管理"><a href="#二、TCP数据流与窗口管理" class="headerlink" title="二、TCP数据流与窗口管理"></a>二、TCP数据流与窗口管理</h2><h3 id="交互式通信"><a href="#交互式通信" class="headerlink" title="交互式通信"></a>交互式通信</h3><ul>
+<h2 id="二tcp数据流与窗口管理">二、TCP数据流与窗口管理</h2>
+<h3 id="交互式通信">交互式通信</h3>
+<ul>
 <li>TCP流量中通常90%或者更多的TCP报文段都包含大批量数据（如Web、文件共享、电子邮件、备份），其余部分则包含交互式数据（如远程登陆、网络游戏），批量数据通常较大，而交互式数据段则会比较小</li>
 <li>对于一个ssh连接，客户端对其传输数据加密，意味着用户输入的信息在通过连接传送前已经进行了加密</li>
 <li>每一个交互按键通常都会生成一个单独的数据包，每个按键是独立传输的（每次一个字符而非每次一行）</li>
-<li>每个输入字符会生成4个TCP数据段：客户端的交互击键输入、服务器对击键的确认、服务器端生成的回显、客户端对该回显的确认<ul>
+<li>每个输入字符会生成4个TCP数据段：客户端的交互击键输入、服务器对击键的确认、服务器端生成的回显、客户端对该回显的确认
+<ul>
 <li>通常第二段和第三段可以合并，可将对击键的确认与回显一并传送，这种方法称为（捎带延时确认）</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="延时确认"><a href="#延时确认" class="headerlink" title="延时确认"></a>延时确认</h3><ul>
-<li>TCP并不对每个到来的数据包都返回ACK<ul>
+<h3 id="延时确认">延时确认</h3>
+<ul>
+<li>TCP并不对每个到来的数据包都返回ACK
+<ul>
 <li>利用TCP的累计ACK字段就能实现该功能</li>
-</ul>
-</li>
-<li>捎带传输：<ul>
+</ul></li>
+<li>捎带传输：
+<ul>
 <li>累计确认可以允许TCP延迟一段时间发送ACK，以便将ACK和相同方向上需要传输的数据结合发送</li>
-</ul>
-</li>
+</ul></li>
 <li>TCP不能任意时长地延迟ACK，否则对方会误认以为数据丢失而出现不必要的重传</li>
 <li>RFC指出：TCP实现ACK延迟的时延应小于500ms，实践中时延最大取200ms</li>
 </ul>
-<h3 id="Nagle算法"><a href="#Nagle算法" class="headerlink" title="Nagle算法"></a>Nagle算法</h3><ul>
+<h3 id="nagle算法">Nagle算法</h3>
+<ul>
 <li>当一个TCP连接中有在传数据（即那些已发送但还未经确认的数据），小的报文段（长度小于SMSS）就不能被发送，直到所有的在传数据都收到ACK，在收到ACK后，TCP需要收集这些小数据，将其整合到一个报文段中发送</li>
 <li>ACK返回越快，数据传输越快</li>
 <li>传输包数目更少而长度更大，但同时传输时延也更长</li>
 <li>Nagle算法结合ACK可能会导致某种程度的死锁（这种死锁不是永久的）</li>
-<li>要求延时尽量小的应用，建议禁用Nagle算法<ul>
+<li>要求延时尽量小的应用，建议禁用Nagle算法
+<ul>
 <li>TCP_NODELAY选项可以禁用Nagle算法</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="流量控制与窗口管理"><a href="#流量控制与窗口管理" class="headerlink" title="流量控制与窗口管理"></a>流量控制与窗口管理</h3><ul>
+<h3 id="流量控制与窗口管理">流量控制与窗口管理</h3>
+<ul>
 <li>每一个TCP报文段（除了建立之初的包交换）都包含一个有效的序列号字段、一个ACK号或确认字段以及一个窗口大小字段（包含窗口通告信息）</li>
 <li>窗口通告：表示发送该窗口信息的通信方为即将到来的新数据预留的存储空间</li>
 <li>窗口大小：表明接收端可用缓存空间的大小</li>
-<li>滑动窗口<ul>
+<li>滑动窗口
+<ul>
 <li>每个TCP活动连接的两端都维护一个发送窗口结构和接收窗口结构</li>
 <li>TCP以字节（而非包）为单位维护其窗口结构</li>
-<li>窗口左右边界的运动<ul>
-<li>1.关闭<ul>
+<li>窗口左右边界的运动
+<ul>
+<li>1.关闭
+<ul>
 <li>即窗口左边界右移。当已发送数据得到ACK确认时，窗口会减小</li>
-</ul>
-</li>
-<li>2.打开<ul>
+</ul></li>
+<li>2.打开
+<ul>
 <li>即窗口右边界右移。使得可发送数据量增大。当已确认数据得到处理，接收端可用缓存变大，窗口也随之变大</li>
-</ul>
-</li>
-<li>3.收缩<ul>
+</ul></li>
+<li>3.收缩
+<ul>
 <li>即窗口右边界左移</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>零窗口与TCP持续计时器<ul>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>零窗口与TCP持续计时器
+<ul>
 <li>零窗口：左右边界相等</li>
 <li>当接收端的通告窗口值为0时，可以有效阻止发送端继续发送，直至窗口大小恢复为非零值</li>
-<li>当接收端重新获得可用空间时，会给发送端传输一个”窗口更新“告知其可以继续发送数据<ul>
-<li>该窗口更新通常不包含数据（纯ACK），不能保证其传输的可靠性，容易丢包，造成死锁的发生（发送方等待收到窗口更新告知其可继续发送，接收方等待接收数据）<ul>
+<li>当接收端重新获得可用空间时，会给发送端传输一个”窗口更新“告知其可以继续发送数据
+<ul>
+<li>该窗口更新通常不包含数据（纯ACK），不能保证其传输的可靠性，容易丢包，造成死锁的发生（发送方等待收到窗口更新告知其可继续发送，接收方等待接收数据）
+<ul>
 <li>解决方案：发送端会采用一个持续计时器间歇性地查询接收端，看其窗口是否已增长</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>TCP持续计时器会触发”窗口探测“的传输，强制要求接收端返回ACK（其中包含了窗口大小字段）</li>
-<li>窗口探测包含一个字节的数据，采用TCP可靠传输（丢失重传），因此可以避免由窗口更新丢失导致的死锁<ul>
+<li>窗口探测包含一个字节的数据，采用TCP可靠传输（丢失重传），因此可以避免由窗口更新丢失导致的死锁
+<ul>
 <li>该一个字节的数据能否被接收，取决于接收端的可用缓存空间大小</li>
-</ul>
-</li>
+</ul></li>
 <li>当TCP持续计时器超时，就会触发窗口探测的发送</li>
-<li>窗口探测的响应条件：<ul>
+<li>窗口探测的响应条件：
+<ul>
 <li>至少为一个MSS</li>
 <li>超过总接收缓存的四分之一</li>
-</ul>
-</li>
+</ul></li>
 <li>可以采用指数时间退避来计算持续计时器的超时</li>
-</ul>
-</li>
-<li>糊涂窗口综合征（SWS）<ul>
+</ul></li>
+<li>糊涂窗口综合征（SWS）
+<ul>
 <li>基于窗口的流量控制机制，尤其是不使用大小固定的报文段情况（如TCP），可能会出现SWS</li>
 <li>当出现该问题时，交换数据段不是全长的而是一些较小的数据段，由于每个报文段中有用数据相对头部信息的比例较小，因此耗费的资源也更多，相应的传输效率也更低</li>
-<li>避免SWS问题<ul>
+<li>避免SWS问题
+<ul>
 <li>1.对于接收端来说，不应通告小的窗口值</li>
 <li>2.对于发送端来说，不应发送小的报文段</li>
-<li>为了避免SWS问题，至少满足以下条件之一时才能传输报文段（发送窗口更新）<ul>
+<li>为了避免SWS问题，至少满足以下条件之一时才能传输报文段（发送窗口更新）
+<ul>
 <li>（a）全长（发送MSS字节）的报文段可以发送</li>
-<li>（b）数据段长度 &gt;&#x3D; 接收端通告过的最大窗口的一半的，可以发送</li>
-<li>（c）满足以下任一条件的都可以发送：<ul>
+<li>（b）数据段长度 &gt;= 接收端通告过的最大窗口的一半的，可以发送</li>
+<li>（c）满足以下任一条件的都可以发送：
+<ul>
 <li>（i）某一ACK不是目前期盼的（即没有未经确认的在传数据）</li>
 <li>（ii）该连接禁用Nagle算法</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
+</ul></li>
 <li>TCP需要避免窗口收缩</li>
 <li>优先级：避免窗口收缩 &gt; 避免SWS</li>
-</ul>
-</li>
-<li>大容量缓存与自动调优<ul>
+</ul></li>
+<li>大容量缓存与自动调优
+<ul>
 <li>使用较小接收缓存的TCP应用的吞吐性能更差</li>
-<li>自动调优<ul>
+<li>自动调优
+<ul>
 <li>高效地自动分配缓存大小</li>
 <li>窗口值随着接收数据的增多而增大</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>紧急机制<ul>
+</ul></li>
+</ul></li>
+<li>紧急机制
+<ul>
 <li>紧急指针字段被设置后，发送端生成的每个TCP头部都包含该字段</li>
 <li>所有序列号大于紧急指针的数据都经接收端确认</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="三、TCP拥塞控制"><a href="#三、TCP拥塞控制" class="headerlink" title="三、TCP拥塞控制"></a>三、TCP拥塞控制</h2><h3 id="引言-1"><a href="#引言-1" class="headerlink" title="引言"></a>引言</h3><ul>
+<h2 id="三tcp拥塞控制">三、TCP拥塞控制</h2>
+<h3 id="引言-1">引言</h3>
+<ul>
 <li>TCP拥塞控制的难点在于怎样准确地判断何时需要减缓且如何减缓TCP传输，以及何时恢复其原有速度</li>
 <li>当网络中大量的发送方和接收方被要求承担超负荷的通信任务时，可以考虑采取(降低发送速率)或者(最终丢弃部分数据)的方法</li>
-<li>拥塞<ul>
+<li>拥塞
+<ul>
 <li>路由器因无法处理高速率到达的流量而被迫丢弃数据信息的现象</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="TCP拥塞检测"><a href="#TCP拥塞检测" class="headerlink" title="TCP拥塞检测"></a>TCP拥塞检测</h3><ul>
-<li>针对丢包情况，TCP采取的首要机制是重传<ul>
+<h3 id="tcp拥塞检测">TCP拥塞检测</h3>
+<ul>
+<li>针对丢包情况，TCP采取的首要机制是重传
+<ul>
 <li>超时重传</li>
 <li>快速重传</li>
-</ul>
-</li>
+</ul></li>
 <li>丢包被用作判断拥塞发生与否的值标</li>
 <li>在有线网络中，出现在路由器或交换机中的拥塞是造成丢包的主要原因</li>
 <li>在无线网络中，传输和接收错误是导致丢包的重要因素</li>
 </ul>
-<h3 id="减缓TCP发送"><a href="#减缓TCP发送" class="headerlink" title="减缓TCP发送"></a>减缓TCP发送</h3><ul>
+<h3 id="减缓tcp发送">减缓TCP发送</h3>
+<ul>
 <li>TCP头部设置的通知窗口大小字段，是TCP发送方调节发送速率的依据</li>
-<li>TCP发送端发送速率 &#x3D; min{接收速率，传输速率}</li>
-<li>拥塞窗口（cwnd）<ul>
+<li>TCP发送端发送速率 = min{接收速率，传输速率}</li>
+<li>拥塞窗口（cwnd）
+<ul>
 <li>反映网络传输能力的变量</li>
-</ul>
-</li>
-<li>发送端实际可用窗口W &#x3D; min{cwnd，通知窗口(awnd)}</li>
-<li>在外数据值<ul>
+</ul></li>
+<li>发送端实际可用窗口W = min{cwnd，通知窗口(awnd)}</li>
+<li>在外数据值
+<ul>
 <li>已经发出但还未经确认的数据量大小</li>
 <li>当TCP不使用选择确认机制时，W的限制作用体现为发送方发送的报文段序列号不能大于ACK号的最大值与W之和</li>
 <li>当TCP使用选择确认机制时，W用来限制在外数据值</li>
-</ul>
-</li>
-<li>带宽延迟积（BDP）也称作最佳窗口大小<ul>
+</ul></li>
+<li>带宽延迟积（BDP）也称作最佳窗口大小
+<ul>
 <li>若在传输数据值远高于BDP时，会引入不必要的延时</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="经典算法"><a href="#经典算法" class="headerlink" title="经典算法"></a>经典算法</h3><ul>
+<h3 id="经典算法">经典算法</h3>
+<ul>
 <li>TCP通过与接收端交换一个数据包来获得awnd的值</li>
 <li>获得cwnd最佳值的唯一方法是以越来越快的速率不断发送数据，直到出现数据包丢失（或网络拥塞）为止</li>
 <li>拥塞控制操作是由ACK的接收来驱动或“控制”的</li>
 <li>接收到ACK回复表明发送的数据包已被成功接收，因此可以继续发送操作</li>
-<li>自同步<ul>
+<li>自同步
+<ul>
 <li>由一个ACK到达（称作ACK时钟）触发一个新数据包传输的关系</li>
-</ul>
-</li>
+</ul></li>
 <li>在稳定传输状态下，整个系统可“自同步”控制</li>
 </ul>
-<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><ul>
+<h3 id="慢启动">慢启动</h3>
+<ul>
 <li>当一个新的TCP连接建立或检测到由重传超时（RTO）导致的丢包时，需执行慢启动</li>
-<li>TCP发送端长时间处于空闲状态也可能调用慢启动算法<ul>
-<li>在这种情况下cwnd初始值将被设置为重启窗口（RW），RW &#x3D; min（IW，cwnd）</li>
-</ul>
-</li>
-<li>慢启动的目的<ul>
+<li>TCP发送端长时间处于空闲状态也可能调用慢启动算法
+<ul>
+<li>在这种情况下cwnd初始值将被设置为重启窗口（RW），RW = min（IW，cwnd）</li>
+</ul></li>
+<li>慢启动的目的
+<ul>
 <li>使TCP在用拥塞避免探寻更多可用宽带之前得到cwnd值，以帮助TCP建立ACK时钟</li>
-</ul>
-</li>
+</ul></li>
 <li>慢启动算法防止短时间内大量数据注入导致拥塞</li>
 <li>TCP以发送一定数目的数据段开始慢启动（在SYN交换之后），称为初始窗口（IW）</li>
-<li>SMSS &#x3D; min（接收方MSS，MTU）</li>
+<li>SMSS = min（接收方MSS，MTU）</li>
 <li>慢启动算法会以min（N，SMSS）来增加cwnd值，N是指在未经确认的传输数据中能通过这一”新接收的ACK号大于之前收到的ACK号“确认的字节数</li>
-<li>快速ACK模式<ul>
+<li>快速ACK模式
+<ul>
 <li>TCP操作只在慢启动阶段完成后才返回ACK</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><ul>
+<h3 id="拥塞避免">拥塞避免</h3>
+<ul>
 <li>在慢启动阶段，cwnd会快速增长，帮助确立一个慢启动阈值，一旦达到阈值，就意味着可能有更多可用的传输资源。如果立即全部占用这些资源，将会使共享路由器队列的其他连接出现严重的丢包和重传情况，从而导致整个网络性能不稳定</li>
 <li>一旦确立慢启动阈值，TCP会进入拥塞避免阶段</li>
-<li>拥塞避免阶段窗口随时间线性增长，而慢启动阶段呈指数增长<ul>
-<li>cwnd1 &#x3D; cwnd0+（1&#x2F;k）*SMSS</li>
+<li>拥塞避免阶段窗口随时间线性增长，而慢启动阶段呈指数增长
+<ul>
+<li>cwnd1 = cwnd0+（1/k）*SMSS</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="慢启动和拥塞避免的选择"><a href="#慢启动和拥塞避免的选择" class="headerlink" title="慢启动和拥塞避免的选择"></a>慢启动和拥塞避免的选择</h3><ul>
+<h3 id="慢启动和拥塞避免的选择">慢启动和拥塞避免的选择</h3>
+<ul>
 <li>某个TCP连接总是选择运行慢启动和拥塞避免中的一个，不会出现两者同时运行的情况</li>
 <li>当cwnd&lt;ssthresh，使用慢启动算法</li>
 <li>当cwnd&gt;ssthresh，使用拥塞避免</li>
-<li>当cwnd&#x3D;ssthresh，任何一种算法都可以使用</li>
+<li>当cwnd=ssthresh，任何一种算法都可以使用</li>
 <li>慢启动阈值ssthresh不是固定的，是随时间改变的</li>
 <li>慢启动阈值的主要目的是，在没有丢包发生的情况下，记住上一次”最好的“操作窗口估计值</li>
-<li>ssthresh &#x3D; max（在外数据值&#x2F;2，2*SMSS）</li>
+<li>ssthresh = max（在外数据值/2，2*SMSS）</li>
 <li>如果出现重传情况，慢启动阈值减小至当前窗口大小的一般（但不小于2*SMSS）</li>
 </ul>
-<h3 id="标准TCP"><a href="#标准TCP" class="headerlink" title="标准TCP"></a>标准TCP</h3><ul>
-<li>当接收到一个好的ACK（表明新的数据传输成功）cwnd会相应更新<ul>
-<li>cwnd +&#x3D; SMSS 慢启动</li>
-<li>cwnd +&#x3D; SMSS*SMSS&#x2F;cwnd 拥塞避免</li>
-</ul>
-</li>
-<li>当收到三次重复ACK（或其他表明需要快速重传的信号）时，会执行以下行为<ul>
-<li>1.ssthresh更新为大于等式ssthresh &#x3D; min（在外数据值&#x2F;2，2*SMSS）的值</li>
+<h3 id="标准tcp">标准TCP</h3>
+<ul>
+<li>当接收到一个好的ACK（表明新的数据传输成功）cwnd会相应更新
+<ul>
+<li>cwnd += SMSS 慢启动</li>
+<li>cwnd += SMSS*SMSS/cwnd 拥塞避免</li>
+</ul></li>
+<li>当收到三次重复ACK（或其他表明需要快速重传的信号）时，会执行以下行为
+<ul>
+<li>1.ssthresh更新为大于等式ssthresh = min（在外数据值/2，2*SMSS）的值</li>
 <li>2.启用快速重传算法，将cwnd设为（ssthresh+3*SMSS）</li>
 <li>3.每接收一个重复ACK，cwnd值暂时增加1 SMSS</li>
 <li>4.当接收到一个好的ACK，将cwnd重设为ssthresh</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="转发确认（FACK）和速率减半"><a href="#转发确认（FACK）和速率减半" class="headerlink" title="转发确认（FACK）和速率减半"></a>转发确认（FACK）和速率减半</h3><ul>
+<h3 id="转发确认fack和速率减半">转发确认（FACK）和速率减半</h3>
+<ul>
 <li>为避免出现等待空闲而又不违背将拥塞窗口减半的做法，提出了转发确认（FACK）策略</li>
-<li>带界定参数的速率减半（RHBP）<ul>
+<li>带界定参数的速率减半（RHBP）
+<ul>
 <li>基本操作：在一个RTT时间内，每接收两个重复ACK，TCP发送方可发送一个新的数据包</li>
 <li>RHBP中区分了调整间隔（cwnd的修正阶段）和恢复间隔（数据重传阶段）</li>
-</ul>
-</li>
+</ul></li>
 <li>速率减半是调节发送操作或避免集中发送的方法</li>
 </ul>
-<h3 id="限制传输"><a href="#限制传输" class="headerlink" title="限制传输"></a>限制传输</h3><ul>
+<h3 id="限制传输">限制传输</h3>
+<ul>
 <li>TCP发送方每接收两个连续的重复ACK，就能发送一个新数据包</li>
 <li>TCP因此可以避免长时间等待RTO而导致吞吐性能下降</li>
-<li>速率减半也是限制传输的一种形式<h3 id="拥塞窗口校验（CWV）"><a href="#拥塞窗口校验（CWV）" class="headerlink" title="拥塞窗口校验（CWV）"></a>拥塞窗口校验（CWV）</h3></li>
-<li>在发送长时间暂停的情况下，由ssthresh维护cwnd保存的”记忆”，之后cwnd值会衰减。</li>
+<li>速率减半也是限制传输的一种形式 ### 拥塞窗口校验（CWV）</li>
+<li>在发送长时间暂停的情况下，由ssthresh维护cwnd保存的”记忆"，之后cwnd值会衰减。</li>
 <li>需要区分空闲发送端和应用受限发送端</li>
-<li>CWV算法原理：当需要发送新数据时，首先看距离上次发送操作是否超过一个RTO，如果超过则<ul>
-<li>更新ssthresh值，设为max（ssthresh，（3&#x2F;4）*cwnd）</li>
+<li>CWV算法原理：当需要发送新数据时，首先看距离上次发送操作是否超过一个RTO，如果超过则
+<ul>
+<li>更新ssthresh值，设为max（ssthresh，（3/4）*cwnd）</li>
 <li>每经一个空闲RTT时间，cwnd值就减半，但不小于1 SMSS</li>
-<li>对应用受限阶段<ul>
+<li>对应用受限阶段
+<ul>
 <li>已使用的窗口大小为W_used</li>
-<li>更新ssthresh的值，设为max（ssthresh，（3&#x2F;4）*cwnd）</li>
+<li>更新ssthresh的值，设为max（ssthresh，（3/4）*cwnd）</li>
 <li>cwnd设置为cwnd和W_used的平均值</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 
     </div>

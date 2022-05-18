@@ -29,7 +29,7 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;计算机系统漫游&quot;&gt;&lt;a href=&quot;#计算机系统漫游&quot; class=&quot;headerlink&quot;</summary>
+&lt;h1</summary>
         
       
     
@@ -53,7 +53,9 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;NJU-OS-Note&quot;&gt;&lt;a href=&quot;#NJU-OS-Note&quot; class=&quot;headerlink&quot; title=&quot;NJU OS Note&quot;&gt;&lt;/a&gt;NJU OS</summary>
+&lt;h1 id=&quot;nju-os-note&quot;&gt;NJU OS Note&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ld&lt;/code&gt;, GNU</summary>
         
       
     
@@ -77,7 +79,9 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;ICS-Lab-Note&quot;&gt;&lt;a href=&quot;#ICS-Lab-Note&quot; class=&quot;headerlink&quot; title=&quot;ICS Lab Note&quot;&gt;&lt;/a&gt;ICS Lab Note&lt;/h1&gt;&lt;h2</summary>
+&lt;h1 id=&quot;ics-lab-note&quot;&gt;ICS Lab Note&lt;/h1&gt;
+&lt;h2 id=&quot;lab1&quot;&gt;&lt;strong&gt;lab1&lt;/strong&gt;&lt;/h2&gt;
+&lt;ol</summary>
         
       
     
@@ -101,7 +105,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CS186-Note&quot;&gt;&lt;a href=&quot;#CS186-Note&quot; class=&quot;headerlink&quot; title=&quot;CS186 Note&quot;&gt;&lt;/a&gt;&lt;strong&gt;CS186</summary>
+&lt;h1 id=&quot;cs186-note&quot;&gt;&lt;strong&gt;CS186 Note&lt;/strong&gt;&lt;/h1&gt;
+&lt;h2</summary>
         
       
     
@@ -125,7 +130,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CMU-15-445-Project1-BUFFER-POOL-MANAGER&quot;&gt;&lt;a href=&quot;#CMU-15-445-Project1-BUFFER-POOL-MANAGER&quot;</summary>
+&lt;h1 id=&quot;cmu-15-445-project1-buffer-pool-manager&quot;&gt;CMU 15-445 Project1: BUFFER POOL MANAGER&lt;/h1&gt;
+&lt;h2</summary>
         
       
     
@@ -149,7 +155,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CS61C-Lab2&quot;&gt;&lt;a href=&quot;#CS61C-Lab2&quot; class=&quot;headerlink&quot; title=&quot;CS61C Lab2&quot;&gt;&lt;/a&gt;CS61C Lab2&lt;/h1&gt;&lt;h2</summary>
+&lt;h1 id=&quot;cs61c-lab2&quot;&gt;CS61C Lab2&lt;/h1&gt;
+&lt;h2 id=&quot;exercise-0-makefiles&quot;&gt;&lt;strong&gt;Exercise 0:</summary>
         
       
     
@@ -173,7 +180,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;Stanford-CS144-Lab0-Networking-Warmup&quot;&gt;&lt;a href=&quot;#Stanford-CS144-Lab0-Networking-Warmup&quot; class=&quot;headerlink&quot;</summary>
+&lt;h1 id=&quot;stanford-cs144-lab0-networking-warmup&quot;&gt;Stanford CS144 Lab0: Networking Warmup&lt;/h1&gt;
+&lt;h2</summary>
         
       
     
@@ -197,7 +205,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;MIT-6-S081-Lab5-xv6-lazy-page-allocation&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab5-xv6-lazy-page-allocation&quot;</summary>
+&lt;h1 id=&quot;mit-6.s081-lab5-xv6-lazy-page-allocation&quot;&gt;MIT 6.S081 Lab5: xv6 lazy page allocation&lt;/h1&gt;
+&lt;p&gt;很多方法都用到了Lazy</summary>
         
       
     
@@ -221,7 +230,7 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;MIT-6-S081-Lab4-Traps&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab4-Traps&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081 Lab4:</summary>
+&lt;h1 id=&quot;mit-6.s081-lab4-traps&quot;&gt;MIT 6.S081 Lab4:</summary>
         
       
     
@@ -245,7 +254,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;MIT-6-S081-Lab3-Page-tables&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab3-Page-tables&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081</summary>
+&lt;h1 id=&quot;mit-6.s081-lab3-page-tables&quot;&gt;MIT 6.S081 Lab3: Page tables&lt;/h1&gt;
+&lt;h2 id=&quot;print-a-page-table&quot;&gt;&lt;strong&gt;1.</summary>
         
       
     
@@ -269,7 +279,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;MIT-6-S081-Lab2-System-Calls&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab2-System-Calls&quot; class=&quot;headerlink&quot; title=&quot;MIT 6.S081</summary>
+&lt;h1 id=&quot;mit-6.s081-lab2-system-calls&quot;&gt;MIT 6.S081 Lab2: System Calls&lt;/h1&gt;
+&lt;h2 id=&quot;system-call-tracing&quot;&gt;&lt;strong&gt;1.</summary>
         
       
     
@@ -293,7 +304,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;MIT-6-S081-Lab1-Xv6-and-Unix-utilities&quot;&gt;&lt;a href=&quot;#MIT-6-S081-Lab1-Xv6-and-Unix-utilities&quot;</summary>
+&lt;h1 id=&quot;mit-6.s081-lab1-xv6-and-unix-utilities&quot;&gt;MIT 6.S081 Lab1: Xv6 and Unix utilities&lt;/h1&gt;
+&lt;h2</summary>
         
       
     
@@ -317,7 +329,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CS61B-Gitlet&quot;&gt;&lt;a href=&quot;#CS61B-Gitlet&quot; class=&quot;headerlink&quot; title=&quot;CS61B Gitlet&quot;&gt;&lt;/a&gt;CS61B Gitlet&lt;/h1&gt;&lt;h2</summary>
+&lt;h1 id=&quot;cs61b-gitlet&quot;&gt;CS61B Gitlet&lt;/h1&gt;
+&lt;h2 id=&quot;project-2-getting-startedlab6&quot;&gt;&lt;strong&gt;Project 2 Getting</summary>
         
       
     
@@ -341,7 +354,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CS61C-CPU-PROJECT&quot;&gt;&lt;a href=&quot;#CS61C-CPU-PROJECT&quot; class=&quot;headerlink&quot; title=&quot;CS61C CPU</summary>
+&lt;h1 id=&quot;cs61c-cpu-project&quot;&gt;&lt;strong&gt;CS61C CPU PROJECT&lt;/strong&gt;&lt;/h1&gt;
+&lt;h2</summary>
         
       
     
@@ -365,7 +379,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CSAPP-Lab2-Bomb-Lab&quot;&gt;&lt;a href=&quot;#CSAPP-Lab2-Bomb-Lab&quot; class=&quot;headerlink&quot; title=&quot;CSAPP Lab2: Bomb</summary>
+&lt;h1 id=&quot;csapp-lab2-bomb-lab&quot;&gt;CSAPP Lab2: Bomb Lab&lt;/h1&gt;
+&lt;h2</summary>
         
       
     
@@ -389,7 +404,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;CSAPP-Lab1-Data-Lab&quot;&gt;&lt;a href=&quot;#CSAPP-Lab1-Data-Lab&quot; class=&quot;headerlink&quot; title=&quot;CSAPP Lab1: Data</summary>
+&lt;h1 id=&quot;csapp-lab1-data-lab&quot;&gt;CSAPP Lab1: Data Lab&lt;/h1&gt;
+&lt;h2 id=&quot;some-restriction&quot;&gt;&lt;strong&gt;Some</summary>
         
       
     
@@ -413,7 +429,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;6-NULL-Video-Note&quot;&gt;&lt;a href=&quot;#6-NULL-Video-Note&quot; class=&quot;headerlink&quot; title=&quot;6.NULL Video Note&quot;&gt;&lt;/a&gt;6.NULL</summary>
+&lt;h1 id=&quot;null-video-note&quot;&gt;6.NULL Video Note&lt;/h1&gt;
+&lt;h2 id=&quot;video-1-the-shell&quot;&gt;&lt;strong&gt;VIDEO 1&lt;/strong&gt; The</summary>
         
       
     
@@ -437,7 +454,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;Makefile-Note&quot;&gt;&lt;a href=&quot;#Makefile-Note&quot; class=&quot;headerlink&quot; title=&quot;Makefile Note&quot;&gt;&lt;/a&gt;Makefile</summary>
+&lt;h1 id=&quot;makefile-note&quot;&gt;Makefile Note&lt;/h1&gt;
+&lt;p&gt;参考&lt;a</summary>
         
       
     
@@ -461,7 +479,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h1 id=&quot;vim-vscode-tmux-gdb-git&quot;&gt;&lt;a href=&quot;#vim-vscode-tmux-gdb-git&quot; class=&quot;headerlink&quot;</summary>
+&lt;h1 id=&quot;vimvscodetmuxgdbgit&quot;&gt;vim+vscode+tmux+gdb+git&lt;/h1&gt;
+&lt;p&gt;个人的一些认为比较常用以及不经常用到的的快捷操作 ## &lt;strong&gt;vscode&lt;/strong&gt;</summary>
         
       
     
@@ -485,7 +504,8 @@
         
         
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h2 id=&quot;一、std-function和bind绑定器&quot;&gt;&lt;a href=&quot;#一、std-function和bind绑定器&quot; class=&quot;headerlink&quot;</summary>
+&lt;h2 id=&quot;一stdfunction和bind绑定器&quot;&gt;一、std::function和bind绑定器&lt;/h2&gt;
+&lt;h3</summary>
         
       
     

@@ -384,7 +384,7 @@ pre {
 }
 figure.highlight,
 pre {
-  line-height: 1.5;
+  line-height: 1.35;
   margin: 0 auto 20px;
 }
 figure.highlight figcaption,
@@ -2763,7 +2763,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ff39a2;
+  background: #ffffa7;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);

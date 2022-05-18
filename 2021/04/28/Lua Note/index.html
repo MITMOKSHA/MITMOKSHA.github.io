@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="交互模式  lua -i，-i参数用于在运行完其他命令行参数后进入交互模式 不在交互模式下必须把表达式包在函数print的调用中 如果不想输出结果，可以在行末加上一个;  词法规范  标识符由任意字母、数字和下划线组成的字符串（不能以数字开头） _+大写字母（特殊用途） _+小写字母（哑变量） 注释  单行注释-- 多行注释 --[[       多行注释   ]]">
+    <meta name="description" content="交互模式 lua -i，-i参数用于在运行完其他命令行参数后进入交互模式 不在交互模式下必须把表达式包在函数print的调用中 如果不想输出结果，可以在行末加上一个;  词法规范 标识符由任意字母、数字和下划线组成的字符串（不能以数字开头）  _+大写字母（特殊用途）  _+小写字母（哑变量）  注释  单行注释-- 多行注释  --[[   多行注释   ]]   分隔符;  增加可读性，不是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua Note">
 <meta property="og:url" content="https://mitmoksha.github.io/2021/04/28/Lua%20Note/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="交互模式  lua -i，-i参数用于在运行完其他命令行参数后进入交互模式 不在交互模式下必须把表达式包在函数print的调用中 如果不想输出结果，可以在行末加上一个;  词法规范  标识符由任意字母、数字和下划线组成的字符串（不能以数字开头） _+大写字母（特殊用途） _+小写字母（哑变量） 注释  单行注释-- 多行注释 --[[       多行注释   ]]">
+<meta property="og:description" content="交互模式 lua -i，-i参数用于在运行完其他命令行参数后进入交互模式 不在交互模式下必须把表达式包在函数print的调用中 如果不想输出结果，可以在行末加上一个;  词法规范 标识符由任意字母、数字和下划线组成的字符串（不能以数字开头）  _+大写字母（特殊用途）  _+小写字母（哑变量）  注释  单行注释-- 多行注释  --[[   多行注释   ]]   分隔符;  增加可读性，不是">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-28T09:56:31.000Z">
 <meta property="article:modified_time" content="2022-05-18T01:15:58.746Z">
@@ -261,91 +261,107 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-<h2 id="交互模式">交互模式</h2>
-<ul>
+<h2 id="交互模式"><a href="#交互模式" class="headerlink" title="交互模式"></a>交互模式</h2><ul>
 <li><code>lua -i</code>，<code>-i</code>参数用于在运行完其他命令行参数后进入交互模式</li>
 <li>不在交互模式下必须把表达式包在函数<code>print</code>的调用中</li>
 <li>如果不想输出结果，可以在行末加上一个<code>;</code></li>
 </ul>
-<h2 id="词法规范">词法规范</h2>
-<ul>
-<li><p>标识符由任意字母、数字和下划线组成的字符串（不能以数字开头）</p></li>
-<li><p><code>_</code>+大写字母（特殊用途）</p></li>
-<li><p><code>_</code>+小写字母（哑变量）</p></li>
+<h2 id="词法规范"><a href="#词法规范" class="headerlink" title="词法规范"></a>词法规范</h2><ul>
+<li><p>标识符由任意字母、数字和下划线组成的字符串（不能以数字开头）</p>
+</li>
+<li><p><code>_</code>+大写字母（特殊用途）</p>
+</li>
+<li><p><code>_</code>+小写字母（哑变量）</p>
+</li>
 <li><p>注释</p>
 <ul>
 <li>单行注释<code>--</code></li>
-<li>多行注释 <code>--[[       多行注释   ]]</code></li>
-</ul></li>
+<li>多行注释<br>  <code>--[[   多行注释   ]]</code></li>
+</ul>
+</li>
 <li><p>分隔符<code>;</code></p>
 <ul>
 <li>增加可读性，不是必须的</li>
-</ul></li>
-<li><p>表达式之间的换行不起任何作用</p></li>
 </ul>
-<h2 id="全局变量">全局变量</h2>
-<ul>
+</li>
+<li><p>表达式之间的换行不起任何作用</p>
+</li>
+</ul>
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><ul>
 <li>无须声明即可使用</li>
 <li>使用未经初始化的全局变量，得到的结果时<code>nil</code></li>
 <li><code>nil</code>赋值给全局变量时，Lua会回收该全局变量</li>
 </ul>
-<h2 id="类型和值">类型和值</h2>
-<ul>
+<h2 id="类型和值"><a href="#类型和值" class="headerlink" title="类型和值"></a>类型和值</h2><ul>
 <li><p>Lua语言有8种基本类型</p>
 <ul>
 <li><p><code>nil</code>（空）</p>
 <ul>
 <li>nil赋值给全局变量时，则相当于将其删除（Lua会回收）</li>
-</ul></li>
+</ul>
+</li>
 <li><p><code>boolean</code>（布尔）</p>
 <ul>
 <li>除false和nil之外的所有值都为真（与C++差异）</li>
-<li>not运算符永远返回boolean类型的值
-<ul>
-<li><code>not nil</code> -- true</li>
-<li><code>not false</code> -- true</li>
-</ul></li>
-</ul></li>
-<li><p><code>number</code>（数值）</p></li>
-<li><p><code>string</code>（字符串）</p></li>
+<li>not运算符永远返回boolean类型的值<ul>
+<li><code>not nil</code>  – true</li>
+<li><code>not false</code> – true</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>number</code>（数值）</p>
+</li>
+<li><p><code>string</code>（字符串）</p>
+</li>
 <li><p><code>userdata</code>（用户数据）</p>
 <ul>
 <li>允许把任意的C语言数据保存在Lua语言变量中</li>
-</ul></li>
-<li><p><code>function</code>（函数）</p></li>
-<li><p><code>thread</code>（线程）</p></li>
-<li><p><code>table</code>（表）</p></li>
-</ul></li>
+</ul>
+</li>
+<li><p><code>function</code>（函数）</p>
+</li>
+<li><p><code>thread</code>（线程）</p>
+</li>
+<li><p><code>table</code>（表）</p>
+</li>
+</ul>
+</li>
 <li><p><code>type</code>函数</p>
 <ul>
 <li>获取一个值对应的类型</li>
 <li>返回值永远是一个字符串</li>
-</ul></li>
 </ul>
-<h2 id="独立解释器">独立解释器</h2>
+</li>
+</ul>
+<h2 id="独立解释器"><a href="#独立解释器" class="headerlink" title="独立解释器"></a>独立解释器</h2><ul>
+<li><p>是一个可以直接使用Lua语言的小程序</p>
+</li>
+<li><p>源代码文件第一行以井号<code>#</code>开头，那么解释器在加载文件时会忽略这一行，主要是为了方便在POSIX系统中将Lua作为一种脚本解释器来使用</p>
+</li>
+<li><p>假设独立解释器位于<code>/usr/local/bin</code>下</p>
 <ul>
-<li>是一个可以直接使用Lua语言的小程序</li>
-<li>源代码文件第一行以井号<code>#</code>开头，那么解释器在加载文件时会忽略这一行，主要是为了方便在POSIX系统中将Lua作为一种脚本解释器来使用</li>
-<li>假设独立解释器位于<code>/usr/local/bin</code>下
-<ul>
-<li><code>#!/usr/local/bin/lua</code> 或 <code>#!/usr/bin/env lua</code>
-<ul>
+<li><code>#!/usr/local/bin/lua</code> 或<br>  <code>#!/usr/bin/env lua</code><ul>
 <li>不需要显式调用Lua语言解释器也可以直接运行Lua脚本</li>
-</ul></li>
-</ul></li>
-<li>编译器在运行代码前会创建一个名为arg的表
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编译器在运行代码前会创建一个名为arg的表</p>
 <ul>
-<li>索引0中保存的内容为脚本名
-<ul>
+<li>索引0中保存的内容为脚本名<ul>
 <li><code>arg[0]</code></li>
-</ul></li>
-<li>索引1保存的内容为第一个参数
-<ul>
+</ul>
+</li>
+<li>索引1保存的内容为第一个参数<ul>
 <li><code>arg[1]</code></li>
-</ul></li>
+</ul>
+</li>
 <li>以此类推</li>
-</ul></li>
-<li>Lua语言也支持可变长参数(...)</li>
+</ul>
+</li>
+<li><p>Lua语言也支持可变长参数(…)</p>
+</li>
 </ul>
 
     </div>

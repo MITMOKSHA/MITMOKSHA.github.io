@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-19T05:22:12.981Z</updated>
+  <updated>2022-05-19T06:07:02.333Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -21,13 +21,35 @@
     <link href="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/"/>
     <id>https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/</id>
     <published>2022-05-19T05:22:12.000Z</published>
-    <updated>2022-05-19T05:22:12.981Z</updated>
+    <updated>2022-05-19T06:07:02.333Z</updated>
     
     
-    <summary type="html">
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;IA32&lt;/code&gt;的64位扩展，也成为&lt;code&gt;x86-64&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gcc -Og -S mstore.c&lt;/code&gt;，GCC会编译该代码且编译器会进行优化&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;objdump -d mstore.o&lt;/code&gt;，由反汇编器将机器级代码转换成汇编代码，同时反汇编器会在汇编代码的&lt;code&gt;Label&lt;/code&gt;旁注上它所对应的地址; 需要注意的是反汇编后的汇编代码地址为链接阶段&lt;code&gt;重定向&lt;/code&gt;之后所处的地址，&lt;code&gt;链接器&lt;/code&gt;在程序代码中会插入&lt;code&gt;nop&lt;/code&gt;来提高访问存储器的性能(更好地放置下一个代码块)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86-64&lt;/code&gt;指令长由从1到15个字节不等。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Variable Instruction&lt;/code&gt; vs. &lt;code&gt;Fixed Instruction&lt;/code&gt;，基于变长指令的ISA生成程序代码所需要的存储空间相对于定长指令更小，但增加了&lt;code&gt;DECODE&lt;/code&gt;的开销，这也是一个&lt;code&gt;Tradeoffs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ATT&lt;/code&gt;格式的汇编代码，&lt;code&gt;AT&amp;amp;T&lt;/code&gt;是运营贝尔实验室的公司，这种格式是&lt;code&gt;GCC&lt;/code&gt;，&lt;code&gt;OBJDUMP&lt;/code&gt;等工具的默认格式&lt;/li&gt;
+&lt;li&gt;要想在C语言中编写汇编代码，可以通过&lt;code&gt;GCC&lt;/code&gt;的&lt;code&gt;内联汇编&lt;/code&gt;，用&lt;code&gt;asm&lt;/code&gt;伪指令来包含简短的汇编代码&lt;/li&gt;
+&lt;li&gt;Intel用术语&lt;code&gt;字&lt;/code&gt;来表示16位数据类型&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GCC&lt;/code&gt;生成&lt;code&gt;x86&lt;/code&gt;的汇编代码指令都有一个操作数大小的字符后缀&lt;code&gt;b&lt;/code&gt;、&lt;code&gt;w&lt;/code&gt;、&lt;code&gt;l&lt;/code&gt;、&lt;code&gt;q&lt;/code&gt;，如：&lt;code&gt;movq&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;区分&lt;code&gt;x86&lt;/code&gt;不同大小的寄存器，前缀为&lt;code&gt;r&lt;/code&gt;的寄存器的大小为&lt;strong&gt;四字&lt;/strong&gt;，前缀为&lt;code&gt;e&lt;/code&gt;的大小为&lt;strong&gt;双字&lt;/strong&gt;，后缀为&lt;code&gt;l&lt;/code&gt;或者&lt;code&gt;b&lt;/code&gt;寄存器的大小为&lt;strong&gt;字节&lt;/strong&gt;，其余的归为大小为&lt;strong&gt;字&lt;/strong&gt;的寄存器 &lt;img src=&quot;/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86&lt;/code&gt;的操作数格式，其中比例因子必须是1、2、4、8 &lt;img src=&quot;/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86&lt;/code&gt;规定&lt;strong&gt;立即数大小不能超过32位&lt;/strong&gt;; 且任何为寄存器生成32位值的指令都会把该寄存器的高位部分置为0，如：&lt;code&gt;movl $256, %eax&lt;/code&gt;，会把&lt;code&gt;rax&lt;/code&gt;寄存器的高32位置0&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;movq&lt;/code&gt;会将32位的&lt;code&gt;立即数&lt;/code&gt;拓展为64位再进行传送，而&lt;code&gt;movabsq&lt;/code&gt;直接使用64位的立即数作为源操作数使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mov&lt;/code&gt;的常规4条指令只能表示&lt;strong&gt;32位&lt;/strong&gt;补码数字的&lt;code&gt;立即数&lt;/code&gt;作为&lt;code&gt;源操作数&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86-64&lt;/code&gt;的内存引用总是用&lt;code&gt;4字长&lt;/code&gt;的寄存器(因为地址空间大小为64位)，如：&lt;code&gt;movw %dx, (%rax)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;强制转换&lt;/code&gt;先考虑大小，在考虑符号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pushq&lt;/code&gt;等价为&lt;code&gt;subq&lt;/code&gt;加上&lt;code&gt;movq&lt;/code&gt;两条指令的操作，&lt;code&gt;popq&lt;/code&gt;同理，操作的数据大小为&lt;strong&gt;四字&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86&lt;/code&gt;的二元&lt;code&gt;算术&lt;/code&gt;和&lt;code&gt;逻辑&lt;/code&gt;操作的第二个操作数即是&lt;code&gt;源&lt;/code&gt;也是&lt;code&gt;目的&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;= =未完待续。。。&lt;/p&gt;
 </summary>
     
     
+    
+    <category term="读书笔记" scheme="https://mitmoksha.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
   </entry>
@@ -37,7 +59,7 @@
     <link href="https://mitmoksha.github.io/2022/05/18/Recommended_books/"/>
     <id>https://mitmoksha.github.io/2022/05/18/Recommended_books/</id>
     <published>2022-05-18T15:37:49.000Z</published>
-    <updated>2022-05-19T05:00:30.555Z</updated>
+    <updated>2022-05-19T05:36:56.455Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;

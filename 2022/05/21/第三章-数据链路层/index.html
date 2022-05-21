@@ -19,27 +19,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="揭示C语言的本质">
+    <meta name="description" content="朝着Distribution前进">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS61C C Note">
-<meta property="og:url" content="https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/index.html">
+<meta property="og:title" content="第三章 数据链路层">
+<meta property="og:url" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
-<meta property="og:description" content="揭示C语言的本质">
+<meta property="og:description" content="朝着Distribution前进">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-18T02:08:33.000Z">
-<meta property="article:modified_time" content="2022-05-18T09:57:24.205Z">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-10-07.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-09-20.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-18-41.png">
+<meta property="article:published_time" content="2022-05-21T10:51:30.000Z">
+<meta property="article:modified_time" content="2022-05-21T11:23:59.275Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png">
 
 
-<link rel="canonical" href="https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/">
+<link rel="canonical" href="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/","path":"2022/05/18/CS61C-C-Note/","title":"CS61C C Note"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/","path":"2022/05/21/第三章-数据链路层/","title":"第三章 数据链路层"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>CS61C C Note | Moksha's Blog</title>
+<title>第三章 数据链路层 | Moksha's Blog</title>
   
 
 
@@ -129,7 +134,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -142,6 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text">数据链路层</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -200,7 +206,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/18/CS61C-C-Note/">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -213,12 +219,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="CS61C C Note | Moksha's Blog">
+      <meta itemprop="name" content="第三章 数据链路层 | Moksha's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CS61C C Note
+          第三章 数据链路层
         </h1>
 
         <div class="post-meta-container">
@@ -230,7 +236,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-05-18 10:08:33 / Modified: 17:57:24" itemprop="dateCreated datePublished" datetime="2022-05-18T10:08:33+08:00">2022-05-18</time>
+      <time title="Created: 2022-05-21 18:51:30 / Modified: 19:23:59" itemprop="dateCreated datePublished" datetime="2022-05-21T18:51:30+08:00">2022-05-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,7 +244,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS61C/" itemprop="url" rel="index"><span itemprop="name">CS61C</span></a>
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">计算机网络笔记</span></a>
         </span>
     </span>
 
@@ -252,45 +258,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <!-- # CS61C C Part Notes. -->
-<blockquote>
-<p>揭示C语言的本质</p>
+        <blockquote>
+<p>朝着Distribution前进 <span id="more"></span></p>
 </blockquote>
-<span id="more"></span>
-<ol type="1">
-<li>Array在传递给函数时记得必须要一并传递Array的大小，因为在函数内使用<code>sizeof</code>会得到不正确的结果。</li>
-<li>Array in C don't know their size.</li>
-<li>数组名不是一个变量。</li>
-<li>Struct Alignment.</li>
-<li>A String in C is just an array of characters.</li>
-<li>String end. Last character is followed by a 0 byte('\0')(a.k.a <code>null terminator</code>).</li>
-<li><code>strlen()</code> return the length of string(not including null term).</li>
-<li>Pointer Arithmetic, Pointer+1实际上是加指针指向的类型的大小<code>sizeof(*p)</code>. Pointer arithmetic moves the pointer by the size of the thing it’s pointing to.</li>
-<li>注意<code>postfixal</code>++的优先级要大于dereference(<em>), 注意这两种区别<code>*p++</code>，先将p和后置++捆绑，但是在解引用之后生效，即增以p=p+1。<code>(*p)++</code>表示，先将p和<code>*</code>捆绑，再将解引用后的值++, 即(</em>p) = (*p) + 1.</li>
-<li>声明一个指针如果未初始化，则随机指向任何一个地址<code>garbage</code>，这在<code>dereference</code>时会发生ACV(如果地址为系统地址)。</li>
-<li>dot notation &amp; arrow notationss</li>
-<li>pointers to pointers, 还有一点需要注意。如果传的参数不是当前类型本身的地址，则在函数中改变的值不会对全局造成影响，比如：类型本身是指针就需要传递指针的指针才能改变本身的值。</li>
-<li>Stack frame, which contains location of caller function(调用函数的入口地址)、function arguments(函数参数)、Space for local variables(局部变量所需的空间). Actually in xv6, it contains the additional part of previous stack frame pointer.</li>
-<li>Stack pointer 为最低的(current)Stack frame.</li>
-<li>注意从局部变量返回地址，这个地址在接下来主函数中解引用会出现错误的值，因为栈帧(stack frame)很可能会被覆盖(over write)。印象中Effective cpp书中只是提到这种情况是危险的但并未说清楚其中的原理。So never return pointers to local variable from function.</li>
-<li>Static Data: place for variables that persist. 静态数据会在程序执行的整个过程中持续存在。</li>
-<li><code>String literal</code>字符串字面量同样也是静态数据，比如: <code>char* str = "hi"</code>, 为一个字符指针指向用引号括起来的字符串。切记不要误用为<code>char str[] = "hi"</code>，它会将数据保存到栈(stack)中而不是<code>Static Data</code>区域。</li>
-<li><code>String literal</code>是不能被更改的左值。</li>
-<li><code>Static Data</code>由两种类型组成，一种是<code>Read-only</code>, 比如说<code>String literal</code>; 一种是<code>Read-Write</code>, 比如说<code>Global variable</code>.</li>
-<li><code>Code</code>为<code>Read-only</code> Data，存放machine code.</li>
-<li>地址大小即为指针的大小，取决于Architecture.</li>
-<li><code>Endianness</code>, Big Endian or Little Endian, which just are used in Memory.</li>
-<li><code>sizeof(type/var)</code>函数输出类型的字节大小。</li>
-<li><code>malloc(n)</code>函数，分配n个bytes连续的未初始化的虚存，返回分配块的起始地址(void*类型)。搭配typecaset和sizeof使用，case: <code>int *p = (int *) malloc(n*sizeof(int));</code>, 注意如果为字符串(字符数组)分配空间size则需要+1，为null terminator分配一个location.</li>
-<li><code>calloc(nmember, size)</code>和<code>malloc</code>一致, 只多了一步初始化为<code>0</code>. <code>nmember</code>为成员的数量，<code>size</code>为每个成员的大小。</li>
-<li><code>realloc(ptr, size)</code>, <code>ptr</code>为<code>malloc</code>或<code>calloc</code>返回的指针，<code>size</code>为需要改变的所需要的大小(同malloc)，会复制起始地址为<code>ptr</code>的内容。且可能会移动地址，或者保持在<code>ptr</code>原来的地址不变。</li>
-<li><code>free(p)</code>函数，p必须为最开始分配时的起始地址，否则会抛出异常，因此对<code>p++</code>操作是不明智的。注意<code>free</code>的释放顺序，应该最后释放<strong>源</strong>，否则可能会double free。</li>
-<li>Memory Error: Segmentation Error、Bus Error.</li>
-<li><code>strcpy()</code>的修订版本<code>strncpy</code>保证<code>dst</code>有足够的空间供<code>src</code>来copy.</li>
-<li>Rule of Thumb(经验法则): Malloc的数量超过free意味着内存泄漏；潜在的内存泄漏：改变指针。</li>
-<li><code>free()</code> adds block to the list, combines with adjacent free blocks; <code>malloc()</code> searches free list for block large enough to meet request</li>
-<li>Choose block in malloc(): Best-fit, First-fit, Next-fit.</li>
-</ol>
+<h1 id="数据链路层"><strong>数据链路层</strong></h1>
+<ul>
+<li>数据链路层的协议传输单元，<strong>帧(Frame)</strong></li>
+<li>帧的长度等于帧的<strong>数据部分长度</strong>加上<strong>帧首部</strong>和<strong>帧尾部</strong>的长度</li>
+<li><strong>最大传送单元(Maximum Transfer Unit, MTU)</strong> 规定了帧的<code>数据部分长度</code>的上限</li>
+<li><strong>透明传输</strong>指在发送给上层之前的传输数据没有任何限制(i.e. 将帧定界符删除)</li>
+<li>为了解决透明传输的问题，使用<strong>字节填充</strong>，即在含有数据部分中含有控制字符的前面插入<strong>转义字符</strong></li>
+<li><strong>零比特填充法</strong>，只要在<code>发送端</code>发现有5个连续的1，则在后面插入1个0；在<code>接收端</code>发现有5个连续1，则将其后面的0删除</li>
+<li><span class="math inline">\(误码率=\frac{传输错误的比特}{传输比特总数}\)</span></li>
+<li><strong>差错检测码(Error-Dectecting Code, EDC)</strong>，通常在<strong>每个帧</strong>的尾部设置一个差错检验字段(存放着整个帧，包括首部和数据)的差错检测码，这个差错检验字段成为<strong>帧检验序列(Frame Check Sequence, FCS)</strong> <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png"></li>
+<li><strong>循环冗余检验(Cyclic Redundancy Check, CRC)</strong>，<code>G</code>的长度为<code>r+1</code>，<code>D</code>为待传送的数据，<code>R</code>为余数作为<code>EDC</code>，若<code>R</code>为0则未出现误码。<span class="math inline">\(R=\frac{D \cdot 2^r}{G}的余数\)</span>; 模2运算等价于<strong>按位异或</strong> <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-10-07.png"> <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-09-20.png"></li>
+<li><strong>停止等待协议(Stop-and-Wait)</strong>，发送方发完一个分组时启动<code>超时计时器</code>，一般可以将重传时间设为略大于平均<code>RTT</code>; 过早超时会使发送方收到重复的确认分组，因此确认分组也需要进行编号，但数据链路层中的RTT是确定的，所以在此不必进行编号; 发送方发完一个分组后必须保留已发送的分组的副本; 停止等待协议的优点是<code>简单</code>，缺点是<code>信道利用率太低</code>; <strong>信道利用率</strong><span class="math inline">\(U=\frac{T_D}{T_D+RTT+T_A}\)</span>，其中<span class="math inline">\(T_D\)</span>为发送方发送分组所需要的时间，<span class="math inline">\(T_A\)</span>为接收方发送确认分组所需要的时间 <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-18-41.png"></li>
+</ul>
 
     </div>
 
@@ -304,14 +287,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/05/16/NJU-OS-Note/" rel="prev" title="NJU OS Note">
-                  <i class="fa fa-chevron-left"></i> NJU OS Note
+                <a href="/2022/05/20/%E5%85%B3%E4%BA%8E%E4%B8%89%E7%AF%87%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" rel="prev" title="关于三篇经典论文的总结">
+                  <i class="fa fa-chevron-left"></i> 关于三篇经典论文的总结
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/05/18/CS61B-Lec-Note/" rel="next" title="CS61B Lec Note">
-                  CS61B Lec Note <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -372,7 +352,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"da84d3cb72ad612668f1799171d6f689"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"580240ffb10838a1542358d8757d900f"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

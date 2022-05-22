@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-21T11:23:59.275Z</updated>
+  <updated>2022-05-22T07:12:23.620Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -15,6 +15,22 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于雇主期望CS专业学生具备的品质</title>
+    <link href="https://mitmoksha.github.io/2022/05/22/%E5%85%B3%E4%BA%8E%E9%9B%87%E4%B8%BB%E6%9C%9F%E6%9C%9BCS%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E5%85%B7%E5%A4%87%E7%9A%84%E5%93%81%E8%B4%A8/"/>
+    <id>https://mitmoksha.github.io/2022/05/22/%E5%85%B3%E4%BA%8E%E9%9B%87%E4%B8%BB%E6%9C%9F%E6%9C%9BCS%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E5%85%B7%E5%A4%87%E7%9A%84%E5%93%81%E8%B4%A8/</id>
+    <published>2022-05-22T07:09:44.000Z</published>
+    <updated>2022-05-22T07:12:23.620Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Top ten factors.&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>第三章 数据链路层</title>
@@ -367,24 +383,6 @@
     
     <summary type="html">&lt;!-- # MIT 6.S081 Lab3: Page tables --&gt;
 &lt;h2 id=&quot;print-a-page-table&quot;&gt;&lt;strong&gt;1. Print a page table&lt;/strong&gt;&lt;/h2&gt;</summary>
-    
-    
-    
-    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081 Lab2: System Calls</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab2/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/s081-lab2/</id>
-    <published>2022-05-16T09:54:49.000Z</published>
-    <updated>2022-05-18T09:40:48.601Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # MIT 6.S081 Lab2: System Calls --&gt;
-&lt;h2 id=&quot;system-call-tracing&quot;&gt;&lt;strong&gt;1. System call tracing&lt;/strong&gt;&lt;/h2&gt;</summary>
     
     
     

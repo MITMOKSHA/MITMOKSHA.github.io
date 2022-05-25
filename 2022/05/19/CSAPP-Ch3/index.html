@@ -28,8 +28,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-25-09-10-38.png">
 <meta property="article:published_time" content="2022-05-19T05:22:12.000Z">
-<meta property="article:modified_time" content="2022-05-25T00:59:46.600Z">
+<meta property="article:modified_time" content="2022-05-25T01:12:30.524Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
@@ -240,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-25 08:59:46" itemprop="dateModified" datetime="2022-05-25T08:59:46+08:00">2022-05-25</time>
+      <time title="Modified: 2022-05-25 09:12:30" itemprop="dateModified" datetime="2022-05-25T09:12:30+08:00">2022-05-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,6 +311,9 @@
 </ul></li>
 <li><code>switch</code>语句采用<code>跳转表(jump table)</code>，跳转表就是个数组，因此当值的范围跨度较大时，跳转表所占用的存储空间就会变大。当switch语句<code>case数量比较多(4个以上)</code>，并且<code>值的范围跨度比较小</code>时就会使用<strong>跳转表</strong>(<code>GCC</code>根据switch的case数量和值的范围来决定是否编译成生成<code>跳转表</code>)。</li>
 <li>和<code>if-elseif</code>语句相比，使用跳转表的优点是执行switch语句的时间与case的数量无关(<code>用空间来换时间</code>)</li>
+<li>GCC中前缀<code>&amp;</code>表示指向数据值的指针，<code>&amp;&amp;</code>表示指向代码的指针</li>
+<li>switch语句先判断常量值是否在switch语句范围内(可能会和某个数值做差来生成保证由0开始的数组下标)，如果不在范围内或者在范围内情况在switch语句中不存在，则跳转到defualt情况对应的label。若存在重复的情况，则两种情况使用同一个label(e.g. case 104和106就会使用同一个label)，如： <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case <span class="number">104</span>:</span><br><span class="line">case <span class="number">106</span>:</span><br><span class="line">    val *= val<span class="comment">;</span></span><br><span class="line">    break<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li>case范围从100到106的跳转表，.align指令指定数组元素要保证8字节对齐，.quad指令用于定义64位数值，Overview: <img src="/2022/05/19/CSAPP-Ch3/img-2022-05-25-09-10-38.png"></li>
 </ul>
 <p><strong>未完待续。。。</strong></p>
 

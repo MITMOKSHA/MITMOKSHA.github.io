@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png">
 <meta property="article:published_time" content="2022-05-19T05:22:12.000Z">
-<meta property="article:modified_time" content="2022-05-19T14:18:02.072Z">
+<meta property="article:modified_time" content="2022-05-25T00:59:46.600Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
@@ -232,9 +232,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-05-19 13:22:12 / Modified: 22:18:02" itemprop="dateCreated datePublished" datetime="2022-05-19T13:22:12+08:00">2022-05-19</time>
+      <time title="Created: 2022-05-19 13:22:12" itemprop="dateCreated datePublished" datetime="2022-05-19T13:22:12+08:00">2022-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-25 08:59:46" itemprop="dateModified" datetime="2022-05-25T08:59:46+08:00">2022-05-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,6 +287,29 @@
 <li><code>x86</code>的二元<code>算术</code>和<code>逻辑</code>操作的第二个操作数即是<code>源</code>也是<code>目的</code></li>
 <li><code>lea</code>加载有效地址指令，在x86中可以充当算术运算(编译器经常会这么优化)，比如<code>%rdi</code>表示x，<code>%rsi</code>表示y，那么<code>leaq (%rdi, %rsi, 4), %rax</code>就可以等价于<code>x + 4*y</code></li>
 <li>移位操作中的寄存器操作数，只有最低字节才指示移位量，因为8个bit以内足以表示四字的偏移量了</li>
+<li><code>x86 ISA</code>支持两个64有符号或者无符号的<code>乘法</code>或者<code>除法</code>，结果是<strong>128位</strong>。乘法运算，乘法得到的结果的高64位保存到<strong>rdx</strong>种，低64位保存到<strong>rax</strong>中；除法运算，将商保存到<strong>rax</strong>中，余数存到<strong>rdx</strong>中; 高64前老大有提到过两个32位<strong>补码</strong>(i.e. 有符号数)在<code>mips</code>中相加得到的结果该怎么处理，因为mips没有这样的指令，可以通过编程来实现，无论是两个32位补码相加还是两个64位补码相加，得到的结果的低32位永远是<strong>无符号数</strong>，其余都是<strong>有符号数</strong></li>
+<li>x86有四种条件码分别是: <code>CF: 进位标志</code>, <code>ZF: 零标志</code>, <code>SF: 符号标志</code>, <code>OF溢出标志</code></li>
+<li><code>CMP</code>指令类似于<code>SUB</code>指令，但不更新目的寄存器；同样<code>TEST</code>类似于<code>AND</code>指令，也不更新目的寄存器；e.g. <code>testq %rax, %rax</code>就生成与<strong>零</strong>比较所产生的条件码</li>
+<li><code>比较和测试</code>指令以及<code>算数运算指令(lea除外)</code>都会<strong>设置条件码</strong></li>
+<li><code>SET</code>指令的目的操作数是低位单字节寄存器，它根据条件码的组合，将结果(<code>0</code>或<code>1</code>)放到寄存器中。比如: <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpq %rsi, %rdi</span><br><span class="line"><span class="keyword">setl</span> %al</span><br></pre></td></tr></table></figure></li>
+<li>比如<code>j</code>, <code>set</code>, <code>cmov</code>这些指令，后缀为<code>g</code>或者<code>l</code>表示有符号的大于和小于；后缀为<code>a</code>或者<code>b</code>表示无符号的大于和小于，来将生成条件码的结果和0进行比较。</li>
+<li>直接跳转<code>jmp Label</code>; 间接跳转<code>jmp *Operand</code>(i.e. <code>jmp *%rax</code>使用寄存器rax中的值作为<strong>Label</strong>；或者<code>jmp *(%rax)</code>使用寄存器的值作为地址来访问存储器得到<strong>Label</strong>)。</li>
+<li>个人认为<strong>直接跳转</strong>可以直接使用label，而<strong>间接跳转</strong>需要从存储器(e.g. 寄存器或者主存)中读取label; <strong>条件跳转只能是直接跳转</strong></li>
+<li>x86中的<code>PC-relative</code>是通过<code>PC+4+符号位拓展的Offset</code>来计算跳转到的地址</li>
+<li>原本不同目标文件的<code>虚拟地址</code>的<code>程序段</code>都是由<code>0</code>开始，<strong>链接</strong>后，<strong>重定位</strong>到<strong>可执行目标文件</strong>后原本程序段的<code>虚拟地址</code>就发生了变化</li>
+<li><code>rep</code>指令后面跟<code>ret</code>的组合来避免使ret指令成为条件跳转指令的目标(e.g. <code>rep; ret</code>)</li>
+<li><code>条件传送指令</code>的<code>tradeoff</code>，能够提高遇到分支时流水线的效率(e.g. 减少控制冲突的可能)，但同时也会增加指令数。不过现代微处理器的<code>分支预测器</code>已经足够优秀，所以比如说<code>ARM</code>就没有添加条件传送指令; 由<strong>编译器</strong>来决定编译出条件分支指令还是条件控制转移指令，不过<code>GCC</code>还是更倾向于使用<code>条件控制转移</code></li>
+<li>流水线预测错误处罚时间: <span class="math inline">\(T_{MP}=2(T_{ran} - T_{OK})\)</span>；执行代码的平均时间: <span class="math inline">\(T_{ran} = T_{avg} = T_{OK}+0.5T_{MP}\)</span>；其中<span class="math inline">\(T_{ran}\)</span>为分支随机预测时的执行时间，<span class="math inline">\(T_{OK}\)</span>为分支非常可预测的执行时间</li>
+<li>C语言中对结果为负数的除法(<code>\</code>)进行的是<strong>向上舍入</strong>，对结果为正数的乘法是<strong>向下舍入</strong>，总体来说是<strong>向零舍入</strong>；第二章内容补充，向上舍入时在<strong>移位运算</strong>之前需要加上<span class="math inline">\(2^k-1\)</span>的<strong>偏移量</strong>，来达到最后正数部分值加<code>1</code>的效果。根据<code>Value box</code>可以想到，相当于将最终的负数结果增大了1，因此也就达成了向上取整的效果</li>
+<li><code>逆向工程</code>，简而言之就是由<code>汇编</code>到<code>高级语言程序</code></li>
+<li>注意<code>编译器的优化</code>不会总能带来性能的提升</li>
+<li>编译器对<code>while</code>循环的两种优化: <code>jump to middle</code>和<code>guarded-do</code>，通过量化的方式，第二种方式在<strong>流水线</strong>中相比第一种性能较好
+<ul>
+<li>jump to middle: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">goto</span> test;</span><br><span class="line">loop:</span><br><span class="line">    body-statement</span><br><span class="line">test:</span><br><span class="line">    t = test-expr;</span><br><span class="line">    <span class="keyword">if</span> (t)</span><br><span class="line">        <span class="keyword">goto</span> loop</span><br></pre></td></tr></table></figure></li>
+<li>guarded-do: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t = test-expr;</span><br><span class="line"><span class="keyword">if</span> (!t)</span><br><span class="line">    <span class="keyword">goto</span> done;</span><br><span class="line">loop:</span><br><span class="line">    body-statement</span><br><span class="line">    t = test-expr;</span><br><span class="line">    <span class="keyword">if</span> (t)</span><br><span class="line">        <span class="keyword">goto</span> loop;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><code>switch</code>语句采用<code>跳转表(jump table)</code>，跳转表就是个数组，因此当值的范围跨度较大时，跳转表所占用的存储空间就会变大。当switch语句<code>case数量比较多(4个以上)</code>，并且<code>值的范围跨度比较小</code>时就会使用<strong>跳转表</strong>(<code>GCC</code>根据switch的case数量和值的范围来决定是否编译成生成<code>跳转表</code>)。</li>
+<li>和<code>if-elseif</code>语句相比，使用跳转表的优点是执行switch语句的时间与case的数量无关(<code>用空间来换时间</code>)</li>
 </ul>
 <p><strong>未完待续。。。</strong></p>
 

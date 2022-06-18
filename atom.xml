@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-05-22T07:14:27.123Z</updated>
+  <updated>2022-06-16T17:03:01.193Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -17,17 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>关于雇主期望CS专业学生具备的品质</title>
-    <link href="https://mitmoksha.github.io/2022/05/22/%E5%85%B3%E4%BA%8E%E9%9B%87%E4%B8%BB%E6%9C%9F%E6%9C%9BCS%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E5%85%B7%E5%A4%87%E7%9A%84%E5%93%81%E8%B4%A8/"/>
-    <id>https://mitmoksha.github.io/2022/05/22/%E5%85%B3%E4%BA%8E%E9%9B%87%E4%B8%BB%E6%9C%9F%E6%9C%9BCS%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E5%85%B7%E5%A4%87%E7%9A%84%E5%93%81%E8%B4%A8/</id>
+    <title>CSAPP Lab3: Attack Lab</title>
+    <link href="https://mitmoksha.github.io/2022/06/15/CSAPP-Lab3-Attack-Lab/"/>
+    <id>https://mitmoksha.github.io/2022/06/15/CSAPP-Lab3-Attack-Lab/</id>
+    <published>2022-06-15T03:47:48.000Z</published>
+    <updated>2022-06-16T17:03:01.193Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;一个人几乎可以在任何他怀有无限热忱的事情上成功。&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="CMU15-213" scheme="https://mitmoksha.github.io/categories/CMU15-213/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>DLX Lab</title>
+    <link href="https://mitmoksha.github.io/2022/06/01/DLX-Lab/"/>
+    <id>https://mitmoksha.github.io/2022/06/01/DLX-Lab/</id>
+    <published>2022-06-01T01:18:25.000Z</published>
+    <updated>2022-06-14T03:54:05.085Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CS专业学生应具备的品质</title>
+    <link href="https://mitmoksha.github.io/2022/05/22/CS%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E5%BA%94%E5%85%B7%E5%A4%87%E7%9A%84%E5%93%81%E8%B4%A8/"/>
+    <id>https://mitmoksha.github.io/2022/05/22/CS%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E5%BA%94%E5%85%B7%E5%A4%87%E7%9A%84%E5%93%81%E8%B4%A8/</id>
     <published>2022-05-22T07:09:44.000Z</published>
-    <updated>2022-05-22T07:14:27.123Z</updated>
+    <updated>2022-06-14T03:54:23.816Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;Top ten factors.&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
+    
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
     
     
   </entry>
@@ -55,11 +92,11 @@
     <link href="https://mitmoksha.github.io/2022/05/20/%E5%85%B3%E4%BA%8E%E4%B8%89%E7%AF%87%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/"/>
     <id>https://mitmoksha.github.io/2022/05/20/%E5%85%B3%E4%BA%8E%E4%B8%89%E7%AF%87%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/</id>
     <published>2022-05-20T03:45:49.000Z</published>
-    <updated>2022-05-20T04:46:45.323Z</updated>
+    <updated>2022-06-13T06:26:10.362Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;因为疫情，C.O.课程要求写关于三篇论文的读书报告。&lt;/p&gt;&lt;/blockquote&gt;</summary>
+&lt;p&gt;疫情原因，体系结构课程要求写三篇经典论文的读书报告。。&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -73,7 +110,7 @@
     <link href="https://mitmoksha.github.io/2022/05/19/OSTEP-Virtualization/"/>
     <id>https://mitmoksha.github.io/2022/05/19/OSTEP-Virtualization/</id>
     <published>2022-05-19T12:29:21.000Z</published>
-    <updated>2022-05-24T03:20:51.348Z</updated>
+    <updated>2022-05-25T07:14:47.373Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -91,7 +128,7 @@
     <link href="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/"/>
     <id>https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/</id>
     <published>2022-05-19T05:22:12.000Z</published>
-    <updated>2022-05-25T01:12:30.524Z</updated>
+    <updated>2022-06-16T15:16:08.441Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -127,7 +164,7 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CSAPP-Ch2/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CSAPP-Ch2/</id>
     <published>2022-05-18T10:11:57.000Z</published>
-    <updated>2022-05-19T14:00:35.691Z</updated>
+    <updated>2022-06-15T06:51:09.268Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -146,7 +183,7 @@
     <link href="https://mitmoksha.github.io/2022/05/18/CSAPP-Ch1/"/>
     <id>https://mitmoksha.github.io/2022/05/18/CSAPP-Ch1/</id>
     <published>2022-05-18T03:14:00.000Z</published>
-    <updated>2022-05-19T14:00:44.127Z</updated>
+    <updated>2022-05-29T09:40:36.926Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -346,43 +383,6 @@
     
     <summary type="html">&lt;!-- # MIT 6.S081 Lab5: xv6 lazy page allocation --&gt;
 &lt;p&gt;很多情况都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081 Lab4: Traps</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab4/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/s081-lab4/</id>
-    <published>2022-05-16T09:54:57.000Z</published>
-    <updated>2022-05-18T09:41:02.965Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # MIT 6.S081 Lab4: Traps --&gt;
-&lt;ul&gt;
-&lt;li&gt;跟着视频走一遍系统调用&lt;code&gt;gdb&lt;/code&gt;的流程。&lt;code&gt;tmux&lt;/code&gt;分割两个窗口，一个窗口作为服务器&lt;code&gt;make CPUS=1 qemu-gdb&lt;/code&gt;，另一个窗口作为&lt;code&gt;gdb&lt;/code&gt;调试窗口&lt;code&gt;gdb-multiarch&lt;/code&gt;。将断点打在&lt;code&gt;ecall指令处&lt;/code&gt;, &lt;code&gt;continue&lt;/code&gt;执行，随后再将第二个断点打到&lt;code&gt;print/x $stvec&lt;/code&gt;处也就是，&lt;code&gt;TRAPFRAME&lt;/code&gt;的起始地址。&lt;code&gt;ecall&lt;/code&gt;指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。&lt;/li&gt;&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081 Lab3: Page tables</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab3/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/s081-lab3/</id>
-    <published>2022-05-16T09:54:53.000Z</published>
-    <updated>2022-05-18T09:40:53.323Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # MIT 6.S081 Lab3: Page tables --&gt;
-&lt;h2 id=&quot;print-a-page-table&quot;&gt;&lt;strong&gt;1. Print a page table&lt;/strong&gt;&lt;/h2&gt;</summary>
     
     
     

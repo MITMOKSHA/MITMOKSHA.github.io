@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-06-11-18-24-09.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-06-11-19-40-24.png">
 <meta property="article:published_time" content="2022-05-19T05:22:12.000Z">
-<meta property="article:modified_time" content="2022-06-16T15:16:08.441Z">
+<meta property="article:modified_time" content="2022-06-19T02:40:24.056Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-16 23:16:08" itemprop="dateModified" datetime="2022-06-16T23:16:08+08:00">2022-06-16</time>
+      <time title="Modified: 2022-06-19 10:40:24" itemprop="dateModified" datetime="2022-06-19T10:40:24+08:00">2022-06-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -277,7 +277,7 @@
 <li><code>x86-64</code>指令长由从1到15个字节不等。</li>
 <li><code>Variable Instruction</code> vs. <code>Fixed Instruction</code>，基于变长指令的ISA生成程序代码所需要的存储空间相对于定长指令更小，但增加了<code>DECODE</code>的开销，这也是一个<code>Tradeoffs</code></li>
 <li><code>ATT</code>格式的汇编代码，<code>AT&amp;T</code>是运营贝尔实验室的公司，这种格式是<code>GCC</code>，<code>OBJDUMP</code>等工具的默认格式</li>
-<li>根据<code>x86 AT&amp;T</code>语法，寄存器前要加<code>%</code>，立即数前要加<code>$</code></li>
+<li>根据<code>x86 AT&amp;T</code>语法，寄存器前要加<code>%</code>，立即数前要加<code>$</code>，注释用<code>#</code>来表示。</li>
 <li>要想在C语言中编写汇编代码，可以通过<code>GCC</code>的<code>内联汇编</code>，用<code>asm</code>伪指令来包含简短的汇编代码</li>
 <li>Intel用术语<code>字</code>来表示16位数据类型，老大补充字为<code>CPU</code>和<code>Cache</code>之间的数据交换单位，且RISC风格的ISA的<code>字</code>为32位</li>
 <li><code>GCC</code>生成<code>x86</code>的汇编代码指令都有一个操作数大小的字符后缀<code>b</code>、<code>w</code>、<code>l</code>、<code>q</code>，如：<code>movq</code></li>
@@ -349,7 +349,7 @@
 <li>C语言对于数组引用不进行任何<strong>边界检查</strong>，因此可能会因为越界的数组元素的写操作来破坏存储在栈上的状态信息(e.g.参数，返回地址)，这可能会导致ret指令将PC返回到未知的地址。</li>
 <li>来看一个<strong>缓冲区溢出(Buffer Overflow)</strong>的例子，主要是因为用户输入的字符串的长度超出了为数组分配的空间 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Implementation of library function gets() */</span></span><br><span class="line"><span class="type">char</span> *<span class="title function_">gets</span><span class="params">(<span class="type">char</span> *s)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    <span class="type">char</span> *dest = s;</span><br><span class="line">    <span class="keyword">while</span> ((c = getchar()) != ’\n’ &amp;&amp; c != EOF)</span><br><span class="line">        *dest++ = c;</span><br><span class="line">    <span class="keyword">if</span> (c == EOF &amp;&amp; dest == s)</span><br><span class="line">        <span class="comment">/* No characters read */</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    *dest++ = ’\<span class="number">0</span>’; <span class="comment">/* Terminate string */</span></span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Read input line and write it back */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">echo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">8</span>]; <span class="comment">/* Way too small! */</span></span><br><span class="line">    gets(buf);</span><br><span class="line">    <span class="built_in">puts</span>(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <img src="/2022/05/19/CSAPP-Ch3/img-2022-06-11-19-40-24.png"></li>
 <li>C语言中有一些库函数(e.g.fgets)是原始库函数的更安全的版本，它额外包括一个参数，限制待读入的最大字节数。</li>
-<li>缓冲区溢出攻击的目的就是使执行的ret指令跳转到攻击代码</li>
+<li>缓冲区溢出攻击的目的就是使执行的ret指令跳转到攻击代码(在缓冲区中)</li>
 <li>病毒：用来指各种在系统间传播攻击代码的策略</li>
 <li>对抗缓冲区溢出攻击常见的三种方式：栈随机化、栈破坏检测、限制可执行代码区域。</li>
 <li>栈随机化使得栈的位置在程序每次运行时都有变化，通过在程序开始时在栈上分配一段0~n字节之间的随即大小的空间(程序不使用这段空间)。在Linux系统中，采用地址空间布局随机化(ASLR)，使得每次运行时程序中的程序代码、库代码、栈、全局变量和堆数据都被加载到内存的不同区域。</li>

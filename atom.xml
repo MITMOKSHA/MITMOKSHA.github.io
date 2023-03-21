@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2022-06-30T09:36:30.771Z</updated>
+  <updated>2023-03-21T02:43:14.234Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>CSAPP Lab3: Attack Lab</title>
+    <title>面经</title>
+    <link href="https://mitmoksha.github.io/2023/03/20/%E9%9D%A2%E7%BB%8F/"/>
+    <id>https://mitmoksha.github.io/2023/03/20/%E9%9D%A2%E7%BB%8F/</id>
+    <published>2023-03-20T09:32:17.000Z</published>
+    <updated>2023-03-21T02:43:14.234Z</updated>
+    
+    
+    <summary type="html">&lt;!-- # CSAPP: Data Lab --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;面试总要总结吧&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="面试" scheme="https://mitmoksha.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>网络系统编程笔记</title>
+    <link href="https://mitmoksha.github.io/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mitmoksha.github.io/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</id>
+    <published>2023-03-20T08:32:17.000Z</published>
+    <updated>2023-03-21T02:43:10.228Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;捡起来做个毕设&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>DB_Reading</title>
+    <link href="https://mitmoksha.github.io/2022/12/27/DB-Reading/"/>
+    <id>https://mitmoksha.github.io/2022/12/27/DB-Reading/</id>
+    <published>2022-12-27T09:31:11.000Z</published>
+    <updated>2022-12-31T01:04:42.310Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CSAPP: Attack Lab</title>
     <link href="https://mitmoksha.github.io/2022/06/15/CSAPP-Lab3-Attack-Lab/"/>
     <id>https://mitmoksha.github.io/2022/06/15/CSAPP-Lab3-Attack-Lab/</id>
     <published>2022-06-15T03:47:48.000Z</published>
-    <updated>2022-06-30T09:36:30.771Z</updated>
+    <updated>2022-07-01T14:53:03.205Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -329,64 +383,6 @@
     
     
     <category term="CMU15-445" scheme="https://mitmoksha.github.io/categories/CMU15-445/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CS61C Lab2</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/cs61c-lab2/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/cs61c-lab2/</id>
-    <published>2022-05-16T09:59:00.000Z</published>
-    <updated>2022-05-18T09:57:31.792Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # CS61C Lab2 --&gt;
-&lt;blockquote&gt;
-&lt;p&gt;覆盖广的一个lab&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="CS61C" scheme="https://mitmoksha.github.io/categories/CS61C/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Stanford CS144 Lab0: Networking Warmup</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/cs144-lab0/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/cs144-lab0/</id>
-    <published>2022-05-16T09:58:51.000Z</published>
-    <updated>2022-05-18T09:57:39.734Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # Stanford CS144 Lab0: Networking Warmup --&gt;
-&lt;blockquote&gt;
-&lt;p&gt;应用层Overview&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="CS144" scheme="https://mitmoksha.github.io/categories/CS144/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081 Lab5: xv6 lazy page allocation</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/s081-lab5/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/s081-lab5/</id>
-    <published>2022-05-16T09:55:02.000Z</published>
-    <updated>2022-05-18T09:51:07.336Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # MIT 6.S081 Lab5: xv6 lazy page allocation --&gt;
-&lt;p&gt;很多情况都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="MIT 6.S081" scheme="https://mitmoksha.github.io/categories/MIT-6-S081/"/>
     
     
   </entry>

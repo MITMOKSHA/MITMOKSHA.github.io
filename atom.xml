@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2023-03-21T14:15:14.048Z</updated>
+  <updated>2023-03-23T09:27:29.926Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IC note</title>
+    <link href="https://mitmoksha.github.io/2023/03/23/IC-note/"/>
+    <id>https://mitmoksha.github.io/2023/03/23/IC-note/</id>
+    <published>2023-03-23T08:03:40.000Z</published>
+    <updated>2023-03-23T09:27:29.926Z</updated>
+    
+    
+    <summary type="html">&lt;!-- # IC note --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;好好学一学吧！&lt;/p&gt;&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="IC设计" scheme="https://mitmoksha.github.io/categories/IC%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>面经</title>
@@ -41,13 +60,12 @@
     <link href="https://mitmoksha.github.io/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
     <id>https://mitmoksha.github.io/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</id>
     <published>2023-03-20T08:32:17.000Z</published>
-    <updated>2023-03-22T04:23:56.999Z</updated>
+    <updated>2023-03-23T03:49:55.102Z</updated>
     
     
     <summary type="html">&lt;!-- # 网络编程笔记 --&gt;
 &lt;blockquote&gt;
-&lt;p&gt;捡起来做个毕设&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
+&lt;p&gt;捡起来做个毕设&lt;/p&gt;&lt;/blockquote&gt;</summary>
     
     
     
@@ -366,26 +384,6 @@
     
     
     <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CMU 15-445 Project1: BUFFER POOL MANAGER</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/cmu15445-project1/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/cmu15445-project1/</id>
-    <published>2022-05-16T10:02:20.000Z</published>
-    <updated>2022-05-18T09:56:29.589Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # CMU 15-445 Project1: BUFFER POOL MANAGER --&gt;
-&lt;blockquote&gt;
-&lt;p&gt;OS vs. DB&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="CMU15-445" scheme="https://mitmoksha.github.io/categories/CMU15-445/"/>
     
     
   </entry>

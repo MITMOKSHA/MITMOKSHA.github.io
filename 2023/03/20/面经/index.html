@@ -27,7 +27,7 @@
 <meta property="og:description" content="面试总要总结吧">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-20T09:32:17.000Z">
-<meta property="article:modified_time" content="2023-03-21T14:15:14.048Z">
+<meta property="article:modified_time" content="2023-03-26T08:34:23.819Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">1.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%BD%91-x2F-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">计网&#x2F;网络编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%BB%84-x2F-OS"><span class="nav-number">1.2.</span> <span class="nav-text">计组&#x2F;OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-x2F-C"><span class="nav-number">1.3.</span> <span class="nav-text">C&#x2F;C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">设计模式</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">1.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%BD%91-x2F-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">计网&#x2F;网络编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%BB%84-x2F-OS"><span class="nav-number">1.2.</span> <span class="nav-text">计组&#x2F;OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-x2F-C"><span class="nav-number">1.3.</span> <span class="nav-text">C&#x2F;C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other"><span class="nav-number">1.4.</span> <span class="nav-text">Other</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">设计模式</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,13 +155,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-21 22:15:14" itemprop="dateModified" datetime="2023-03-21T22:15:14+08:00">2023-03-21</time>
+      <time title="Modified: 2023-03-26 16:34:23" itemprop="dateModified" datetime="2023-03-26T16:34:23+08:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -277,7 +277,7 @@
 <li>信号</li>
 <li>管道。 半双工通信方式</li>
 <li>消息队列。用一个链表来存储操作系统内核中的消息，并且使用“消息队列标识符”来标识消息队列。</li>
-<li>共享内存(多处理器时代)。共享内存不使用内核，其中一个进程一次进行更改，然后其他进程查看更改</li>
+<li>共享内存。共享内存使用mmap，不同进程的虚拟地址映射到同一处物理地址进行通信</li>
 <li>套接字</li>
 <li>信号量</li>
 </ul>
@@ -309,6 +309,7 @@
 <li>每次调用select，都需要把fd集合从用户空间拷贝到内核空间(不论这些文件描述符是否就绪)，fd很多时开销就很大</li>
 <li>每次调用select都需在内核遍历传递进来的所有fd, 线性扫描(即轮询), 效率低, 查询时间为O(n)</li>
 <li>select支持的文件描述符数量太少(默认最大支持1024个)</li>
+<li>fds集合不能重用</li>
 </ul>
 </li>
 <li>poll<ul>
@@ -316,7 +317,8 @@
 <li>无最大连接数限制，基于链表存储</li>
 </ul>
 </li>
-<li>水平触发，报告fd后没有被处理，则下次poll时会咋此报告该fd</li>
+<li>水平触发，报告fd后没有被处理，则下次poll时会再次报告该fd</li>
+<li>解决了select第三第四个缺点</li>
 </ul>
 </li>
 <li>epoll<ul>
@@ -326,6 +328,7 @@
 <li>若用LT，若系统中有大量无需读写的就绪文件描述符，它们每次调用epoll_wait都会返回，这样会降低效率</li>
 </ul>
 </li>
+<li>对比select和poll省略了把fd集合从用户空间拷贝到内核空间(而是通过直接在内核空间中创建)，而且从内核空间拷贝到用户空间的fd集合是就绪fd集合(拷贝开销较小)</li>
 </ul>
 </li>
 <li>三者对比：<ul>
@@ -352,7 +355,14 @@
 <li>TCP开销比UDP大，TCP头部需要20个字节，UDP头部只需要8个字节</li>
 <li>TCP有拥塞控制，UDP没有拥塞控制</li>
 <li>TCP通过字节流传输，UDP中每一个包都是单独的</li>
-<li>TCP<strong>提供可靠的服务</strong>，适用于通讯质量要求高的场景；UDP<strong>传输效率高</strong>，适用于高速传输和实时性要求的场景</li>
+<li>TCP<strong>提供可靠的服务</strong>，适用于可靠性要求高的场景；UDP<strong>传输效率高</strong>，适用于高速传输和实时性要求的场景</li>
+<li>TCP仅支持一对一连接</li>
+</ul>
+</li>
+<li>TCP是如何保证可靠的？<ul>
+<li>确认应答机制</li>
+<li>重传机制(超时重传、冗余ACK)</li>
+<li>序号(一个字节对应一个序号)</li>
 </ul>
 </li>
 <li>UDP什么不可靠？<ul>
@@ -515,8 +525,15 @@
 <li>异步I&#x2F;O</li>
 </ul>
 </li>
+<li>close文件描述符后，epoll会不会把它自动从监听集合中删除呢？<ul>
+<li>如果fd的引用计数是1，close之后会自动删除</li>
+</ul>
+</li>
 <li>https握手？</li>
-<li>TCP的队头阻塞？<h2 id="计组-x2F-OS"><a href="#计组-x2F-OS" class="headerlink" title="计组&#x2F;OS"></a>计组&#x2F;OS</h2></li>
+<li>TCP的队头阻塞？</li>
+<li>UDP具体使用过程？</li>
+</ul>
+<h2 id="计组-x2F-OS"><a href="#计组-x2F-OS" class="headerlink" title="计组&#x2F;OS"></a>计组&#x2F;OS</h2><ul>
 <li>堆栈有什么区别?<ul>
 <li>申请方式：栈由系统自动分配释放(如函数调用时存放函数的参数值，局部变量的值等)；堆需要程序员自己申请，并指明大小</li>
 <li>申请效率：栈由系统自动分配，申请效率高；堆一般速度较慢，容易产生内存碎片。</li>
@@ -524,9 +541,11 @@
 <li>(堆), 空闲链表来管理，动态分配内存时空闲内存的管理：首次适配(不需要排序)、最佳适配(空闲分区按<strong>容量</strong>递增次序排序)、下次适配(在首次适配的基础上，每次分配内存时，从上次查找结束的位置开始查找)、最差适配(空闲分区按<strong>容量</strong>递减次序排序)</li>
 </ul>
 </li>
-<li>静态库与动态库？<ul>
-<li>静态库对函数库的链接是在编译时期完成的，但浪费空间和资源，包括对程序更新、部署和发布都需要重新编译(因此衍生出了动态库)</li>
-<li>动态库在程序<strong>编译时</strong>并不会链接到目标代码中，而是在程序<strong>运行时</strong>才被载入。不同的应用程序如果调用相同的库，那么共享内存(可实现进程间资源的共享)中只需要有一份实例</li>
+<li>静态库与动态库(共享库)？<ul>
+<li>静态库在程序的链接阶段被链接到了程序当中；而动态库是由程序运行时动态加载到进程的虚拟地址空间里的</li>
+<li>库的好处：代码保密、方便部署和分发</li>
+<li>静态库浪费空间和资源，包括对程序更新、部署和发布都需要重新编译(因此衍生出了动态库)</li>
+<li>动态库并不会链接到目标代码中，而是在程序<strong>运行时</strong>才被载入。不同的应用程序如果调用相同的库，那么共享内存(可实现进程间资源的共享)中只需要有一份实例</li>
 </ul>
 </li>
 <li>死锁？<ul>
@@ -595,9 +614,23 @@
 <li>mmap由操作系统负责管理</li>
 </ul>
 </li>
+<li>条件变量和信号量的区别？<ul>
+<li>条件变量可以一次唤醒所有等待者；而信号量不行</li>
+<li>信号量可以指明有效资源的数量(是有值的)，而条件变量没有</li>
+</ul>
+</li>
+<li>CAS?<ul>
+<li>compare and swap(传入三个参数)，通过检查内存位置中的值是否等于旧值，若未发生变化，则将新值更新到内存位置中。需要搭配Volatile使用(使编译器不再优化对该变量的ld和st)</li>
+</ul>
+</li>
 <li>什么是条件变量？条件变量的使用？</li>
 <li>字节对齐的好处？</li>
-<li>解决死锁的方法？<h2 id="C-x2F-C"><a href="#C-x2F-C" class="headerlink" title="C&#x2F;C++"></a>C&#x2F;C++</h2></li>
+<li>解决死锁的方法？</li>
+<li>Linux如何实现多线程？</li>
+<li>管道通信(有名&#x2F;无名)？</li>
+<li>PV操作原理？</li>
+</ul>
+<h2 id="C-x2F-C"><a href="#C-x2F-C" class="headerlink" title="C&#x2F;C++"></a>C&#x2F;C++</h2><ul>
 <li>malloc和new的区别？<ul>
 <li>new是运算符(其中调用malloc)，malloc是库函数</li>
 <li>new申请的堆大小由系统自动判断，malloc需要传递申请大小的参数</li>
@@ -647,7 +680,7 @@
 </ul>
 </li>
 <li>C语言sizeof和strlen的区别？<ul>
-<li>sizeof是运算符，用来求指定变量或变量类型所占内存空间的大小，其值在编译时期就计算好了，因此只能算出静态的大小</li>
+<li>sizeof是运算符，用来求指定变量或变量类型所占内存空间的大小(单位为字节)，其值在编译时期就计算好了，因此只能算出静态的大小</li>
 <li>strlen是库函数，用来求字符串的长度，它回去找字符串结尾的’\0’<strong>结束符</strong>(返回值不包括\0)；如果找不到，返回值会是一个不确定的值</li>
 </ul>
 </li>
@@ -718,8 +751,8 @@
 <li>指针和引用的区别？<ul>
 <li>指针是存储变量地址的变量，引用是变量的别名</li>
 <li>引用定义时必须初始化，而指针可以不必初始化</li>
-<li>指针可以改变指向的存储单元，而引用初始化之后就不能改变了</li>
-<li>sizeof指针变量可以得到地址单元的大小(32&#x2F;64)，而引用得到所指变量的大小</li>
+<li>指针可以改变指向的存储单元，而引用初始化之后就<strong>不能改变了</strong></li>
+<li><strong>sizeof</strong>指针变量可以得到一个字长的大小(32&#x2F;64位机器)，而引用得到所指变量的大小</li>
 <li>指针的自增标识指向下一个地址单元，而引用的自增表示引用变量值的增减</li>
 </ul>
 </li>
@@ -796,6 +829,18 @@
 <li>在编译时就分配内存，静态成员变量&#x2F;函数不占用对象的空间。</li>
 </ul>
 </li>
+<li>预处理阶段做的事情<ul>
+<li>使用<code>gcc -E</code>，生成<code>.i</code>文件，将注释删去，将将头文件和宏进行展开和替换</li>
+</ul>
+</li>
+<li>命名空间的作用？</li>
+<li>include防范？<ul>
+<li>为了避免重复声明</li>
+</ul>
+</li>
+</ul>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ul>
+<li>团队遇到分歧怎么办？</li>
 </ul>
 <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ul>
 <li>单例模式？</li>

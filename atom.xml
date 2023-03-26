@@ -6,7 +6,7 @@
   <link href="https://mitmoksha.github.io/atom.xml" rel="self"/>
   
   <link href="https://mitmoksha.github.io/"/>
-  <updated>2023-03-25T04:35:23.919Z</updated>
+  <updated>2023-03-25T08:37:45.342Z</updated>
   <id>https://mitmoksha.github.io/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CAAQA阅读笔记</title>
+    <link href="https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
+    <published>2023-03-25T06:56:08.000Z</published>
+    <updated>2023-03-25T08:37:45.342Z</updated>
+    
+    
+    <summary type="html">&lt;!-- # CAAQA阅读笔记 --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;转行前奏&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="读书笔记《CAAQA》" scheme="https://mitmoksha.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%8ACAAQA%E3%80%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>xv6源码阅读</title>
     <link href="https://mitmoksha.github.io/2023/03/25/xv6%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
     <id>https://mitmoksha.github.io/2023/03/25/xv6%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</id>
     <published>2023-03-25T02:33:47.000Z</published>
-    <updated>2023-03-25T04:35:23.919Z</updated>
+    <updated>2023-03-26T06:04:12.883Z</updated>
     
     
     <summary type="html">&lt;!-- # xv6源码阅读 --&gt;
@@ -31,6 +51,8 @@
     
     
     
+    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
+    
     
   </entry>
   
@@ -39,7 +61,7 @@
     <link href="https://mitmoksha.github.io/2023/03/23/IC-note/"/>
     <id>https://mitmoksha.github.io/2023/03/23/IC-note/</id>
     <published>2023-03-23T08:03:40.000Z</published>
-    <updated>2023-03-24T04:31:03.897Z</updated>
+    <updated>2023-03-25T08:12:25.802Z</updated>
     
     
     <summary type="html">&lt;!-- # IC note --&gt;
@@ -59,7 +81,7 @@
     <link href="https://mitmoksha.github.io/2023/03/20/%E9%9D%A2%E7%BB%8F/"/>
     <id>https://mitmoksha.github.io/2023/03/20/%E9%9D%A2%E7%BB%8F/</id>
     <published>2023-03-20T09:32:17.000Z</published>
-    <updated>2023-03-21T14:15:14.048Z</updated>
+    <updated>2023-03-26T08:34:23.819Z</updated>
     
     
     <summary type="html">&lt;!-- # 面经 --&gt;
@@ -79,7 +101,7 @@
     <link href="https://mitmoksha.github.io/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
     <id>https://mitmoksha.github.io/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</id>
     <published>2023-03-20T08:32:17.000Z</published>
-    <updated>2023-03-25T02:56:24.003Z</updated>
+    <updated>2023-03-26T08:53:20.887Z</updated>
     
     
     <summary type="html">&lt;!-- # 网络编程笔记 --&gt;
@@ -359,26 +381,6 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;一直以来被忽略的本科教学&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="Computer Science Notes" scheme="https://mitmoksha.github.io/categories/Computer-Science-Notes/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ICS Lab Note</title>
-    <link href="https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/"/>
-    <id>https://mitmoksha.github.io/2022/05/16/ICS-Lab-Note/</id>
-    <published>2022-05-16T10:08:09.000Z</published>
-    <updated>2022-05-18T09:57:52.517Z</updated>
-    
-    
-    <summary type="html">&lt;!-- # ICS Lab Note --&gt;
-&lt;blockquote&gt;
-&lt;p&gt;本校的Lab体验总结&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     

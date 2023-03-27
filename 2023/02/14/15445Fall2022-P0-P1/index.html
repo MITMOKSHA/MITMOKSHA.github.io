@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="DB也算是程序员的浪漫吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15445Fall2022 P0&amp;P1">
+<meta property="og:url" content="https://mitmoksha.github.io/2023/02/14/15445Fall2022-P0-P1/index.html">
+<meta property="og:site_name" content="Moksha&#39;s Blog">
+<meta property="og:description" content="DB也算是程序员的浪漫吧">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-6a36ab1b74c03d7e7faedc5a5496836b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-d29cb8fe458758ce6555330b7ccc85bb.png">
+<meta property="article:published_time" content="2023-02-14T03:19:02.000Z">
+<meta property="article:modified_time" content="2023-03-27T03:21:13.493Z">
+<meta property="article:author" content="Pishun Huang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-6a36ab1b74c03d7e7faedc5a5496836b.png">
+
+
+<link rel="canonical" href="https://mitmoksha.github.io/2023/02/14/15445Fall2022-P0-P1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2023/02/14/15445Fall2022-P0-P1/","path":"2023/02/14/15445Fall2022-P0-P1/","title":"15445Fall2022 P0&P1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>15445Fall2022 P0&P1 | Moksha's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moksha's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-目录"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>目录</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E8%B5%B7%E9%80%9A%E5%85%B3%E5%90%A7cmu15445fall2022-project0-and-project1"><span class="nav-number">1.</span> <span class="nav-text">一起通关吧！CMU15445fall2022 project0 and project1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#project0-c-primer"><span class="nav-number">1.1.</span> <span class="nav-text">Project0 C++ Primer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#project1-buffer-pool-management"><span class="nav-number">1.2.</span> <span class="nav-text">Project1 Buffer Pool Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extendible-hashing"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">Extendible Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lru-k"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">LRU-K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#buffer-pool-managerment-instance"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">Buffer Pool Managerment Instance</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Pishun Huang</p>
+  <div class="site-description" itemprop="description">Opportunities are ready for it, the more to beat action.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2023/02/14/15445Fall2022-P0-P1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="15445Fall2022 P0&P1 | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          15445Fall2022 P0&P1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-14 11:19:02" itemprop="dateCreated datePublished" datetime="2023-02-14T11:19:02+08:00">2023-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-03-27 11:21:13" itemprop="dateModified" datetime="2023-03-27T11:21:13+08:00">2023-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CMU15-445/" itemprop="url" rel="index"><span itemprop="name">CMU15-445</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <!-- # fall2022 -->
+<blockquote>
+<p>DB也算是程序员的浪漫吧 <span id="more"></span></p>
+</blockquote>
+<h1 id="一起通关吧cmu15445fall2022-project0-and-project1">一起通关吧！CMU15445fall2022 project0 and project1</h1>
+<h2 id="project0-c-primer">Project0 C++ Primer</h2>
+<ul>
+<li><code>explicit</code>关键字用于防止构造函数发生隐式转换</li>
+<li><code>noexcept</code>关键字用于使函数不抛出异常</li>
+<li>左值和右值
+<ul>
+<li>能对表达式取地址的为左值，否则为右值</li>
+<li>具名变量都为左值，右值不具名</li>
+<li>右值又分为：expiring value(将亡值)和pure rvalue(纯右值)</li>
+<li>C++11中所有的值必属于左值、将亡值(C++11新增)、纯右值</li>
+</ul></li>
+<li>引用
+<ul>
+<li>无论左值引用和右值引用都必须立即初始化，因为引用类型本身并不拥有所绑定对象的内存，只是该对象的一个别名</li>
+<li>右值引用绑定一个右值引用类型变量就可以延长生命周期，利用这一特点可以做一些性能上的优化(如减少拷贝构造函数和析构函数的调用次数)</li>
+<li>左值是指表达式结束后依然存在的持久对象;右值是指表达式结束时就不再存在的临时对象</li>
+</ul></li>
+<li>move constructor(移动构造函数), 移动堆中的资源，即不像拷贝构造函数一样复制现有对象的数据(在栈中)，而是声明对象的指针指向临时对象的数据并清空临时对象的指针。可以防止在内存中不必要地复制数据(i.e.不必要地调用copy constructor)</li>
+<li>深拷贝 vs. 浅拷贝(i.e. 拷贝构造函数 vs. 移动构造函数)</li>
+<li>std::move 并不会真正地移动对象，真正的移动操作是在移动构造函数、移动赋值函数等完成的，std::move 只是将参数转换为右值引用而已（相当于一个static_cast)</li>
+<li>不能将一个unique_ptr直接赋值给另一个unique_ptr, 但可以用<code>std::move</code>来进行赋值，或者通过函数返回</li>
+<li>std::move之后的右值, 表达式结束后就不再存在</li>
+<li>继承关系，如果子类的构造函数没有<strong>显式</strong>地调用父类的构造函数，则默认调用父类的无参构造函数。</li>
+<li>std::unique_ptr的引用不能绑定到派生类的unique_ptr，若想创建派生类的unique_ptr可以用多态</li>
+<li>Trie的Remove需要用到辅助函数</li>
+<li>std::unqiue_ptr有三种初始化方式，构造函数，std::make_unique，std::move</li>
+</ul>
+<h2 id="project1-buffer-pool-management">Project1 Buffer Pool Management</h2>
+<h4 id="extendible-hashing">Extendible Hashing</h4>
+<ul>
+<li>直接向下这一部分状态图是project给的本地测试，向右侧这部分状态是自己想的测试<img src="https://pic4.zhimg.com/80/v2-6a36ab1b74c03d7e7faedc5a5496836b.png" alt="状态图"></li>
+<li>override关键字有两个用途:
+<ul>
+<li>向读者表明这是个虚函数</li>
+<li>编译器也知道这是个重载的方法，因此它可以检查你不是添加或者改变新的方法</li>
+</ul></li>
+<li>const_cast可以将non-const转换为const</li>
+<li>桶在插入之前检测full再进行split</li>
+<li>若global depth和local depth，具体见<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Extendible_hashing">wiki</a>
+<ul>
+<li>相等(即仅一个指针指向bucket)，则对dir_进行扩容</li>
+<li>不相等(即多个指针指向bucket)，不需要对dir_进行扩容</li>
+</ul></li>
+<li>如果桶满了要对桶进行split(通过增加global counter), 然后根据上面的情况选择是否double dir_的大小(通过resize function)，reshuffle bucket, <strong>创建一个新的bucket</strong>，在bucket发生split时，增加新增桶和当前桶的局部深度，再retry</li>
+<li><strong>只需要</strong>split<strong>当前</strong>full的bucket即可，将其映射到别的bucket, 注意bucket删除元素时，迭代器可能会失效(可以用一个del容器来收集要被删除的元素)</li>
+<li>local counter is bookkeeping</li>
+<li>extendible hashing可以将不同的哈希键映射到同一个桶里</li>
+<li>std::vector::resize()函数可以对额外增加的元素数目进行初始化</li>
+<li>remove函数可以在Bucket类中实现对每个bucket元素remove，再extendible hashing类中实现对哈希表元素的remove。</li>
+<li>mutable关键字可以删除const的限定</li>
+<li>std::scoped_lock提供了RAII机制(C++17特性)。</li>
+<li>看了十一佬的博客后，几个关键的问题：
+<ul>
+<li><strong>dir 扩容时，新的指针应该指向哪里</strong>？ A: split之后，扩容将增加一个bit。若除了增加的一位高位以外的bits都相等，则指向同一个bucket(称其为兄弟指针)，根据其扩容前的global depth和相应的掩码操作。</li>
+<li><strong>如何重新安排指针？</strong> <strong>只需要重新安排split bucket的兄弟指针</strong>即可，可以对原哈希索引和当前索引进行比较，若不相同则需要重新安排指针。每次split都需要重新安排指针，兄弟指针如何分配? dir_中与插入index后local depth位相等的即为兄弟指针，增加local depth之后以掩码的方式重新分配兄弟指针(可以将其分为两组，高位分别是0和1，一组指向原bucket，一组指向新的bucket)</li>
+</ul></li>
+<li>在接口实现中获取数据成员时不要调用线程安全的接口，否则可能并发测试会特别慢</li>
+<li>如果当前split bucket的local depth等于global depth，则不需要重新安排指针。</li>
+<li>整个part的难点在split，可以分为以下几步
+<ul>
+<li><ol type="1">
+<li>是否索引数组要扩容? 扩容伴随着全局深度的增加</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>新建bucket</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>重新安排指针</li>
+</ol></li>
+<li><ol start="4" type="1">
+<li>重新分配split bucket中的键值对</li>
+</ol></li>
+</ul></li>
+<li>IndexOf通过global depth生成的mask与std::hash返回的键值进行<code>&amp;</code>操作返回哈希目录的index，找到具体的bucket。</li>
+<li>这里实现的可扩展哈希，存储的值是<strong>KV对</strong></li>
+<li>可扩展哈希的优势？</li>
+</ul>
+<h4 id="lru-k">LRU-K</h4>
+<ul>
+<li>LRU(LRU-1)为最近使用过1次，LRU-K为最近使用过K次</li>
+<li>若少于K次访问的frame的distance被赋值为+Inf, 当frame的distance都是+Inf时，逐出frame中历史访问中时间戳最早(指的是<strong>当前frame的最早的访问记录</strong>)的那个(也就是经典的LRU算法)</li>
+<li>frame被evict或者remove之后它的access history、映射也要被移除，evictable属性也要设置为false，frame的evictable属性可以用一个bool数组来记录。</li>
+<li><code>[[maybe_unused]]</code>用于抑制未使用实体的警告(C++17特性)</li>
+<li>std::advance可以增加迭代器的值</li>
+<li>建议做这个part之前可以先去实现一下<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/">LC.146题</a></li>
+<li>LRU-1可以用哈希表(unordered_map)+双链表(list)来实现</li>
+<li>双链表不支持随机访问, list::splice(具体STFM)可以将被访问或刚插入的元素移动到双链表头。</li>
+<li>list::splice可以将指定list中的迭代器指定的元素插入到this链表中的pos迭代器之前，就可以完成具体想要实现的功能, splice之后迭代器未失效(LRU-K的实现用不到这个方法)</li>
+<li>list中存储<frame_id></frame_id></li>
+<li>哈希表中存储&lt;frame_id, list的迭代器&gt;，方便找到frame id在list中对应的位置</li>
+<li>可以用list::assign()为list进行初始化</li>
+<li>每进行一次RecordAccess就增加timestamp的值，记录frame id每次的访问时间。同时也要更新链表中该frame id所在的位置</li>
+<li>注意: 增加一个辅助的二维数组对K个access history的个数进行标记，每个record[frame_id]中存储timestamp</li>
+<li>insert在当前迭代器之前插入元素</li>
+<li>可以用std::prev和std::next来减少和递增迭代器, 注意std::next返回前进之后的迭代器，而std::advance不返回任何内容</li>
+<li>记得保证所有操作都是线程安全的</li>
+<li>cpp读写锁(c++14特性)。共享锁和排他锁不能同时持有，可以同时多个线程持有多个共享锁，排他锁只能一个线程持有。括头文件<shared_mutex>, 定义一个std::shared_mutex变量。共享锁上锁/解锁(lock_shared/unlock_shared)，排他锁上锁/解锁(lock/unlock)</shared_mutex></li>
+<li>size_t(aka.long unsigned)需要8个字节的格式符，因此在printf的时候就不用4字节的%d而是%ld</li>
+<li>如果当前frame的历史访问记录为0，那么再setEvictable()中即可直接返回(terminate)</li>
+<li>frame_id大于等于0，小于replacer的大小</li>
+<li>如果是简单的LRU-1/LRU算法，用哈希表+双链表可以各操作保证O(1)的时间复杂度。若page引用大于等于K次即(LRU-K)，既比较最近它们的第K次时间戳，直接遍历record数组(注意要筛去访问次数小于k的frame以及non-evictable的frame)找到具有最早时间戳的frame并驱逐即可; 若page引用小于K次(即LRU-1)，则将这些page单独挑出来用LRU/LRU-1即可。这样可以得到最高的效率。</li>
+<li>如果要remove一个访问记录大于等于k的frame，直接删除record数组中的记录即可</li>
+<li>LRU-K就是在LRU的基础上加了一些记录信息的容器而已。RecordAccess方法用来动态维护list;SetEvictable维护replacer的大小，设置evictable属性。</li>
+<li>在维护LRU-1的链表时，如果元素重复访问，且访问记录次数小于k，不需要改变当前链表的状态，记录访问时间即可。</li>
+</ul>
+<h4 id="buffer-pool-managerment-instance">Buffer Pool Managerment Instance</h4>
+<ul>
+<li>了解过OS的虚拟内存机制之后，Buffer pool的大致实现应该能理解。</li>
+<li>对atomic对象的访问可以建立线程间同步并按照std::memory_order的规定对非原子内存访问进行排序; std::atomic即不可复制也不可移动</li>
+<li>Page对象成员page_id跟踪具体的物理页面，如果Page对象没有包含物理页，那么page_id就被设为INVALID_PAGE_ID(-1)；Page对象还包含了当前页的pin_count_(防止buffer pool evict这个页面)和is_dirty数据成员。p1之前实现的hashtable(page_id到frame_id的映射)和lru_k_replacer(跟踪要被evict的Page对象)将作为bufferpool的数据成员来实现</li>
+<li>取frame先考虑freelist再考虑replacer</li>
+<li>在DB中，又分为latch和lock。lock是高层次的原语，可以防止tuples，tables，databases受其他事务的影响。latch是低层次的原语(os中为lock)，DBMS用于临界区，或者是数据结构(i.e.哈希表)的内部。</li>
+<li>page directory是page ids到数据库文件中page的位置的映射；page table是page ids到frame ids的映射</li>
+<li>page_id<strong>是</strong>从磁盘中调页的页号</li>
+<li>pages_即为<strong>缓冲池</strong>，存放磁盘页在主存中的缓存，free_list<strong>记录空闲帧的ID</strong></li>
+<li>FetchNewPg如果所有frame都被pin住了就返回nullptr</li>
+<li>用一个for循环遍历pages_数组来判断所有的frame是否正在使用，如果否则新建frame_id变量来记录free_list中或这是replacer中逐出的frame的id。</li>
+<li>SetEvictable(frame_id, false)就相当于pin操作，了解过LRU-K的实现后，pin住了的frame就不会被驱逐</li>
+<li>如果page和frame之间没有产生映射，那么page id应该初始化为INVALID_PAGE_ID</li>
+<li>UnpinPgImp()中传入的is_dirty_参数只是告诉BPM刚刚对这个page进行读(FetchPg相当于进行读操作)还是写，unpin时不刷盘(这样也会降低性能)，在fetch页面或者new页面时刷盘(lazy的机制)，注意刷盘时传入FlushPgImg的page_id是刚被替换出去的frame的id，可以通过pages_[f_id].page_id，获取之前在frame上的page id(此时新映射的page id还未更新, 因此未覆盖)</li>
+<li>UnpinPgImp()传入的参数如果为is_dirty，并不是要直接赋给当前的page(如果原先是dirty，传入的参数是false，不可将当前的frame设置为non-dirty)</li>
+<li>ReadPage读page id在磁盘中存储的数据页</li>
+<li>Fetch时先考虑Flush如果当前替换得到的frame上有脏数据先写到磁盘上，再ReadPage从磁盘中读取Fetch目标page在磁盘上的数据到这个frame上。否则会覆盖</li>
+<li>使用memset c库函数初始化页的data_区域，初始化为PAGE_SIZE个'\0'</li>
+<li>切记刷盘之后要初始化当前frame的data数据为空</li>
+<li>Flush操作仅仅是将当前缓冲池中页的数据写回磁盘，然后将dirty flag置为false。</li>
+<li>最后，结合文档中给的hint，加上自己的理解，注意细节，p1就完成啦</li>
+<li><img src="https://pic4.zhimg.com/80/v2-d29cb8fe458758ce6555330b7ccc85bb.png" title="fig:" alt="Image"></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/12/27/DB-Reading/" rel="prev" title="DB_Reading">
+                  <i class="fa fa-chevron-left"></i> DB_Reading
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/20/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="next" title="网络系统编程笔记">
+                  网络系统编程笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pishun Huang</span>
+</div>
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","//mhchem.github.io/MathJax-mhchem/ mhchem":false,"js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"d249c2a9934939854c4f43e3a24e7d1f"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

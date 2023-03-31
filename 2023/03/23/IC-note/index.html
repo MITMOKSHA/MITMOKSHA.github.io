@@ -29,8 +29,9 @@
 <meta property="og:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/03/23/IC-note/img-2023-03-23-17-26-51.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/03/23/IC-note/img-2023-03-23-17-27-28.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/03/23/IC-note/img-2023-03-25-16-10-43.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/img-2023-03-28-23-23-49.png">
 <meta property="article:published_time" content="2023-03-23T08:03:40.000Z">
-<meta property="article:modified_time" content="2023-03-25T08:12:25.802Z">
+<meta property="article:modified_time" content="2023-03-30T14:00:43.822Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/03/23/IC-note/img-2023-03-23-17-26-51.png">
@@ -146,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISCV%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">RISCV基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E6%A0%87%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8%E8%AE%BE%E8%AE%A1%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">超标量处理器设计相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache"><span class="nav-number">3.</span> <span class="nav-text">Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISCV%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">RISCV基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E6%A0%87%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8%E8%AE%BE%E8%AE%A1%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">超标量处理器设计相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache"><span class="nav-number">3.</span> <span class="nav-text">Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">4.</span> <span class="nav-text">寄存器重命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog"><span class="nav-number">5.</span> <span class="nav-text">Verilog</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-25 16:12:25" itemprop="dateModified" datetime="2023-03-25T16:12:25+08:00">2023-03-25</time>
+      <time title="Modified: 2023-03-30 22:00:43" itemprop="dateModified" datetime="2023-03-30T22:00:43+08:00">2023-03-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -398,10 +399,98 @@
 </ul>
 </li>
 </ul>
+<h2 id="寄存器重命名"><a href="#寄存器重命名" class="headerlink" title="寄存器重命名"></a>寄存器重命名</h2><ul>
+<li>重命名映射表(Register Alias Table, RAT)<ul>
+<li>用来保存已经存在的映射关系(例如一个逻辑寄存器映射到了哪个物理寄存器)。源寄存器通过读取重命名映射表，就可以得到它的物理寄存器了</li>
+</ul>
+</li>
+<li>空闲寄存器列表(Free Register List, FRL)用来完成这个过程<ul>
+<li>用来记录哪些物理寄存器是空闲的。在寄存器重命名时会通过这个表格来获得空闲的物理寄存器的编号</li>
+</ul>
+</li>
+<li>寄存器重命名方式<ol>
+<li>将逻辑寄存器(ARF)扩展来实现寄存器重命名</li>
+<li>使用统一的物理寄存器(PRF)来实现寄存器重命名</li>
+<li>使用ROB来实现寄存器重命名</li>
+</ol>
+</li>
+</ul>
+<h2 id="Verilog"><a href="#Verilog" class="headerlink" title="Verilog"></a>Verilog</h2><ul>
+<li>模块(module):包含输入和输出的硬件模块。如与门、多路选择器、优先级别编码器</li>
+<li>模块的功能的主要形式<ul>
+<li>行为模型(behavioral)。描述一个模块做什么</li>
+<li>结构模型(structural)。应用层次化方法描述一个模块怎么由更简单的部件构造<!-- - System Verilog。文件名通常以`.sv`结束
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// logic关键字(替代了reg)用来定义输入输出变量</span></span><br><span class="line"><span class="comment">// logic[3:0]表示改变量为4位的总线</span></span><br><span class="line">module <span class="title function_">fulladder</span><span class="params">(input  logic a, b, <span class="built_in">cin</span>,  <span class="comment">// module关键字用来定义一个模块</span></span></span><br><span class="line"><span class="params">                output logic s, <span class="built_in">cout</span>)</span>;</span><br><span class="line">  logic p, g;         <span class="comment">// 内部变量(相当于C语言的局部变量)，既不作为整体的输入也不作为输出变量</span></span><br><span class="line">  assign p = a ^ b;   <span class="comment">// assign描述组合逻辑</span></span><br><span class="line">  assign g = a &amp; b;</span><br><span class="line">  assign s = p ^ <span class="built_in">cin</span>;</span><br><span class="line">  assign <span class="built_in">cout</span> = g | (p &amp; <span class="built_in">cin</span>);</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>运算符优先级<ul>
+<li><img src="/2023/03/23/IC-note/img-2023-03-28-23-23-49.png"></li>
+</ul>
+</li>
+<li>数字。声明常量的方法<code>N&#39;Bvalue</code>(如<code>9&#39;h25</code>表示9个bit的数十六进制值25), <code>N</code>表示位数，<code>B</code>表示基数(如<code>h</code>表示十六进制，<code>b</code>表示二进制)。<ul>
+<li>若不写<code>N</code>，如<code>&#39;b11</code>，则在assign中赋值时将会自动进行拓展满足左值的位数</li>
+<li>若不写<code>B</code>则默认为十进制数</li>
+</ul>
+</li>
+<li>Z和X<ul>
+<li><code>z</code>表示浮空值，如三态门使能位为0时，输出值为浮空</li>
+<li>‘x’表示无效逻辑电平</li>
+</ul>
+</li>
+<li>位混合。<code>assign y = &#123;c[2:1], &#123;3&#123;d[0]&#125;&#125;, c[0], 3&#39;b101&#125;</code>，将y赋予9位值$c_2c_1d_0d_0d_0c_0101$。<code>&#123;&#125;</code>用于连接总线，<code>&#123;3&#123;d[0]&#125;&#125;</code>表示<code>d[0]</code>的3个拷贝 –&gt;</li>
+<li><code>assign</code>描述组合逻辑</li>
+<li>vector(向量)。对相关的信号进行分组<ul>
+<li>声明。注意与C语言不同的是，向量索引写在向量名称之前<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wire [<span class="number">7</span>:<span class="number">0</span>] w;         <span class="comment">// 8-bit wire</span></span><br><span class="line">reg  [<span class="number">4</span>:<span class="number">1</span>] x;         <span class="comment">// 4-bit reg</span></span><br><span class="line">output reg [<span class="number">0</span>:<span class="number">0</span>] y;   <span class="comment">// 1-bit reg that is also an output port (this is still a vector)</span></span><br><span class="line">input wire [<span class="number">3</span>:<span class="number">-2</span>] z;  <span class="comment">// 6-bit wire input (negative ranges are allowed)</span></span><br><span class="line">output [<span class="number">3</span>:<span class="number">0</span>] a;       <span class="comment">// 4-bit output wire. Type is &#x27;wire&#x27; unless specified otherwise.</span></span><br><span class="line"><span class="comment">// 可以以这种方式切换大小端的表示方式</span></span><br><span class="line">wire [<span class="number">0</span>:<span class="number">7</span>] b;         <span class="comment">// 8-bit wire where b[0] is the most-significant bit.</span></span><br></pre></td></tr></table></figure></li>
+<li>如果不用<code>[high:low]</code>方式进行声明，则称为<code>隐式网络(implicit nets)</code>会默认声明为<code>1bit</code>变量，注意隐式网络可能带来的错误。比如若向量赋值双方长度不匹配，则进行<code>零拓展</code>或<code>截断</code></li>
+<li>访问向量元素(类似C语言数组)，如<code>w[3:0]</code>, <code>w[0]</code>等</li>
+<li>完成一个四输入的与门可以用<code>=&amp;</code>技巧，对所有bit进行与，相当于C的<code>&amp;=</code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module <span class="title function_">top_module</span><span class="params">( </span></span><br><span class="line"><span class="params">    input [<span class="number">3</span>:<span class="number">0</span>] in,</span></span><br><span class="line"><span class="params">    output out_and,</span></span><br><span class="line"><span class="params">    output out_or,</span></span><br><span class="line"><span class="params">    output out_xor</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line">    assign out_and =&amp; in;</span><br><span class="line">    assign out_or =| in;</span><br><span class="line">    assign out_xor =^ in;</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure></li>
+<li>向量连接运算符<code>&#123;&#125;</code>，可以将多个bit连接到一起</li>
+<li>复制运算符。重复一个向量多次并连接到一起<code>&#123;num&#123;向量&#125;&#125;</code>这将向量<strong>复制</strong><code>num</code>次并连接到一起，num必须是常数。如<code>&#123;2&#123;a,b,c&#125;&#125;</code>与<code>&#123;a,b,c,a,b,c&#125;</code>一致。复制运算符能完成<strong>符号位拓展</strong></li>
+</ul>
+</li>
+<li>模块。类似C语言的函数，可以进行传参<ul>
+<li>构建实例。目的，通过传参将子模块的端口和模块端口连接<ul>
+<li>通过位置<code>模块名 实例名 (wa, wb, wc);  // 按照参数顺序</code>。缺点，如果端口位置变化则需要重新编写</li>
+<li>通过名字<code>模块名 实例名 (.当前模块端口名(wc), .当前模块端口名(wa), .当前模块端口名(wb));  // 可不按照参数顺序传参</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过程<ul>
+<li>always块。**具有更丰富的语句集(如<code>if-then</code>、<code>case</code>)**。<code>always</code>中要写多条语句必须得有<code>begin</code>和<code>end</code><ul>
+<li>组合<code>always@(*)</code>，使用阻塞赋值。等同于<code>assign</code>语句。区别是<code>always块</code>赋值的对象必须是<strong>变量类型</strong>如(reg)；<code>assign</code>赋值的对象必须是**<code>net</code>类型**如(wire);<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">module <span class="title function_">top_module</span><span class="params">(</span></span><br><span class="line"><span class="params">    input a, </span></span><br><span class="line"><span class="params">    input b,</span></span><br><span class="line"><span class="params">    output wire out_assign,</span></span><br><span class="line"><span class="params">    output reg out_alwaysblock</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line">    always@(*) out_alwaysblock = a &amp; b;</span><br><span class="line">    assign out_assign = a &amp; b;</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure></li>
+<li>时序<code>always@(posedge clk)</code>，使用非阻塞赋值。逻辑块的输出端创建一组触发器，逻辑块的输出不是立即可见的，而是仅在下一个(posedge clk)之后立即可见。括号里的<code>posedge</code>关键字指的是上升沿有效，<code>clk</code>为传入的时钟变量</li>
+</ul>
+</li>
+<li><code>if-else</code>语句。如果嵌套中包含多于一条语句，则要搭配<code>begin</code>和<code>end</code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">always @(*) begin</span><br><span class="line">    <span class="title function_">if</span> <span class="params">(condition)</span> begin</span><br><span class="line">        out = x;</span><br><span class="line">    end</span><br><span class="line">    <span class="keyword">else</span> begin</span><br><span class="line">        out = y;</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>if-else</code>语句，如果没有<code>else</code>分支，然后<code>if</code>也不满足的情况下，<strong>会生成一个锁存器存储当前的状态</strong></li>
+</ul>
+</li>
+<li><code>case</code>语句。<code>case</code>以<code>endcase</code>结尾，其中<code>case</code>项中的语句后都需要加一个<code>;</code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">always @(*) begin     <span class="comment">// This is a combinational circuit</span></span><br><span class="line">    <span class="keyword">case</span> (in)</span><br><span class="line">      <span class="number">1&#x27;b</span>1: begin </span><br><span class="line">              out = <span class="number">1&#x27;b</span>1;  <span class="comment">// begin-end if &gt;1 statement</span></span><br><span class="line">            end</span><br><span class="line">      <span class="number">1&#x27;b</span>0: out = <span class="number">1&#x27;b</span>0;</span><br><span class="line">      <span class="keyword">default</span>: out = <span class="number">1&#x27;b</span>x;</span><br><span class="line">    endcase</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>总是以<code>case</code>开头，没有<code>switch</code>语句，case语句的项和C语言一样以<code>:</code>结尾</li>
+<li>每个<code>case</code>项只能执行一条语句，如果需要使用多个语句必须使用<code>begin</code>和<code>end</code></li>
+<li>允许重复(和部分重叠)case的项(C语言不允许)</li>
+</ul>
+</li>
+<li>阻塞分配和非阻塞分配。广义上说，表示组合逻辑内部无执行顺序(称为非阻塞)<ul>
+<li>verilog三种类型的赋值<ul>
+<li>连续赋值(<code>assign x = y;</code>)。不能在过程内部使用(始终阻塞)</li>
+<li>过程阻塞赋值(<code>x=y;</code>)。只能在过程内部使用</li>
+<li>过程非阻塞赋值(<code>x &lt;= y;</code>)。只能在过程内部使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三目元运算符实现四选一多路选择器<code>assign q = sel[1]? (sel[0]? c: b): (sel[0]? a: d);</code>。注意在括号中<strong>不需要</strong>加<code>;</code></li>
+</ul>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
 <li>为什么需要发射队列？</li>
 </ul>
-
+--></li></ul></li></ul>
     </div>
 
     

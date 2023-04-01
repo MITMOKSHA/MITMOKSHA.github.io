@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/03/23/IC-note/img-2023-03-25-16-10-43.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/img-2023-03-28-23-23-49.png">
 <meta property="article:published_time" content="2023-03-23T08:03:40.000Z">
-<meta property="article:modified_time" content="2023-03-30T14:00:43.822Z">
+<meta property="article:modified_time" content="2023-03-31T15:08:30.062Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2023/03/23/IC-note/03/23/IC-note/img-2023-03-23-17-26-51.png">
@@ -242,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-30 22:00:43" itemprop="dateModified" datetime="2023-03-30T22:00:43+08:00">2023-03-30</time>
+      <time title="Modified: 2023-03-31 23:08:30" itemprop="dateModified" datetime="2023-03-31T23:08:30+08:00">2023-03-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +285,7 @@
 <li>宏观融合。高端处理器通过将简单的指令组合在一起从而提高性能，从而减少更复杂的ISA给底端实现带来的负担</li>
 <li>RV32I指令<ul>
 <li>六种基本指令<ul>
-<li>R。寄存器-寄存器操作</li>
+<li>R。寄存器-寄存器风格的算数逻辑运算指令</li>
 <li>I。用于短立即数和访问load操作</li>
 <li>S。用于访存store操作</li>
 <li>B。用于条件跳转</li>
@@ -390,8 +390,18 @@
 </ul>
 </li>
 <li>恢复电路&amp;预测技术</li>
+<li>经典九级流水线<ul>
+<li>Fetch。从I-Cache中取指令。主要有两大部件构成：I-Cache和分支预测器(决定下一条指令的PC值)</li>
+<li>Decode。用来识别出<strong>指令的类型</strong>、<strong>指令需要的操作数</strong>以及指令的一些<strong>控制信号</strong>(通过对指令编码字段进行译码)。</li>
+<li>Register Renaming。解决WAW和WAR这两种”伪相关性”</li>
+<li>Dispatch。被重命名之后的指令会按照程序中规定的顺序，写到发射队列、ROB和SB中。如果这些部件中没有空闲的空间可以容纳当前的指令，那么这些指令就需要在流水线重命名阶段进行等待，这就相当于暂停了寄存器重命名以及之前的所有流水线，直到这些部件中有空闲的空间位置</li>
+<li>Issue。仲裁(select)电路会从这个部件中挑选出合适的指令送到FU中执行。对于顺序发射仲裁电路只需要判断IQ中最旧那条指令是否<strong>准备</strong>好就可以了</li>
+<li>Register File Read。被仲裁电路选中的指令需要从物理寄存器组(PRF)中读取操作数</li>
+<li>Execute。指令得到操作数之后马上就可以送到对应的FU中执行</li>
+<li>Write Back。这个阶段会将FU计算的结果写到物理寄存器组(PRF)中，同时这个阶段还有一个重要的功能，就是通过转发将这个计算结果送到需要的地方。</li>
+<li>Commit。这个阶段起主要作用的部件时ROB，它会将乱序执行的指令拉回到程序中规定的顺序，还有SB部件，防止出现异常的指令写入存储部件无法恢复<h2 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h2></li>
 </ul>
-<h2 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h2><ul>
+</li>
 <li>组相联和全相联的对比<ul>
 <li>全相联需要更多的硬件(如多路选择器、比较器等)，包括LRU所需的控制位，但冲突不命中的影响降低了。</li>
 <li>组相联存在冲突不命中的影响，但需要的硬件更少了。</li>
@@ -488,7 +498,10 @@
 <li>三目元运算符实现四选一多路选择器<code>assign q = sel[1]? (sel[0]? c: b): (sel[0]? a: d);</code>。注意在括号中<strong>不需要</strong>加<code>;</code></li>
 </ul>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
-<li>为什么需要发射队列？</li>
+<li>为什么需要发射队列？<ul>
+<li>若想在双发射超标量流水线中同时执行4条指令，就需要用到IQ，因为一些指令可能涉及到写回时相关性的停顿。</li>
+</ul>
+</li>
 </ul>
 --></li></ul></li></ul>
     </div>

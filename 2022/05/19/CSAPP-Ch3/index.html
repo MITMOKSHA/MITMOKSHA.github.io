@@ -26,17 +26,17 @@
 <meta property="og:site_name" content="Moksha&#39;s Blog">
 <meta property="og:description" content="It is never too late to be what you might have been.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-25-09-10-38.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-06-04-11-03-23.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-06-11-18-24-09.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-06-11-19-40-24.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-25-09-10-38.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-06-04-11-03-23.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-06-11-18-24-09.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-06-11-19-40-24.png">
 <meta property="article:published_time" content="2022-05-19T05:22:12.000Z">
 <meta property="article:modified_time" content="2022-06-19T02:40:24.056Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
+<meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png">
 
 
 <link rel="canonical" href="https://mitmoksha.github.io/2022/05/19/CSAPP-Ch3/">
@@ -267,10 +267,11 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>It is never too late to be what you might have been. <span id="more"></span></p>
+<p>It is never too late to be what you might have been.</p>
 </blockquote>
-<h1 id="程序的机器级表示"><strong>程序的机器级表示</strong></h1>
-<ul>
+<span id="more"></span>
+
+<h1 id="程序的机器级表示"><a href="#程序的机器级表示" class="headerlink" title="程序的机器级表示"></a><strong>程序的机器级表示</strong></h1><ul>
 <li><code>IA32</code>的64位扩展，也成为<code>x86-64</code></li>
 <li><code>gcc -Og -S mstore.c</code>，GCC会编译该代码且编译器会进行优化</li>
 <li><code>objdump -d mstore.o</code>，由反汇编器将机器级代码转换成汇编代码，同时反汇编器会在汇编代码的<code>Label</code>旁注上它所对应的地址; 需要注意的是反汇编后的汇编代码地址为链接阶段<code>重定向</code>之后所处的地址，<code>链接器</code>在程序代码中会插入<code>nop</code>来提高访问存储器的性能(更好地放置下一个代码块)。</li>
@@ -281,8 +282,8 @@
 <li>要想在C语言中编写汇编代码，可以通过<code>GCC</code>的<code>内联汇编</code>，用<code>asm</code>伪指令来包含简短的汇编代码</li>
 <li>Intel用术语<code>字</code>来表示16位数据类型，老大补充字为<code>CPU</code>和<code>Cache</code>之间的数据交换单位，且RISC风格的ISA的<code>字</code>为32位</li>
 <li><code>GCC</code>生成<code>x86</code>的汇编代码指令都有一个操作数大小的字符后缀<code>b</code>、<code>w</code>、<code>l</code>、<code>q</code>，如：<code>movq</code></li>
-<li>区分<code>x86</code>不同大小的寄存器，前缀为<code>r</code>的寄存器的大小为<strong>四字</strong>，前缀为<code>e</code>的大小为<strong>双字</strong>，后缀为<code>l</code>或者<code>b</code>寄存器的大小为<strong>字节</strong>，其余的归为大小为<strong>字</strong>的寄存器 <img src="/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png"></li>
-<li><code>x86</code>的操作数格式，其中比例因子必须是1、2、4、8 <img src="/2022/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png"></li>
+<li>区分<code>x86</code>不同大小的寄存器，前缀为<code>r</code>的寄存器的大小为<strong>四字</strong>，前缀为<code>e</code>的大小为<strong>双字</strong>，后缀为<code>l</code>或者<code>b</code>寄存器的大小为<strong>字节</strong>，其余的归为大小为<strong>字</strong>的寄存器<br><img src="/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-19-13-49-56.png"></li>
+<li><code>x86</code>的操作数格式，其中比例因子必须是1、2、4、8<br><img src="/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-19-13-51-36.png"></li>
 <li><code>x86</code>规定<strong>任何为寄存器生成32位值的指令都会把该寄存器的高四字节置为0</strong>，如：<code>movl $256, %eax</code>，会把<code>rax</code>寄存器的高32位置0</li>
 <li>常规的<code>movq</code>指令只能以表示<strong>32位</strong>补码数字的<code>立即数</code>作为<code>源操作数</code></li>
 <li><code>movq</code>会将32位的<code>立即数</code>拓展为64位再进行传送，而<code>movabsq</code>直接使用64位的立即数作为源操作数使用</li>
@@ -297,7 +298,7 @@
 <li>x86有四种条件码分别是: <code>CF: 进位标志</code>, <code>ZF: 零标志</code>, <code>SF: 符号标志</code>, <code>OF溢出标志</code></li>
 <li><code>CMP</code>指令类似于<code>SUB</code>指令，但不更新目的寄存器；同样<code>TEST</code>类似于<code>AND</code>指令，也不更新目的寄存器；e.g. <code>testq %rax, %rax</code>就生成与<strong>零</strong>比较所产生的条件码</li>
 <li><code>比较和测试</code>指令以及<code>算数运算指令(lea除外)</code>都会<strong>设置条件码</strong></li>
-<li><code>SET</code>指令的目的操作数是低位单字节寄存器，它根据条件码的组合，将结果(<code>0</code>或<code>1</code>)放到寄存器中。比如: <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpq %rsi, %rdi</span><br><span class="line"><span class="keyword">setl</span> %al</span><br></pre></td></tr></table></figure></li>
+<li><code>SET</code>指令的目的操作数是低位单字节寄存器，它根据条件码的组合，将结果(<code>0</code>或<code>1</code>)放到寄存器中。比如:<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpq %rsi, %rdi</span><br><span class="line"><span class="keyword">setl</span> %al</span><br></pre></td></tr></table></figure></li>
 <li>比如<code>j</code>, <code>set</code>, <code>cmov</code>这些指令，后缀为<code>g</code>或者<code>l</code>表示有符号的大于和小于；后缀为<code>a</code>或者<code>b</code>表示无符号的大于和小于，来将生成条件码的结果和0进行比较。</li>
 <li>直接跳转<code>jmp Label</code>; 间接跳转<code>jmp *Operand</code>(i.e. <code>jmp *%rax</code>使用寄存器rax中的值作为<strong>Label</strong>；或者<code>jmp *(%rax)</code>使用寄存器的值作为地址来访问存储器得到<strong>Label</strong>)。</li>
 <li>个人认为<strong>直接跳转</strong>可以直接使用label，而<strong>间接跳转</strong>需要从存储器(e.g. 寄存器或者主存)中读取label; <strong>条件跳转只能是直接跳转</strong></li>
@@ -305,56 +306,57 @@
 <li>原本不同目标文件的<code>虚拟地址</code>的<code>程序段</code>都是由<code>0</code>开始，<strong>链接</strong>后，<strong>重定位</strong>到<strong>可执行目标文件</strong>后原本程序段的<code>虚拟地址</code>就发生了变化</li>
 <li><code>rep</code>指令后面跟<code>ret</code>的组合来避免使ret指令成为条件跳转指令的目标(e.g. <code>rep; ret</code>)</li>
 <li><code>条件传送指令</code>的<code>tradeoff</code>，能够提高遇到分支时流水线的效率(e.g. 减少控制冲突的可能，可以通过插一个气泡的方式来解决)，但同时也会增加指令数。不过现代微处理器的<code>分支预测器</code>已经足够优秀，所以比如说<code>ARM</code>就没有添加条件传送指令; 由<strong>编译器</strong>来决定编译出条件分支指令还是条件控制转移指令，不过<code>GCC</code>还是更倾向于使用<code>条件控制转移</code></li>
-<li>流水线预测错误处罚时间: <span class="math inline">\(T_{MP}=2(T_{ran} - T_{OK})\)</span>；执行代码的平均时间: <span class="math inline">\(T_{ran} = T_{avg} = T_{OK}+0.5T_{MP}\)</span>；其中<span class="math inline">\(T_{ran}\)</span>为分支随机预测时的执行时间，<span class="math inline">\(T_{OK}\)</span>为分支非常可预测的执行时间</li>
+<li>流水线预测错误处罚时间: $T_{MP}&#x3D;2(T_{ran} - T_{OK})$；执行代码的平均时间: $T_{ran} &#x3D; T_{avg} &#x3D; T_{OK}+0.5T_{MP}$；其中$T_{ran}$为分支随机预测时的执行时间，$T_{OK}$为分支非常可预测的执行时间</li>
 <li><code>逆向工程</code>，简而言之就是由<code>汇编</code>到<code>高级语言程序</code></li>
 <li>注意<code>编译器的优化</code>不会总能带来性能的提升</li>
-<li>编译器对<code>while</code>循环的两种优化: <code>jump to middle</code>和<code>guarded-do</code>，通过量化的方式，第二种方式在<strong>流水线</strong>中相比第一种性能较好
-<ul>
-<li>jump to middle: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">goto</span> test;</span><br><span class="line">loop:</span><br><span class="line">    body-statement</span><br><span class="line">test:</span><br><span class="line">    t = test-expr;</span><br><span class="line">    <span class="keyword">if</span> (t)</span><br><span class="line">        <span class="keyword">goto</span> loop</span><br></pre></td></tr></table></figure></li>
-<li>guarded-do: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t = test-expr;</span><br><span class="line"><span class="keyword">if</span> (!t)</span><br><span class="line">    <span class="keyword">goto</span> done;</span><br><span class="line">loop:</span><br><span class="line">    body-statement</span><br><span class="line">    t = test-expr;</span><br><span class="line">    <span class="keyword">if</span> (t)</span><br><span class="line">        <span class="keyword">goto</span> loop;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure></li>
-</ul></li>
+<li>编译器对<code>while</code>循环的两种优化: <code>jump to middle</code>和<code>guarded-do</code>，通过量化的方式，第二种方式在<strong>流水线</strong>中相比第一种性能较好<ul>
+<li>jump to middle:  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">goto</span> test;</span><br><span class="line">loop:</span><br><span class="line">    body-statement</span><br><span class="line">test:</span><br><span class="line">    t = test-expr;</span><br><span class="line">    <span class="keyword">if</span> (t)</span><br><span class="line">        <span class="keyword">goto</span> loop</span><br></pre></td></tr></table></figure></li>
+<li>guarded-do:  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t = test-expr;</span><br><span class="line"><span class="keyword">if</span> (!t)</span><br><span class="line">    <span class="keyword">goto</span> done;</span><br><span class="line">loop:</span><br><span class="line">    body-statement</span><br><span class="line">    t = test-expr;</span><br><span class="line">    <span class="keyword">if</span> (t)</span><br><span class="line">        <span class="keyword">goto</span> loop;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 <li><code>switch</code>语句采用<code>跳转表(jump table)</code>，跳转表就是个数组，因此当值的范围跨度较大时，跳转表所占用的存储空间就会变大。当switch语句<code>case数量比较多(4个以上)</code>，并且<code>值的范围跨度比较小</code>时就会使用<strong>跳转表</strong>(<code>GCC</code>根据switch的case数量和值的范围来决定是否编译成生成<code>跳转表</code>)。</li>
 <li>和<code>if-elseif</code>语句相比，使用跳转表的优点是执行switch语句的时间与case的数量无关(<code>用空间来换时间</code>)</li>
 <li>GCC中前缀<code>&amp;</code>表示指向数据值的指针，<code>&amp;&amp;</code>表示指向代码的指针</li>
-<li>switch语句先判断常量值是否在switch语句范围内(可能会和某个数值做差来生成保证由0开始的数组下标)，如果不在范围内或者在范围内情况在switch语句中不存在，则跳转到defualt情况对应的label。若存在重复的情况，则两种情况使用同一个label(e.g. case 104和106就会使用同一个label)，如： <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case <span class="number">104</span>:</span><br><span class="line">case <span class="number">106</span>:</span><br><span class="line">    val *= val<span class="comment">;</span></span><br><span class="line">    break<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
-<li><code>Case</code>的范围从100到106的跳转表，<code>.align</code>指令指定数组元素要保证8字节对齐，<code>.quad</code>指令用于定义64位数值，Overview: <img src="/2022/05/19/CSAPP-Ch3/img-2022-05-25-09-10-38.png"></li>
-<li>通用栈帧结构 <img src="/2022/05/19/CSAPP-Ch3/img-2022-06-04-11-03-23.png"></li>
+<li>switch语句先判断常量值是否在switch语句范围内(可能会和某个数值做差来生成保证由0开始的数组下标)，如果不在范围内或者在范围内情况在switch语句中不存在，则跳转到defualt情况对应的label。若存在重复的情况，则两种情况使用同一个label(e.g. case 104和106就会使用同一个label)，如：<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case <span class="number">104</span>:</span><br><span class="line">case <span class="number">106</span>:</span><br><span class="line">    val *= val<span class="comment">;</span></span><br><span class="line">    break<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li><code>Case</code>的范围从100到106的跳转表，<code>.align</code>指令指定数组元素要保证8字节对齐，<code>.quad</code>指令用于定义64位数值，Overview:<br><img src="/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-05-25-09-10-38.png"></li>
+<li>通用栈帧结构<br><img src="/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-06-04-11-03-23.png"></li>
 <li>当x86-64<strong>过程</strong>需要的存储空间超出寄存器能够存放的大小时，就会在栈上分配空间(这部分称为栈帧(stack frame))</li>
 <li>x86-64最多可以使用寄存器来传递6个参数，超出部分需要在栈上传递(参数7~n，参数7位于<code>栈顶</code>)</li>
 <li>叶子过程：所有的局部变量保存在寄存器中，而且该函数不会调用任何其他函数，即<code>不需要</code>栈帧</li>
 <li>调用<code>call</code>指令时，会<strong>自动</strong>(i.e.不需要手动开辟栈帧)把返回地址(紧跟在call指令后的指令地址)压入栈中，<code>ret</code>指令会将压入的返回地址从栈中弹出并赋给<code>PC</code></li>
 <li><code>Frame pointer</code>指向本函数的栈帧顶，每个函数的<code>fp</code>放在其后调用的函数的栈帧中；fp一般在backtrace或者是管理变长栈帧时要用到。</li>
 <li>通过栈<strong>传递参数</strong>(注意不是局部变量)时，所有数据大小都向8的倍数对齐。</li>
-<li>有的时候<code>局部数据</code><strong>必须</strong>存储在栈上:
-<ul>
+<li>有的时候<code>局部数据</code><strong>必须</strong>存储在栈上:<ul>
 <li>寄存器不足以存放所有本地数据</li>
 <li>使用地址运算符<code>&amp;</code>(取地址)的局部变量，要为它产生一个地址(寄存器存储的局部变量取不到地址)，因此必须存储在栈上。</li>
 <li>某些局部变量是数组或结构体，必须通过数组或结构体引用被访问到。</li>
-</ul></li>
+</ul>
+</li>
 <li><code>callee save</code>寄存器(被调用函数能保证它们的值不变，要么不使用，要么压栈保存)：rbx, rbp, r12~r15；<code>caller save</code>寄存器(意味着任何被调用函数都能修改它们)：除了上述寄存器以及rsp外的寄存器。</li>
-<li>T D[R][C]的数组元素D[i][j]的内存地址为：<span class="math inline">\(\&amp;D[i][j]=x_D+L(C\cdot i + j)\)</span>，其中<code>L</code>是数据类型T以字节为单位的大小，<span class="math inline">\(x_D\)</span>为数组D的起始地址。</li>
+<li>T D[R][C]的数组元素D[i][j]的内存地址为：$&amp;D[i][j]&#x3D;x_D+L(C\cdot i + j)$，其中<code>L</code>是数据类型T以字节为单位的大小，$x_D$为数组D的起始地址。</li>
 <li>C语言编译器能够优化<code>定长</code>多维数组(比如说减少寄存器的使用或者减少分支判断，具体可以参考书本3.8.4)</li>
 <li>变长数组。<code>C99</code>引入了一种功能，允许数组的维度是<code>表达式</code>(原本只能是常量)，在遇到这个数组的时候计算出数组的维度(因此变量定义的值必须要数组使用之前)</li>
 <li>动态的版本(i.e.变长数组)必须使用乘法指令来对i伸缩n倍，而不能用一系列的移位和加法(移位只针对于2的幂次)。在一些处理器中，乘法会导致严重的性能处罚(编器件通过优化来避免生成我们上面计算地址的表达式从而避免乘法指令，具体看书本P182)。</li>
 <li>C语言结构体(struct)的所有组成部分都存放在内存中一段连续的区域内；<strong>编译器维护关于每个结构体类型的信息</strong>，指示每个字段(field)(i.e. 属性)的字节偏移</li>
-<li>C语言联合体(union)是<strong>用不同的字段来引用相同的内存块</strong>(进而节约内存空间)。e.g.数据结构中的二叉树，因为内部结点中不存放数据，而叶子节点中存放数据，就可以考虑使用union来节省内存空间。如下面代码所示，union一共只需要16个字节的内存空间。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">node_s</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">node_s</span>* <span class="title">left</span>;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">node_s</span>* <span class="title">right</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">double</span> data[<span class="number">2</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>C语言联合体(union)是<strong>用不同的字段来引用相同的内存块</strong>(进而节约内存空间)。e.g.数据结构中的二叉树，因为内部结点中不存放数据，而叶子节点中存放数据，就可以考虑使用union来节省内存空间。如下面代码所示，union一共只需要16个字节的内存空间。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">node_s</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">node_s</span>* <span class="title">left</span>;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">node_s</span>* <span class="title">right</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">double</span> data[<span class="number">2</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 <li>计算机系统对数据对齐限制简化了形成处理器和内存系统之间接口的硬件设计。e.g.假设一个处理器总是从内存中取8个字节，则地址必须为8的倍数(这样就可以用一个内存操作来读或者写值了)，进而提高性能。</li>
-<li>对齐原则是任何K字节的基本对象的地址必须是K的倍数。 <img src="/2022/05/19/CSAPP-Ch3/img-2022-06-11-18-24-09.png"></li>
+<li>对齐原则是任何K字节的基本对象的地址必须是K的倍数。<br><img src="/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-06-11-18-24-09.png"></li>
 <li>编译器再汇编代码中插入指令<code>.align</code>，指明<strong>全局数据</strong>所需的对齐。e.g.<code>.align 8</code>，这就保证了它<strong>后面</strong>的数据的起始地址是8的倍数。</li>
 <li>编译器可能需要在字段的分配过程中插入<code>Gap</code>或者在末尾进行<code>Padding</code>。e.g.结构体数组<code>struct S2 d[4]</code>，结构体元素的可能会在末尾进行填充来保证接下来的结构体数组元素是对齐的。</li>
 <li>void*类型代表通用指针，e.g.<code>malloc</code>函数返回<code>void*</code>类型，然后通过显示的强制类型转换或者赋值操作那样的隐式强制类型转换，来转换成有类型的指针</li>
-<li>C语言表达式<code>p+i</code>，这里指针值为<span class="math inline">\(p\)</span>，得到的地址计算为<span class="math inline">\(p+L \cdot i\)</span>，<span class="math inline">\(L\)</span>是与P相关的数据类型的大小</li>
+<li>C语言表达式<code>p+i</code>，这里指针值为$p$，得到的地址计算为$p+L \cdot i$，$L$是与P相关的数据类型的大小</li>
 <li>将指针从一种类型强制转换成另一种类型，只改变它的<strong>类型</strong>，而不改变它的<strong>值</strong></li>
 <li>函数指针的声明<code>int (*f)(int*);</code>，*f两边的括号是必要的，否则就会声明成<code>int* f(int*)</code>，既返回类型为<code>int*</code>的函数f。函数指针也是个指针，可以将函数名作为函数的起始地址存放到函数指针中。</li>
 <li>C语言对于数组引用不进行任何<strong>边界检查</strong>，因此可能会因为越界的数组元素的写操作来破坏存储在栈上的状态信息(e.g.参数，返回地址)，这可能会导致ret指令将PC返回到未知的地址。</li>
-<li>来看一个<strong>缓冲区溢出(Buffer Overflow)</strong>的例子，主要是因为用户输入的字符串的长度超出了为数组分配的空间 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Implementation of library function gets() */</span></span><br><span class="line"><span class="type">char</span> *<span class="title function_">gets</span><span class="params">(<span class="type">char</span> *s)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    <span class="type">char</span> *dest = s;</span><br><span class="line">    <span class="keyword">while</span> ((c = getchar()) != ’\n’ &amp;&amp; c != EOF)</span><br><span class="line">        *dest++ = c;</span><br><span class="line">    <span class="keyword">if</span> (c == EOF &amp;&amp; dest == s)</span><br><span class="line">        <span class="comment">/* No characters read */</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    *dest++ = ’\<span class="number">0</span>’; <span class="comment">/* Terminate string */</span></span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Read input line and write it back */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">echo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">8</span>]; <span class="comment">/* Way too small! */</span></span><br><span class="line">    gets(buf);</span><br><span class="line">    <span class="built_in">puts</span>(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <img src="/2022/05/19/CSAPP-Ch3/img-2022-06-11-19-40-24.png"></li>
+<li>来看一个**缓冲区溢出(Buffer Overflow)**的例子，主要是因为用户输入的字符串的长度超出了为数组分配的空间<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Implementation of library function gets() */</span></span><br><span class="line"><span class="type">char</span> *<span class="title function_">gets</span><span class="params">(<span class="type">char</span> *s)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    <span class="type">char</span> *dest = s;</span><br><span class="line">    <span class="keyword">while</span> ((c = getchar()) != ’\n’ &amp;&amp; c != EOF)</span><br><span class="line">        *dest++ = c;</span><br><span class="line">    <span class="keyword">if</span> (c == EOF &amp;&amp; dest == s)</span><br><span class="line">        <span class="comment">/* No characters read */</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    *dest++ = ’\<span class="number">0</span>’; <span class="comment">/* Terminate string */</span></span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Read input line and write it back */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">echo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">8</span>]; <span class="comment">/* Way too small! */</span></span><br><span class="line">    gets(buf);</span><br><span class="line">    <span class="built_in">puts</span>(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/2022/05/19/CSAPP-Ch3/05/19/CSAPP-Ch3/img-2022-06-11-19-40-24.png"></li>
 <li>C语言中有一些库函数(e.g.fgets)是原始库函数的更安全的版本，它额外包括一个参数，限制待读入的最大字节数。</li>
 <li>缓冲区溢出攻击的目的就是使执行的ret指令跳转到攻击代码(在缓冲区中)</li>
 <li>病毒：用来指各种在系统间传播攻击代码的策略</li>
 <li>对抗缓冲区溢出攻击常见的三种方式：栈随机化、栈破坏检测、限制可执行代码区域。</li>
 <li>栈随机化使得栈的位置在程序每次运行时都有变化，通过在程序开始时在栈上分配一段0~n字节之间的随即大小的空间(程序不使用这段空间)。在Linux系统中，采用地址空间布局随机化(ASLR)，使得每次运行时程序中的程序代码、库代码、栈、全局变量和堆数据都被加载到内存的不同区域。</li>
 <li>栈破坏检测能够检测到栈何时已经被破坏。因为在C语言中没有可靠的方法来防止对数组的写越界，最近的GCC版本在产生的代码中加入金丝雀(canary)来检测(在x86中为<code>%fs:40</code>使用fs数据段寄存器来进行段寻址，canary在段中标志为只读)。在恢复寄存状态和从函数返回之前，程序检查这个金丝雀值是否被该函数的某个操作或者该函数调用的某个函数的某个操作改变了(使用xorq指令来进行比较)，如果改变了，程序就会异常中止。最近的GCC版本会自动插入这种溢出检测(canary)。可以通过对局部变量的重新排列来提供更好的安全性(见201页)</li>
-<li>限制内存区域中哪些区域能够存放可执行代码。许多系统允许三种访问形式：R、W、X。最近AMD和Intel处理器的内存保护引进了"NX"(No-Execute)位，将读和执行访问模式分开。这样一来栈可以被标记为可读和可写，但是不可执行(检查页是否可执行由硬件来完成，效率上没有损失)</li>
+<li>限制内存区域中哪些区域能够存放可执行代码。许多系统允许三种访问形式：R、W、X。最近AMD和Intel处理器的内存保护引进了”NX”(No-Execute)位，将读和执行访问模式分开。这样一来栈可以被标记为可读和可写，但是不可执行(检查页是否可执行由硬件来完成，效率上没有损失)</li>
 <li>alloca函数申请的是栈上的内存空间(与malloc不同)，用完会在退出栈时自动释放，来支持<strong>变长栈帧</strong>。为了支持变长栈帧能方便进行栈的释放，需要支持帧指针(frame pointer)来保存上一个栈帧顶的地址。x86中帧指针存放在rbp寄存器中，而RISCV将帧指针压到栈上。</li>
 </ul>
 <blockquote>

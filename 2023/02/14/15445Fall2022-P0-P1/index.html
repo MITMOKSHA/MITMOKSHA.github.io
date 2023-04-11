@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-6a36ab1b74c03d7e7faedc5a5496836b.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-d29cb8fe458758ce6555330b7ccc85bb.png">
 <meta property="article:published_time" content="2023-02-14T03:19:02.000Z">
-<meta property="article:modified_time" content="2023-03-27T04:53:58.482Z">
+<meta property="article:modified_time" content="2023-04-11T04:39:41.288Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-6a36ab1b74c03d7e7faedc5a5496836b.png">
@@ -240,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-27 12:53:58" itemprop="dateModified" datetime="2023-03-27T12:53:58+08:00">2023-03-27</time>
+      <time title="Modified: 2023-04-11 12:39:41" itemprop="dateModified" datetime="2023-04-11T12:39:41+08:00">2023-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,7 +377,7 @@
 <h4 id="Buffer-Pool-Managerment-Instance"><a href="#Buffer-Pool-Managerment-Instance" class="headerlink" title="Buffer Pool Managerment Instance"></a>Buffer Pool Managerment Instance</h4><ul>
 <li>了解过OS的虚拟内存机制之后，Buffer pool的大致实现应该能理解。</li>
 <li>对atomic对象的访问可以建立线程间同步并按照std::memory_order的规定对非原子内存访问进行排序; std::atomic即不可复制也不可移动</li>
-<li>Page对象成员page_id跟踪具体的物理页面，如果Page对象没有包含物理页，那么page_id就被设为INVALID_PAGE_ID(-1)；Page对象还包含了当前页的pin_count_(防止buffer pool evict这个页面)和is_dirty数据成员。p1之前实现的hashtable(page_id到frame_id的映射)和lru_k_replacer(跟踪要被evict的Page对象)将作为bufferpool的数据成员来实现</li>
+<li><strong>Page对象</strong>成员page_id跟踪具体的物理页面，如果Page对象没有包含物理页，那么page_id就被设为INVALID_PAGE_ID(-1)；Page对象还包含了当前页的pin_count_(防止buffer pool evict这个页面)和is_dirty数据成员。p1之前实现的hashtable(page_id到frame_id的映射)和lru_k_replacer(跟踪要被evict的Page对象)将作为bufferpool的数据成员来实现</li>
 <li>取frame先考虑freelist再考虑replacer</li>
 <li>在DB中，又分为latch和lock。lock是高层次的原语，可以防止tuples，tables，databases受其他事务的影响。latch是低层次的原语(os中为lock)，DBMS用于临界区，或者是数据结构(i.e.哈希表)的内部。</li>
 <li>page directory是page ids到数据库文件中page的位置的映射；page table是page ids到frame ids的映射</li>

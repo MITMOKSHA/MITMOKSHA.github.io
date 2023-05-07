@@ -27,7 +27,7 @@
 <meta property="og:description" content="个人的一些认为比较常用以及不经常用到的的快捷操作">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-16T09:09:48.000Z">
-<meta property="article:modified_time" content="2023-04-23T08:20:03.117Z">
+<meta property="article:modified_time" content="2023-04-27T12:24:17.346Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode"><span class="nav-number">1.</span> <span class="nav-text">vscode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim"><span class="nav-number">2.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmux"><span class="nav-number">3.</span> <span class="nav-text">tmux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb"><span class="nav-number">4.</span> <span class="nav-text">gdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-gt-gdb%E7%BB%AD"><span class="nav-number">5.</span> <span class="nav-text">&lt;&gt;(gdb续)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cgdb"><span class="nav-number">6.</span> <span class="nav-text">cgdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">7.</span> <span class="nav-text">git</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode"><span class="nav-number">1.</span> <span class="nav-text">vscode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim"><span class="nav-number">2.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmux"><span class="nav-number">3.</span> <span class="nav-text">tmux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb"><span class="nav-number">4.</span> <span class="nav-text">gdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb%E7%BB%AD"><span class="nav-number">5.</span> <span class="nav-text">&lt;&gt;(gdb续)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cgdb"><span class="nav-number">6.</span> <span class="nav-text">cgdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">7.</span> <span class="nav-text">git</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-23 16:20:03" itemprop="dateModified" datetime="2023-04-23T16:20:03+08:00">2023-04-23</time>
+      <time title="Modified: 2023-04-27 20:24:17" itemprop="dateModified" datetime="2023-04-27T20:24:17+08:00">2023-04-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,28 +264,30 @@
 <p>个人的一些认为比较常用以及不经常用到的的快捷操作</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a><strong>vscode</strong></h2><ol>
+<h2 id="vscode"><strong>vscode</strong></h2>
+<ol type="1">
 <li>查找文件ctrl+p， esc退出</li>
-<li>分割屏幕ctrl+\，通过ctrl+1&#x2F;2&#x2F;3来切换分割屏幕的焦点</li>
-<li>ctrl+&#96; 打开&#x2F;关闭终端</li>
+<li>分割屏幕ctrl+，通过ctrl+1/2/3来切换分割屏幕的焦点</li>
+<li>ctrl+` 打开/关闭终端</li>
 <li>ctrl+tab, 在tab之间切换</li>
 <li>模糊查找当前工作目录下的所有文件ctrl+p, #</li>
 <li>Ctrl + Shift + Tab 导航tab</li>
-<li>alt + &lt;-&#x2F;-&gt;切换tab</li>
+<li>alt + &lt;-/-&gt;切换tab</li>
 <li>alt + o在源文件和头文件之间切换</li>
 </ol>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a><strong>vim</strong></h2><ol>
+<h2 id="vim"><strong>vim</strong></h2>
+<ol type="1">
 <li>跳转到指定行号n, ngg</li>
 <li>复制整行 yy, 复制包括当前行接下来n行， nyy</li>
 <li>复制指定行v模式下指定复制内容，然后y键复制。</li>
-<li>粘贴<br> 如复制内容不是一整行：p粘贴到当前光标处，P粘贴到当前行首。<br> 如复制内容是一整行：p粘贴到当前行的下一行，P粘贴到当前行的上一行</li>
+<li>粘贴 如复制内容不是一整行：p粘贴到当前光标处，P粘贴到当前行首。 如复制内容是一整行：p粘贴到当前行的下一行，P粘贴到当前行的上一行</li>
 <li>剪切dd</li>
-<li>在当前文件查找指定内容，&#x2F;+内容</li>
+<li>在当前文件查找指定内容，/+内容</li>
 <li>ctrl+] 跳转到函数的定义处，ctrl+t返回上一次光标处</li>
 <li>u撤销，ctrl+r恢复</li>
 <li><code>^y</code>向上移动一行, <code>^e</code>向下移动一行</li>
 <li><code>^b</code>向上移动一页，<code>^f</code>向下移动一页</li>
-<li>number + shift + G, 跳到第number行 </li>
+<li>number + shift + G, 跳到第number行</li>
 <li>在<code>tab</code>之间切换, <code>Alt</code>+<code>number</code>.</li>
 <li>可视条件下选中后<code>&lt;</code>或<code>&gt;</code>完成缩进。</li>
 <li>要想跳转到函数定义处，需要在项目目录中输入<code>ctags -R</code>命令。<code>ctrl+]</code>跳转, <code>ctrl+o</code>返回。</li>
@@ -297,21 +299,23 @@
 <li><code>dw</code>删除一个词</li>
 <li><code>I</code>将光标跳转到行首并进入<code>Insert</code>模式</li>
 </ol>
-<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a><strong>tmux</strong></h2><ol>
+<h2 id="tmux"><strong>tmux</strong></h2>
+<ol type="1">
 <li>任何命令都需要加ctrl+b前缀</li>
 <li>c创建窗口；n, p切换窗口</li>
-<li>%垂直分屏, “水平分屏</li>
+<li>%垂直分屏, "水平分屏</li>
 <li>x关闭窗口(等同于^d)</li>
 <li>o在窗口之间切换</li>
 <li>PgUp开启tmux终端界面的翻页，q退出。</li>
 </ol>
-<h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a><strong>gdb</strong></h2><ol>
+<h2 id="gdb"><strong>gdb</strong></h2>
+<ol type="1">
 <li>delete 删除所有断点</li>
-<li>layout src&#x2F;reg&#x2F;asm 显示c源代码、寄存器和汇编，但未分屏；focus src&#x2F;reg&#x2F;asm在src、reg和asm的tui中来回切换</li>
+<li>layout src/reg/asm 显示c源代码、寄存器和汇编，但未分屏；focus src/reg/asm在src、reg和asm的tui中来回切换</li>
 <li>layout split获得c和asm的分屏。</li>
-<li>info&#x2F;i frame 查看栈帧, info&#x2F;i args查看传递给main的参数, i locals显示当前的本地变量。</li>
+<li>info/i frame 查看栈帧, info/i args查看传递给main的参数, i locals显示当前的本地变量。</li>
 <li>通过backtrace查看栈帧，frame n(n为bt结果的栈帧号)，然后i frame查看当前栈帧号的详细内容</li>
-<li>print&#x2F;p查看argv数据;print&#x2F;p *argv(默认打印一个参数);可以通过print&#x2F;p *argv@n 来选择argv数组中的n个元素即参数; p *argv@argc打印所有参数</li>
+<li>print/p查看argv数据;print/p <em>argv(默认打印一个参数);可以通过print/p </em>argv@n 来选择argv数组中的n个元素即参数; p *argv@argc打印所有参数</li>
 <li><code>print</code>是打印值，<code>x</code>是访问主存。</li>
 <li><code>Ctrl + x</code>，再按1：单窗口模式，显示一个窗口</li>
 <li><code>Ctrl + x</code>，再按2：双窗口模式，显示两个窗口</li>
@@ -319,8 +323,10 @@
 <li><code>^x+a</code>关闭可视化</li>
 <li><code>wa</code>跟踪某个变量(watch point)</li>
 </ol>
-<h2 id="lt-gt-gdb续"><a href="#lt-gt-gdb续" class="headerlink" title="&lt;&gt;(gdb续)"></a><strong>&lt;<Debug hacks>&gt;(gdb续)</Debug></strong></h2><ol>
-<li><code>break/b</code><ul>
+<h2 id="gdb续"><strong>&lt;<Debug hacks>&gt;(gdb续)</Debug></strong></h2>
+<ol type="1">
+<li><code>break/b</code>
+<ul>
 <li><code>break 函数名</code></li>
 <li><code>break 行号</code></li>
 <li><code>break 文件名:行号</code></li>
@@ -331,14 +337,14 @@
 <li><code>break 断点 if 条件</code></li>
 <li>若不指定位置就默认在下一行代码上设置断点</li>
 <li><code>info break</code>显示断点信息</li>
-</ul>
-</li>
+</ul></li>
 <li><code>run/r</code>, 如果不加参数，执行到断点位置后暂停运行(和start命令一样的效果)</li>
-<li><code>print/p</code><ul>
+<li><code>print/p</code>
+<ul>
 <li><code>p $eax</code>，显示寄存器(寄存器名前加$)</li>
-</ul>
-</li>
-<li><code>p/格式 变量</code>, 显示寄存器可用的格式:<ul>
+</ul></li>
+<li><code>p/格式 变量</code>, 显示寄存器可用的格式:
+<ul>
 <li>x, 显示为十六进制数</li>
 <li>d, 显示为十进制数</li>
 <li>u, 显示无符号十进制数</li>
@@ -349,36 +355,37 @@
 <li>f, 浮点小数</li>
 <li>s, 显示为字符串</li>
 <li>i, 显示为机器语言</li>
-</ul>
-</li>
-<li><code>x/NFU ADDR</code>, 显示内存的内容(eXamining):<ul>
+</ul></li>
+<li><code>x/NFU ADDR</code>, 显示内存的内容(eXamining):
+<ul>
 <li><code>N</code>为重复次数</li>
 <li><code>F</code>为上述的P格式</li>
-<li><code>U</code>代表的单位：<ul>
+<li><code>U</code>代表的单位：
+<ul>
 <li>b, 字节</li>
 <li>h, 半字</li>
 <li>w, 字(4字节默认)</li>
 <li>g, 双字</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ol>
-<h2 id="cgdb"><a href="#cgdb" class="headerlink" title="cgdb"></a><strong>cgdb</strong></h2><ol>
+<h2 id="cgdb"><strong>cgdb</strong></h2>
+<ol type="1">
 <li>使用<code>i</code>切换到<code>GDB command</code>，<code>esc</code>切换到<code>source window</code>。</li>
 <li>在<code>source window</code>下，可以像<code>vim</code>一样用<code>\</code>匹配内容， 且移动到指定行按下<code>space</code>可以可视化打断点。</li>
 <li><code>q</code>或者<code>^c+d</code>退出<code>gdb</code></li>
 <li>调整<code>source window</code>的大小, <code>-</code>缩小一行，<code>=</code>增加一行。</li>
 <li>在<code>source window</code>下<code>^w</code>窗口水平竖直分割切换。</li>
-<li><code>F5</code> &#x3D; <code>run</code>, <code>F6</code> &#x3D; <code>continue</code>, <code>F7</code> &#x3D; <code>finish</code>, <code>F8</code> &#x3D; <code>next</code>, <code>F10</code> &#x3D; <code>step</code>。</li>
-<li><code>CGDB</code>的配置, 在<code>~/.cgdb/</code>目录下创建<code>cgdbrc</code>文件并编辑。如果<code>cgdbrc</code>文件存在，<code>CGDB</code>就会执行该文件中的每一行。<ul>
+<li><code>F5</code> = <code>run</code>, <code>F6</code> = <code>continue</code>, <code>F7</code> = <code>finish</code>, <code>F8</code> = <code>next</code>, <code>F10</code> = <code>step</code>。</li>
+<li><code>CGDB</code>的配置, 在<code>~/.cgdb/</code>目录下创建<code>cgdbrc</code>文件并编辑。如果<code>cgdbrc</code>文件存在，<code>CGDB</code>就会执行该文件中的每一行。
+<ul>
 <li><code>:set disasm</code>，以汇编语言的形式显示。</li>
 <li><code>:set hls</code>，高亮显示匹配到的字符串</li>
 <li><code>:set syn=style</code>设置当前文件对应语法风格的高亮。</li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<h2 id="git"><a href="#git" class="headerlink" title="git"></a><strong>git</strong></h2><ul>
+<h2 id="git"><strong>git</strong></h2>
+<ul>
 <li><code>git clone -b branch XXX</code>克隆指定分支的代码</li>
 <li><code>git reset --hard 1a703e</code>回滚到某个历史commit</li>
 <li><code>git branch -m &lt;branchName&gt;</code>将当前分支名更改为branchName</li>

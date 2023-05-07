@@ -26,12 +26,12 @@
 <meta property="og:site_name" content="Moksha&#39;s Blog">
 <meta property="og:description" content="转行前奏">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/img-2023-03-25-15-53-48.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/img-2023-03-25-15-53-48.png">
 <meta property="article:published_time" content="2023-03-25T06:56:08.000Z">
 <meta property="article:modified_time" content="2023-03-25T08:37:45.342Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/img-2023-03-25-15-53-48.png">
+<meta name="twitter:image" content="https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/img-2023-03-25-15-53-48.png">
 
 
 <link rel="canonical" href="https://mitmoksha.github.io/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Hierarchy"><span class="nav-number">1.</span> <span class="nav-text">Memory Hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache%E6%80%A7%E8%83%BD"><span class="nav-number">1.0.1.</span> <span class="nav-text">Cache性能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E4%B8%AA%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.2.</span> <span class="nav-text">四个存储器层次结构的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">Cache优化</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#memory-hierarchy"><span class="nav-number">1.</span> <span class="nav-text">Memory Hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cache%E6%80%A7%E8%83%BD"><span class="nav-number">1.0.1.</span> <span class="nav-text">Cache性能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">Cache优化</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,48 +257,49 @@
     <div class="post-body" itemprop="articleBody">
         <!-- # CAAQA阅读笔记 -->
 <blockquote>
-<p>转行前奏</p>
+<p>转行前奏 <span id="more"></span></p>
 </blockquote>
-<span id="more"></span>
-
-<h2 id="Memory-Hierarchy"><a href="#Memory-Hierarchy" class="headerlink" title="Memory Hierarchy"></a>Memory Hierarchy</h2><h4 id="Cache性能"><a href="#Cache性能" class="headerlink" title="Cache性能"></a>Cache性能</h4><ul>
-<li>$CPU执行时间&#x3D;(CPU时钟周期数 \times 存储器停顿周期数) \times 时钟周期$</li>
-<li>$存储器停顿时钟周期&#x3D;(IC \times \frac{存储器访问数}{指令}\times缺失率\times缺失代价)$<h4 id="四个存储器层次结构的问题"><a href="#四个存储器层次结构的问题" class="headerlink" title="四个存储器层次结构的问题"></a>四个存储器层次结构的问题</h4></li>
+<h2 id="memory-hierarchy">Memory Hierarchy</h2>
+<h4 id="cache性能">Cache性能</h4>
+<ul>
+<li><span class="math inline">\(CPU执行时间=(CPU时钟周期数 \times 存储器停顿周期数) \times 时钟周期\)</span></li>
+<li><span class="math inline">\(存储器停顿时钟周期=(IC \times \frac{存储器访问数}{指令}\times缺失率\times缺失代价)\)</span> #### 四个存储器层次结构的问题</li>
 <li>块的放置。通过<code>块地址 mod Cache的组数</code>来放置到对应的插槽中。<strong>如果组中有n个块，就成为n路组相联映射(i.e.相联度)</strong></li>
-<li>块的识别。若有效位为1，且地址中的tag字段和块中的tag字段匹配(这是两个条件通过一个与门)，然后就能取到对应的块，再根据地址字段的块偏移找到对应的块(块偏移字段的bit数&#x3D;log2(块大小&#x2F;主存宽度)，是跟主存宽度相关的)</li>
+<li>块的识别。若有效位为1，且地址中的tag字段和块中的tag字段匹配(这是两个条件通过一个与门)，然后就能取到对应的块，再根据地址字段的块偏移找到对应的块(块偏移字段的bit数=log2(块大小/主存宽度)，是跟主存宽度相关的)</li>
 <li>块的替换。随机，LRU，FIFO</li>
-<li>写入策略。<ul>
+<li>写入策略。
+<ul>
 <li>写回。信息仅更新到Cache中，未更新到低一级的存储器中，只有在Cache中的块发生替换时，才将dirty的块写入低一级的存储器中，效率比较高</li>
 <li>写直达。同时写入Cache和低一级的存储器中，一般会有一个写缓冲，来使得处理器在更新低一级存储器时不停顿。</li>
-</ul>
-</li>
-<li>写缺失<ul>
+</ul></li>
+<li>写缺失
+<ul>
 <li>写分配。将发生写缺失的块调入Cache中，因此一般搭配写回策略</li>
 <li>非写分配。不将写缺失的块调入Cache中，仅修改低一级的存储器的块，因此一般搭配写直达策略</li>
+</ul></li>
+<li>索引字段的计算<span class="math inline">\({2}^{索引} = \frac{Cache大小}{块大小\times相联度}\)</span></li>
+<li><span class="math inline">\(AMAT(存储器的平均访问时间)=命中时间+缺失率\times缺失代价\)</span></li>
 </ul>
-</li>
-<li>索引字段的计算${2}^{索引} &#x3D; \frac{Cache大小}{块大小\times相联度}$</li>
-<li>$AMAT(存储器的平均访问时间)&#x3D;命中时间+缺失率\times缺失代价$</li>
-</ul>
-<h2 id="Cache优化"><a href="#Cache优化" class="headerlink" title="Cache优化"></a>Cache优化</h2><ul>
+<h2 id="cache优化">Cache优化</h2>
+<ul>
 <li>降低缺失率</li>
 <li>降低不命中的代价</li>
 <li>缩短Cache命中的时间</li>
-<li>3’c不命中<ul>
+<li>3'c不命中
+<ul>
 <li>强制不命中(冷启动不命中)。第一次访问某个指令或数据时，它肯定不在Cache中，必须读入Cache中执行。</li>
-<li>容量不命中。Cache无法容纳程序执行期间所需要的全部块，由于一些块会被丢失，过会又被提取，就会出现”抖动”</li>
+<li>容量不命中。Cache无法容纳程序执行期间所需要的全部块，由于一些块会被丢失，过会又被提取，就会出现"抖动"</li>
 <li>冲突不命中。针对放置策略为组相联映射或全相联映射</li>
 <li>多处理器中还有一致性缺失。</li>
-</ul>
-</li>
-<li>优化方法<ul>
+</ul></li>
+<li>优化方法
+<ul>
 <li>增大块大小降低缺失率，块大小会增加硬件比较器的开销</li>
 <li>增大缓存以降低缺失率</li>
 <li>提高相联度以降低缺失率</li>
 <li>采用多级Cache降低缺失代价</li>
-</ul>
-</li>
-<li>Cache TLB与内存结合<br><img src="/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/img-2023-03-25-15-53-48.png"></li>
+</ul></li>
+<li>Cache TLB与内存结合 <img src="/2023/03/25/CAAQA%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/img-2023-03-25-15-53-48.png"></li>
 </ul>
 
     </div>

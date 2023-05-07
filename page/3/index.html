@@ -914,12 +914,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab5: xv6 lazy page allocation -->
-<p>很多情况都用到了Lazy allocation, 比如:</p>
-<ul>
-<li>paging from disk</li>
-<li>COW fork</li>
-<li>automatically extending stack</li>
-<li>memory-mapped files</li></ul>
+<p>很多情况都用到了Lazy allocation, 比如: - paging from disk - COW fork - automatically extending stack - memory-mapped files</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab5/#more" rel="contents">
@@ -1012,7 +1007,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab4: Traps -->
-
 <ul>
 <li>跟着视频走一遍系统调用<code>gdb</code>的流程。<code>tmux</code>分割两个窗口，一个窗口作为服务器<code>make CPUS=1 qemu-gdb</code>，另一个窗口作为<code>gdb</code>调试窗口<code>gdb-multiarch</code>。将断点打在<code>ecall指令处</code>, <code>continue</code>执行，随后再将第二个断点打到<code>print/x $stvec</code>处也就是，<code>TRAPFRAME</code>的起始地址。<code>ecall</code>指令完成三件事，将用户模式切换到管理员模式、将PC保存到sepc寄存器中、将stvec寄存器的值赋给PC跳转到stvec保存的地址处执行。</li></ul>
           <!--noindex-->
@@ -1107,7 +1101,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- # MIT 6.S081 Lab3: Page tables -->
-<h2 id="1-Print-a-page-table"><a href="#1-Print-a-page-table" class="headerlink" title="1. Print a page table"></a><strong>1. Print a page table</strong></h2>
+<h2 id="print-a-page-table"><strong>1. Print a page table</strong></h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/16/s081-lab3/#more" rel="contents">

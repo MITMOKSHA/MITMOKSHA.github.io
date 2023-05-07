@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="Moksha&#39;s Blog">
 <meta property="og:description" content="朝着Distribution前进">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-10-07.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-09-20.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-18-41.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-10-07.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-09-20.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-18-41.png">
 <meta property="article:published_time" content="2022-05-21T10:51:30.000Z">
 <meta property="article:modified_time" content="2022-05-21T11:23:59.275Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png">
+<meta name="twitter:image" content="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png">
 
 
 <link rel="canonical" href="https://mitmoksha.github.io/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
@@ -259,21 +259,20 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>朝着Distribution前进</p>
+<p>朝着Distribution前进 <span id="more"></span></p>
 </blockquote>
-<span id="more"></span>
-
-<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a><strong>数据链路层</strong></h1><ul>
+<h1 id="数据链路层"><strong>数据链路层</strong></h1>
+<ul>
 <li>数据链路层的协议传输单元，<strong>帧(Frame)</strong></li>
 <li>帧的长度等于帧的<strong>数据部分长度</strong>加上<strong>帧首部</strong>和<strong>帧尾部</strong>的长度</li>
 <li><strong>最大传送单元(Maximum Transfer Unit, MTU)</strong> 规定了帧的<code>数据部分长度</code>的上限</li>
 <li><strong>透明传输</strong>指在发送给上层之前的传输数据没有任何限制(i.e. 将帧定界符删除)</li>
 <li>为了解决透明传输的问题，使用<strong>字节填充</strong>，即在含有数据部分中含有控制字符的前面插入<strong>转义字符</strong></li>
 <li><strong>零比特填充法</strong>，只要在<code>发送端</code>发现有5个连续的1，则在后面插入1个0；在<code>接收端</code>发现有5个连续1，则将其后面的0删除</li>
-<li>$误码率&#x3D;\frac{传输错误的比特}{传输比特总数}$</li>
-<li><strong>差错检测码(Error-Dectecting Code, EDC)<strong>，通常在</strong>每个帧</strong>的尾部设置一个差错检验字段(存放着整个帧，包括首部和数据)的差错检测码，这个差错检验字段成为<strong>帧检验序列(Frame Check Sequence, FCS)</strong><br><img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png"></li>
-<li><strong>循环冗余检验(Cyclic Redundancy Check, CRC)<strong>，<code>G</code>的长度为<code>r+1</code>，<code>D</code>为待传送的数据，<code>R</code>为余数作为<code>EDC</code>，若<code>R</code>为0则未出现误码。$R&#x3D;\frac{D \cdot 2^r}{G}的余数$; 模2运算等价于</strong>按位异或</strong><br><img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-10-07.png"><br><img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-09-20.png"></li>
-<li>**停止等待协议(Stop-and-Wait)**，发送方发完一个分组时启动<code>超时计时器</code>，一般可以将重传时间设为略大于平均<code>RTT</code>; 过早超时会使发送方收到重复的确认分组，因此确认分组也需要进行编号，但数据链路层中的RTT是确定的，所以在此不必进行编号; 发送方发完一个分组后必须保留已发送的分组的副本; 停止等待协议的优点是<code>简单</code>，缺点是<code>信道利用率太低</code>; <strong>信道利用率</strong>$U&#x3D;\frac{T_D}{T_D+RTT+T_A}$，其中$T_D$为发送方发送分组所需要的时间，$T_A$为接收方发送确认分组所需要的时间<br><img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-18-41.png"></li>
+<li><span class="math inline">\(误码率=\frac{传输错误的比特}{传输比特总数}\)</span></li>
+<li><strong>差错检测码(Error-Dectecting Code, EDC)</strong>，通常在<strong>每个帧</strong>的尾部设置一个差错检验字段(存放着整个帧，包括首部和数据)的差错检测码，这个差错检验字段成为<strong>帧检验序列(Frame Check Sequence, FCS)</strong> <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-08-22.png"></li>
+<li><strong>循环冗余检验(Cyclic Redundancy Check, CRC)</strong>，<code>G</code>的长度为<code>r+1</code>，<code>D</code>为待传送的数据，<code>R</code>为余数作为<code>EDC</code>，若<code>R</code>为0则未出现误码。<span class="math inline">\(R=\frac{D \cdot 2^r}{G}的余数\)</span>; 模2运算等价于<strong>按位异或</strong> <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-10-07.png"> <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-09-20.png"></li>
+<li><strong>停止等待协议(Stop-and-Wait)</strong>，发送方发完一个分组时启动<code>超时计时器</code>，一般可以将重传时间设为略大于平均<code>RTT</code>; 过早超时会使发送方收到重复的确认分组，因此确认分组也需要进行编号，但数据链路层中的RTT是确定的，所以在此不必进行编号; 发送方发完一个分组后必须保留已发送的分组的副本; 停止等待协议的优点是<code>简单</code>，缺点是<code>信道利用率太低</code>; <strong>信道利用率</strong><span class="math inline">\(U=\frac{T_D}{T_D+RTT+T_A}\)</span>，其中<span class="math inline">\(T_D\)</span>为发送方发送分组所需要的时间，<span class="math inline">\(T_A\)</span>为接收方发送确认分组所需要的时间 <img src="/2022/05/21/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/img-2022-05-21-19-18-41.png"></li>
 </ul>
 
     </div>

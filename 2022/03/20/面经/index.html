@@ -27,7 +27,7 @@
 <meta property="og:description" content="面试总要总结吧">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-20T09:32:17.000Z">
-<meta property="article:modified_time" content="2023-05-10T16:32:36.675Z">
+<meta property="article:modified_time" content="2023-05-11T06:35:36.863Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-11 00:32:36" itemprop="dateModified" datetime="2023-05-11T00:32:36+08:00">2023-05-11</time>
+      <time title="Modified: 2023-05-11 14:35:36" itemprop="dateModified" datetime="2023-05-11T14:35:36+08:00">2023-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,6 +273,25 @@
 <li>除此之外，喜欢阅读原版技术书籍，文学类书籍，热爱体育运动，热爱与他人交流讨论问题。希望贵公司可以给我一个机会。</li>
 </ul>
 <h2 id="计网-x2F-网络编程"><a href="#计网-x2F-网络编程" class="headerlink" title="计网&#x2F;网络编程"></a>计网&#x2F;网络编程</h2><ul>
+<li>socket编程<ul>
+<li>服务器端<ul>
+<li>socket。创建<strong>监听描述符</strong></li>
+<li>bind。绑定IP地址和端口号，ip地址和端口号可以确定一台计算机上的一个进程</li>
+<li>listen。第二个参数为内核监听队列的最大长度，超过这个长度服务器将不受理新的客户连接(backlog真正取min(backlog, &#x2F;proc&#x2F;sys&#x2F;net&#x2F;core&#x2F;somaxconn))</li>
+<li>accept。等待客户端建立，建立成功则返回<strong>连接描述符(用于通信)</strong></li>
+<li>send&#x2F;recv</li>
+<li>close。主动关闭一方进入FIN_WAIT2</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>socket</li>
+<li>connect</li>
+<li>send&#x2F;recv</li>
+<li>close</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>TCP，UDP的区别<ul>
 <li>TCP是面向连接的、可靠的(确认应答、超时重传、拥塞控制)、有序的(序列号)；UDP是无连接的、不可靠的、无序的</li>
 <li>TCP开销比UDP大，TCP头部需要20个字节，UDP头部只需要8个字节</li>
@@ -581,8 +600,8 @@
 </li>
 <li><a target="_blank" rel="noopener" href="https://zhangbinalan.gitbooks.io/protocol/content/tcpde_yong_sai_kong_zhi.html">流量控制和拥塞控制？</a><ul>
 <li>对比：<ul>
-<li>拥塞控制是一个全局性的过程，涉及到所有的主机、路由器等</li>
-<li>流量控制指的是点对点通信的控制，所要做的就是抑制发送端发送数据的速率，以便使接收端来得及接收</li>
+<li>拥塞控制是一个<strong>全局性</strong>的过程，涉及到所有的主机、路由器等</li>
+<li>流量控制指的是<strong>点对点通信</strong>的控制，所要做的就是抑制发送端发送数据的速率，以便使接收端来得及接收</li>
 </ul>
 </li>
 <li>流量控制：为了避免分组丢失，控制发送者的发送速度，使得接收者来得及接收。<ul>
@@ -598,6 +617,15 @@
 <li>快重传和快恢复属于慢启动和拥塞避免的<strong>改进</strong></li>
 </ul>
 </li>
+</ul>
+</li>
+<li>视频会议为什么用UDP协议呢？<ul>
+<li>不需要可靠性，一些卡顿是可以接收到</li>
+<li>UDP的速度是TCP比不了的</li>
+</ul>
+</li>
+<li>webbench压测工具的原理？<ul>
+<li>fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果</li>
 </ul>
 </li>
 <li>多线程accept有什么问题？惊群效应？如何解决？</li>
@@ -666,9 +694,9 @@
 </li>
 <li>自旋锁和互斥锁？<ul>
 <li>加锁失败的处理<ul>
-<li>互斥锁加锁失败后会进行线程切换</li>
+<li><strong>互斥锁加锁失败后会进行线程切换</strong></li>
 <li>自旋锁(通过CPU提供的CAS(compare and swap), TAS原子操作)加锁失败后，线程会<strong>忙等待</strong>，直到它拿到锁</li>
-<li>如果你能确定被锁住的代码执行时间很短，就不应该用互斥锁，而应该选用自旋锁，否则使用互斥锁(因为线程互斥锁线程上下文切换的开销)</li>
+<li>如果你能确定被锁住的代码执行时间很短，就不应该用互斥锁，而应该选用自旋锁，否则使用互斥锁(因为线程互斥锁线程<strong>上下文切换</strong>的开销)</li>
 </ul>
 </li>
 </ul>
@@ -794,7 +822,13 @@
 <li>信号量</li>
 </ul>
 </li>
-<li>协程？</li>
+<li>协程？<ul>
+<li>用户态线程</li>
+<li>轻量(栈比线程小)</li>
+<li>在同一个线程的协程是串行执行的</li>
+<li>非对称协程、对称协程</li>
+</ul>
+</li>
 </ul>
 <h2 id="DB"><a href="#DB" class="headerlink" title="DB"></a>DB</h2><ul>
 <li>B+树和B树的区别？<ul>
@@ -893,6 +927,19 @@
 <li>如果分区间的pivot恰好为中点，递归对两个子区间sort复杂度logn，分为n个子区间</li>
 </ul>
 </li>
+<li>哈希表处理冲突的方法？<ul>
+<li>开放定址法<ul>
+<li>线性探测</li>
+<li>平方探测</li>
+<li>再散列</li>
+</ul>
+</li>
+<li>拉链法<ul>
+<li>把所有key一致的元素都存放在同一个链表中</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="C-x2F-C"><a href="#C-x2F-C" class="headerlink" title="C&#x2F;C++"></a>C&#x2F;C++</h2><ul>
 <li>什么是内联函数？<ul>
@@ -953,8 +1000,8 @@
 </ul>
 </li>
 <li>C语言sizeof和strlen的区别？<ul>
-<li>sizeof是运算符，用来求指定变量或变量类型所占内存空间的大小(单位为字节)，其值在编译时期就计算好了，因此只能算出静态的大小</li>
-<li>strlen是库函数，用来求字符串的长度，它回去找字符串结尾的’\0’<strong>结束符</strong>(返回值不包括\0)；如果找不到，返回值会是一个不确定的值</li>
+<li>sizeof是<strong>一元运算符</strong>，以字节为单位，用来求指定变量或变量类型所占内存空间的大小(单位为字节)，其值在<strong>编译时期</strong>就计算好了，因此只能算出静态的大小</li>
+<li>strlen是<strong>库函数</strong>，用来求字符串的长度，它回去找字符串结尾的’\0’<strong>结束符</strong>(返回值不包括\0)；如果找不到，返回值会是一个不确定的值</li>
 </ul>
 </li>
 <li>构造函数的顺序和析构函数的顺序原因？<ul>
@@ -1030,10 +1077,9 @@
 </ul>
 </li>
 <li>指针和引用的区别？<ul>
-<li>指针是存储变量地址的变量，引用是变量的别名</li>
-<li>引用定义时必须初始化，而指针可以不必初始化</li>
-<li>指针可以改变指向的存储单元，而引用初始化之后就<strong>不能改变了</strong></li>
-<li><strong>sizeof</strong>指针变量可以得到一个字长的大小(32&#x2F;64位机器)，而引用得到所指变量的大小</li>
+<li>指针是存储地址的<strong>变量</strong>，引用是变量的<strong>别名</strong></li>
+<li>引用定义时<strong>必须</strong>初始化，而指针可以不必初始化</li>
+<li>指针可以改变指向的存储单元，而<strong>引用初始化之后就不能改变了</strong></li>
 <li>指针的自增标识指向下一个地址单元，而引用的自增表示引用变量值的增减</li>
 </ul>
 </li>
@@ -1049,12 +1095,11 @@
 <li>struct默认是public继承，而class是private</li>
 </ul>
 </li>
-<li>常见C++四大内存分区<ul>
+<li>常见C++四大内存分区(const变量的位置取决于编译器)<ul>
 <li>代码区</li>
-<li>静态&#x2F;全局数据区。包括常量区、静态区、全局区</li>
-<li>栈区</li>
+<li>静态&#x2F;全局数据区，又分为已初始化&#x2F;未初始化。const修饰的全局变量</li>
+<li>栈区。const修饰的局部变量</li>
 <li>堆区</li>
-<li>其中const修饰的全局变量保存在代码区，const修饰的局部变量保存在栈区</li>
 </ul>
 </li>
 <li>迭代器失效的情况？解决方案？<ul>
@@ -1194,6 +1239,22 @@
 <li>必须在程序员能预见会出现循环引用的情况下才能使用</li>
 </ul>
 </li>
+<li>访问一个NULL会发生什么?<ul>
+<li>段错误</li>
+</ul>
+</li>
+<li>join()和detach()?<ul>
+<li>join()主线程会<strong>阻塞</strong>等待被调用线程执行结束后，然后主线程回收被调用线程的资源</li>
+<li>detach()，主线程继续运行(不被阻塞)，被调用线程驻留在后台运行，<strong>当主线程结束时</strong>，库负责清理与被调用西安城相关的资源</li>
+</ul>
+</li>
+<li>C++lambda表达式(匿名函数)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 返回类型为int，x,y为传入的参数，若想使用外部变量，要在[]种捕获外部变量</span></span><br><span class="line"><span class="comment">// []不捕获任何外部变量</span></span><br><span class="line"><span class="comment">// [this]显式捕获this指针</span></span><br><span class="line"><span class="comment">// [=]以值的形式捕获所有外部变量</span></span><br><span class="line"><span class="comment">// [&amp;]以引用的形式捕获所有外部变量</span></span><br><span class="line">[&amp;,i](<span class="type">int</span> x, <span class="type">int</span> y) -&gt; <span class="type">int</span> &#123;<span class="keyword">return</span> i;&#125;  <span class="comment">// [&amp;,i]表示i变量以值的形式捕获，其他外部变量以引用的形式捕获</span></span><br></pre></td></tr></table></figure></li>
+<li>C++模板特化<ul>
+<li>匹配顺序：全特化类 &gt; 偏特化类 &gt; 主版本模板类</li>
+<li>全特化模板<strong>形参列表</strong>没有参数<code>&lt;&gt;</code>，类名后显式指定所有<strong>模板实参</strong></li>
+<li>偏特化模板形参列表有参数但不是全部，类名后指定了部分模板实参，以及模板形参<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全特化</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line">LexicalCast&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 偏特化</span></span><br><span class="line"><span class="comment">// 主模板类</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">LexicalCast&lt;<span class="type">int</span>, T&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主模板类</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">F</span>&gt;</span><br><span class="line">LexicalCast &#123;&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 <h2 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109655171">UML类图</a></h2><ul>
 <li>泛化关系(空心箭头)(is a)</li>
@@ -1214,7 +1275,7 @@
 </ul>
 <h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ul>
 <li>团队遇到分歧怎么办？<ul>
-<li>在分歧中寻找共识，通过共识化解分歧</li>
+<li>在分歧中寻找<strong>共识</strong>，<strong>通过共识化解分歧</strong></li>
 <li>想想各自的出发点</li>
 <li>承认冲突并找到解决方案</li>
 </ul>

@@ -27,7 +27,7 @@
 <meta property="og:description" content="面试总要总结吧">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-20T09:32:17.000Z">
-<meta property="article:modified_time" content="2023-05-11T06:35:36.863Z">
+<meta property="article:modified_time" content="2023-05-11T16:08:21.731Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-11 14:35:36" itemprop="dateModified" datetime="2023-05-11T14:35:36+08:00">2023-05-11</time>
+      <time title="Modified: 2023-05-12 00:08:21" itemprop="dateModified" datetime="2023-05-12T00:08:21+08:00">2023-05-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -322,10 +322,10 @@
 </li>
 <li>epoll，select，poll的区别？<ul>
 <li>select<ul>
-<li>每次调用select，都需要把fd集合从用户空间拷贝到内核空间(不论这些文件描述符是否就绪)，fd很多时开销就很大</li>
-<li>每次调用select都需在内核遍历传递进来的所有fd, 线性扫描，即轮询是否有就绪的文件描述符, 效率低, 查询时间为O(n)</li>
+<li>每次调用select，都需要<strong>把fd集合从用户空间拷贝到内核空间</strong>(不论这些文件描述符是否就绪)，fd很多时开销就很大</li>
+<li>每次调用select都需<strong>在内核遍历</strong>传递进来的所有fd, 线性扫描，即轮询是否有就绪的文件描述符, 效率低, 查询时间为O(n)</li>
 <li>select支持的文件描述符数量太少(默认最大支持1024个，可以通过ulimit -n修改)</li>
-<li>fds集合不能重用</li>
+<li>fds集合不能<strong>重用</strong></li>
 </ul>
 </li>
 <li>poll<ul>
@@ -344,7 +344,7 @@
 <li>若用LT，若系统中有大量无需读写的就绪文件描述符，它们每次调用epoll_wait都会返回，这样会降低效率</li>
 </ul>
 </li>
-<li>对比select和poll省略了把fd集合从用户空间拷贝到内核空间(而是通过直接在内核空间中创建)，而且从内核空间拷贝到用户空间的fd集合是就绪fd集合(拷贝开销较小)</li>
+<li>对比select和poll省略了把fd集合从用户空间拷贝到内核空间(而是通过<strong>直接在内核空间中创建</strong>)，而且从内核空间拷贝到用户空间的fd集合是就绪fd集合(拷贝开销较小)，<strong>时间复杂度是O(1)</strong></li>
 </ul>
 </li>
 <li>三者对比：<ul>
@@ -541,8 +541,8 @@
 </ul>
 </li>
 <li>说一下cookie和session？<ul>
-<li>cookie。因为HTTP是无状态协议，HTTP&#x2F;1.1引入<code>Cookie</code>来保存状态信息<ul>
-<li>cookie是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器之后向同一服务器再次发起请求时被携带上，用于告知服务器两个请求是否来自同一浏览器，会带来额外的性能开销</li>
+<li>cookie。因为HTTP是无状态协议，HTTP&#x2F;1.1引入<code>Cookie</code>来<strong>保存状态信息</strong><ul>
+<li>cookie是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器之后向同一服务器再次发起请求时被携带上，<strong>用于告知服务器两个请求是否来自同一浏览器</strong>，会带来额外的性能开销</li>
 <li>用途<ul>
 <li>会话状态管理（如用户登录状态，购物车，游戏分数或其他需要记录的信息）</li>
 <li>个性化设置（如用户自定义设置、主题等）</li>
@@ -628,6 +628,7 @@
 <li>fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果</li>
 </ul>
 </li>
+<li>udp如何实现可靠？</li>
 <li>多线程accept有什么问题？惊群效应？如何解决？</li>
 </ul>
 <h2 id="计组-x2F-OS"><a href="#计组-x2F-OS" class="headerlink" title="计组&#x2F;OS"></a>计组&#x2F;OS</h2><ul>
@@ -673,11 +674,11 @@
 <li>信号量。信号值为0下调用sem_wait()则会<strong>阻塞</strong>直到信号值大于0或者是信号中断处理的调用</li>
 </ul>
 </li>
-<li>堆栈有什么区别?<ul>
+<li>堆和栈有什么区别?<ul>
 <li>申请方式：栈由系统自动分配释放(如函数调用时存放函数的参数值，局部变量的值等)；堆需要程序员自己申请，并指明大小</li>
 <li>申请效率：栈由系统自动分配，申请效率高；堆一般速度较慢，容易产生内存碎片。</li>
 <li>增长方向：栈由高地址向低地址方向增长；堆由低地址向高地址方向增长</li>
-<li>(堆), 空闲链表来管理，动态分配内存时空闲内存的管理：首次适配(不需要排序)、最佳适配(空闲分区按<strong>容量</strong>递增次序排序)、下次适配(在首次适配的基础上，每次分配内存时，从上次查找结束的位置开始查找)、最差适配(空闲分区按<strong>容量</strong>递减次序排序)</li>
+<li>堆中空闲空间使用<strong>空闲链表</strong>来管理，动态分配内存时空闲内存的管理：首次适配(不需要排序)、最佳适配(空闲分区按<strong>容量</strong>递增次序排序)、下次适配(在首次适配的基础上，每次分配内存时，从上次查找结束的位置开始查找)、最差适配(空闲分区按<strong>容量</strong>递减次序排序)</li>
 <li><strong>由进程的虚拟地址空间布局可知，在多线程环境中，共享的变量应该存储在堆上，而不是栈(每个线程都有自己的栈)</strong></li>
 </ul>
 </li>
@@ -726,7 +727,7 @@
 </li>
 <li>僵尸进程和孤儿进程？<ul>
 <li>孤儿进程是指，父进程已经退出了，子进程还在运行，那么这些子进程将被init进程所收养，并由init进程对它们完成状态收集工作</li>
-<li>僵尸进程是指，子进程退出了，但父进程并未调用waitpid&#x2F;wait收集子进程状态信息，那么子进程的进程描述符仍然在系统中(如果有大量的僵尸进程，因为系统所能使用的进程号是有限的，就可能因为没有进程号而导致创建不了新的进程)</li>
+<li>僵尸进程是指，子进程退出了，但父进程并未调用waitpid&#x2F;wait收集子进程状态信息，那么子进程的进程描述符仍然在系统中(如果有大量的僵尸进程，因为<strong>系统所能使用的进程号是有限的</strong>，就可能因为没有进程号而导致创建不了新的进程)</li>
 </ul>
 </li>
 <li>死锁及避免？<ul>
@@ -769,7 +770,7 @@
 </ul>
 </li>
 <li>字节对齐的好处？<ul>
-<li>字节对齐能够更好地对指令进行译码，同时使得访问存储器的次数更少(比如获取一个8bit数据，主存宽度为8，如果字节不对齐，取数据需要访问两次存储器)</li>
+<li>字节对齐能够更好地对指令进行译码，同时避免访问一个数据多次访存(比如获取一个8bit数据，主存宽度为8，如果字节不对齐，取数据需要访问两次存储器)</li>
 </ul>
 </li>
 <li>为什么<code>pthread_create</code>第三个传入的参数为成员函数必须得是静态的？<ul>
@@ -956,7 +957,7 @@
 <li>new申请的堆大小由系统自动判断，malloc需要传递申请大小的参数</li>
 <li>new返回相应类型的指针，malloc返回void*，需要强制转换</li>
 <li>若new申请不到内存则会抛出异常，malloc返回NULL</li>
-<li>new种会调用malloc<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// no inline, required by [replacement.functions]/3</span></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(std::<span class="type">size_t</span> sz)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::<span class="built_in">printf</span>(<span class="string">&quot;1) new(size_t), size = %zu\n&quot;</span>, sz);</span><br><span class="line">    <span class="keyword">if</span> (sz == <span class="number">0</span>)</span><br><span class="line">        ++sz; <span class="comment">// avoid std::malloc(0) which may return nullptr on success</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="type">void</span> *ptr = std::<span class="built_in">malloc</span>(sz))</span><br><span class="line">        <span class="keyword">return</span> ptr;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> std::bad_alloc&#123;&#125;; <span class="comment">// required by [new.delete.single]/3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>new中会调用malloc<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// no inline, required by [replacement.functions]/3</span></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(std::<span class="type">size_t</span> sz)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::<span class="built_in">printf</span>(<span class="string">&quot;1) new(size_t), size = %zu\n&quot;</span>, sz);</span><br><span class="line">    <span class="keyword">if</span> (sz == <span class="number">0</span>)</span><br><span class="line">        ++sz; <span class="comment">// avoid std::malloc(0) which may return nullptr on success</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="type">void</span> *ptr = std::<span class="built_in">malloc</span>(sz))</span><br><span class="line">        <span class="keyword">return</span> ptr;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> std::bad_alloc&#123;&#125;; <span class="comment">// required by [new.delete.single]/3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li>C++为什么构造函数不能是虚函数？<ul>
@@ -1269,6 +1270,7 @@
 <li>赛马次数。25匹马，5个跑道，用最少的比赛次数找出前3匹马</li>
 <li>得到4升的水。有一个3L量杯和5L量杯，量出四升的水？</li>
 <li>用绳子计时15分钟。有两条绳子，质量不均匀，烧断一条绳子的时间是1小时，</li>
+<li>村子里有红眼病，可以互相看到但不会互相告诉，当发现自己是红眼病之后会自杀，当外人告诉后第三天有人自杀，问村子里有几个人是红眼病</li>
 </ul>
 <h2 id="场景题"><a href="#场景题" class="headerlink" title="场景题"></a>场景题</h2><ul>
 <li>40亿个数中找一个数是否存在</li>
@@ -1280,6 +1282,8 @@
 <li>承认冲突并找到解决方案</li>
 </ul>
 </li>
+<li>自己最大的优点和缺点？</li>
+<li>进入职场之后的规划？</li>
 </ul>
 <h2 id="反问环节"><a href="#反问环节" class="headerlink" title="反问环节"></a>反问环节</h2><h4 id="反问技术面试官"><a href="#反问技术面试官" class="headerlink" title="反问技术面试官"></a>反问技术面试官</h4><ul>
 <li>您可以给我一些<strong>学习上的建议吗</strong>？</li>

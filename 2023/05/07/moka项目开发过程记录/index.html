@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://mitmoksha.github.io/2023/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/img-2023-05-07-15-12-25.png">
 <meta property="og:image" content="https://mitmoksha.github.io/2023/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/img-2023-05-07-15-56-39.png">
 <meta property="article:published_time" content="2023-05-07T07:09:26.000Z">
-<meta property="article:modified_time" content="2023-05-14T13:27:26.316Z">
+<meta property="article:modified_time" content="2023-05-15T11:49:18.018Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mitmoksha.github.io/2023/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/img-2023-05-07-15-11-33.png">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-14 21:27:26" itemprop="dateModified" datetime="2023-05-14T21:27:26+08:00">2023-05-14</time>
+      <time title="Modified: 2023-05-15 19:49:18" itemprop="dateModified" datetime="2023-05-15T19:49:18+08:00">2023-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@
 <li>stringstream.str()为返回string buffer的copy</li>
 <li><code>#</code>为宏的字符串操作符</li>
 <li><code>std::get(i)</code>用于获取tuple的第i个元素</li>
-<li>继承<code>enable_shared_from_this&lt;T&gt;</code>才能在成员函数中安全获得this的智能指针版本</li>
+<li>继承<code>enable_shared_from_this&lt;T&gt;</code>才能在成员函数中安全获得this的智能指针版本，通过<code>shared_from_this()</code>获得</li>
 <li><code>stringstream</code>通过<code>&lt;&lt;</code>将字符串放入缓冲区中(类似cout)，.str()成员函数获取缓冲区中的数据</li>
 <li>时间用<code>localtime</code>先是从epoch到现在的时间UTC</li>
 <li>要保证初始化列表的顺序和成员变量声明的顺序一致</li>
@@ -328,6 +328,15 @@
 <li>智能指针遇到的问题<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GetThis后会返回当前协程的this的智能指针，这里yield之后，无法继续执行该函数体，故cur无法进行释放(没有执行出作用范围，即函数体，无法进行释放)，所以cur需要显式子进行释放</span></span><br><span class="line">&#123;</span><br><span class="line">  Fiber::ptr cur = Fiber::<span class="built_in">GetThis</span>();</span><br><span class="line">  <span class="keyword">auto</span> raw_ptr = cur.<span class="built_in">get</span>();</span><br><span class="line">  cur.<span class="built_in">reset</span>();</span><br><span class="line">  raw_ptr-&gt;<span class="built_in">yield</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>扩容为fd的值*1.5，因为fd的值可能很大超过fd上下文集合的大小</li>
 <li>在iomanager中调用schedule执行的notify、stop、idle，根据虚函数原理，都会执行IOManager::的相应的虚函数版本</li>
+<li>若不使用caller线程，则在run函数中新建主协程为调度协程</li>
+<li>IOManager中的idle通过back回到事件循环之后，会直接跳过MainFunc中设置协程状态为TERM的过程，因此到事件循环后会被设置为HOLD。run中事件循环中重新启动后，HOLD状态的协程不会被放入事件队列，因此此时满足stop的条件，调度器就停止了</li>
+<li>IOManager中Addevent对某个fd注册的事件，会在epoll_wait返回之后，如果有addEvent注册的事件则调用回调函数</li>
+<li>IOManager析构时会调用stop</li>
+<li>idle事件循环中，在处理fd监听到的事件时，一个线程处理结束后会修改epoll内核事件表，然后下一个线程就不处理该事件了</li>
+<li>实现一个定时器，利用epoll_wait的第四个参数(毫秒级)，进行整合</li>
+<li><strong>友元类有当前类的访问权限</strong></li>
+<li>使用set进行自定义对象排序时，比较的时候得重载比较运算符</li>
+<li>set.insert()返回一个pair，&lt;插入位置的迭代器，是否成功的bool变量&gt;</li>
 </ul>
 <h4 id="项目开发遇到的一些BUG"><a href="#项目开发遇到的一些BUG" class="headerlink" title="项目开发遇到的一些BUG"></a>项目开发遇到的一些BUG</h4><ul>
 <li><img src="/2023/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/img-2023-05-07-15-11-33.png"></li>

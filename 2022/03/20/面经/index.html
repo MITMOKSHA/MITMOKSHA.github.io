@@ -27,7 +27,7 @@
 <meta property="og:description" content="面试总要总结吧">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-20T09:32:17.000Z">
-<meta property="article:modified_time" content="2023-05-13T10:24:18.444Z">
+<meta property="article:modified_time" content="2023-05-16T05:25:13.991Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-13 18:24:18" itemprop="dateModified" datetime="2023-05-13T18:24:18+08:00">2023-05-13</time>
+      <time title="Modified: 2023-05-16 13:25:13" itemprop="dateModified" datetime="2023-05-16T13:25:13+08:00">2023-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -628,7 +628,10 @@
 <li>fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果</li>
 </ul>
 </li>
-<li>udp如何实现可靠？</li>
+<li>udp如何实现可靠？<ul>
+<li>参照<a target="_blank" rel="noopener" href="https://www.51cto.com/article/708598.html">QUIC</a></li>
+</ul>
+</li>
 <li>多线程accept有什么问题？惊群效应？如何解决？</li>
 </ul>
 <h2 id="计组-x2F-OS"><a href="#计组-x2F-OS" class="headerlink" title="计组&#x2F;OS"></a>计组&#x2F;OS</h2><ul>
@@ -690,7 +693,7 @@
 </ul>
 </li>
 <li>死锁？<ul>
-<li>死锁是指<strong>两个或两个以上</strong>的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种<strong>阻塞</strong>的现象</li>
+<li>死锁是指<strong>两个或两个以上</strong>的进程在执行过程中，由于<strong>竞争资源</strong>或者由于彼此通信而造成的一种<strong>阻塞</strong>的现象</li>
 </ul>
 </li>
 <li>自旋锁和互斥锁？<ul>
@@ -704,7 +707,7 @@
 </li>
 <li>悲观锁和乐观锁（加场景）？<ul>
 <li>悲观锁，认为多线程同时修改共享资源的概率比较高，因此访问共享资源前总会加锁</li>
-<li>乐观锁(无锁编程，并没有加锁)，反之，会先修改完共享资源后再验证这段时间内是否发生冲突，如果没有则操作完成，有则放弃本次操作。</li>
+<li>乐观锁(无锁编程，并没有加锁)，反之，<strong>会先修改完共享资源后再验证这段时间内是否发生冲突</strong>，如果没有则操作完成，有则放弃本次操作。</li>
 <li>乐观锁重试的成本非常高，因此只有在锁成本高且冲突概率低的场景时，才考虑使用乐观锁，如：多人在线文档</li>
 </ul>
 </li>
@@ -726,7 +729,7 @@
 </ul>
 </li>
 <li>僵尸进程和孤儿进程？<ul>
-<li>孤儿进程是指，父进程已经退出了，子进程还在运行，那么这些子进程将被init进程所收养，并由init进程对它们完成状态收集工作</li>
+<li>孤儿进程是指，父进程已经退出了，子进程还在运行，那么这些子进程将被init进程(1号进程，0号进程为idle进程)所收养，并由init进程对它们完成状态收集工作</li>
 <li>僵尸进程是指，子进程退出了，但父进程并未调用waitpid&#x2F;wait收集子进程状态信息，那么子进程的进程描述符仍然在系统中(如果有大量的僵尸进程，因为<strong>系统所能使用的进程号是有限的</strong>，就可能因为没有进程号而导致创建不了新的进程)</li>
 </ul>
 </li>
@@ -794,12 +797,12 @@
 <li>虚拟内存的优势？<ul>
 <li><strong>程序的保护</strong>(每个进程有自己的虚拟地址空间)和<strong>共享</strong>(进程间通过共享内存通信)</li>
 <li><strong>内存管理的便利</strong>，引入页式管理后，可以减少外部碎片</li>
-<li><strong>使得一个进程所占用的物理空间超过主存的空间</strong>(有一部分在磁盘的交换区)</li>
+<li>使得一个<strong>进程</strong>所占用的物理空间超过主存的空间(有一部分在磁盘的交换区)</li>
 <li><strong>可以管理每个页的访问权限</strong>(进程虚拟地址空间内核数据的部分是和物理地址空间一一映射的，不需要进行VA到PA的转换)</li>
 </ul>
 </li>
 <li>为什么要引入Cache？<ul>
-<li>充分利用局部性原理(时间局部性和空间局部性)</li>
+<li><strong>充分利用局部性原理</strong>(时间局部性和空间局部性)</li>
 <li>CPU和主存的速度相差三个数量级，指令和数据都需要到主存中去取(太慢)</li>
 </ul>
 </li>
@@ -833,8 +836,10 @@
 </ul>
 <h2 id="DB"><a href="#DB" class="headerlink" title="DB"></a>DB</h2><ul>
 <li>B+树和B树的区别？<ul>
-<li>树有多高就需要检索多少次(访问二叉树每个节点就会发生一次I&#x2F;O)</li>
-<li>B+树范围查找更方便</li>
+<li>B树每个节点在内存中占用一个页面</li>
+<li>树有多高就需要检索多少次(访问二叉树每个节点就会发生一次I&#x2F;O)，<strong>索引存在于磁盘中</strong></li>
+<li>B树中键不能重复存储</li>
+<li>B+树<strong>范围查找</strong>更高效快捷</li>
 <li>B+树只有叶子节点存储数据指针(这样内部节点就可存储更多的key，使得B+树相对B树来说更矮)；B树叶子节点和内部节点都存储数据指针，因此节点数量相同，B+的高度比B树更低</li>
 </ul>
 </li>
@@ -941,7 +946,13 @@
 </li>
 </ul>
 </li>
-<li>二分查找为什么是<code>O(nlogn)</code>？</li>
+<li>二分查找时间复杂度为什么是<code>O(logn)</code>？<ul>
+<li>第一次迭代之后剩余数组长度为$\frac{n}{2}$</li>
+<li>第二次迭代之后剩余数组长度为$\frac{n}{2^2}$</li>
+<li>第k次迭代之后剩余数组长度为1，即$\frac{n}{2^k}&#x3D;1$</li>
+<li>故时间复杂度为k，即$k&#x3D;\log_{2}{n}$</li>
+</ul>
+</li>
 </ul>
 <h2 id="C-x2F-C"><a href="#C-x2F-C" class="headerlink" title="C&#x2F;C++"></a>C&#x2F;C++</h2><ul>
 <li>什么是内联函数？<ul>
@@ -1268,9 +1279,12 @@
 </li>
 </ul>
 <h2 id="智力题"><a href="#智力题" class="headerlink" title="智力题"></a>智力题</h2><ul>
-<li>赛马次数。25匹马，5个跑道，用最少的比赛次数找出前3匹马</li>
-<li>得到4升的水。有一个3L量杯和5L量杯，量出四升的水？</li>
-<li>用绳子计时15分钟。有两条绳子，质量不均匀，烧断一条绳子的时间是1小时，</li>
+<li>25匹马，5个跑道，用最少的比赛次数找出前3匹马？</li>
+<li>有一个3L量杯和5L量杯，如何量出四升的水？</li>
+<li>有两条绳子，质量不均匀，烧断一条绳子的时间是1小时，如何测量15分钟？</li>
+<li>有 9 个球，其中 8 个球质量相同，有 1 个球比较重。要求用 2 次天平，找出比较重的那个球？</li>
+<li>有 20 瓶药丸，其中 19 瓶药丸质量相同为 1 克，剩下一瓶药丸质量为 1.1 克。瓶子中有无数个药丸。要求用一次天平找出药丸质量 1.1 克的药瓶。</li>
+<li>一栋楼有 100 层，在第 N 层或者更高扔鸡蛋会破，而第 N 层往下则不会。给 2 个鸡蛋，求 N，要求最差的情况下扔鸡蛋的次数最少。</li>
 <li>村子里有红眼病，可以互相看到但不会互相告诉，当发现自己是红眼病之后会自杀，当外人告诉后第三天有人自杀，问村子里有几个人是红眼病</li>
 </ul>
 <h2 id="场景题"><a href="#场景题" class="headerlink" title="场景题"></a>场景题</h2><ul>

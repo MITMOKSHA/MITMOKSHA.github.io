@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="应原生态coroutine需求！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The tour of go">
+<meta property="og:url" content="https://mitmoksha.github.io/2023/06/04/The-tour-of-go/index.html">
+<meta property="og:site_name" content="Moksha&#39;s Blog">
+<meta property="og:description" content="应原生态coroutine需求！">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-04T04:15:02.000Z">
+<meta property="article:modified_time" content="2023-06-04T04:17:01.397Z">
+<meta property="article:author" content="Pishun Huang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mitmoksha.github.io/2023/06/04/The-tour-of-go/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2023/06/04/The-tour-of-go/","path":"2023/06/04/The-tour-of-go/","title":"The tour of go"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>The tour of go | Moksha's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moksha's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-目录"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>目录</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Pishun Huang</p>
+  <div class="site-description" itemprop="description">Opportunities are ready for it, the more to beat action.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2023/06/04/The-tour-of-go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="The tour of go | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The tour of go
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-06-04 12:15:02 / Modified: 12:17:01" itemprop="dateCreated datePublished" datetime="2023-06-04T12:15:02+08:00">2023-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Science Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <!-- # The tour of go -->
+<blockquote>
+<p>应原生态coroutine需求！</p>
+</blockquote>
+<span id="more"></span>
+<ul>
+<li><p>代码被分组到包中(<strong>即包收集相关函数</strong>)，包被分组到模块中</p></li>
+<li><p><code>go mod init &lt;file&gt;</code>创建<code>go.mod</code>来跟踪代码的依赖项，使用<code>go mod init</code>命令来创建新模块</p>
+<ul>
+<li><code>go mod init example.com/myproject</code>将会在当前目录下初始化名为<code>example.com/project</code>的模块</li>
+</ul></li>
+<li><p>名称以<strong>大写字母开始的函数</strong>可以由不在同一包中的函数调用</p></li>
+<li><p><code>:=</code>运算会自动推导右侧变量类型。 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message := <span class="number">1</span></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">var</span> message <span class="type">int</span></span><br><span class="line">message = <span class="number">1</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>go run .</code>会编译并运行当前目录下的go文件；<code>go build .</code>会编译当前目录下的go文件并生成可执行文件。</p></li>
+<li><p><code>go mod tidy</code>用于管理go的依赖项，根据源项目代码中实际引用的依赖项，自动更新go.mod文件的依赖列表，以及删除未引用的依赖</p></li>
+<li><p>go的模块命名`<prefix>/<project-name></project-name></prefix></p></li>
+<li><p><code>$ go mod edit -replace example.com/greetings=../greetings</code>，将模块重定向到本地路径</p></li>
+<li><p>go中连续类型相同的参数，除了最后一个类型以外都可以省略类型名<code>x int, y int</code>，<code>x, y int</code></p></li>
+<li><p>使用var声明变量，类型在最后<code>var i, j int = 1, 2</code>，<strong>可以用这种方式声明变量</strong></p></li>
+<li><p>go中只允许<strong>显式类型转换</strong></p></li>
+<li><p>常量<strong>不能</strong>用<code>:=</code>声明(因为<code>:=</code>涉及类型推导，常量可以是字符、字符串、布尔值、数值)</p></li>
+<li><p>基本类型包括 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span></span><br><span class="line"></span><br><span class="line"><span class="type">string</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>  <span class="type">int8</span>  <span class="type">int16</span>  <span class="type">int32</span>  <span class="type">int64</span></span><br><span class="line"><span class="type">uint</span> <span class="type">uint8</span> <span class="type">uint16</span> <span class="type">uint32</span> <span class="type">uint64</span> <span class="type">uintptr</span></span><br><span class="line"></span><br><span class="line"><span class="type">byte</span> <span class="comment">// uint8 的别名</span></span><br><span class="line"></span><br><span class="line"><span class="type">rune</span> <span class="comment">// int32 的别名</span></span><br><span class="line">    <span class="comment">// 表示一个 Unicode 码点</span></span><br><span class="line"></span><br><span class="line"><span class="type">float32</span> <span class="type">float64</span></span><br><span class="line"></span><br><span class="line"><span class="type">complex64</span> <span class="type">complex128</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>for语句，go中三个构成外面<strong>没有小括号</strong>，if也一样 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// go中只有后置++</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">  sum += i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>for也可以充当c中的关键字while <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">for</span> sum &lt; <span class="number">1000</span> &#123;</span><br><span class="line">	sum += sum</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">// 无限循环</span></span><br><span class="line"> <span class="keyword">for</span> &#123;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>if可以在条件判断前执行一个简单的语句，<strong>该语句声明的变量作用域在if内</strong> <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">if</span> v := math.Pow(x, n); v &lt; lim &#123;</span><br><span class="line">	<span class="keyword">return</span> v</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>switch语句，go会在每个case后自动加一个break，<strong>go中switch的case无需为常量，且取值不必为整数</strong>，也可以在判断条件之前加入一个简单的语句 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">switch</span> os := runtime.GOOS; os &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;darwin&quot;</span>:</span><br><span class="line">	fmt.Println(<span class="string">&quot;OS X.&quot;</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;linux&quot;</span>:</span><br><span class="line">	fmt.Println(<span class="string">&quot;Linux.&quot;</span>)</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">	<span class="comment">// freebsd, openbsd,</span></span><br><span class="line">	<span class="comment">// plan9, windows...</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;%s.\n&quot;</span>, os)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>for中的无限循环和switch true一样，<strong>默认不写条件就代表true</strong>，更加清晰 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> t.Hour() &lt; <span class="number">12</span>:</span><br><span class="line">    fmt.Println(<span class="string">&quot;Good morning!&quot;</span>)</span><br><span class="line">  <span class="keyword">case</span> t.Hour() &lt; <span class="number">17</span>:</span><br><span class="line">    fmt.Println(<span class="string">&quot;Good afternoon.&quot;</span>)</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    fmt.Println(<span class="string">&quot;Good evening.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>defer语句会<strong>函数</strong>延迟到作用域结束后执行，<strong>但其参数会立即求值</strong>！</p></li>
+<li><p>defer语句会将<strong>函数</strong>压入栈中，返回时按照弹栈的顺序调用执行</p></li>
+<li><p>struct结构体要用type标识 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</span><br><span class="line">   X <span class="type">int</span></span><br><span class="line">   Y <span class="type">int</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 初始化结构体对象</span></span><br><span class="line"> v := Vertex&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br><span class="line"> v2 = Vertex&#123;X: <span class="number">1</span>&#125;  <span class="comment">// Y:0 被隐式地赋予</span></span><br><span class="line">v3 = Vertex&#123;&#125;      <span class="comment">// X:0 Y:0</span></span><br><span class="line">v.X = <span class="number">4</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>数组，<strong>[n]T表示拥有n个T类型的值的数组</strong>。<strong>声明时括号在前</strong> <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">2</span>]<span class="type">string</span></span><br><span class="line">a[<span class="number">1</span>] = <span class="string">&quot;hello&quot;</span></span><br><span class="line">primes := [<span class="number">6</span>]<span class="type">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>切片(<strong>没有长度的数组</strong>)，<strong>[]T表示一个元素类型为T的切片</strong>。 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b [<span class="number">3</span>]<span class="type">string</span></span><br><span class="line"><span class="comment">// c为切片类型，将b的最后两个元素赋给c</span></span><br><span class="line"><span class="keyword">var</span> c []<span class="type">string</span> = b[<span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a [<span class="number">10</span>]<span class="type">int</span></span><br><span class="line"><span class="comment">// 以下切片是等价的</span></span><br><span class="line">a[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">a[:<span class="number">10</span>]</span><br><span class="line">a[<span class="number">0</span>:]</span><br><span class="line">a[:]</span><br></pre></td></tr></table></figure></p></li>
+<li><p>可以通过len(s)，和cap(s)来获取切片的长度和容量。类似于C++vector的长度和容量，即size()和capacity()，同样有扩容机制</p></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/07/moka%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" rel="prev" title="moka项目开发过程记录">
+                  <i class="fa fa-chevron-left"></i> moka项目开发过程记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pishun Huang</span>
+</div>
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","//mhchem.github.io/MathJax-mhchem/ mhchem":false,"js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"d505ca749e4e9ab7979e96f996b24f5f"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

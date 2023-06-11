@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mitmoksha.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="算法题总结">
+<meta property="og:url" content="https://mitmoksha.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Moksha&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-11T03:28:43.000Z">
+<meta property="article:modified_time" content="2023-06-11T04:01:59.633Z">
+<meta property="article:author" content="Pishun Huang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mitmoksha.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mitmoksha.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/","path":"2023/06/11/算法题总结/","title":"算法题总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>算法题总结 | Moksha's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Moksha's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moksha's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-目录"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>目录</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Pishun Huang</p>
+  <div class="site-description" itemprop="description">Opportunities are ready for it, the more to beat action.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mitmoksha.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Pishun Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moksha's Blog">
+      <meta itemprop="description" content="Opportunities are ready for it, the more to beat action.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="算法题总结 | Moksha's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          算法题总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-06-11 11:28:43 / Modified: 12:01:59" itemprop="dateCreated datePublished" datetime="2023-06-11T11:28:43+08:00">2023-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<span id="more"></span>
+</blockquote>
+<ul>
+<li>回溯题，当需要输出很多个等长串且第一个字符都不一样时，回溯内部需要用到for循环，否则不用。回溯函数一般返回类型都是void</li>
+<li>mysql中使用三值逻辑true、false、UNKNOWN</li>
+<li>二分搜索的几种特例(<strong>while循环的判断条件为le &lt;= ri</strong>) 1）找到该键第一次出现的位置，一直在左半区间搜索，如果nums[mid]==target，用一个变量index记录该下标，然后hi = mid -1,继续在左半区搜，若左半区没有该元素，则index就是target第一次出现的位置。 2）查找该键最后一次出现的位置反之
+<ul>
+<li><ol start="34" type="1">
+<li>在排序数组中查找元素的第一个和最后一个位置 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">searchRangeLeft</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> le = <span class="number">0</span>, ri = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span> (le &lt;= ri) &#123;</span><br><span class="line">        <span class="type">int</span> mid = le + (ri-le)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            idx = mid;</span><br><span class="line">            ri = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)&#123;</span><br><span class="line">            le = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ri = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> idx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 3）在一个有序数组中找第一个大于等于target的下标</li>
+</ol></li>
+<li>剑指 Offer II 068. 查找插入位置 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">searchInsert</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> p = <span class="number">0</span>, q = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">    <span class="type">int</span> ret = q+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= q) &#123;  <span class="comment">// 这里的判断条件和while循环不一致</span></span><br><span class="line">        <span class="type">int</span> mid = p + (q-p)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt;= target) &#123;</span><br><span class="line">            ret = mid;</span><br><span class="line">            q = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            p = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>单调栈
+<ul>
+<li>头部先push一个0，则不需要判断栈是否为空</li>
+<li>将下标放在栈中，栈中下标对应的元素是单调增/减的</li>
+<li>接雨水，每日温度，柱状图中最大的矩形</li>
+</ul></li>
+<li>前缀和可以用<code>std::accumulate(nums.begin(), nums.end(), init_val);</code>会返回当前容器的前缀和</li>
+<li>字符串
+<ul>
+<li><code>isspace(ch)</code>空格</li>
+<li><code>isalpha(ch)</code>字母</li>
+<li><code>isdigit(ch)</code>数字</li>
+<li><code>isalnum(ch)</code>字母和数字</li>
+<li><code>tolower(ch)</code>转化为小写</li>
+<li><code>toupper(ch)</code>转换为大写</li>
+<li><code>transform(nums.begin(), nums.end(), nums.begin(), tolower)</code>将容器内的元素都变为小写字母，第三个参数表示替换的起始位置</li>
+</ul></li>
+<li>dp背包问题
+<ul>
+<li>分类
+<ul>
+<li><strong>0-1背包</strong>(空间优化时必须逆向遍历)
+<ul>
+<li>dp[i][j]表示<strong>前i件物品</strong>在<strong>物品体积不超过j</strong>的情况下的最大价值</li>
+<li>如果第i件物品不被放进背包，则<code>dp[i][j] = dp[i-1][j]</code></li>
+<li>如果第i件物品被放进背包, 且该物品的体积为W，价值为V，则<code>dp[i][j] = dp[i-1][j-W] + V;</code></li>
+<li>遍历过程只需要取这两种情况的最大值即可</li>
+<li>时间复杂度和空间都为<code>O(NW)</code></li>
+</ul></li>
+<li><strong>完全背包</strong>(可以直接从一维优化，因为不确定物品具体的数目)
+<ul>
+<li>如果第i件物品不被放进背包，则<code>dp[i][j] = dp[i-1][j]</code></li>
+<li>如果第i件物品被放进背包, 且该物品的体积为W，价值为V，则<code>dp[i][j] = dp[i][j-W] + V;</code>，注意与01背包的区别，当前状态也有同一行的状态决定</li>
+<li>比如279完全平方数，322零钱兑换，直接用一维做就可以了ii <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="type">int</span> <span class="title">coinChange</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; coins, <span class="type">int</span> amount)</span> </span>&#123;</span><br><span class="line">          <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(amount+<span class="number">1</span>, INT_MAX<span class="number">-1</span>)</span></span>;</span><br><span class="line">          dp[<span class="number">0</span>] = <span class="number">0</span>;  <span class="comment">// 初始条件，0块钱所需要的最少硬币数</span></span><br><span class="line">          <span class="comment">// 外层物品，内层体积</span></span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= amount; ++i) &#123;</span><br><span class="line">              <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; coins.<span class="built_in">size</span>(); ++j) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (i &gt;= coins[j]) &#123;  <span class="comment">// 保证不发生越界</span></span><br><span class="line">                      dp[i] = <span class="built_in">min</span>(dp[i], dp[i-coins[j]] + <span class="number">1</span>);  <span class="comment">// 1为价值，coins[j]为体积</span></span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> dp[amount] == INT_MAX<span class="number">-1</span>? <span class="number">-1</span>: dp[amount];</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>一般01背包，外层物品内层体积；完全背包外层体积，内层物品</li>
+</ul></li>
+</ul></li>
+<li>寻找[1,n]重复数的常见解题思路
+<ul>
+<li>O1空间复杂度，以元素值为下标作为桶，遍历到就往桶里面(对应下标为nums[nums[i]%n]，n为数组长度)加上数组的长度，最后再遍历一次check桶里面的值。</li>
+</ul></li>
+<li>dp股票问题
+<ul>
+<li>画状态图</li>
+<li>记得设置初始状态，可能BUY和HOLD都要一起设置。如BUY[i]表示在第i天买入的<strong>最大</strong>利润，那么初始值BUY[0]应该设置为-prices[0]</li>
+<li>最后的结果可能是两个状态的最大值</li>
+</ul></li>
+<li>二维数组的二分查找，直接取矩阵的右上角作为mid来进行查找</li>
+<li>C++中优先队列priority_queue的根节点在尾部，因此建立小根堆比较器为greater(即lhs &gt; rhs)
+<ul>
+<li>如果想使用lamda表达式来作为比较器，必须得用<code>decltype</code>，定义对象时还需要<strong>传入模板参数</strong>，注意lambda表达式是匿名函数，在定义比较器时需要返回bool变量 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> cmp = [](<span class="type">int</span> a, <span class="type">int</span> b) &#123;</span><br><span class="line">    <span class="comment">// 比较器的实现</span></span><br><span class="line">    <span class="keyword">return</span> a &lt; b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::priority_queue&lt;<span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt;, <span class="keyword">decltype</span>(cmp)&gt; <span class="built_in">pq</span>(cmp);</span><br></pre></td></tr></table></figure></li>
+<li>或者自定义对象，使用仿函数来实现 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">cmp</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&amp; lhs, pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; rhs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lhs.second &gt; rhs.second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;, vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&gt;, cmp&gt; que; </span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>前缀树
+<ul>
+<li>每个node两个成员变量：isend判断该节点是否为结尾，<code>vector&lt;Trie*&gt;children(26);</code>，表示26个小写字母</li>
+<li>每个node一个方法：查询前缀树中是否有该前缀，有的话返回该前缀的尾节点，否则返回nullptr</li>
+</ul></li>
+<li>快速排序(时间O(nlogn), 空间O(logn)) <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">quickSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> lo, <span class="type">int</span> hi)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lo &gt;= hi) &#123;  <span class="comment">// 记得这里递归要有结束条件</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = <span class="built_in">partition</span>(arr, lo, hi);</span><br><span class="line">    <span class="built_in">quickSort</span>(arr, lo, mid<span class="number">-1</span>);</span><br><span class="line">    <span class="built_in">quickSort</span>(arr, mid+<span class="number">1</span>, hi);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">partition</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> le, <span class="type">int</span> ri)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> pivot = arr[le];</span><br><span class="line">    <span class="type">int</span> i = le, j = ri;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;  <span class="comment">// 这里和二分while不一致，因为相同位置没必要进行交换</span></span><br><span class="line">      <span class="keyword">while</span> (i &lt; ri &amp;&amp; arr[i] &lt;= pivot) i++;</span><br><span class="line">      <span class="keyword">while</span> (j &gt; le &amp;&amp; arr[j] &gt;= pivot) --j;</span><br><span class="line">      <span class="keyword">if</span> (i &gt;= j) <span class="keyword">break</span>;  <span class="comment">// 关键</span></span><br><span class="line">      <span class="built_in">swap</span>(arr[i], arr[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">swap</span>(arr[j], arr[le]);</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>归并排序(时间O(nlogn), <strong>空间O(n)</strong>) <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传递参数时需要mid</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, vector&lt;<span class="type">int</span>&gt;&amp; aux, <span class="type">int</span> lo, <span class="type">int</span> mid, <span class="type">int</span> hi)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 两个子区间的起始下标i,j</span></span><br><span class="line">  <span class="type">int</span> i = lo, j = mid+<span class="number">1</span>;</span><br><span class="line">  <span class="comment">// 这里一定要更新aux数组，因为bottom-up时，arr会发生变化</span></span><br><span class="line">  <span class="comment">// 保存原始arr的一个副本，最后不断更改arr达到最后的效果</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> k = lo; k &lt;= hi; ++k) &#123;</span><br><span class="line">      aux[k] = arr[k];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 双指针合并数组</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> k = lo; k &lt;= hi; ++k) &#123;</span><br><span class="line">      <span class="comment">// 两种越界情况</span></span><br><span class="line">      <span class="keyword">if</span> (i &gt; mid) arr[k] = aux[j++];</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (j &gt; hi) arr[k] = aux[i++];</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (aux[i] &lt; aux[j]) arr[k] = aux[i++];</span><br><span class="line">      <span class="keyword">else</span> arr[k] = aux[j++];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mergeSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, vector&lt;<span class="type">int</span>&gt;&amp; aux, <span class="type">int</span> lo, <span class="type">int</span> hi)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lo &gt;= hi) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = lo + (hi-lo)/<span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 如果区间sort[lo, mid-1]则可能会出现下标越界!!</span></span><br><span class="line">    <span class="built_in">mergeSort</span>(arr, aux, lo, mid);</span><br><span class="line">    <span class="built_in">mergeSort</span>(arr, aux, mid+<span class="number">1</span>, hi);</span><br><span class="line">    <span class="built_in">merge</span>(arr, aux, lo, mid, hi);  <span class="comment">// 传入mid，需要第二个区间的起始下标</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>前缀和</strong>问题，比如560和为k的子数组。本质上就是这一个公式，若pre[j]-pre[i-1]=k，即表示[i..j]区间内的元素和为k。转化为pre[i-1] = pre[j]-k(满足说明出现了和为k的子数组)，每次遍历时都要统计前缀和为n出现的次数mp[pre]++，然后<strong>哈希表</strong>可以统计前缀和出现的次数。初始条件为map[0]=1，想想这种情况[3,4] k=7</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/09/%E5%B8%B8%E7%94%A8Mysql%E6%93%8D%E4%BD%9C/" rel="prev" title="常用Mysql操作">
+                  <i class="fa fa-chevron-left"></i> 常用Mysql操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pishun Huang</span>
+</div>
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","//mhchem.github.io/MathJax-mhchem/ mhchem":false,"js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"MITMOKSHA","repo":"MITMOKSHA.github.io","client_id":"1bc801cf709af0ddca6a","client_secret":"10ac0f160a26730afadf94d39d045789894a180a","admin_user":"MITMOKSHA","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"f9975ef0c2e0acc52215a272aa8ddd32"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

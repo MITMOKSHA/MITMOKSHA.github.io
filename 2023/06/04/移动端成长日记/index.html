@@ -27,7 +27,7 @@
 <meta property="og:description" content="记录成长的点滴">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-04T10:02:50.000Z">
-<meta property="article:modified_time" content="2023-06-04T10:04:51.058Z">
+<meta property="article:modified_time" content="2023-06-12T04:30:02.480Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
 
@@ -129,7 +129,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -142,6 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Kotlin基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -228,9 +229,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-06-04 18:02:50 / Modified: 18:04:51" itemprop="dateCreated datePublished" datetime="2023-06-04T18:02:50+08:00">2023-06-04</time>
+      <time title="Created: 2023-06-04 18:02:50" itemprop="dateCreated datePublished" datetime="2023-06-04T18:02:50+08:00">2023-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-06-12 12:30:02" itemprop="dateModified" datetime="2023-06-12T12:30:02+08:00">2023-06-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -254,22 +261,22 @@
     <div class="post-body" itemprop="articleBody">
         <!-- # 移动端成长日记 -->
 <blockquote>
-<p>记录成长的点滴 <span id="more"></span></p>
+<p>记录成长的点滴</p>
 </blockquote>
-<ul>
-<li>Activity？
-<ul>
-<li>在 Android 应用程序中，每个 Activity 都有其自己的生命周期，可以通过重写 Activity 类中的生命周期方法来控制 Activity 的行为。以下是 Activity 的生命周期方法：</li>
-</ul>
-<ol type="1">
-<li><p>onCreate()：当 Activity 第一次创建时调用。在此方法中，你通常会设置 Activity 的布局、初始化变量和加载数据等操作。</p></li>
-<li><p>onStart()：当 Activity 变得可见时调用。在此方法中，你通常会执行一些初始化操作。</p></li>
-<li><p>onResume()：当 Activity 变得可交互时调用。在此方法中，你通常会执行一些恢复操作，例如启动动画、开始音乐等等。</p></li>
-<li><p>onPause()：当 Activity 失去焦点时调用。在此方法中，你通常会执行一些暂停操作，例如停止动画、暂停音乐等等。</p></li>
-<li><p>onStop()：当 Activity 不再可见时调用。在此方法中，你通常会执行一些停止操作，例如释放资源、停止服务等等。</p></li>
-<li><p>onDestroy()：当 Activity 被销毁时调用。在此方法中，你通常会执行一些清理操作，例如释放资源、取消注册等等。</p></li>
-<li><p>onRestart()：当 Activity 从停止状态恢复时调用。在此方法中，你通常会执行一些恢复操作，例如重新加载数据、恢复状态等等。 除了上述生命周期方法，还有一些其他的回调方法，例如 onSaveInstanceState()、onRestoreInstanceState()、onActivityResult() 等等，它们在特定的情况下会被调用。 需要注意的是，当系统内存不足时，Activity 可能会被销毁或者停止，因此你需要在生命周期方法中执行适当的操作来保存数据和状态。</p></li>
-</ol></li>
+<span id="more"></span>
+
+<h2 id="Kotlin基础"><a href="#Kotlin基础" class="headerlink" title="Kotlin基础"></a>Kotlin基础</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><ul>
+<li>kotlin没有类型的隐式转换，必须显式转换<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> b: <span class="built_in">Byte</span> = <span class="number">1</span> <span class="comment">// OK, 字面值会静态检测</span></span><br><span class="line"><span class="comment">// val i: Int = b // 错误</span></span><br><span class="line"><span class="keyword">val</span> i1: <span class="built_in">Int</span> = b.toInt()  <span class="comment">// 使用toInt方法显示转换类型</span></span><br><span class="line"><span class="comment">/*  toByte(): Byte</span></span><br><span class="line"><span class="comment">    toShort(): Short</span></span><br><span class="line"><span class="comment">    toInt(): Int</span></span><br><span class="line"><span class="comment">    toLong(): Long</span></span><br><span class="line"><span class="comment">    toFloat(): Float</span></span><br><span class="line"><span class="comment">    toDouble(): Double */</span></span><br><span class="line"><span class="comment">// 这种情况可以隐式推导</span></span><br><span class="line"><span class="keyword">val</span> l = <span class="number">1L</span> + <span class="number">3</span> <span class="comment">// Long + Int =&gt; Long</span></span><br></pre></td></tr></table></figure></li>
+<li>整数类型：Byte(8), Short(16), Int(32), Long(64)</li>
+<li>浮点类型：Float(32)(可以加f或者F后缀指定), Double(64)</li>
+<li>数字字面值常量：十六进制<code>0xFF</code>，二进制<code>0b01</code></li>
+<li>当初始化一个没有显式指定类型的变量时，编译器会自动推断为足以表示该值的最小类型。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="number">1L</span>  <span class="comment">// 可以显式指定后缀L表示该类型为long</span></span><br><span class="line"><span class="comment">// 使用下划线表示数字常量更易读</span></span><br><span class="line"><span class="keyword">val</span> oneMillion = <span class="number">1_000_000</span></span><br></pre></td></tr></table></figure></li>
+<li>JVM平台的数字表示为原生类型<code>int</code>, <code>double</code>等，例外情况是当创建可空数字引用如<code>Int?</code> 或者使用泛型时。在这些场景中，数字会<strong>装箱</strong>为Java类 <code>Integer</code>、<code>Double</code>等，这样就可以使用一些方法如<code>valueOf()</code><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">//sampleStart</span></span><br><span class="line">    <span class="keyword">val</span> a: <span class="built_in">Int</span> = <span class="number">100</span></span><br><span class="line">    <span class="comment">// Int后面带问号表示类型为可空的</span></span><br><span class="line">    <span class="keyword">val</span> boxedA: <span class="built_in">Int</span>? = a</span><br><span class="line">    <span class="keyword">val</span> anotherBoxedA: <span class="built_in">Int</span>? = a</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> b: <span class="built_in">Int</span> = <span class="number">10000</span></span><br><span class="line">    <span class="keyword">val</span> boxedB: <span class="built_in">Int</span>? = b</span><br><span class="line">    <span class="keyword">val</span> anotherBoxedB: <span class="built_in">Int</span>? = b</span><br><span class="line"></span><br><span class="line">    <span class="comment">// &quot;===&quot;用于比较两个对象的引用(JVM没有指针的概念，实际上操作的是引用(同cpp))</span></span><br><span class="line">    <span class="comment">// 可空引用的不同的原因在于JVM对-128到127的整数（Integer）应用了内存优化</span></span><br><span class="line">    println(boxedA === anotherBoxedA) <span class="comment">// true</span></span><br><span class="line">    println(boxedB === anotherBoxedB) <span class="comment">// false</span></span><br><span class="line">    <span class="comment">// 虽然引用不同但是它们值相等</span></span><br><span class="line">    println(boxedB == anotherBoxedB) <span class="comment">// true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3></li>
+<li>如果函数没有返回类型，那么默认返回类型就是Unit，如<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数前需要加func关键字</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printMessage</span><span class="params">(message: <span class="type">String</span>)</span></span>: <span class="built_in">Unit</span> &#123;</span><br><span class="line">  println(message)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价的</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printMessage</span><span class="params">(message: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">  println(message)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>lambda表达式<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">maxOf</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span> = <span class="keyword">if</span> (a &gt; b) a <span class="keyword">else</span> b</span><br></pre></td></tr></table></figure></li>
+<li>被替换的方法中某些参数的类型以问号 ? 为后缀。这表示传递给这些参数的实际参数可以为 null<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3></li>
+<li>自动推导，类似于cpp的auto<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> a: <span class="built_in">Int</span> = <span class="number">1</span>  <span class="comment">// 立即赋值</span></span><br><span class="line"><span class="keyword">val</span> b = <span class="number">2</span>   <span class="comment">// 自动推断出 `Int` 类型</span></span><br><span class="line"><span class="keyword">val</span> c: <span class="built_in">Int</span>  <span class="comment">// 如果没有初始值类型不能省略</span></span><br><span class="line">c = <span class="number">3</span>       <span class="comment">// 明确赋值</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
     </div>

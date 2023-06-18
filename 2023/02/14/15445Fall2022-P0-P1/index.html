@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E8%B5%B7%E9%80%9A%E5%85%B3%E5%90%A7cmu15445fall2022-project0-and-project1"><span class="nav-number">1.</span> <span class="nav-text">一起通关吧！CMU15445fall2022 project0 and project1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#project0-c-primer"><span class="nav-number">1.1.</span> <span class="nav-text">Project0 C++ Primer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#project1-buffer-pool-management"><span class="nav-number">1.2.</span> <span class="nav-text">Project1 Buffer Pool Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extendible-hashing"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">Extendible Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lru-k"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">LRU-K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#buffer-pool-managerment-instance"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">Buffer Pool Managerment Instance</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E8%B5%B7%E9%80%9A%E5%85%B3%E5%90%A7%EF%BC%81CMU15445fall2022-project0-and-project1"><span class="nav-number">1.</span> <span class="nav-text">一起通关吧！CMU15445fall2022 project0 and project1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project0-C-Primer"><span class="nav-number">1.1.</span> <span class="nav-text">Project0 C++ Primer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project1-Buffer-Pool-Management"><span class="nav-number">1.2.</span> <span class="nav-text">Project1 Buffer Pool Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Extendible-Hashing"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">Extendible Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRU-K"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">LRU-K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Buffer-Pool-Managerment-Instance"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">Buffer Pool Managerment Instance</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -264,26 +264,26 @@
     <div class="post-body" itemprop="articleBody">
         <!-- # fall2022 -->
 <blockquote>
-<p>DB也算是程序员的浪漫吧 <span id="more"></span></p>
+<p>DB也算是程序员的浪漫吧</p>
 </blockquote>
-<h1 id="一起通关吧cmu15445fall2022-project0-and-project1">一起通关吧！CMU15445fall2022 project0 and project1</h1>
-<h2 id="project0-c-primer">Project0 C++ Primer</h2>
-<ul>
+<span id="more"></span>
+
+<h1 id="一起通关吧！CMU15445fall2022-project0-and-project1"><a href="#一起通关吧！CMU15445fall2022-project0-and-project1" class="headerlink" title="一起通关吧！CMU15445fall2022 project0 and project1"></a>一起通关吧！CMU15445fall2022 project0 and project1</h1><h2 id="Project0-C-Primer"><a href="#Project0-C-Primer" class="headerlink" title="Project0 C++ Primer"></a>Project0 C++ Primer</h2><ul>
 <li><code>explicit</code>关键字用于防止构造函数发生隐式转换</li>
 <li><code>noexcept</code>关键字用于使函数不抛出异常</li>
-<li>左值和右值
-<ul>
+<li>左值和右值<ul>
 <li>能对表达式取地址的为左值，否则为右值</li>
 <li>具名变量都为左值，右值不具名</li>
 <li>右值又分为：expiring value(将亡值)和pure rvalue(纯右值)</li>
 <li>C++11中所有的值必属于左值、将亡值(C++11新增)、纯右值</li>
-</ul></li>
-<li>引用
-<ul>
+</ul>
+</li>
+<li>引用<ul>
 <li>无论左值引用和右值引用都必须立即初始化，因为引用类型本身并不拥有所绑定对象的内存，只是该对象的一个别名</li>
 <li>右值引用绑定一个右值引用类型变量就可以延长生命周期，利用这一特点可以做一些性能上的优化(如减少拷贝构造函数和析构函数的调用次数)</li>
 <li>左值是指表达式结束后依然存在的持久对象;右值是指表达式结束时就不再存在的临时对象</li>
-</ul></li>
+</ul>
+</li>
 <li>move constructor(移动构造函数), 移动堆中的资源，即不像拷贝构造函数一样复制现有对象的数据(在栈中)，而是声明对象的指针指向临时对象的数据并清空临时对象的指针。可以防止在内存中不必要地复制数据(i.e.不必要地调用copy constructor)</li>
 <li>深拷贝 vs. 浅拷贝(i.e. 拷贝构造函数 vs. 移动构造函数)</li>
 <li>std::move 并不会真正地移动对象，真正的移动操作是在移动构造函数、移动赋值函数等完成的，std::move 只是将参数转换为右值引用而已（相当于一个static_cast)，配合使用移动构造函数</li>
@@ -294,22 +294,20 @@
 <li>Trie的Remove需要用到辅助函数</li>
 <li>std::unqiue_ptr有三种初始化方式，构造函数，std::make_unique，std::move</li>
 </ul>
-<h2 id="project1-buffer-pool-management">Project1 Buffer Pool Management</h2>
-<h4 id="extendible-hashing">Extendible Hashing</h4>
-<ul>
+<h2 id="Project1-Buffer-Pool-Management"><a href="#Project1-Buffer-Pool-Management" class="headerlink" title="Project1 Buffer Pool Management"></a>Project1 Buffer Pool Management</h2><h4 id="Extendible-Hashing"><a href="#Extendible-Hashing" class="headerlink" title="Extendible Hashing"></a>Extendible Hashing</h4><ul>
 <li>直接向下这一部分状态图是project给的本地测试，向右侧这部分状态是自己想的测试<img src="https://pic4.zhimg.com/80/v2-6a36ab1b74c03d7e7faedc5a5496836b.png" alt="状态图"></li>
-<li>override关键字有两个用途:
-<ul>
+<li>override关键字有两个用途:<ul>
 <li>向读者表明这是个虚函数</li>
 <li>编译器也知道这是个重载的方法，因此它可以检查你不是添加或者改变新的方法</li>
-</ul></li>
+</ul>
+</li>
 <li>const_cast可以将non-const转换为const</li>
 <li>桶在插入之前检测full再进行split</li>
-<li>若global depth和local depth，具体见<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Extendible_hashing">wiki</a>
-<ul>
+<li>若global depth和local depth，具体见<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Extendible_hashing">wiki</a><ul>
 <li>相等(即仅一个指针指向bucket)，则对dir_进行扩容</li>
 <li>不相等(即多个指针指向bucket)，不需要对dir_进行扩容</li>
-</ul></li>
+</ul>
+</li>
 <li>如果桶满了要对桶进行split(通过增加global counter), 然后根据上面的情况选择是否double dir_的大小(通过resize function)，reshuffle bucket, <strong>创建一个新的bucket</strong>，在bucket发生split时，增加新增桶和当前桶的局部深度，再retry</li>
 <li><strong>只需要</strong>split<strong>当前</strong>full的bucket即可，将其映射到别的bucket, 注意bucket删除元素时，迭代器可能会失效(可以用一个del容器来收集要被删除的元素)</li>
 <li>local counter is bookkeeping</li>
@@ -318,34 +316,37 @@
 <li>remove函数可以在Bucket类中实现对每个bucket元素remove，再extendible hashing类中实现对哈希表元素的remove。</li>
 <li>mutable关键字可以删除const的限定</li>
 <li>std::scoped_lock提供了RAII机制(C++17特性)。</li>
-<li>看了十一佬的博客后，几个关键的问题：
-<ul>
+<li>看了十一佬的博客后，几个关键的问题：<ul>
 <li><strong>dir 扩容时，新的指针应该指向哪里</strong>？ A: split之后，扩容将增加一个bit。若除了增加的一位高位以外的bits都相等，则指向同一个bucket(称其为兄弟指针)，根据其扩容前的global depth和相应的掩码操作。</li>
 <li><strong>如何重新安排指针？</strong> <strong>只需要重新安排split bucket的兄弟指针</strong>即可，可以对原哈希索引和当前索引进行比较，若不相同则需要重新安排指针。每次split都需要重新安排指针，兄弟指针如何分配? dir_中与插入index后local depth位相等的即为兄弟指针，增加local depth之后以掩码的方式重新分配兄弟指针(可以将其分为两组，高位分别是0和1，一组指向原bucket，一组指向新的bucket)</li>
-</ul></li>
+</ul>
+</li>
 <li>在接口实现中获取数据成员时不要调用线程安全的接口，否则可能并发测试会特别慢</li>
 <li>如果当前split bucket的local depth等于global depth，则不需要重新安排指针。</li>
-<li>整个part的难点在split，可以分为以下几步
-<ul>
-<li><ol type="1">
+<li>整个part的难点在split，可以分为以下几步<ul>
+<li><ol>
 <li>是否索引数组要扩容? 扩容伴随着全局深度的增加</li>
-</ol></li>
-<li><ol start="2" type="1">
+</ol>
+</li>
+<li><ol start="2">
 <li>新建bucket</li>
-</ol></li>
-<li><ol start="3" type="1">
+</ol>
+</li>
+<li><ol start="3">
 <li>重新安排指针</li>
-</ol></li>
-<li><ol start="4" type="1">
+</ol>
+</li>
+<li><ol start="4">
 <li>重新分配split bucket中的键值对</li>
-</ol></li>
-</ul></li>
+</ol>
+</li>
+</ul>
+</li>
 <li>IndexOf通过global depth生成的mask与std::hash返回的键值进行<code>&amp;</code>操作返回哈希目录的index，找到具体的bucket。</li>
 <li>这里实现的可扩展哈希，存储的值是<strong>KV对</strong></li>
 <li>可扩展哈希的优势？</li>
 </ul>
-<h4 id="lru-k">LRU-K</h4>
-<ul>
+<h4 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h4><ul>
 <li>LRU(LRU-1)为最近使用过1次，LRU-K为最近使用过K次</li>
 <li>若少于K次访问的frame的distance被赋值为+Inf, 当frame的distance都是+Inf时，逐出frame中历史访问中时间戳最早(指的是<strong>当前frame的最早的访问记录</strong>)的那个(也就是经典的LRU算法)</li>
 <li>frame被evict或者remove之后它的access history、映射也要被移除，evictable属性也要设置为false，frame的evictable属性可以用一个bool数组来记录。</li>
@@ -363,18 +364,17 @@
 <li>insert在当前迭代器之前插入元素</li>
 <li>可以用std::prev和std::next来减少和递增迭代器, 注意std::next返回前进之后的迭代器，而std::advance不返回任何内容</li>
 <li>记得保证所有操作都是线程安全的</li>
-<li>cpp读写锁(c++14特性)。共享锁和排他锁不能同时持有，可以同时多个线程持有多个共享锁，排他锁只能一个线程持有。括头文件<shared_mutex>, 定义一个std::shared_mutex变量。共享锁上锁/解锁(lock_shared/unlock_shared)，排他锁上锁/解锁(lock/unlock)</shared_mutex></li>
+<li>cpp读写锁(c++14特性)。共享锁和排他锁不能同时持有，可以同时多个线程持有多个共享锁，排他锁只能一个线程持有。括头文件<shared_mutex>, 定义一个std::shared_mutex变量。共享锁上锁&#x2F;解锁(lock_shared&#x2F;unlock_shared)，排他锁上锁&#x2F;解锁(lock&#x2F;unlock)</shared_mutex></li>
 <li>size_t(aka.long unsigned)需要8个字节的格式符，因此在printf的时候就不用4字节的%d而是%ld</li>
 <li>如果当前frame的历史访问记录为0，那么再setEvictable()中即可直接返回(terminate)</li>
 <li>frame_id大于等于0，小于replacer的大小</li>
-<li>如果是简单的LRU-1/LRU算法，用哈希表+双链表可以各操作保证O(1)的时间复杂度。若page引用大于等于K次即(LRU-K)，既比较最近它们的第K次时间戳，直接遍历record数组(注意要筛去访问次数小于k的frame以及non-evictable的frame)找到具有最早时间戳的frame并驱逐即可; 若page引用小于K次(即LRU-1)，则将这些page单独挑出来用LRU/LRU-1即可。这样可以得到最高的效率。</li>
+<li>如果是简单的LRU-1&#x2F;LRU算法，用哈希表+双链表可以各操作保证O(1)的时间复杂度。若page引用大于等于K次即(LRU-K)，既比较最近它们的第K次时间戳，直接遍历record数组(注意要筛去访问次数小于k的frame以及non-evictable的frame)找到具有最早时间戳的frame并驱逐即可; 若page引用小于K次(即LRU-1)，则将这些page单独挑出来用LRU&#x2F;LRU-1即可。这样可以得到最高的效率。</li>
 <li>如果要remove一个访问记录大于等于k的frame，直接删除record数组中的记录即可</li>
 <li>LRU-K就是在LRU的基础上加了一些记录信息的容器而已。RecordAccess方法用来动态维护list;SetEvictable维护replacer的大小，设置evictable属性。</li>
-<li>在维护LRU-1的链表时，如果元素重复访问，且访问记录次数小于k，不需要改变当前链表的状态，记录访问时间即可。</li>
+<li>在维护LRU-1的链表时，如果元素重复访问，且访问记录次数小于k，不需要改变当前链表的状态，记录访问时间即可。 </li>
 <li>注意这里用的unordered_map而不是上一节实现的可扩展哈希</li>
 </ul>
-<h4 id="buffer-pool-managerment-instance">Buffer Pool Managerment Instance</h4>
-<ul>
+<h4 id="Buffer-Pool-Managerment-Instance"><a href="#Buffer-Pool-Managerment-Instance" class="headerlink" title="Buffer Pool Managerment Instance"></a>Buffer Pool Managerment Instance</h4><ul>
 <li>了解过OS的虚拟内存机制之后，Buffer pool的大致实现应该能理解。</li>
 <li>对atomic对象的访问可以建立线程间同步并按照std::memory_order的规定对非原子内存访问进行排序; std::atomic即不可复制也不可移动</li>
 <li><strong>Page对象</strong>成员page_id跟踪具体的物理页面，如果Page对象没有包含物理页，那么page_id就被设为INVALID_PAGE_ID(-1)；Page对象还包含了当前页的pin_count_(防止buffer pool evict这个页面)和is_dirty数据成员。p1之前实现的hashtable(page_id到frame_id的映射)和lru_k_replacer(跟踪要被evict的Page对象)将作为bufferpool的数据成员来实现</li>
@@ -391,11 +391,11 @@
 <li>UnpinPgImp()传入的参数如果为is_dirty，并不是要直接赋给当前的page(如果原先是dirty，传入的参数是false，不可将当前的frame设置为non-dirty)</li>
 <li>ReadPage读page id在磁盘中存储的数据页</li>
 <li>Fetch时先考虑Flush如果当前替换得到的frame上有脏数据先写到磁盘上，再ReadPage从磁盘中读取Fetch目标page在磁盘上的数据到这个frame上。否则会覆盖</li>
-<li>使用memset c库函数初始化页的data_区域，初始化为PAGE_SIZE个'\0'</li>
+<li>使用memset c库函数初始化页的data_区域，初始化为PAGE_SIZE个’\0’</li>
 <li>切记刷盘之后要初始化当前frame的data数据为空</li>
 <li>Flush操作仅仅是将当前缓冲池中页的数据写回磁盘，然后将dirty flag置为false。</li>
 <li>最后，结合文档中给的hint，加上自己的理解，注意细节，p1就完成啦</li>
-<li><img src="https://pic4.zhimg.com/80/v2-d29cb8fe458758ce6555330b7ccc85bb.png" title="fig:" alt="Image"></li>
+<li><img src="https://pic4.zhimg.com/80/v2-d29cb8fe458758ce6555330b7ccc85bb.png" alt="Image"></li>
 </ul>
 
     </div>

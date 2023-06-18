@@ -24,13 +24,13 @@
 <meta property="og:url" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/index.html">
 <meta property="og:site_name" content="Moksha&#39;s Blog">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/img-2022-12-27-17-33-42.png">
-<meta property="og:image" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/img-2022-12-27-17-33-18.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/12/27/DB-Reading/img-2022-12-27-17-33-42.png">
+<meta property="og:image" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/12/27/DB-Reading/img-2022-12-27-17-33-18.png">
 <meta property="article:published_time" content="2022-12-27T09:31:11.000Z">
 <meta property="article:modified_time" content="2022-12-31T01:04:42.310Z">
 <meta property="article:author" content="Pishun Huang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/img-2022-12-27-17-33-42.png">
+<meta name="twitter:image" content="https://mitmoksha.github.io/2022/12/27/DB-Reading/12/27/DB-Reading/img-2022-12-27-17-33-42.png">
 
 
 <link rel="canonical" href="https://mitmoksha.github.io/2022/12/27/DB-Reading/">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#other"><span class="nav-number">2.</span> <span class="nav-text">other</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#log-structure-storage"><span class="nav-number">3.</span> <span class="nav-text">Log-Structure Storage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data-representation"><span class="nav-number">4.</span> <span class="nav-text">Data Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#database-workloads"><span class="nav-number">5.</span> <span class="nav-text">Database Workloads</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#storage-models"><span class="nav-number">6.</span> <span class="nav-text">Storage Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#database-compression"><span class="nav-number">7.</span> <span class="nav-text">Database Compression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memory-management"><span class="nav-number">8.</span> <span class="nav-text">Memory Management</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fixed-Length-Records"><span class="nav-number">2.</span> <span class="nav-text">Fixed-Length Records</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Variable-Length-Records"><span class="nav-number">3.</span> <span class="nav-text">Variable-Length Records</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#other"><span class="nav-number">4.</span> <span class="nav-text">other</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Log-Structure-Storage"><span class="nav-number">5.</span> <span class="nav-text">Log-Structure Storage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Representation"><span class="nav-number">6.</span> <span class="nav-text">Data Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Database-Workloads"><span class="nav-number">7.</span> <span class="nav-text">Database Workloads</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Storage-Models"><span class="nav-number">8.</span> <span class="nav-text">Storage Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Database-Compression"><span class="nav-number">9.</span> <span class="nav-text">Database Compression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory-Management"><span class="nav-number">10.</span> <span class="nav-text">Memory Management</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -252,122 +252,113 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-
 </blockquote>
 <span id="more"></span>
-<h4 id="存储结构">存储结构</h4>
-<ul>
+<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h4><ul>
 <li>磁头浮在盘片上不接触盘片（否则会出现盘片损坏）</li>
-<li>remapping of bad sectors, 若出现坏块且尝试写这个坏块时，可以重映射到别的物理块。</li>
-<li>性能指标: I/O operations per second(IPOS), mean time to failure(MTTF)</li>
+<li>remapping of bad sectors, 若出现坏块且尝试写这个坏块时，可以重映射到别的物理块。 </li>
+<li>性能指标: I&#x2F;O operations per second(IPOS), mean time to failure(MTTF)</li>
 <li>FLASH: NOR FLASH、NAND FLASH</li>
 <li>SSD are built using NAND flash</li>
 <li>physical page需要定期擦除</li>
 <li>hot data &amp; cold data</li>
 <li>flash translation layer</li>
-<li>flash支持I/O并行请求</li>
+<li>flash支持I&#x2F;O并行请求</li>
 <li>Hybird disk drives: 在磁盘中使用SSD作为cache缓存数据</li>
 <li>数据库被映射到一些操作系统管理的文件中。</li>
 <li>大多数db默认使用4到8k的block大小</li>
 <li>一个block中可能包含多个records</li>
-<li>要求records完整地包含在一个block中(即不能即包含在一个block又包含在另一个block中)，这样能加快访问数据的速度 #### Fixed-Length Records</li>
+<li>要求records完整地包含在一个block中(即不能即包含在一个block又包含在另一个block中)，这样能加快访问数据的速度<h4 id="Fixed-Length-Records"><a href="#Fixed-Length-Records" class="headerlink" title="Fixed-Length Records"></a>Fixed-Length Records</h4></li>
 <li>可以将最后插入的record放入被删除的record的位置，而不是整体移动插在最后(这样会移动很多次)</li>
 <li>在文件起始位置分配一定数量的file header, 可以记录第一个被删除record的地址，然后第一个被删除的record位置又记录着第二个被删除的record的位置。这样就形成了<code>free list</code></li>
-<li>当插入records时，找到free list的最后一个位置将record插入 #### Variable-Length Records</li>
+<li>当插入records时，找到free list的最后一个位置将record插入<h4 id="Variable-Length-Records"><a href="#Variable-Length-Records" class="headerlink" title="Variable-Length Records"></a>Variable-Length Records</h4></li>
 <li>page layout:slotted-pages, log-structured</li>
 <li>varchar类型&lt;偏移量，长度&gt;</li>
 <li>变长记录的空位图记录哪一个属性是空值</li>
-<li><img src="/2022/12/27/DB-Reading/img-2022-12-27-17-33-42.png"></li>
+<li><img src="/2022/12/27/DB-Reading/12/27/DB-Reading/img-2022-12-27-17-33-42.png"></li>
 <li>分槽的页结构，块头记录条目的个数，块中空闲空间的末尾处, 即尾部的开始处（方便插入），包含记录位置和大小的记录条目组成的数组</li>
-<li><img src="/2022/12/27/DB-Reading/img-2022-12-27-17-33-18.png"></li>
+<li><img src="/2022/12/27/DB-Reading/12/27/DB-Reading/img-2022-12-27-17-33-18.png"></li>
 </ul>
-<h4 id="other">other</h4>
-<ul>
+<h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4><ul>
 <li>如果数据库的页超过操作系统的标准页(4KB)DBMS将需要利用额外的手段来确保数据页原子写(在系统出现崩溃的时候)</li>
-<li>如果两个表相关，DBMS会'pre-join'这样可以使得两个表在同一个页上，效率更高</li>
+<li>如果两个表相关，DBMS会’pre-join’这样可以使得两个表在同一个页上，效率更高</li>
 </ul>
-<h4 id="log-structure-storage">Log-Structure Storage</h4>
-<ul>
-<li>slotted-pages的一些缺点: Fragmentation、Unless Disk I/O、Random Disk I/O</li>
+<h4 id="Log-Structure-Storage"><a href="#Log-Structure-Storage" class="headerlink" title="Log-Structure Storage"></a>Log-Structure Storage</h4><ul>
+<li>slotted-pages的一些缺点: Fragmentation、Unless Disk I&#x2F;O、Random Disk I&#x2F;O</li>
 <li>每一个log record包含一个独立的标识符</li>
 <li>DB可以将log压缩到一个表中，称为SSTable(Sorted String Table)</li>
 <li>write amplification: 不断写同样的数据</li>
 </ul>
-<h4 id="data-representation">Data Representation</h4>
-<ul>
+<h4 id="Data-Representation"><a href="#Data-Representation" class="headerlink" title="Data Representation"></a>Data Representation</h4><ul>
 <li>在tuple中的数据本质上是字节数组，DBMS将这些字节数组解释为什么属性取决于<code>数据的表示</code></li>
-<li>五种高级数据类型: integers, variable-precision numbers, fixed-point precision numbers, variable length values, and date/times.</li>
+<li>五种高级数据类型: integers, variable-precision numbers, fixed-point precision numbers, variable length values, and date&#x2F;times.</li>
 <li>整型数(INTEGER, BIGINT, SMALLINT, TINYINT)</li>
 <li>可变精度数字(FLOAT, REAL)</li>
 <li>定点精度数字(NUMERIC, DECIMAL)</li>
-<li>可变长度值(VARCHAR, VARBINARY, TEXT, BLOB)。
-<ul>
+<li>可变长度值(VARCHAR, VARBINARY, TEXT, BLOB)。<ul>
 <li>比较典型的是存在头部储一个跟踪长度的属性，方便跳到下一个值；其中可能也包括校验和</li>
-<li>大多数DBMS不允许tuple的大小超过一个页，因此当tuple过大时，数据会存储在"overflow pages"中，并且tuple中会有到overflow pages的引用。</li>
+<li>大多数DBMS不允许tuple的大小超过一个页，因此当tuple过大时，数据会存储在”overflow pages”中，并且tuple中会有到overflow pages的引用。</li>
 <li>一些系统也会允许将数据存储在外部文件上，但DBMS不能操纵这些数据，同时这些数据也不具有持久性和事务保护。</li>
-</ul></li>
-<li>日期和时间(TIME, DATE, TIMESTAMP)
-<ul>
-<li>可以表示从unix epoch开始的时间</li>
-</ul></li>
-<li>System catalogs
-<ul>
-<li>为了解析tuple的内容，DBMS维护了一个内部目录来说明数据库的元数据。这些元数据包括表中的哪一列的类型和值是什么等信息。</li>
-</ul></li>
 </ul>
-<h4 id="database-workloads">Database Workloads</h4>
-<ul>
+</li>
+<li>日期和时间(TIME, DATE, TIMESTAMP)<ul>
+<li>可以表示从unix epoch开始的时间</li>
+</ul>
+</li>
+<li>System catalogs<ul>
+<li>为了解析tuple的内容，DBMS维护了一个内部目录来说明数据库的元数据。这些元数据包括表中的哪一列的类型和值是什么等信息。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Database-Workloads"><a href="#Database-Workloads" class="headerlink" title="Database Workloads"></a>Database Workloads</h4><ul>
 <li>OLTP(Online Transaction Processing)。OLTP一般处理更多的写相比于读</li>
 <li>OLAP(Online Analytical Processing)。分析现有的数据并产生新的数据</li>
 </ul>
-<h4 id="storage-models">Storage Models</h4>
-<ul>
-<li>N-Ary Storage Model(NSM)。对于一个tuple的所有属性都在一个页里，适配OLTP
-<ul>
+<h4 id="Storage-Models"><a href="#Storage-Models" class="headerlink" title="Storage Models"></a>Storage Models</h4><ul>
+<li>N-Ary Storage Model(NSM)。对于一个tuple的所有属性都在一个页里，适配OLTP<ul>
 <li>优点：更快地插入，更新，删除；对需要整个tuple的查询有利</li>
 <li>缺点：不利于扫描表的大部分或者属性的子集</li>
-</ul></li>
-<li>Decomposition Storage Model(DSM)。就是所谓的列存储，将一个属性列存储在一个块中，所有块连续存放。适配OLAP
-<ul>
-<li>优点：减少大量的I/O，因为DBMS在查询中只读数据；更好的查询处理和数据压缩</li>
+</ul>
+</li>
+<li>Decomposition Storage Model(DSM)。就是所谓的列存储，将一个属性列存储在一个块中，所有块连续存放。适配OLAP<ul>
+<li>优点：减少大量的I&#x2F;O，因为DBMS在查询中只读数据；更好的查询处理和数据压缩</li>
 <li>缺点：点查询，插入，更新和删除变慢，因为tuple中的属性分离</li>
-<li>将属性列还原成原来的行存储有两种方法:
-<ul>
+<li>将属性列还原成原来的行存储有两种方法:<ul>
 <li>每一列有同样的长度和offset</li>
 <li>使用嵌入的tuple ids(如主键)。但这种方法会造成大量的存储开销</li>
-</ul></li>
-</ul></li>
 </ul>
-<h4 id="database-compression">Database Compression</h4>
-<ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Database-Compression"><a href="#Database-Compression" class="headerlink" title="Database Compression"></a>Database Compression</h4><ul>
 <li>压缩可以提高性能，尤其是对于那些只读的分析负载</li>
 <li>压缩和解压也需要开销</li>
 <li>如果数据集是完全的随机bit，将不能压缩</li>
-<li>压缩策略：
-<ul>
+<li>压缩策略：<ul>
 <li>必须产生固定长度的值，唯一的例外，可变长度数据存储在分离的pools里</li>
 <li>允许DBMS在查询执行过程中推迟解压</li>
 <li>必须是无损的策略，任何有损的压缩将在应用级执行</li>
-</ul></li>
-<li>压缩粒度：
-<ul>
+</ul>
+</li>
+<li>压缩粒度：<ul>
 <li>Block Level: 压缩同一个表中的元组块</li>
 <li>Tuple Level: 压缩整个tuples的内容(仅支持NSM)</li>
 <li>Attribute Level: 压缩一个tuple的一个属性值，也可以针对同一个tuple的多个属性</li>
 <li>Columnar Level: 压缩多个tuples中的多个属性值(仅支持DSM)</li>
-</ul></li>
 </ul>
-<h4 id="memory-management">Memory Management</h4>
-<ul>
+</li>
+</ul>
+<h4 id="Memory-Management"><a href="#Memory-Management" class="headerlink" title="Memory Management"></a>Memory Management</h4><ul>
 <li>Spacial Control: 页被写到磁盘的哪个位置，应该保证页在磁盘尽可能物理上地紧挨着</li>
 <li>Temporal Control: 合适将页读到内存中，何时将页写到磁盘中，目标是为了减少从磁盘读页造成的停顿</li>
 <li>Locks vs. Latches: lock是高级原语用于保证的数据库内容(e.g. tuples, databases, tables)不受其他事务的影响；latch是低级原语，用于内部数据结构(e.g., hash tables, regions of memory)的临界区</li>
-<li>Buffer Pool是磁盘页在内存中的缓存
-<ul>
+<li>Buffer Pool是磁盘页在内存中的缓存<ul>
 <li>元数据: page table(类似于os的page table)，注意与page directory的区别，page directory映射页id到数据库文件中的页的位置，对page directory的所有改变都必须记录在磁盘上，以便DBMS重启时能找到。page table的每一页还可能包含:脏位，pin计数等元数据</li>
 <li>内存分配策略：全局(对于整个工作负载有利)和局部(对于单个查询或事务有利)策略。tradeoff，大多数系统一般组合它们使用</li>
 <li>优化：pre-fetching</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
     </div>
